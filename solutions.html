@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>โซลูชันควบคุมภัยคุกคามไซเบอร์ · Anurak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1220;
+    --panel:#121B2E;
+    --panel-2:#0F1626;
+    --line:#24344D;
+    --text:#E8EEF5;
+    --muted:#8CA0B8;
+    --amber:#FFB020;
+    --teal:#4FD1C5;
+    --radius:10px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter','Noto Sans Thai',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk','Noto Sans Thai',sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:0.02em;
+  }
+  a{color:inherit;text-decoration:none;}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  img{max-width:100%;display:block;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,18,32,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:var(--maxw);margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;}
+  .brand-mark{
+    width:28px;height:28px;border:1px solid var(--teal);border-radius:4px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--teal);font-family:'IBM Plex Mono',monospace;font-size:12px;
+  }
+  nav.links{display:flex;gap:28px;font-size:14px;color:var(--muted);}
+  nav.links a:hover{color:var(--text);}
+  nav.links a.current{color:var(--teal);}
+  .nav-right{display:flex;align-items:center;gap:16px;}
+  .lang-toggle{
+    display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;
+  }
+  .lang-toggle button{
+    background:transparent;border:none;color:var(--muted);padding:6px 10px;cursor:pointer;
+  }
+  .lang-toggle button.active{background:var(--panel);color:var(--teal);}
+
+  @media (max-width:760px){
+    nav.links{display:none;}
+  }
+
+  /* ---------- Page hero ---------- */
+  .page-hero{padding:64px 0 48px;border-bottom:1px solid var(--line);}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;color:var(--teal);
+    letter-spacing:0.12em;
+    display:flex;align-items:center;gap:8px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:'';width:8px;height:8px;border-radius:50%;background:var(--teal);
+    box-shadow:0 0 0 4px rgba(79,209,197,0.15);
+  }
+  .page-hero h1{font-size:clamp(28px,4vw,42px);line-height:1.2;max-width:760px;}
+  .page-hero p.sub{color:var(--muted);max-width:640px;margin-top:16px;font-size:15.5px;}
+  .updated-badge{
+    display:inline-flex;align-items:center;gap:8px;margin-top:24px;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);
+    border:1px solid var(--line);border-radius:20px;padding:6px 14px;
+  }
+  .updated-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);}
+
+  /* ---------- Solutions ---------- */
+  section{padding:64px 0;border-bottom:1px solid var(--line);}
+  .solutions-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .solution-card{
+    border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+    background:var(--panel);display:flex;flex-direction:column;gap:16px;
+  }
+  .solution-card .head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;}
+  .solution-card h2{font-size:19px;}
+  .solution-card .idx{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);flex:none;}
+  .solution-card .row{border-top:1px solid var(--line);padding-top:12px;}
+  .solution-card .row .k{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--amber);
+    letter-spacing:0.07em;margin-bottom:5px;
+  }
+  .solution-card .row .v{font-size:13.5px;color:var(--text);}
+  .solution-card .row .v.muted{color:var(--muted);}
+  .tools-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .tool-chip{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);
+    border:1px solid var(--line);border-radius:14px;padding:4px 10px;
+  }
+  @media (max-width:800px){.solutions-grid{grid-template-columns:1fr;}}
+
+  /* ---------- CTA ---------- */
+  .cta-band{border-bottom:none;}
+  .cta-box{
+    border:1px solid var(--line);border-radius:var(--radius);padding:36px;
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  }
+  .cta-box h2{font-size:22px;max-width:520px;}
+  .cta-box p{color:var(--muted);margin-top:8px;font-size:14px;max-width:520px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 20px;border-radius:8px;font-size:14px;font-weight:600;
+    cursor:pointer;border:1px solid transparent;transition:transform .15s ease, opacity .15s ease;flex:none;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--amber);color:#1a1206;}
+  .btn-primary:hover{opacity:0.92;}
+
+  footer{padding:32px 0;text-align:center;color:var(--muted);font-size:13px;font-family:'IBM Plex Mono',monospace;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="index.html">
+      <div class="brand-mark">AN</div>
+      <span>Anurak</span>
+    </a>
+    <nav class="links">
+      <a href="index.html#about" data-i18n="navAbout">เกี่ยวกับ</a>
+      <a href="index.html#services" data-i18n="navServices">บริการ</a>
+      <a href="solutions.html" class="current" data-i18n="navSolutions">โซลูชัน</a>
+      <a href="index.html#cases" data-i18n="navCases">ผลงาน</a>
+      <a href="index.html#news" data-i18n="navNews">ข่าว Cyber Attack</a>
+      <a href="index.html#certs" data-i18n="navCerts">ใบรับรอง</a>
+      <a href="index.html#contact" data-i18n="navContact">ติดต่อ</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button id="btn-th" onclick="setLang('th')" class="active">TH</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="heroEyebrow">SOLUTION UPDATE · CYBERSECURITY</div>
+    <h1 data-i18n="heroTitle">เครื่องมือที่ใช้ควบคุมภัยคุกคามทางไซเบอร์</h1>
+    <p class="sub" data-i18n="heroSub">สรุปกลุ่มเทคโนโลยีหลักที่องค์กรใช้รับมือภัยคุกคามไซเบอร์ในแต่ละด้าน ใช้เป็นข้อมูลอ้างอิงประกอบการพูดคุยและออกแบบโซลูชันให้ลูกค้า</p>
+    <div class="updated-badge"><span class="dot"></span><span data-i18n="updatedLabel">อัปเดตล่าสุด: กรกฎาคม 2026</span></div>
+  </div>
+</section>
+
+<section id="solutions">
+  <div class="wrap">
+    <div class="solutions-grid" id="solutions-grid"></div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <div class="cta-box">
+      <div>
+        <h2 data-i18n="ctaTitle">ต้องการออกแบบโซลูชันที่เหมาะกับองค์กรของคุณ?</h2>
+        <p data-i18n="ctaSub">ผมช่วยประเมินความเสี่ยงและเลือกเครื่องมือที่ตอบโจทย์งบประมาณและระบบที่มีอยู่ได้</p>
+      </div>
+      <a href="index.html#contact" class="btn btn-primary" data-i18n="ctaButton">นัดคุยโซลูชัน</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span data-i18n="footerText">© 2026 · Pre-Sales Engineer, Cybersecurity · ข้อมูลอ้างอิงประกอบการนำเสนอ</span>
+</footer>
+
+<script>
+const translations = {
+  th: {
+    navAbout: "เกี่ยวกับ", navServices: "บริการ", navSolutions: "โซลูชัน", navCases: "ผลงาน",
+    navNews: "ข่าว Cyber Attack", navCerts: "ใบรับรอง", navContact: "ติดต่อ",
+    heroEyebrow: "SOLUTION UPDATE · CYBERSECURITY",
+    heroTitle: "เครื่องมือที่ใช้ควบคุมภัยคุกคามทางไซเบอร์",
+    heroSub: "สรุปกลุ่มเทคโนโลยีหลักที่องค์กรใช้รับมือภัยคุกคามไซเบอร์ในแต่ละด้าน ใช้เป็นข้อมูลอ้างอิงประกอบการพูดคุยและออกแบบโซลูชันให้ลูกค้า",
+    updatedLabel: "อัปเดตล่าสุด: กรกฎาคม 2026",
+    kThreat: "ภัยคุกคามที่ควบคุม", kFunction: "หน้าที่หลัก", kTools: "ตัวอย่างเทคโนโลยี",
+    ctaTitle: "ต้องการออกแบบโซลูชันที่เหมาะกับองค์กรของคุณ?",
+    ctaSub: "ผมช่วยประเมินความเสี่ยงและเลือกเครื่องมือที่ตอบโจทย์งบประมาณและระบบที่มีอยู่ได้",
+    ctaButton: "นัดคุยโซลูชัน",
+    footerText: "© 2026 · Pre-Sales Engineer, Cybersecurity · ข้อมูลอ้างอิงประกอบการนำเสนอ"
+  },
+  en: {
+    navAbout: "About", navServices: "Services", navSolutions: "Solutions", navCases: "Case Studies",
+    navNews: "Cyber News", navCerts: "Certifications", navContact: "Contact",
+    heroEyebrow: "SOLUTION UPDATE · CYBERSECURITY",
+    heroTitle: "Tools Used to Control Cyber Threats",
+    heroSub: "A summary of the core technology categories organizations use to defend against cyber threats — a quick reference for client conversations and solution design.",
+    updatedLabel: "Last updated: July 2026",
+    kThreat: "THREAT CONTROLLED", kFunction: "CORE FUNCTION", kTools: "EXAMPLE TECHNOLOGIES",
+    ctaTitle: "Want a solution designed for your organization?",
+    ctaSub: "I can help assess your risk and shortlist the right tools for your budget and existing stack.",
+    ctaButton: "Schedule a consult",
+    footerText: "© 2026 · Pre-Sales Engineer, Cybersecurity · Reference material for client presentations"
+  }
+};
+
+const SOLUTIONS = [
+  {
+    name_th: "Network Security", name_en: "Network Security",
+    threat_th: "การโจมตีเจาะเครือข่ายจากภายนอกและการเคลื่อนที่ในเครือข่ายภายใน",
+    threat_en: "External network intrusions and lateral movement inside the network",
+    fn_th: "ตรวจสอบและกรองทราฟฟิกที่ผ่านเข้า-ออกเครือข่าย บล็อกการโจมตีตั้งแต่ชั้น perimeter",
+    fn_en: "Inspects and filters traffic at the perimeter, blocking attacks before they reach internal systems",
+    tools: ["NGFW", "IPS/IDS", "Network Segmentation"]
+  },
+  {
+    name_th: "Cloud Security", name_en: "Cloud Security",
+    threat_th: "การตั้งค่าคลาวด์ผิดพลาด (misconfiguration) และช่องโหว่ใน workload บนคลาวด์",
+    threat_en: "Cloud misconfigurations and vulnerabilities in cloud workloads",
+    fn_th: "ตรวจสอบ posture ของบัญชีคลาวด์และปกป้อง workload อย่างต่อเนื่อง",
+    fn_en: "Continuously monitors cloud account posture and protects running workloads",
+    tools: ["CSPM", "CWPP", "CNAPP"]
+  },
+  {
+    name_th: "Zero Trust", name_en: "Zero Trust",
+    threat_th: "การเข้าถึงระบบโดยไม่ได้รับอนุญาต แม้จะอยู่ในเครือข่ายภายในแล้วก็ตาม",
+    threat_en: "Unauthorized access attempts, even from inside the internal network",
+    fn_th: "ยืนยันตัวตนและสิทธิ์การเข้าถึงทุกครั้งตามหลัก never trust, always verify",
+    fn_en: "Verifies identity and access rights on every request under a never-trust, always-verify model",
+    tools: ["ZTNA", "Micro-segmentation", "Continuous Authentication"]
+  },
+  {
+    name_th: "SIEM / SOC", name_en: "SIEM / SOC",
+    threat_th: "เหตุการณ์ผิดปกติที่กระจายอยู่หลายระบบซึ่งตรวจจับด้วยตาเปล่าไม่ทัน",
+    threat_en: "Anomalies scattered across many systems that are too slow to catch manually",
+    fn_th: "รวบรวมและวิเคราะห์ log จากทุกระบบแบบเรียลไทม์ พร้อมทีมเฝ้าระวัง 24/7",
+    fn_en: "Aggregates and correlates logs from every system in real time, backed by 24/7 monitoring",
+    tools: ["SIEM", "SOAR", "Managed Detection & Response"]
+  },
+  {
+    name_th: "Endpoint / XDR", name_en: "Endpoint / XDR",
+    threat_th: "มัลแวร์ แรนซัมแวร์ และการโจมตีที่เกิดขึ้นบนเครื่องผู้ใช้งานโดยตรง",
+    threat_en: "Malware, ransomware, and attacks that land directly on user devices",
+    fn_th: "ตรวจจับพฤติกรรมผิดปกติบน endpoint และตอบสนองอัตโนมัติแบบข้ามระบบ",
+    fn_en: "Detects anomalous endpoint behavior and automates response across systems",
+    tools: ["EDR", "XDR", "Endpoint Protection Platform"]
+  },
+  {
+    name_th: "IAM", name_en: "IAM",
+    threat_th: "บัญชีผู้ใช้ที่ถูกขโมยหรือสิทธิ์การเข้าถึงที่มากเกินความจำเป็น",
+    threat_en: "Stolen credentials and excessive access privileges",
+    fn_th: "จัดการตัวตนและสิทธิ์การเข้าถึงให้ตรงตามบทบาท พร้อมยืนยันตัวตนหลายชั้น",
+    fn_en: "Manages identity and role-based access with layered authentication",
+    tools: ["MFA", "Privileged Access Management", "Single Sign-On"]
+  },
+  {
+    name_th: "GRC / PDPA", name_en: "GRC / PDPA",
+    threat_th: "ความเสี่ยงด้านการปฏิบัติตามกฎหมายคุ้มครองข้อมูลส่วนบุคคลและมาตรฐานสากล",
+    threat_en: "Compliance risk under data protection law and international standards",
+    fn_th: "ประเมินความเสี่ยง จัดทำนโยบาย และติดตามสถานะการปฏิบัติตามมาตรฐานอย่างต่อเนื่อง",
+    fn_en: "Assesses risk, drafts policy, and continuously tracks compliance status",
+    tools: ["GRC Platform", "DLP", "Compliance Automation"]
+  },
+  {
+    name_th: "Vulnerability Mgmt", name_en: "Vulnerability Mgmt",
+    threat_th: "ช่องโหว่ของซอฟต์แวร์และระบบที่ยังไม่ได้รับการแก้ไข (unpatched)",
+    threat_en: "Unpatched software and system vulnerabilities",
+    fn_th: "สแกนหาช่องโหว่อย่างต่อเนื่องและจัดลำดับความสำคัญในการแก้ไข",
+    fn_en: "Continuously scans for vulnerabilities and prioritizes remediation",
+    tools: ["Vulnerability Scanner", "Patch Management", "Attack Surface Management"]
+  }
+];
+
+function renderSolutions(){
+  const grid = document.getElementById('solutions-grid');
+  const lang = window.__currentLang || 'th';
+  const dict = translations[lang];
+  grid.innerHTML = SOLUTIONS.map((s, i) => `
+    <div class="solution-card">
+      <div class="head">
+        <h2>${lang === 'th' ? s.name_th : s.name_en}</h2>
+        <span class="idx mono">0${i + 1}</span>
+      </div>
+      <div class="row">
+        <div class="k">${dict.kThreat}</div>
+        <div class="v muted">${lang === 'th' ? s.threat_th : s.threat_en}</div>
+      </div>
+      <div class="row">
+        <div class="k">${dict.kFunction}</div>
+        <div class="v">${lang === 'th' ? s.fn_th : s.fn_en}</div>
+      </div>
+      <div class="row">
+        <div class="k">${dict.kTools}</div>
+        <div class="tools-row">${s.tools.map(t => `<span class="tool-chip">${t}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.getElementById('btn-th').classList.toggle('active', lang==='th');
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  const dict = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined){
+      el.textContent = dict[key];
+    }
+  });
+  window.__currentLang = lang;
+  renderSolutions();
+}
+
+setLang('th');
+</script>
+
+</body>
+</html>
