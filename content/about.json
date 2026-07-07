@@ -1,12 +1,21 @@
 {
-  "bio_th": "ผมเป็น Pre-Sales Engineer ด้าน Cybersecurity ทำหน้าที่เชื่อมระหว่างทีมขาย ทีมเทคนิค และลูกค้า เพื่อออกแบบโซลูชันความปลอดภัยที่ตอบทั้งความต้องการทางเทคนิคและเป้าหมายทางธุรกิจ ตั้งแต่การวิเคราะห์ความเสี่ยง จัดทำ PoC ไปจนถึงตอบเอกสาร RFP",
-  "bio2_th": "มีประสบการณ์ทำงานร่วมกับลูกค้าในหลายอุตสาหกรรม ทั้งธนาคาร การผลิต และสาธารณสุข พร้อมความเข้าใจในแนวทาง Zero Trust, SOC/SIEM, Endpoint Security และ Compliance ตามมาตรฐาน PDPA / ISO 27001",
   "bio_en": "I'm a Cybersecurity Pre-Sales Engineer, bridging sales, technical teams, and clients to design security solutions that meet both technical requirements and business goals — from risk analysis and PoC delivery to RFP response.",
+  "bio2_th": "มีประสบการณ์ทำงานร่วมกับลูกค้าในหลายอุตสาหกรรม ทั้งธนาคาร การผลิต และสาธารณสุข พร้อมความเข้าใจในแนวทาง Zero Trust, SOC/SIEM, Endpoint Security และ Compliance ตามมาตรฐาน PDPA / ISO 27001",
+  "bio_th": "ผมเป็น Pre-Sales Engineer ด้าน Cybersecurity ทำหน้าที่เชื่อมระหว่างทีมขาย ทีมเทคนิค และลูกค้า เพื่อออกแบบโซลูชันความปลอดภัยที่ตอบทั้งความต้องการทางเทคนิคและเป้าหมายทางธุรกิจ ตั้งแต่การวิเคราะห์ความเสี่ยง จัดทำ PoC ไปจนถึงตอบเอกสาร RFP",
+  "avatar_en": "DynaSec Consultang<br>Pre-Sales Engineer",
+  "location_en": "Bangkok, Thailand",
+  "tags": [
+    "Network Security",
+    "Cloud Security",
+    "Zero Trust",
+    "SIEM / SOC",
+    "Endpoint / XDR",
+    "IAM",
+    "GRC / PDPA",
+    "Vulnerability Mgmt"
+  ],
+  "avatar_th": "DynaSec Consultang<br>Pre-Sales Engineer",
+  "email": "anurak.art@gmail.com",
   "bio2_en": "Experienced working with clients across banking, manufacturing, and healthcare, with strong grounding in Zero Trust, SIEM/SOC, endpoint security, and compliance frameworks such as PDPA and ISO 27001.",
-  "avatar_th": "Anurak<br>Pre-Sales Engineer",
-  "avatar_en": "Anurak<br>Pre-Sales Engineer",
-  "tags": ["Network Security", "Cloud Security", "Zero Trust", "SIEM / SOC", "Endpoint / XDR", "IAM", "GRC / PDPA", "Vulnerability Mgmt"],
-  "email": "anurak@baycoms.com",
-  "location_th": "กรุงเทพมหานคร ประเทศไทย",
-  "location_en": "Bangkok, Thailand"
+  "location_th": "กรุงเทพมหานคร ประเทศไทย"
 }
