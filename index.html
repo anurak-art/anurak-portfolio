@@ -362,11 +362,11 @@
       <h2 data-i18n="aboutTitle">เกี่ยวกับผม</h2>
     </div>
     <div class="about-grid">
-      <div class="avatar" data-i18n="avatarInitials">Anurak<br>Pre-Sales Engineer</div>
+      <div class="avatar" id="about-avatar">Anurak<br>Pre-Sales Engineer</div>
       <div>
-        <p data-i18n="aboutBody1">ผมเป็น Pre-Sales Engineer ด้าน Cybersecurity ทำหน้าที่เชื่อมระหว่างทีมขาย ทีมเทคนิค และลูกค้า เพื่อออกแบบโซลูชันความปลอดภัยที่ตอบทั้งความต้องการทางเทคนิคและเป้าหมายทางธุรกิจ ตั้งแต่การวิเคราะห์ความเสี่ยง จัดทำ PoC ไปจนถึงตอบเอกสาร RFP</p>
-        <p data-i18n="aboutBody2" style="margin-top:14px;">มีประสบการณ์ทำงานร่วมกับลูกค้าในหลายอุตสาหกรรม ทั้งธนาคาร การผลิต และสาธารณสุข พร้อมความเข้าใจในแนวทาง Zero Trust, SOC/SIEM, Endpoint Security และ Compliance ตามมาตรฐาน PDPA / ISO 27001</p>
-        <div class="tags">
+        <p id="about-bio1">ผมเป็น Pre-Sales Engineer ด้าน Cybersecurity ทำหน้าที่เชื่อมระหว่างทีมขาย ทีมเทคนิค และลูกค้า เพื่อออกแบบโซลูชันความปลอดภัยที่ตอบทั้งความต้องการทางเทคนิคและเป้าหมายทางธุรกิจ ตั้งแต่การวิเคราะห์ความเสี่ยง จัดทำ PoC ไปจนถึงตอบเอกสาร RFP</p>
+        <p id="about-bio2" style="margin-top:14px;">มีประสบการณ์ทำงานร่วมกับลูกค้าในหลายอุตสาหกรรม ทั้งธนาคาร การผลิต และสาธารณสุข พร้อมความเข้าใจในแนวทาง Zero Trust, SOC/SIEM, Endpoint Security และ Compliance ตามมาตรฐาน PDPA / ISO 27001</p>
+        <div class="tags" id="about-tags">
           <span class="tag">Network Security</span>
           <span class="tag">Cloud Security</span>
           <span class="tag">Zero Trust</span>
@@ -430,32 +430,7 @@
       <h2 data-i18n="casesTitle">ตัวอย่างผลงาน (ไม่ระบุชื่อลูกค้า)</h2>
       <p data-i18n="casesSub">สรุปแบบไม่ระบุตัวตนลูกค้า ตามข้อตกลงการรักษาความลับ</p>
     </div>
-    <div class="case-grid">
-      <div class="case-card">
-        <div class="industry" data-i18n="case1Industry">BANKING &amp; FINANCE</div>
-        <div class="field"><div class="k" data-i18n="kChallenge">CHALLENGE</div><div class="v" data-i18n="case1Challenge">ระบบ perimeter แบบเดิม มองไม่เห็นการเคลื่อนไหวภายในเครือข่าย</div></div>
-        <hr>
-        <div class="field"><div class="k" data-i18n="kApproach">APPROACH</div><div class="v" data-i18n="case1Approach">นำเสนอแนวทาง Zero Trust ร่วมกับ PoC บริการ SOC-as-a-Service</div></div>
-        <hr>
-        <div class="field"><div class="k" data-i18n="kOutcome">OUTCOME</div><div class="v" data-i18n="case1Outcome">PoC ได้รับการอนุมัติภายใน 3 สัปดาห์ และผ่านเข้ารอบ RFP</div></div>
-      </div>
-      <div class="case-card">
-        <div class="industry" data-i18n="case2Industry">MANUFACTURING</div>
-        <div class="field"><div class="k" data-i18n="kChallenge">CHALLENGE</div><div class="v" data-i18n="case2Challenge">ความเสี่ยงจากการเชื่อมต่อระบบ OT และ IT เข้าด้วยกัน</div></div>
-        <hr>
-        <div class="field"><div class="k" data-i18n="kApproach">APPROACH</div><div class="v" data-i18n="case2Approach">เสนอสถาปัตยกรรมแบ่งส่วนเครือข่าย พร้อมตารางเทียบเคียงผู้ให้บริการ</div></div>
-        <hr>
-        <div class="field"><div class="k" data-i18n="kOutcome">OUTCOME</div><div class="v" data-i18n="case2Outcome">ลงนามสัญญากรอบความร่วมมือระยะยาวหลายปี</div></div>
-      </div>
-      <div class="case-card">
-        <div class="industry" data-i18n="case3Industry">HEALTHCARE</div>
-        <div class="field"><div class="k" data-i18n="kChallenge">CHALLENGE</div><div class="v" data-i18n="case3Challenge">ช่องว่างด้านการปฏิบัติตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA)</div></div>
-        <hr>
-        <div class="field"><div class="k" data-i18n="kApproach">APPROACH</div><div class="v" data-i18n="case3Approach">วางแผนงานด้านการปกป้องข้อมูลและเสริมความปลอดภัย endpoint</div></div>
-        <hr>
-        <div class="field"><div class="k" data-i18n="kOutcome">OUTCOME</div><div class="v" data-i18n="case3Outcome">ผ่านการตรวจสอบตามมาตรฐาน และเริ่มโครงการเฟส 2</div></div>
-      </div>
-    </div>
+    <div class="case-grid" id="case-grid"></div>
   </div>
 </section>
 
@@ -480,13 +455,7 @@
       <div class="eyebrow" data-i18n="certsEyebrow">CREDENTIALS</div>
       <h2 data-i18n="certsTitle">ใบรับรองและมาตรฐาน</h2>
     </div>
-    <div class="cert-row">
-      <div class="cert"><div class="dot"></div><div class="name">CISSP<small data-i18n="certBody">(ISC)² Certified</small></div></div>
-      <div class="cert"><div class="dot"></div><div class="name">CEH<small data-i18n="certEc">EC-Council</small></div></div>
-      <div class="cert"><div class="dot"></div><div class="name">CompTIA Security+<small data-i18n="certComptia">CompTIA</small></div></div>
-      <div class="cert"><div class="dot"></div><div class="name">Fortinet NSE 4<small data-i18n="certFortinet">Fortinet</small></div></div>
-      <div class="cert"><div class="dot"></div><div class="name">PSE — Foundation<small data-i18n="certPan">Palo Alto Networks</small></div></div>
-    </div>
+    <div class="cert-row" id="cert-grid"></div>
   </div>
 </section>
 
@@ -544,7 +513,7 @@
           </div>
           <div class="txt">
             <div class="k" data-i18n="kEmail">EMAIL</div>
-            <div class="v">anurak@baycoms.com</div>
+            <div class="v" id="contact-email">anurak@baycoms.com</div>
           </div>
         </div>
         <div class="direct-item">
@@ -553,7 +522,7 @@
           </div>
           <div class="txt">
             <div class="k" data-i18n="kLocation">LOCATION</div>
-            <div class="v" data-i18n="locationVal">กรุงเทพมหานคร ประเทศไทย</div>
+            <div class="v" id="contact-location">กรุงเทพมหานคร ประเทศไทย</div>
           </div>
         </div>
       </div>
@@ -580,9 +549,6 @@ const translations = {
     nodeCenter: "PRE-SALES ENGINEER",
     nodeR1: "ความเสี่ยงลดลง", nodeR2: "พร้อมตรวจสอบ", nodeR3: "ปิดดีลเร็วขึ้น",
     aboutEyebrow: "PROFILE", aboutTitle: "เกี่ยวกับผม",
-    avatarInitials: "Anurak<br>Pre-Sales Engineer",
-    aboutBody1: "ผมเป็น Pre-Sales Engineer ด้าน Cybersecurity ทำหน้าที่เชื่อมระหว่างทีมขาย ทีมเทคนิค และลูกค้า เพื่อออกแบบโซลูชันความปลอดภัยที่ตอบทั้งความต้องการทางเทคนิคและเป้าหมายทางธุรกิจ ตั้งแต่การวิเคราะห์ความเสี่ยง จัดทำ PoC ไปจนถึงตอบเอกสาร RFP",
-    aboutBody2: "มีประสบการณ์ทำงานร่วมกับลูกค้าในหลายอุตสาหกรรม ทั้งธนาคาร การผลิต และสาธารณสุข พร้อมความเข้าใจในแนวทาง Zero Trust, SOC/SIEM, Endpoint Security และ Compliance ตามมาตรฐาน PDPA / ISO 27001",
     servicesEyebrow: "HOW I HELP", servicesTitle: "บริการที่ช่วยลูกค้าได้",
     servicesSub: "สิ่งที่ผมช่วยได้ในบทบาท pre-sales engineer ตลอดวงจรการตัดสินใจซื้อโซลูชันความปลอดภัย",
     svc1Title: "ออกแบบสถาปัตยกรรมโซลูชัน", svc1Body: "วิเคราะห์ความต้องการและออกแบบสถาปัตยกรรมความปลอดภัยที่เหมาะกับสภาพแวดล้อมของลูกค้า",
@@ -601,23 +567,13 @@ const translations = {
     newsStatusLoading: "กำลังโหลดข่าวสด...",
     newsStatusLive: "อัปเดตล่าสุดเมื่อ",
     newsStatusFallback: "แสดงข่าวที่คัดสรรไว้ (ไม่สามารถโหลดข่าวสดได้ในขณะนี้)",
-    case1Industry: "ธนาคารและการเงิน", case1Challenge: "ระบบ perimeter แบบเดิม มองไม่เห็นการเคลื่อนไหวภายในเครือข่าย",
-    case1Approach: "นำเสนอแนวทาง Zero Trust ร่วมกับ PoC บริการ SOC-as-a-Service",
-    case1Outcome: "PoC ได้รับการอนุมัติภายใน 3 สัปดาห์ และผ่านเข้ารอบ RFP",
-    case2Industry: "ภาคการผลิต", case2Challenge: "ความเสี่ยงจากการเชื่อมต่อระบบ OT และ IT เข้าด้วยกัน",
-    case2Approach: "เสนอสถาปัตยกรรมแบ่งส่วนเครือข่าย พร้อมตารางเทียบเคียงผู้ให้บริการ",
-    case2Outcome: "ลงนามสัญญากรอบความร่วมมือระยะยาวหลายปี",
-    case3Industry: "สาธารณสุข", case3Challenge: "ช่องว่างด้านการปฏิบัติตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA)",
-    case3Approach: "วางแผนงานด้านการปกป้องข้อมูลและเสริมความปลอดภัย endpoint",
-    case3Outcome: "ผ่านการตรวจสอบตามมาตรฐาน และเริ่มโครงการเฟส 2",
     certsEyebrow: "CREDENTIALS", certsTitle: "ใบรับรองและมาตรฐาน",
-    certBody: "(ISC)² Certified", certEc: "EC-Council", certComptia: "CompTIA", certFortinet: "Fortinet", certPan: "Palo Alto Networks",
     contactEyebrow: "GET IN TOUCH", contactTitle: "ติดต่อสอบถาม / ขอข้อมูลโซลูชัน",
     contactSub: "กรอกแบบฟอร์ม หรือติดต่อโดยตรงตามช่องทางด้านขวา ผมจะตอบกลับภายใน 1 วันทำการ",
     lblName: "ชื่อ-นามสกุล", lblCompany: "บริษัท / องค์กร", lblEmail: "อีเมล", lblPhone: "เบอร์โทร",
     lblTopic: "เรื่องที่ต้องการสอบถาม", lblMessage: "รายละเอียด", btnSend: "ส่งข้อความ",
     topic1: "ปรึกษาโซลูชันความปลอดภัย", topic2: "ขอ PoC / Demo", topic3: "สนับสนุนเอกสาร RFP", topic4: "ความร่วมมือทางธุรกิจ", topic5: "อื่น ๆ",
-    kEmail: "อีเมล", kPhone: "โทรศัพท์", kLocation: "ที่ตั้ง", locationVal: "กรุงเทพมหานคร ประเทศไทย",
+    kEmail: "อีเมล", kPhone: "โทรศัพท์", kLocation: "ที่ตั้ง",
     footerText: "© 2026 · Pre-Sales Engineer, Cybersecurity · ข้อมูลติดต่อเพื่อธุรกิจ",
     sendingMsg: "กำลังเปิดโปรแกรมอีเมล...", sentMsg: "เปิดโปรแกรมอีเมลแล้ว กรุณากดส่งในโปรแกรมอีเมลของคุณ"
   },
@@ -634,9 +590,6 @@ const translations = {
     nodeCenter: "PRE-SALES ENGINEER",
     nodeR1: "Risk Reduced", nodeR2: "Compliance Ready", nodeR3: "Faster Deal Close",
     aboutEyebrow: "PROFILE", aboutTitle: "About Me",
-    avatarInitials: "Anurak<br>Pre-Sales Engineer",
-    aboutBody1: "I'm a Cybersecurity Pre-Sales Engineer, bridging sales, technical teams, and clients to design security solutions that meet both technical requirements and business goals — from risk analysis and PoC delivery to RFP response.",
-    aboutBody2: "Experienced working with clients across banking, manufacturing, and healthcare, with strong grounding in Zero Trust, SIEM/SOC, endpoint security, and compliance frameworks such as PDPA and ISO 27001.",
     servicesEyebrow: "HOW I HELP", servicesTitle: "How I help clients",
     servicesSub: "What I bring as a pre-sales engineer across the full security buying journey.",
     svc1Title: "Solution Architecture & Design", svc1Body: "Analyze requirements and design security architecture that fits the client's real environment.",
@@ -655,23 +608,13 @@ const translations = {
     newsStatusLoading: "Loading live feed...",
     newsStatusLive: "Last updated",
     newsStatusFallback: "Showing curated headlines (live feed unavailable right now)",
-    case1Industry: "BANKING & FINANCE", case1Challenge: "Legacy perimeter setup with no visibility into lateral movement.",
-    case1Approach: "Positioned a Zero Trust approach with a SOC-as-a-Service PoC.",
-    case1Outcome: "PoC approved within 3 weeks; shortlisted for RFP.",
-    case2Industry: "MANUFACTURING", case2Challenge: "Risk from converging OT and IT networks.",
-    case2Approach: "Proposed a segmented architecture with a vendor comparison matrix.",
-    case2Outcome: "Signed a multi-year framework agreement.",
-    case3Industry: "HEALTHCARE", case3Challenge: "Compliance gap under the Personal Data Protection Act (PDPA).",
-    case3Approach: "Built a data protection and endpoint hardening roadmap.",
-    case3Outcome: "Passed compliance audit; phase 2 kicked off.",
     certsEyebrow: "CREDENTIALS", certsTitle: "Certifications & Standards",
-    certBody: "(ISC)² Certified", certEc: "EC-Council", certComptia: "CompTIA", certFortinet: "Fortinet", certPan: "Palo Alto Networks",
     contactEyebrow: "GET IN TOUCH", contactTitle: "Get in touch / request information",
     contactSub: "Fill in the form, or reach out directly using the details on the right. I typically reply within 1 business day.",
     lblName: "Full name", lblCompany: "Company / Organization", lblEmail: "Email", lblPhone: "Phone",
     lblTopic: "What can I help with?", lblMessage: "Message", btnSend: "Send message",
     topic1: "Security solution consultation", topic2: "Request PoC / Demo", topic3: "RFP support", topic4: "Business partnership", topic5: "Other",
-    kEmail: "EMAIL", kPhone: "PHONE", kLocation: "LOCATION", locationVal: "Bangkok, Thailand",
+    kEmail: "EMAIL", kPhone: "PHONE", kLocation: "LOCATION",
     footerText: "© 2026 · Pre-Sales Engineer, Cybersecurity · For business inquiries",
     sendingMsg: "Opening your email app...", sentMsg: "Email app opened — please hit send there."
   }
@@ -689,10 +632,111 @@ function setLang(lang){
     }
   });
   window.__currentLang = lang;
+  renderAbout();
+  renderCases();
   renderNews();
   if(lang === 'th' && newsState === 'live'){
     translateNewsItemsToThai().then(renderNews);
   }
+}
+
+// admin-editable content -> content/*.json (edited via /admin, falls back to these defaults)
+const ABOUT_FALLBACK = {
+  bio_th: "ผมเป็น Pre-Sales Engineer ด้าน Cybersecurity ทำหน้าที่เชื่อมระหว่างทีมขาย ทีมเทคนิค และลูกค้า เพื่อออกแบบโซลูชันความปลอดภัยที่ตอบทั้งความต้องการทางเทคนิคและเป้าหมายทางธุรกิจ ตั้งแต่การวิเคราะห์ความเสี่ยง จัดทำ PoC ไปจนถึงตอบเอกสาร RFP",
+  bio2_th: "มีประสบการณ์ทำงานร่วมกับลูกค้าในหลายอุตสาหกรรม ทั้งธนาคาร การผลิต และสาธารณสุข พร้อมความเข้าใจในแนวทาง Zero Trust, SOC/SIEM, Endpoint Security และ Compliance ตามมาตรฐาน PDPA / ISO 27001",
+  bio_en: "I'm a Cybersecurity Pre-Sales Engineer, bridging sales, technical teams, and clients to design security solutions that meet both technical requirements and business goals — from risk analysis and PoC delivery to RFP response.",
+  bio2_en: "Experienced working with clients across banking, manufacturing, and healthcare, with strong grounding in Zero Trust, SIEM/SOC, endpoint security, and compliance frameworks such as PDPA and ISO 27001.",
+  avatar_th: "Anurak<br>Pre-Sales Engineer",
+  avatar_en: "Anurak<br>Pre-Sales Engineer",
+  tags: ["Network Security", "Cloud Security", "Zero Trust", "SIEM / SOC", "Endpoint / XDR", "IAM", "GRC / PDPA", "Vulnerability Mgmt"],
+  email: "anurak@baycoms.com",
+  location_th: "กรุงเทพมหานคร ประเทศไทย",
+  location_en: "Bangkok, Thailand"
+};
+const CASES_FALLBACK = { items: [
+  { industry_th: "ธนาคารและการเงิน", industry_en: "BANKING & FINANCE",
+    challenge_th: "ระบบ perimeter แบบเดิม มองไม่เห็นการเคลื่อนไหวภายในเครือข่าย", challenge_en: "Legacy perimeter setup with no visibility into lateral movement.",
+    approach_th: "นำเสนอแนวทาง Zero Trust ร่วมกับ PoC บริการ SOC-as-a-Service", approach_en: "Positioned a Zero Trust approach with a SOC-as-a-Service PoC.",
+    outcome_th: "PoC ได้รับการอนุมัติภายใน 3 สัปดาห์ และผ่านเข้ารอบ RFP", outcome_en: "PoC approved within 3 weeks; shortlisted for RFP." },
+  { industry_th: "ภาคการผลิต", industry_en: "MANUFACTURING",
+    challenge_th: "ความเสี่ยงจากการเชื่อมต่อระบบ OT และ IT เข้าด้วยกัน", challenge_en: "Risk from converging OT and IT networks.",
+    approach_th: "เสนอสถาปัตยกรรมแบ่งส่วนเครือข่าย พร้อมตารางเทียบเคียงผู้ให้บริการ", approach_en: "Proposed a segmented architecture with a vendor comparison matrix.",
+    outcome_th: "ลงนามสัญญากรอบความร่วมมือระยะยาวหลายปี", outcome_en: "Signed a multi-year framework agreement." },
+  { industry_th: "สาธารณสุข", industry_en: "HEALTHCARE",
+    challenge_th: "ช่องว่างด้านการปฏิบัติตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA)", challenge_en: "Compliance gap under the Personal Data Protection Act (PDPA).",
+    approach_th: "วางแผนงานด้านการปกป้องข้อมูลและเสริมความปลอดภัย endpoint", approach_en: "Built a data protection and endpoint hardening roadmap.",
+    outcome_th: "ผ่านการตรวจสอบตามมาตรฐาน และเริ่มโครงการเฟส 2", outcome_en: "Passed compliance audit; phase 2 kicked off." }
+]};
+const CERTS_FALLBACK = { items: [
+  { name: "CISSP", issuer: "(ISC)² Certified" },
+  { name: "CEH", issuer: "EC-Council" },
+  { name: "CompTIA Security+", issuer: "CompTIA" },
+  { name: "Fortinet NSE 4", issuer: "Fortinet" },
+  { name: "PSE — Foundation", issuer: "Palo Alto Networks" }
+]};
+
+let ABOUT_DATA = ABOUT_FALLBACK;
+let CASES_DATA = CASES_FALLBACK;
+let CERTS_DATA = CERTS_FALLBACK;
+
+async function fetchJson(path, fallback){
+  try{
+    const res = await fetch(path, { cache: 'no-store' });
+    if(!res.ok) return fallback;
+    return await res.json();
+  }catch(err){
+    return fallback;
+  }
+}
+
+function renderAbout(){
+  const lang = window.__currentLang || 'th';
+  const d = ABOUT_DATA;
+  document.getElementById('about-avatar').innerHTML = lang === 'th' ? d.avatar_th : d.avatar_en;
+  document.getElementById('about-bio1').textContent = lang === 'th' ? d.bio_th : d.bio_en;
+  document.getElementById('about-bio2').textContent = lang === 'th' ? d.bio2_th : d.bio2_en;
+  document.getElementById('about-tags').innerHTML = (d.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+  document.getElementById('contact-email').textContent = d.email;
+  document.getElementById('contact-location').textContent = lang === 'th' ? d.location_th : d.location_en;
+}
+
+function renderCases(){
+  const lang = window.__currentLang || 'th';
+  const dict = translations[lang];
+  const grid = document.getElementById('case-grid');
+  if(!grid) return;
+  grid.innerHTML = (CASES_DATA.items || []).map(c => `
+    <div class="case-card">
+      <div class="industry">${lang === 'th' ? c.industry_th : c.industry_en}</div>
+      <div class="field"><div class="k">${dict.kChallenge}</div><div class="v">${lang === 'th' ? c.challenge_th : c.challenge_en}</div></div>
+      <hr>
+      <div class="field"><div class="k">${dict.kApproach}</div><div class="v">${lang === 'th' ? c.approach_th : c.approach_en}</div></div>
+      <hr>
+      <div class="field"><div class="k">${dict.kOutcome}</div><div class="v">${lang === 'th' ? c.outcome_th : c.outcome_en}</div></div>
+    </div>`
+  ).join('');
+}
+
+function renderCerts(){
+  const grid = document.getElementById('cert-grid');
+  if(!grid) return;
+  grid.innerHTML = (CERTS_DATA.items || []).map(c => `
+    <div class="cert"><div class="dot"></div><div class="name">${c.name}<small>${c.issuer}</small></div></div>`
+  ).join('');
+}
+
+async function loadContent(){
+  const [about, cases, certs] = await Promise.all([
+    fetchJson('content/about.json', ABOUT_FALLBACK),
+    fetchJson('content/cases.json', CASES_FALLBACK),
+    fetchJson('content/certifications.json', CERTS_FALLBACK)
+  ]);
+  ABOUT_DATA = about;
+  CASES_DATA = cases;
+  CERTS_DATA = certs;
+  renderAbout();
+  renderCases();
+  renderCerts();
 }
 
 // cyber attack news -> live RSS feed via rss2json, with a curated fallback
@@ -875,12 +919,13 @@ ${message}`
   );
   const status = document.getElementById('form-status');
   status.textContent = translations[lang].sendingMsg;
-  window.location.href = `mailto:anurak@baycoms.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:${ABOUT_DATA.email}?subject=${subject}&body=${body}`;
   setTimeout(()=>{ status.textContent = translations[lang].sentMsg; }, 600);
 });
 
 setLang('th');
 loadNews();
+loadContent();
 </script>
 
 </body>

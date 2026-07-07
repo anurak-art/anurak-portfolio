@@ -1,0 +1,9 @@
+{
+  "items": [
+    {"name": "CISSP", "issuer": "(ISC)² Certified"},
+    {"name": "CEH", "issuer": "EC-Council"},
+    {"name": "CompTIA Security+", "issuer": "CompTIA"},
+    {"name": "Fortinet NSE 4", "issuer": "Fortinet"},
+    {"name": "PSE — Foundation", "issuer": "Palo Alto Networks"}
+  ]
+}

@@ -234,7 +234,7 @@ const translations = {
   }
 };
 
-const SOLUTIONS = [
+const SOLUTIONS_FALLBACK = [
   {
     name_th: "Network Security", name_en: "Network Security",
     threat_th: "การโจมตีเจาะเครือข่ายจากภายนอกและการเคลื่อนที่ในเครือข่ายภายใน",
@@ -301,6 +301,21 @@ const SOLUTIONS = [
   }
 ];
 
+let SOLUTIONS = SOLUTIONS_FALLBACK;
+
+async function loadSolutions(){
+  try{
+    const res = await fetch('content/solutions.json', { cache: 'no-store' });
+    if(res.ok){
+      const data = await res.json();
+      if(Array.isArray(data.items) && data.items.length) SOLUTIONS = data.items;
+    }
+  }catch(err){
+    // keep SOLUTIONS_FALLBACK
+  }
+  renderSolutions();
+}
+
 function renderSolutions(){
   const grid = document.getElementById('solutions-grid');
   const lang = window.__currentLang || 'th';
@@ -343,6 +358,7 @@ function setLang(lang){
 }
 
 setLang('th');
+loadSolutions();
 </script>
 
 </body>

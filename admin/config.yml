@@ -1,0 +1,89 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "content/uploads"
+public_folder: "/content/uploads"
+
+locale: "th"
+
+collections:
+  - name: "about"
+    label: "เกี่ยวกับผม + ข้อมูลติดต่อ"
+    files:
+      - name: "about"
+        label: "ข้อมูลโปรไฟล์"
+        file: "content/about.json"
+        fields:
+          - {label: "แนะนำตัว (ไทย) - ย่อหน้า 1", name: "bio_th", widget: "text"}
+          - {label: "แนะนำตัว (ไทย) - ย่อหน้า 2", name: "bio2_th", widget: "text"}
+          - {label: "Introduction (English) - paragraph 1", name: "bio_en", widget: "text"}
+          - {label: "Introduction (English) - paragraph 2", name: "bio2_en", widget: "text"}
+          - {label: "กล่องชื่อ/ตำแหน่ง (ไทย)", name: "avatar_th", widget: "string", hint: "ใช้ <br> ถ้าต้องการขึ้นบรรทัดใหม่"}
+          - {label: "Name/Title box (English)", name: "avatar_en", widget: "string", hint: "Use <br> for a line break"}
+          - label: "ทักษะ / แท็กความเชี่ยวชาญ"
+            name: "tags"
+            widget: "list"
+            field: {label: "แท็ก", name: "tag", widget: "string"}
+          - {label: "อีเมลติดต่อ", name: "email", widget: "string"}
+          - {label: "ที่ตั้ง (ไทย)", name: "location_th", widget: "string"}
+          - {label: "Location (English)", name: "location_en", widget: "string"}
+
+  - name: "cases"
+    label: "ผลงาน (Case Studies)"
+    files:
+      - name: "cases"
+        label: "รายการผลงาน"
+        file: "content/cases.json"
+        fields:
+          - label: "รายการผลงาน"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.industry_th}}"
+            fields:
+              - {label: "อุตสาหกรรม (ไทย)", name: "industry_th", widget: "string"}
+              - {label: "Industry (English)", name: "industry_en", widget: "string"}
+              - {label: "โจทย์ (ไทย)", name: "challenge_th", widget: "text"}
+              - {label: "Challenge (English)", name: "challenge_en", widget: "text"}
+              - {label: "แนวทาง (ไทย)", name: "approach_th", widget: "text"}
+              - {label: "Approach (English)", name: "approach_en", widget: "text"}
+              - {label: "ผลลัพธ์ (ไทย)", name: "outcome_th", widget: "text"}
+              - {label: "Outcome (English)", name: "outcome_en", widget: "text"}
+
+  - name: "certifications"
+    label: "ใบรับรอง (Certifications)"
+    files:
+      - name: "certifications"
+        label: "รายการใบรับรอง"
+        file: "content/certifications.json"
+        fields:
+          - label: "รายการใบรับรอง"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - {label: "ชื่อใบรับรอง", name: "name", widget: "string"}
+              - {label: "ผู้ออกใบรับรอง", name: "issuer", widget: "string"}
+
+  - name: "solutions"
+    label: "โซลูชัน / เครื่องมือ"
+    files:
+      - name: "solutions"
+        label: "รายการโซลูชัน"
+        file: "content/solutions.json"
+        fields:
+          - label: "รายการโซลูชัน"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name_th}}"
+            fields:
+              - {label: "ชื่อกลุ่มโซลูชัน (ไทย)", name: "name_th", widget: "string"}
+              - {label: "Category Name (English)", name: "name_en", widget: "string"}
+              - {label: "ภัยคุกคามที่ควบคุม (ไทย)", name: "threat_th", widget: "text"}
+              - {label: "Threat Controlled (English)", name: "threat_en", widget: "text"}
+              - {label: "หน้าที่หลัก (ไทย)", name: "fn_th", widget: "text"}
+              - {label: "Core Function (English)", name: "fn_en", widget: "text"}
+              - label: "ตัวอย่างเทคโนโลยี"
+                name: "tools"
+                widget: "list"
+                field: {label: "เทคโนโลยี", name: "tool", widget: "string"}

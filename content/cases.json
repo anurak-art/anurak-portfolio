@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "industry_th": "ธนาคารและการเงิน",
+      "industry_en": "BANKING & FINANCE",
+      "challenge_th": "ระบบ perimeter แบบเดิม มองไม่เห็นการเคลื่อนไหวภายในเครือข่าย",
+      "challenge_en": "Legacy perimeter setup with no visibility into lateral movement.",
+      "approach_th": "นำเสนอแนวทาง Zero Trust ร่วมกับ PoC บริการ SOC-as-a-Service",
+      "approach_en": "Positioned a Zero Trust approach with a SOC-as-a-Service PoC.",
+      "outcome_th": "PoC ได้รับการอนุมัติภายใน 3 สัปดาห์ และผ่านเข้ารอบ RFP",
+      "outcome_en": "PoC approved within 3 weeks; shortlisted for RFP."
+    },
+    {
+      "industry_th": "ภาคการผลิต",
+      "industry_en": "MANUFACTURING",
+      "challenge_th": "ความเสี่ยงจากการเชื่อมต่อระบบ OT และ IT เข้าด้วยกัน",
+      "challenge_en": "Risk from converging OT and IT networks.",
+      "approach_th": "เสนอสถาปัตยกรรมแบ่งส่วนเครือข่าย พร้อมตารางเทียบเคียงผู้ให้บริการ",
+      "approach_en": "Proposed a segmented architecture with a vendor comparison matrix.",
+      "outcome_th": "ลงนามสัญญากรอบความร่วมมือระยะยาวหลายปี",
+      "outcome_en": "Signed a multi-year framework agreement."
+    },
+    {
+      "industry_th": "สาธารณสุข",
+      "industry_en": "HEALTHCARE",
+      "challenge_th": "ช่องว่างด้านการปฏิบัติตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA)",
+      "challenge_en": "Compliance gap under the Personal Data Protection Act (PDPA).",
+      "approach_th": "วางแผนงานด้านการปกป้องข้อมูลและเสริมความปลอดภัย endpoint",
+      "approach_en": "Built a data protection and endpoint hardening roadmap.",
+      "outcome_th": "ผ่านการตรวจสอบตามมาตรฐาน และเริ่มโครงการเฟส 2",
+      "outcome_en": "Passed compliance audit; phase 2 kicked off."
+    }
+  ]
+}
