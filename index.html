@@ -206,6 +206,23 @@
   .case-card hr{border:none;border-top:1px solid var(--line);margin:2px 0;}
   @media (max-width:900px){.case-grid{grid-template-columns:1fr;}}
 
+  /* cyber attack news */
+  .news-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+  .news-updated{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.05em;}
+  .news-refresh{background:transparent;border:1px solid var(--line);color:var(--teal);border-radius:6px;padding:7px 14px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;cursor:pointer;}
+  .news-refresh:hover{border-color:var(--teal);}
+  .news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .news-card{border:1px solid var(--line);border-radius:var(--radius);padding:22px;background:var(--panel);display:flex;flex-direction:column;gap:10px;}
+  .news-card .src{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;}
+  .news-card .src .name{color:var(--amber);}
+  .news-card .src .date{color:var(--muted);flex:none;}
+  .news-card h3{font-size:15px;line-height:1.4;font-weight:600;}
+  .news-card h3 a{color:var(--text);}
+  .news-card h3 a:hover{color:var(--teal);}
+  .news-card p{color:var(--muted);font-size:13px;margin:0;}
+  .news-fallback-note{grid-column:1 / -1;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);padding-top:4px;}
+  @media (max-width:700px){.news-grid{grid-template-columns:1fr;}}
+
   /* certifications */
   .cert-row{display:flex;flex-wrap:wrap;gap:12px;}
   .cert{
@@ -254,6 +271,7 @@
       <a href="#about" data-i18n="navAbout">เกี่ยวกับ</a>
       <a href="#services" data-i18n="navServices">บริการ</a>
       <a href="#cases" data-i18n="navCases">ผลงาน</a>
+      <a href="#news" data-i18n="navNews">ข่าว Cyber Attack</a>
       <a href="#certs" data-i18n="navCerts">ใบรับรอง</a>
       <a href="#contact" data-i18n="navContact">ติดต่อ</a>
     </nav>
@@ -440,6 +458,21 @@
   </div>
 </section>
 
+<section id="news">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" data-i18n="newsEyebrow">LIVE THREAT FEED</div>
+      <h2 data-i18n="newsTitle">ข่าว Cyber Attack ล่าสุด</h2>
+      <p data-i18n="newsSub">อัปเดตอัตโนมัติจากแหล่งข่าวความปลอดภัยไซเบอร์ชั้นนำ ใช้เป็นข้อมูลประกอบการพูดคุยกับลูกค้าได้ทันที</p>
+    </div>
+    <div class="news-meta">
+      <span class="news-updated" id="news-updated"></span>
+      <button type="button" class="news-refresh" id="news-refresh" data-i18n="newsRefresh">รีเฟรช</button>
+    </div>
+    <div class="news-grid" id="news-grid"></div>
+  </div>
+</section>
+
 <section id="certs">
   <div class="wrap">
     <div class="section-head">
@@ -560,6 +593,13 @@ const translations = {
     casesEyebrow: "SELECTED ENGAGEMENTS", casesTitle: "ตัวอย่างผลงาน (ไม่ระบุชื่อลูกค้า)",
     casesSub: "สรุปแบบไม่ระบุตัวตนลูกค้า ตามข้อตกลงการรักษาความลับ",
     kChallenge: "โจทย์", kApproach: "แนวทาง", kOutcome: "ผลลัพธ์",
+    navNews: "ข่าว Cyber Attack",
+    newsEyebrow: "LIVE THREAT FEED", newsTitle: "ข่าว Cyber Attack ล่าสุด",
+    newsSub: "อัปเดตอัตโนมัติจากแหล่งข่าวความปลอดภัยไซเบอร์ชั้นนำ ใช้เป็นข้อมูลประกอบการพูดคุยกับลูกค้าได้ทันที",
+    newsRefresh: "รีเฟรช",
+    newsStatusLoading: "กำลังโหลดข่าวสด...",
+    newsStatusLive: "อัปเดตล่าสุดเมื่อ",
+    newsStatusFallback: "แสดงข่าวที่คัดสรรไว้ (ไม่สามารถโหลดข่าวสดได้ในขณะนี้)",
     case1Industry: "ธนาคารและการเงิน", case1Challenge: "ระบบ perimeter แบบเดิม มองไม่เห็นการเคลื่อนไหวภายในเครือข่าย",
     case1Approach: "นำเสนอแนวทาง Zero Trust ร่วมกับ PoC บริการ SOC-as-a-Service",
     case1Outcome: "PoC ได้รับการอนุมัติภายใน 3 สัปดาห์ และผ่านเข้ารอบ RFP",
@@ -607,6 +647,13 @@ const translations = {
     casesEyebrow: "SELECTED ENGAGEMENTS", casesTitle: "Selected Case Studies (client-anonymized)",
     casesSub: "Anonymized per confidentiality agreements.",
     kChallenge: "CHALLENGE", kApproach: "APPROACH", kOutcome: "OUTCOME",
+    navNews: "Cyber News",
+    newsEyebrow: "LIVE THREAT FEED", newsTitle: "Latest Cyber Attack News",
+    newsSub: "Auto-updated from leading cybersecurity news sources — ready to reference in client conversations.",
+    newsRefresh: "Refresh",
+    newsStatusLoading: "Loading live feed...",
+    newsStatusLive: "Last updated",
+    newsStatusFallback: "Showing curated headlines (live feed unavailable right now)",
     case1Industry: "BANKING & FINANCE", case1Challenge: "Legacy perimeter setup with no visibility into lateral movement.",
     case1Approach: "Positioned a Zero Trust approach with a SOC-as-a-Service PoC.",
     case1Outcome: "PoC approved within 3 weeks; shortlisted for RFP.",
@@ -641,7 +688,121 @@ function setLang(lang){
     }
   });
   window.__currentLang = lang;
+  renderNews();
 }
+
+// cyber attack news -> live RSS feed via rss2json, with a curated fallback
+const NEWS_FEEDS = [
+  { url: 'https://feeds.feedburner.com/TheHackersNews', name: 'The Hacker News' },
+  { url: 'https://www.bleepingcomputer.com/feed/', name: 'BleepingComputer' }
+];
+const NEWS_FALLBACK = [
+  {
+    title: "Researchers Claim First Fully Agentic Ransomware: JadePuffer",
+    link: "https://www.infosecurity-magazine.com/news/researchers-first-agentic/",
+    source: "Infosecurity Magazine",
+    pubDate: "2026-07-06",
+    description: "Sysdig researchers detail JadePuffer, an LLM-driven agent that autonomously handled recon, credential theft, lateral movement and encryption in a live ransomware attack."
+  },
+  {
+    title: "Attackers Exploit SimpleHelp CVE-2026-48558 to Deploy Infostealers",
+    link: "https://thehackernews.com/2026/06/attackers-exploit-simplehelp-cve-2026.html",
+    source: "The Hacker News",
+    pubDate: "2026-06-28",
+    description: "An OIDC authentication bypass in SimpleHelp RMM lets unauthenticated attackers forge a technician session; now added to CISA's Known Exploited Vulnerabilities catalog."
+  },
+  {
+    title: "New TrojPix Attack Leaks Data From Air-Gapped Systems via Video Cable Emissions",
+    link: "https://thehackernews.com/2026/07/new-trojpix-attack-leaks-data-from-air.html",
+    source: "The Hacker News",
+    pubDate: "2026-07-06",
+    description: "Shandong University researchers show imperceptible pixel modulation that turns a video cable into a covert radio transmitter, exfiltrating data from air-gapped machines up to 208 meters away."
+  },
+  {
+    title: "Qilin Dominates a Resurgent Ransomware Market",
+    link: "https://www.infosecurity-magazine.com/news/qilin-dominates-ransomware-market/",
+    source: "Infosecurity Magazine",
+    pubDate: "2026-06-30",
+    description: "June 2026 saw 102 publicly disclosed ransomware attacks across 21 countries, with Qilin and The Gentlemen driving the largest share of claimed victims."
+  }
+];
+
+let newsState = 'loading';
+let newsItems = NEWS_FALLBACK;
+
+function stripHtml(html){
+  const div = document.createElement('div');
+  div.innerHTML = html || '';
+  return (div.textContent || div.innerText || '').trim();
+}
+
+function truncateText(str, len){
+  if(!str) return '';
+  return str.length <= len ? str : str.slice(0, len).trim() + '…';
+}
+
+function formatNewsDate(dateStr){
+  const d = new Date(dateStr);
+  if(isNaN(d.getTime())) return '';
+  const locale = window.__currentLang === 'en' ? 'en-US' : 'th-TH';
+  return d.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function renderNews(){
+  const grid = document.getElementById('news-grid');
+  const updatedEl = document.getElementById('news-updated');
+  if(!grid) return;
+  const dict = translations[window.__currentLang || 'th'];
+  grid.innerHTML = newsItems.map(item => `
+    <div class="news-card">
+      <div class="src"><span class="name">${item.source}</span><span class="date">${formatNewsDate(item.pubDate)}</span></div>
+      <h3><a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a></h3>
+      <p>${truncateText(item.description, 150)}</p>
+    </div>`
+  ).join('') + (newsState === 'fallback' ? `<div class="news-fallback-note">${dict.newsStatusFallback}</div>` : '');
+  if(updatedEl){
+    if(newsState === 'loading') updatedEl.textContent = dict.newsStatusLoading;
+    else if(newsState === 'live') updatedEl.textContent = `${dict.newsStatusLive} ${new Date().toLocaleTimeString(window.__currentLang === 'en' ? 'en-US' : 'th-TH', { hour: '2-digit', minute: '2-digit' })}`;
+    else updatedEl.textContent = dict.newsStatusFallback;
+  }
+}
+
+async function fetchNewsFeed(feed){
+  const endpoint = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed.url)}`;
+  const res = await fetch(endpoint);
+  if(!res.ok) throw new Error('feed request failed');
+  const data = await res.json();
+  if(data.status !== 'ok' || !Array.isArray(data.items)) throw new Error('feed status not ok');
+  return data.items.map(it => ({
+    title: stripHtml(it.title),
+    link: it.link,
+    source: feed.name,
+    pubDate: it.pubDate,
+    description: stripHtml(it.description || it.content || '')
+  }));
+}
+
+async function loadNews(){
+  newsState = 'loading';
+  renderNews();
+  try{
+    const results = await Promise.allSettled(NEWS_FEEDS.map(fetchNewsFeed));
+    const merged = results
+      .filter(r => r.status === 'fulfilled')
+      .flatMap(r => r.value)
+      .filter(item => item.title && item.link);
+    if(!merged.length) throw new Error('no live items');
+    merged.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+    newsItems = merged.slice(0, 8);
+    newsState = 'live';
+  }catch(err){
+    newsItems = NEWS_FALLBACK;
+    newsState = 'fallback';
+  }
+  renderNews();
+}
+
+document.getElementById('news-refresh').addEventListener('click', loadNews);
 
 // contact form -> mailto handoff (static site, no backend)
 document.getElementById('contact-form').addEventListener('submit', function(e){
@@ -671,6 +832,7 @@ ${message}`
 });
 
 setLang('th');
+loadNews();
 </script>
 
 </body>
