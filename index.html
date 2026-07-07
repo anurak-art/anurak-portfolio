@@ -689,6 +689,9 @@ function setLang(lang){
   });
   window.__currentLang = lang;
   renderNews();
+  if(lang === 'th' && newsState === 'live'){
+    translateNewsItemsToThai().then(renderNews);
+  }
 }
 
 // cyber attack news -> live RSS feed via rss2json, with a curated fallback
@@ -699,31 +702,39 @@ const NEWS_FEEDS = [
 const NEWS_FALLBACK = [
   {
     title: "Researchers Claim First Fully Agentic Ransomware: JadePuffer",
+    title_th: "นักวิจัยเผยแรนซัมแวร์ตัวแรกที่ทำงานอัตโนมัติเต็มรูปแบบด้วย AI Agent: JadePuffer",
     link: "https://www.infosecurity-magazine.com/news/researchers-first-agentic/",
     source: "Infosecurity Magazine",
     pubDate: "2026-07-06",
-    description: "Sysdig researchers detail JadePuffer, an LLM-driven agent that autonomously handled recon, credential theft, lateral movement and encryption in a live ransomware attack."
+    description: "Sysdig researchers detail JadePuffer, an LLM-driven agent that autonomously handled recon, credential theft, lateral movement and encryption in a live ransomware attack.",
+    description_th: "นักวิจัยจาก Sysdig เปิดเผยรายละเอียดของ JadePuffer ซึ่งเป็น AI Agent ที่ขับเคลื่อนด้วย LLM และดำเนินการโจมตีแรนซัมแวร์ได้เองทั้งหมด ตั้งแต่สำรวจเป้าหมาย ขโมยข้อมูลรับรอง เคลื่อนที่ในระบบ ไปจนถึงเข้ารหัสข้อมูล"
   },
   {
     title: "Attackers Exploit SimpleHelp CVE-2026-48558 to Deploy Infostealers",
+    title_th: "แฮกเกอร์โจมตีช่องโหว่ SimpleHelp CVE-2026-48558 เพื่อฝัง Infostealer",
     link: "https://thehackernews.com/2026/06/attackers-exploit-simplehelp-cve-2026.html",
     source: "The Hacker News",
     pubDate: "2026-06-28",
-    description: "An OIDC authentication bypass in SimpleHelp RMM lets unauthenticated attackers forge a technician session; now added to CISA's Known Exploited Vulnerabilities catalog."
+    description: "An OIDC authentication bypass in SimpleHelp RMM lets unauthenticated attackers forge a technician session; now added to CISA's Known Exploited Vulnerabilities catalog.",
+    description_th: "ช่องโหว่การยืนยันตัวตนแบบ OIDC ใน SimpleHelp RMM เปิดทางให้ผู้โจมตีที่ไม่ต้องยืนยันตัวตนปลอมเซสชันของช่างเทคนิคได้ ล่าสุดถูกเพิ่มเข้าบัญชี Known Exploited Vulnerabilities ของ CISA แล้ว"
   },
   {
     title: "New TrojPix Attack Leaks Data From Air-Gapped Systems via Video Cable Emissions",
+    title_th: "เทคนิคโจมตีใหม่ TrojPix ขโมยข้อมูลจากระบบ Air-Gapped ผ่านคลื่นวิทยุจากสายวิดีโอ",
     link: "https://thehackernews.com/2026/07/new-trojpix-attack-leaks-data-from-air.html",
     source: "The Hacker News",
     pubDate: "2026-07-06",
-    description: "Shandong University researchers show imperceptible pixel modulation that turns a video cable into a covert radio transmitter, exfiltrating data from air-gapped machines up to 208 meters away."
+    description: "Shandong University researchers show imperceptible pixel modulation that turns a video cable into a covert radio transmitter, exfiltrating data from air-gapped machines up to 208 meters away.",
+    description_th: "นักวิจัยจากมหาวิทยาลัย Shandong สาธิตการปรับพิกเซลบนหน้าจอแบบที่ตาเปล่ามองไม่เห็น เพื่อเปลี่ยนสายวิดีโอให้กลายเป็นเครื่องส่งสัญญาณวิทยุลับ ขโมยข้อมูลจากเครื่องที่ตัดการเชื่อมต่อเครือข่าย (air-gapped) ได้ไกลถึง 208 เมตร"
   },
   {
     title: "Qilin Dominates a Resurgent Ransomware Market",
+    title_th: "Qilin ครองตลาดแรนซัมแวร์ที่กลับมาคึกคักอีกครั้ง",
     link: "https://www.infosecurity-magazine.com/news/qilin-dominates-ransomware-market/",
     source: "Infosecurity Magazine",
     pubDate: "2026-06-30",
-    description: "June 2026 saw 102 publicly disclosed ransomware attacks across 21 countries, with Qilin and The Gentlemen driving the largest share of claimed victims."
+    description: "June 2026 saw 102 publicly disclosed ransomware attacks across 21 countries, with Qilin and The Gentlemen driving the largest share of claimed victims.",
+    description_th: "เดือนมิถุนายน 2026 มีการโจมตีแรนซัมแวร์ที่เปิดเผยต่อสาธารณะ 102 ครั้ง ใน 21 ประเทศ โดยกลุ่ม Qilin และ The Gentlemen เป็นผู้ก่อเหตุในสัดส่วนสูงสุด"
   }
 ];
 
@@ -752,19 +763,51 @@ function renderNews(){
   const grid = document.getElementById('news-grid');
   const updatedEl = document.getElementById('news-updated');
   if(!grid) return;
-  const dict = translations[window.__currentLang || 'th'];
-  grid.innerHTML = newsItems.map(item => `
+  const lang = window.__currentLang || 'th';
+  const dict = translations[lang];
+  grid.innerHTML = newsItems.map(item => {
+    const title = lang === 'th' ? (item.title_th || item.title) : item.title;
+    const description = lang === 'th' ? (item.description_th || item.description) : item.description;
+    return `
     <div class="news-card">
       <div class="src"><span class="name">${item.source}</span><span class="date">${formatNewsDate(item.pubDate)}</span></div>
-      <h3><a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a></h3>
-      <p>${truncateText(item.description, 150)}</p>
-    </div>`
-  ).join('') + (newsState === 'fallback' ? `<div class="news-fallback-note">${dict.newsStatusFallback}</div>` : '');
+      <h3><a href="${item.link}" target="_blank" rel="noopener noreferrer">${title}</a></h3>
+      <p>${truncateText(description, 150)}</p>
+    </div>`;
+  }).join('') + (newsState === 'fallback' ? `<div class="news-fallback-note">${dict.newsStatusFallback}</div>` : '');
   if(updatedEl){
     if(newsState === 'loading') updatedEl.textContent = dict.newsStatusLoading;
-    else if(newsState === 'live') updatedEl.textContent = `${dict.newsStatusLive} ${new Date().toLocaleTimeString(window.__currentLang === 'en' ? 'en-US' : 'th-TH', { hour: '2-digit', minute: '2-digit' })}`;
+    else if(newsState === 'live') updatedEl.textContent = `${dict.newsStatusLive} ${new Date().toLocaleTimeString(lang === 'en' ? 'en-US' : 'th-TH', { hour: '2-digit', minute: '2-digit' })}`;
     else updatedEl.textContent = dict.newsStatusFallback;
   }
+}
+
+async function translateToThai(text){
+  if(!text) return text;
+  try{
+    const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|th`);
+    if(!res.ok) return text;
+    const data = await res.json();
+    const translated = data && data.responseData && data.responseData.translatedText;
+    return translated ? translated : text;
+  }catch(err){
+    return text;
+  }
+}
+
+async function ensureThaiTranslation(item){
+  if(item.title_th && item.description_th) return item;
+  const [title_th, description_th] = await Promise.all([
+    item.title_th ? item.title_th : translateToThai(item.title),
+    item.description_th ? item.description_th : translateToThai(item.description)
+  ]);
+  item.title_th = title_th;
+  item.description_th = description_th;
+  return item;
+}
+
+async function translateNewsItemsToThai(){
+  await Promise.all(newsItems.map(ensureThaiTranslation));
 }
 
 async function fetchNewsFeed(feed){
@@ -795,6 +838,9 @@ async function loadNews(){
     merged.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
     newsItems = merged.slice(0, 8);
     newsState = 'live';
+    if(window.__currentLang === 'th'){
+      await translateNewsItemsToThai();
+    }
   }catch(err){
     newsItems = NEWS_FALLBACK;
     newsState = 'fallback';
