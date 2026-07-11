@@ -1,68 +1,116 @@
 {
   "items": [
     {
-      "name_th": "Network Security", "name_en": "Network Security",
+      "name_th": "Network Security",
+      "name_en": "Network Security",
       "threat_th": "การโจมตีเจาะเครือข่ายจากภายนอกและการเคลื่อนที่ในเครือข่ายภายใน",
       "threat_en": "External network intrusions and lateral movement inside the network",
       "fn_th": "ตรวจสอบและกรองทราฟฟิกที่ผ่านเข้า-ออกเครือข่าย บล็อกการโจมตีตั้งแต่ชั้น perimeter",
       "fn_en": "Inspects and filters traffic at the perimeter, blocking attacks before they reach internal systems",
-      "tools": ["NGFW", "IPS/IDS", "Network Segmentation"]
+      "tools": [
+        "NGFW",
+        "IPS/IDS",
+        "Network Segmentation"
+      ]
     },
     {
-      "name_th": "Cloud Security", "name_en": "Cloud Security",
+      "name_th": "Cloud Security",
+      "name_en": "Cloud Security",
       "threat_th": "การตั้งค่าคลาวด์ผิดพลาด (misconfiguration) และช่องโหว่ใน workload บนคลาวด์",
       "threat_en": "Cloud misconfigurations and vulnerabilities in cloud workloads",
       "fn_th": "ตรวจสอบ posture ของบัญชีคลาวด์และปกป้อง workload อย่างต่อเนื่อง",
       "fn_en": "Continuously monitors cloud account posture and protects running workloads",
-      "tools": ["CSPM", "CWPP", "CNAPP"]
+      "tools": [
+        "CSPM",
+        "CWPP",
+        "CNAPP"
+      ]
     },
     {
-      "name_th": "Zero Trust", "name_en": "Zero Trust",
+      "name_th": "Zero Trust",
+      "name_en": "Zero Trust",
       "threat_th": "การเข้าถึงระบบโดยไม่ได้รับอนุญาต แม้จะอยู่ในเครือข่ายภายในแล้วก็ตาม",
       "threat_en": "Unauthorized access attempts, even from inside the internal network",
       "fn_th": "ยืนยันตัวตนและสิทธิ์การเข้าถึงทุกครั้งตามหลัก never trust, always verify",
       "fn_en": "Verifies identity and access rights on every request under a never-trust, always-verify model",
-      "tools": ["ZTNA", "Micro-segmentation", "Continuous Authentication"]
+      "tools": [
+        "ZTNA",
+        "Micro-segmentation",
+        "Continuous Authentication"
+      ]
     },
     {
-      "name_th": "SIEM / SOC", "name_en": "SIEM / SOC",
+      "name_th": "SIEM / SOC",
+      "name_en": "SIEM / SOC",
       "threat_th": "เหตุการณ์ผิดปกติที่กระจายอยู่หลายระบบซึ่งตรวจจับด้วยตาเปล่าไม่ทัน",
       "threat_en": "Anomalies scattered across many systems that are too slow to catch manually",
       "fn_th": "รวบรวมและวิเคราะห์ log จากทุกระบบแบบเรียลไทม์ พร้อมทีมเฝ้าระวัง 24/7",
       "fn_en": "Aggregates and correlates logs from every system in real time, backed by 24/7 monitoring",
-      "tools": ["SIEM", "SOAR", "Managed Detection & Response"]
+      "tools": [
+        "SIEM",
+        "SOAR",
+        "Managed Detection & Response"
+      ]
     },
     {
-      "name_th": "Endpoint / XDR", "name_en": "Endpoint / XDR",
+      "name_th": "Endpoint / XDR",
+      "name_en": "Endpoint / XDR",
       "threat_th": "มัลแวร์ แรนซัมแวร์ และการโจมตีที่เกิดขึ้นบนเครื่องผู้ใช้งานโดยตรง",
       "threat_en": "Malware, ransomware, and attacks that land directly on user devices",
       "fn_th": "ตรวจจับพฤติกรรมผิดปกติบน endpoint และตอบสนองอัตโนมัติแบบข้ามระบบ",
       "fn_en": "Detects anomalous endpoint behavior and automates response across systems",
-      "tools": ["EDR", "XDR", "Endpoint Protection Platform"]
+      "tools": [
+        "EDR",
+        "XDR",
+        "Endpoint Protection Platform"
+      ]
     },
     {
-      "name_th": "IAM", "name_en": "IAM",
+      "name_th": "IAM",
+      "name_en": "IAM",
       "threat_th": "บัญชีผู้ใช้ที่ถูกขโมยหรือสิทธิ์การเข้าถึงที่มากเกินความจำเป็น",
       "threat_en": "Stolen credentials and excessive access privileges",
       "fn_th": "จัดการตัวตนและสิทธิ์การเข้าถึงให้ตรงตามบทบาท พร้อมยืนยันตัวตนหลายชั้น",
       "fn_en": "Manages identity and role-based access with layered authentication",
-      "tools": ["MFA", "Privileged Access Management", "Single Sign-On"]
+      "tools": [
+        "MFA",
+        "Privileged Access Management",
+        "Single Sign-On"
+      ]
     },
     {
-      "name_th": "GRC / PDPA", "name_en": "GRC / PDPA",
+      "name_th": "GRC / PDPA",
+      "name_en": "GRC / PDPA",
       "threat_th": "ความเสี่ยงด้านการปฏิบัติตามกฎหมายคุ้มครองข้อมูลส่วนบุคคลและมาตรฐานสากล",
       "threat_en": "Compliance risk under data protection law and international standards",
       "fn_th": "ประเมินความเสี่ยง จัดทำนโยบาย และติดตามสถานะการปฏิบัติตามมาตรฐานอย่างต่อเนื่อง",
       "fn_en": "Assesses risk, drafts policy, and continuously tracks compliance status",
-      "tools": ["GRC Platform", "DLP", "Compliance Automation"]
+      "tools": [
+        "GRC Platform",
+        "DLP",
+        "Compliance Automation"
+      ]
     },
     {
-      "name_th": "Vulnerability Mgmt", "name_en": "Vulnerability Mgmt",
+      "name_th": "Vulnerability Mgmt",
+      "name_en": "Vulnerability Mgmt",
       "threat_th": "ช่องโหว่ของซอฟต์แวร์และระบบที่ยังไม่ได้รับการแก้ไข (unpatched)",
       "threat_en": "Unpatched software and system vulnerabilities",
       "fn_th": "สแกนหาช่องโหว่อย่างต่อเนื่องและจัดลำดับความสำคัญในการแก้ไข",
       "fn_en": "Continuously scans for vulnerabilities and prioritizes remediation",
-      "tools": ["Vulnerability Scanner", "Patch Management", "Attack Surface Management"]
+      "tools": [
+        "Vulnerability Scanner",
+        "Patch Management",
+        "Attack Surface Management"
+      ]
+    },
+    {
+      "name_th": "Data Loss Prevention - DLP",
+      "name_en": "Data Loss Prevention - DLP",
+      "threat_th": "ข้อมูลคือทรัพย์สินที่สำคัญที่สุดขององค์กร อาจรั่วไหลจากความตั้งใจ หรือไม่ตั้งใจของพนักงาน",
+      "fn_th": "ป้องกันข้อมูลสำคัญไม่ให้รั่วไหลออกจากองค์กร พร้อมตอบโจทย์ข้อกฎหมาย PDPA",
+      "fn_en": "Endpoint DLP, Data Encryption, Network DLP",
+      "threat_en": "ข้อมูลคือทรัพย์สินที่สำคัญที่สุดขององค์กร อาจรั่วไหลจากความตั้งใจ หรือไม่ตั้งใจของพนักงาน"
     }
   ]
 }
