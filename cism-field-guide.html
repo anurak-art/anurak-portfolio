@@ -241,6 +241,39 @@
   .nav-btn:hover{border-color:var(--gold); color:var(--gold);}
   .nav-btn.disabled{opacity:0.25; pointer-events:none;}
 
+  /* ===== QUIZ COMPONENT ===== */
+  .quiz-box{
+    max-width:760px; border:1px solid var(--line); border-radius:10px;
+    background:var(--bg-panel); padding:22px 24px; margin-top:8px;
+  }
+  .quiz-q{font-size:14.5px; color:var(--text); margin-bottom:16px; font-weight:600;}
+  .quiz-choices{display:flex; flex-direction:column; gap:8px;}
+  .quiz-choice{
+    display:flex; align-items:center; gap:12px;
+    padding:11px 14px; border:1px solid var(--line); border-radius:7px;
+    cursor:pointer; font-size:13.5px; color:var(--text-dim); transition:all .15s;
+    background:var(--bg-card);
+  }
+  .quiz-choice:hover{border-color:var(--dom-accent, var(--gold)); color:var(--text);}
+  .quiz-choice .qc-letter{
+    font-family:var(--mono); font-size:11.5px; font-weight:700; color:var(--text-faint);
+    width:22px; height:22px; border-radius:50%; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .quiz-choice.correct{background:rgba(79,190,141,0.1); border-color:var(--ok); color:var(--text);}
+  .quiz-choice.correct .qc-letter{background:var(--ok); border-color:var(--ok); color:#062015;}
+  .quiz-choice.wrong{background:rgba(214,86,74,0.1); border-color:var(--danger); color:var(--text);}
+  .quiz-choice.wrong .qc-letter{background:var(--danger); border-color:var(--danger); color:#1A0705;}
+  .quiz-choice.disabled{cursor:default; pointer-events:none;}
+  .quiz-result{
+    margin-top:14px; padding:12px 14px; border-radius:7px; font-size:13px;
+    display:none; color:var(--text);
+  }
+  .quiz-result.show{display:block;}
+  .quiz-result.is-correct{background:rgba(79,190,141,0.1); border:1px solid rgba(79,190,141,0.3);}
+  .quiz-result.is-wrong{background:rgba(214,86,74,0.1); border:1px solid rgba(214,86,74,0.3);}
+  .quiz-result b{display:block; margin-bottom:4px; font-family:var(--mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase;}
+
   footer{
     text-align:center; padding:40px 0 10px; font-family:var(--mono); font-size:11px;
     color:var(--text-faint); letter-spacing:0.06em;
@@ -342,6 +375,15 @@
       </div>
     </div>
 
+    <div class="detail-section">
+      <div class="sec-label">แบบฝึกหัดตัวอย่าง (ลองตอบดู)</div>
+      <div class="quiz-box">
+        <div class="quiz-q" id="quiz-q"></div>
+        <div class="quiz-choices" id="quiz-choices"></div>
+        <div class="quiz-result" id="quiz-result"></div>
+      </div>
+    </div>
+
     <div class="topic-nav">
       <div class="nav-btn" id="btn-prev" onclick="navTopic(-1)">‹ หัวข้อก่อนหน้า</div>
       <div class="nav-btn" id="btn-next" onclick="navTopic(1)">หัวข้อถัดไป ›</div>
@@ -364,7 +406,13 @@ const DATA = [
         terms:[["Enterprise Governance","การกำกับดูแลองค์กรทั้งหมดโดยบอร์ด/ผู้บริหารสูงสุด"],["InfoSec Governance","ส่วนย่อยที่ทำให้ security strategy สอดคล้องกับเป้าหมายองค์กร"]],
         scenario:"CISO ต้องการเสนอ security strategy ฉบับใหม่ต่อบอร์ด ควรเริ่มต้นจากอะไร? — เริ่มจากการทำความเข้าใจ business objective และ risk appetite ขององค์กรก่อน แล้วจึงออกแบบ strategy ให้ตอบโจทย์นั้น ไม่ใช่เริ่มจากรายการเทคโนโลยีที่อยากซื้อ",
         trap:"ข้อสอบมักมีตัวเลือกที่ดู 'ทันสมัย' ทางเทคนิคแต่ไม่เชื่อมกับ business objective ให้ตัดตัวเลือกเหล่านั้นทิ้งก่อนเสมอ",
-        rec:"เวลาคุยกับลูกค้า ให้ถามหา business objective ก่อนเสนอโซลูชัน ถ้าลูกค้าตอบไม่ได้ว่า security เชื่อมกับเป้าหมายธุรกิจอย่างไร นั่นคือสัญญาณว่าต้องช่วยลูกค้าวาง governance framework ก่อน ไม่ใช่ขายผลิตภัณฑ์ทันที"
+        rec:"เวลาคุยกับลูกค้า ให้ถามหา business objective ก่อนเสนอโซลูชัน ถ้าลูกค้าตอบไม่ได้ว่า security เชื่อมกับเป้าหมายธุรกิจอย่างไร นั่นคือสัญญาณว่าต้องช่วยลูกค้าวาง governance framework ก่อน ไม่ใช่ขายผลิตภัณฑ์ทันที",
+        quiz:{
+          q:"องค์กรกำลังจัดทำ security strategy ฉบับใหม่ ขั้นตอนแรกที่ควรทำคือข้อใด?",
+          choices:["เลือกเทคโนโลยีความปลอดภัยที่ทันสมัยที่สุด","ทำความเข้าใจ business objective และ risk appetite ขององค์กรก่อน","จัดซื้อ SIEM เพื่อเริ่มเก็บ log ทันที","ว่าจ้างที่ปรึกษาภายนอกมาเขียนนโยบายทั้งหมด"],
+          answer:1,
+          explain:"Governance ที่ดีต้องเริ่มจากความเข้าใจเป้าหมายธุรกิจและ risk appetite ก่อนเสมอ แล้วจึงออกแบบ strategy ให้ตอบโจทย์นั้น การเลือกเทคโนโลยีก่อนคือการเริ่มผิดทาง"
+        }
       },
       {
         title:"Policy, Standard, Procedure, Guideline",
@@ -373,7 +421,13 @@ const DATA = [
         terms:[["Policy","หลักการระดับสูงสุด กำหนดโดยผู้บริหาร (บังคับ)"],["Standard","ข้อกำหนดเฉพาะเจาะจงที่ต้องทำตาม (บังคับ)"],["Procedure","ขั้นตอนปฏิบัติละเอียด (บังคับ)"],["Guideline","คำแนะนำ ไม่บังคับ"]],
         scenario:"องค์กรกำหนดว่า 'รหัสผ่านต้องมีความยาวอย่างน้อย 12 ตัวอักษร' — นี่คือ Policy, Standard, หรือ Procedure? คำตอบคือ Standard เพราะเป็นข้อกำหนดเฉพาะเจาะจงที่วัดผลได้ ไม่ใช่หลักการกว้างระดับ Policy",
         trap:"ข้อสอบชอบสลับใช้คำว่า Policy/Standard/Procedure/Guideline ในโจทย์เดียวกัน ต้องอ่านให้ละเอียดว่าระดับความเฉพาะเจาะจงและการบังคับใช้ตรงกับนิยามไหน",
-        rec:"เวลาช่วยลูกค้าออกแบบ solution ให้เช็คว่าลูกค้ามี policy ระดับบนที่ชัดเจนหรือยัง ถ้ามีแต่ standard/procedure แต่ไม่มี policy รองรับ อาจเป็นสัญญาณว่า governance ยังไม่สมบูรณ์"
+        rec:"เวลาช่วยลูกค้าออกแบบ solution ให้เช็คว่าลูกค้ามี policy ระดับบนที่ชัดเจนหรือยัง ถ้ามีแต่ standard/procedure แต่ไม่มี policy รองรับ อาจเป็นสัญญาณว่า governance ยังไม่สมบูรณ์",
+        quiz:{
+          q:"\"รหัสผ่านต้องมีความยาวอย่างน้อย 12 ตัวอักษรและเปลี่ยนทุก 90 วัน\" จัดเป็นเอกสารประเภทใด?",
+          choices:["Policy","Standard","Guideline","Business Case"],
+          answer:1,
+          explain:"นี่คือข้อกำหนดเฉพาะเจาะจงที่วัดผลได้และบังคับใช้ จึงเป็น Standard ไม่ใช่ Policy ซึ่งเป็นหลักการกว้างระดับสูงกว่า"
+        }
       },
       {
         title:"Roles, Responsibilities & Steering Committee",
@@ -382,7 +436,13 @@ const DATA = [
         terms:[["Steering Committee","กลุ่มผู้บริหารข้ามสายงานที่กำกับทิศทาง program"],["Data/Asset Owner","ผู้รับผิดชอบการตัดสินใจเกี่ยวกับ asset นั้นๆ รวมถึง risk acceptance"]],
         scenario:"ทีม IT ต้องการยอมรับความเสี่ยงของช่องโหว่ระดับกลางเพื่อประหยัดเวลา ควรเป็นใครที่อนุมัติ? — ต้องเป็น asset owner หรือผู้บริหารที่มีอำนาจ ไม่ใช่ทีมเทคนิคตัดสินใจเอง เพราะ risk acceptance ต้องมีการอนุมัติอย่างเป็นทางการ",
         trap:"โจทย์มักหลอกให้เลือกคนที่ 'รู้เรื่องเทคนิคที่สุด' เป็นผู้อนุมัติ แต่คำตอบที่ถูกต้องมักเป็นผู้มีอำนาจตัดสินใจทางธุรกิจ",
-        rec:"ระบุให้ชัดในการเสนอโครงการว่าใครในฝั่งลูกค้าควรเป็น sponsor หรือ approver — ช่วยให้ deal เดินหน้าได้เร็วขึ้นเพราะไม่ติดขั้นตอนอนุมัติที่ไม่ชัดเจน"
+        rec:"ระบุให้ชัดในการเสนอโครงการว่าใครในฝั่งลูกค้าควรเป็น sponsor หรือ approver — ช่วยให้ deal เดินหน้าได้เร็วขึ้นเพราะไม่ติดขั้นตอนอนุมัติที่ไม่ชัดเจน",
+        quiz:{
+          q:"ใครควรเป็นผู้อนุมัติการยอมรับความเสี่ยง (risk acceptance) ของระบบสำคัญ?",
+          choices:["ทีมเทคนิคที่ดูแลระบบ","Asset owner หรือผู้บริหารที่มีอำนาจตัดสินใจ","Vendor ผู้ขายโซลูชัน","ทีม Pre-sales ที่เสนอขาย"],
+          answer:1,
+          explain:"Risk acceptance ต้องมีเจ้าของ asset หรือผู้บริหารที่มีอำนาจเป็นผู้อนุมัติอย่างเป็นทางการ ไม่ใช่ทีมเทคนิคตัดสินใจเอง"
+        }
       },
       {
         title:"Legal, Regulatory & Contractual Requirements",
@@ -391,7 +451,13 @@ const DATA = [
         terms:[["PDPA","กฎหมายคุ้มครองข้อมูลส่วนบุคคลของไทย"],["Contractual Requirement","ข้อกำหนดด้าน security ที่ระบุในสัญญากับลูกค้า/คู่ค้า"]],
         scenario:"ลูกค้าต้องการเก็บข้อมูลส่วนบุคคลของประชาชนในระบบใหม่ ควรพิจารณาอะไรก่อนเริ่มออกแบบระบบ? — ต้องเช็คข้อกำหนด PDPA เรื่อง data classification, consent, และ retention period ตั้งแต่ขั้นตอนออกแบบ ไม่ใช่เพิ่มทีหลัง",
         trap:"อย่าลืมว่าข้อกำหนดทางกฎหมายบางครั้ง 'เข้มงวดกว่า' มาตรฐานภายในองค์กร — ถ้าขัดแย้งกัน กฎหมายมีลำดับความสำคัญเหนือกว่า",
-        rec:"จุดแข็งของคุณคือมีประสบการณ์ตรงกับ PDPA จากงาน government proposal ใช้เป็นจุดขายในการคุยกับลูกค้าภาคเอกชนที่เพิ่งเริ่มปฏิบัติตาม PDPA ได้เลย"
+        rec:"จุดแข็งของคุณคือมีประสบการณ์ตรงกับ PDPA จากงาน government proposal ใช้เป็นจุดขายในการคุยกับลูกค้าภาคเอกชนที่เพิ่งเริ่มปฏิบัติตาม PDPA ได้เลย",
+        quiz:{
+          q:"เมื่อข้อกำหนดทางกฎหมาย (เช่น PDPA) ขัดแย้งกับมาตรฐานภายในองค์กร ควรยึดสิ่งใดเป็นหลัก?",
+          choices:["มาตรฐานภายในองค์กรเสมอ เพราะเข้าใจบริบทดีกว่า","ข้อกำหนดทางกฎหมาย เพราะมีลำดับความสำคัญเหนือกว่า","ให้ทีมเทคนิคตัดสินใจเอง","เลือกข้อที่ implement ง่ายกว่า"],
+          answer:1,
+          explain:"ข้อกำหนดทางกฎหมายมีลำดับความสำคัญเหนือมาตรฐานภายในองค์กรเสมอ หากขัดแย้งกันต้องปรับมาตรฐานภายในให้สอดคล้องกับกฎหมาย"
+        }
       },
       {
         title:"Business Case & Budget",
@@ -400,7 +466,13 @@ const DATA = [
         terms:[["Business Case","เอกสารพิสูจน์ความคุ้มค่าของการลงทุนต่อผู้บริหาร"],["ROI/Cost-Benefit","การเปรียบเทียบผลตอบแทนกับต้นทุนของ security investment"]],
         scenario:"งบ security ปีนี้ถูกตัด 20% ทีม security ควรทำอย่างไรเพื่อรักษาโครงการสำคัญไว้? — จัดลำดับความสำคัญของโครงการตาม risk-based prioritization และนำเสนอ business case ที่ชัดเจนว่าโครงการไหนกระทบความเสี่ยงสูงสุดหากถูกตัด",
         trap:"อย่าเสนอโครงการโดยอิงแค่ 'ความเสี่ยงทางเทคนิค' ต้องแปลงเป็นผลกระทบทางธุรกิจที่วัดได้เสมอ",
-        rec:"ช่วยลูกค้าทำ business case ให้ ไม่ใช่แค่ส่ง quotation — การช่วยแปลง technical benefit เป็นภาษาธุรกิจคือสิ่งที่ทำให้ pre-sales ของเราแตกต่างจากคู่แข่ง"
+        rec:"ช่วยลูกค้าทำ business case ให้ ไม่ใช่แค่ส่ง quotation — การช่วยแปลง technical benefit เป็นภาษาธุรกิจคือสิ่งที่ทำให้ pre-sales ของเราแตกต่างจากคู่แข่ง",
+        quiz:{
+          q:"งบ security ถูกตัด 20% สิ่งแรกที่ทีม security ควรทำคืออะไร?",
+          choices:["ตัดโครงการที่ implement ยากที่สุดออกก่อน","จัดลำดับความสำคัญของโครงการตาม risk-based prioritization พร้อม business case","ของบเพิ่มจากแผนกอื่นทันที","หยุดโครงการทั้งหมดจนกว่าจะได้งบคืน"],
+          answer:1,
+          explain:"ต้องจัดลำดับความสำคัญตามความเสี่ยงที่กระทบสูงสุด และนำเสนอ business case ที่ชัดเจนต่อผู้บริหาร ไม่ใช่ตัดโดยไม่มีหลักเกณฑ์"
+        }
       }
     ]
   },
@@ -415,7 +487,13 @@ const DATA = [
         terms:[["Risk Appetite","ระดับความเสี่ยงที่องค์กรเต็มใจรับ (กำหนดโดยบอร์ด)"],["Risk Tolerance","ขอบเขตเบี่ยงเบนที่ยอมรับได้ในแต่ละกรณี"],["Risk Capacity","ขีดจำกัดสูงสุดที่องค์กรรับไหวจริง"]],
         scenario:"องค์กรกำหนด risk appetite ไว้ต่ำ แต่โครงการหนึ่งมีความเสี่ยงเกิน capacity จริงของงบประมาณ ควรทำอย่างไร? — ต้องยกเลิกหรือปรับโครงการทันที เพราะเกิน capacity คือเกินขีดจำกัดที่รับไหวจริง ไม่ใช่แค่เรื่องความเต็มใจ",
         trap:"ข้อสอบมักใช้สามคำนี้ปนกันในโจทย์เดียว ให้จำลำดับ Capacity (เพดานจริง) ≥ Appetite (สิ่งที่อยากรับ) ≥ Tolerance (ขอบเขตต่อกรณี)",
-        rec:"เวลาเสนอโซลูชัน ให้ถามลูกค้าว่า risk appetite ระดับองค์กรเป็นอย่างไร จะช่วยให้เข้าใจว่าลูกค้าจะยอมลงทุนระดับไหนใน security control"
+        rec:"เวลาเสนอโซลูชัน ให้ถามลูกค้าว่า risk appetite ระดับองค์กรเป็นอย่างไร จะช่วยให้เข้าใจว่าลูกค้าจะยอมลงทุนระดับไหนใน security control",
+        quiz:{
+          q:"ข้อใดเรียงลำดับค่าจากสูงสุดไปต่ำสุดได้ถูกต้อง?",
+          choices:["Tolerance ≥ Appetite ≥ Capacity","Capacity ≥ Appetite ≥ Tolerance","Appetite ≥ Capacity ≥ Tolerance","ทั้งสามค่าเท่ากันเสมอ"],
+          answer:1,
+          explain:"Capacity คือเพดานสูงสุดที่รับไหวจริง กว้างกว่า Appetite ที่เป็นสิ่งที่องค์กรเต็มใจรับ ซึ่งกว้างกว่า Tolerance ที่เป็นขอบเขตในแต่ละกรณี"
+        }
       },
       {
         title:"Risk Treatment: Mitigate / Transfer / Avoid / Accept",
@@ -424,7 +502,13 @@ const DATA = [
         terms:[["Mitigate","ลดโอกาสเกิด/ผลกระทบด้วย control"],["Transfer","โอนความเสี่ยง เช่น insurance, outsource"],["Avoid","หยุดกิจกรรมที่ก่อความเสี่ยง"],["Accept","ยอมรับความเสี่ยงโดยมีการอนุมัติอย่างเป็นทางการ"]],
         scenario:"ทีมพบช่องโหว่ความเสี่ยงต่ำที่ค่าใช้จ่ายในการแก้สูงกว่าผลกระทบ ควรทำอย่างไร? — พิจารณา risk acceptance แต่ต้องเสนอให้ผู้มีอำนาจอนุมัติอย่างเป็นทางการ พร้อมบันทึกไว้ใน risk register",
         trap:"'Accept' ที่ไม่มีการอนุมัติอย่างเป็นทางการ ถือเป็นความประมาท ไม่ใช่ risk acceptance ที่ถูกต้องตามหลัก governance",
-        rec:"เมื่อเสนอโซลูชันที่เป็น 'mitigate' ให้ชัดเจนว่ามันลด likelihood หรือ impact ด้านไหน จะช่วยให้ลูกค้าเทียบกับทางเลือก transfer/avoid/accept ได้ง่ายขึ้น"
+        rec:"เมื่อเสนอโซลูชันที่เป็น 'mitigate' ให้ชัดเจนว่ามันลด likelihood หรือ impact ด้านไหน จะช่วยให้ลูกค้าเทียบกับทางเลือก transfer/avoid/accept ได้ง่ายขึ้น",
+        quiz:{
+          q:"การยอมรับความเสี่ยง (Risk Acceptance) จะสมบูรณ์ตามหลัก governance ต้องมีอะไรประกอบเสมอ?",
+          choices:["รายงานให้ทีมเทคนิคทราบ","การอนุมัติอย่างเป็นทางการจากผู้มีอำนาจ พร้อมบันทึกในเอกสาร","ไม่ต้องทำอะไรเพิ่มเติม","แจ้ง vendor ให้ทราบ"],
+          answer:1,
+          explain:"Risk Acceptance ที่ถูกต้องต้องมีการอนุมัติอย่างเป็นทางการและบันทึกไว้ ไม่เช่นนั้นถือเป็นความประมาท ไม่ใช่การยอมรับความเสี่ยงตามหลัก governance"
+        }
       },
       {
         title:"Qualitative vs Quantitative Risk Analysis",
@@ -433,7 +517,13 @@ const DATA = [
         terms:[["SLE","Asset Value × Exposure Factor"],["ARO","ความถี่ที่คาดว่าจะเกิดต่อปี"],["ALE","SLE × ARO = ค่าความเสียหายคาดการณ์ต่อปี"]],
         scenario:"Asset มูลค่า 10 ล้านบาท มี exposure factor 20% และคาดว่าเกิดเหตุการณ์นี้ 0.5 ครั้งต่อปี ALE เท่ากับเท่าไหร่? — SLE = 10,000,000 × 0.20 = 2,000,000 บาท, ALE = 2,000,000 × 0.5 = 1,000,000 บาทต่อปี",
         trap:"ข้อสอบชอบให้คำนวณ ALE จากตัวเลขที่ให้มา อย่าลืมสูตร SLE ก่อนแล้วค่อยคูณ ARO",
-        rec:"ใช้ ALE ช่วยพิสูจน์ ROI ของโซลูชันในเชิงตัวเลข เช่น 'โซลูชันนี้ราคา X บาทต่อปี แต่ลด ALE ได้ Y บาท' เป็นภาษาที่ CFO ฝั่งลูกค้าเข้าใจทันที"
+        rec:"ใช้ ALE ช่วยพิสูจน์ ROI ของโซลูชันในเชิงตัวเลข เช่น 'โซลูชันนี้ราคา X บาทต่อปี แต่ลด ALE ได้ Y บาท' เป็นภาษาที่ CFO ฝั่งลูกค้าเข้าใจทันที",
+        quiz:{
+          q:"Asset มูลค่า 5,000,000 บาท Exposure Factor 30% และ ARO 2 ครั้ง/ปี ALE เท่ากับเท่าใด?",
+          choices:["1,500,000 บาท","3,000,000 บาท","900,000 บาท","500,000 บาท"],
+          answer:1,
+          explain:"SLE = 5,000,000 × 0.30 = 1,500,000 บาท จากนั้น ALE = SLE × ARO = 1,500,000 × 2 = 3,000,000 บาท"
+        }
       },
       {
         title:"Risk Register & Reporting",
@@ -442,7 +532,13 @@ const DATA = [
         terms:[["Risk Register","ฐานข้อมูลกลางบันทึกความเสี่ยงทั้งหมดขององค์กร"],["Risk Owner","ผู้รับผิดชอบติดตามและจัดการความเสี่ยงแต่ละรายการ"]],
         scenario:"บอร์ดต้องการทราบภาพรวมความเสี่ยงองค์กรในที่ประชุมรายไตรมาส ควรนำเสนออะไร? — สรุปจาก risk register โดยเน้นความเสี่ยงที่เปลี่ยนสถานะหรือเกิน risk appetite ไม่ใช่รายละเอียดทางเทคนิคทั้งหมด",
         trap:"ระวังการนำเสนอข้อมูลทางเทคนิคที่มากเกินไปต่อบอร์ด ควรสรุปเป็นภาษาความเสี่ยงทางธุรกิจ",
-        rec:"เสนอให้ลูกค้าใช้ dashboard หรือรายงานสรุปความเสี่ยงที่เชื่อมกับ risk register ของเขา เป็นจุดขายเสริมนอกเหนือจากตัวโซลูชันหลัก"
+        rec:"เสนอให้ลูกค้าใช้ dashboard หรือรายงานสรุปความเสี่ยงที่เชื่อมกับ risk register ของเขา เป็นจุดขายเสริมนอกเหนือจากตัวโซลูชันหลัก",
+        quiz:{
+          q:"การรายงานความเสี่ยงต่อบอร์ดในที่ประชุมรายไตรมาส ควรมีลักษณะอย่างไร?",
+          choices:["รายละเอียดทางเทคนิคทั้งหมดจาก vulnerability scan","สรุปจาก risk register เน้นความเสี่ยงที่เปลี่ยนสถานะหรือเกิน risk appetite","รายชื่อพนักงานที่ทำผิดนโยบาย","Log การเข้าใช้งานระบบทั้งหมด"],
+          answer:1,
+          explain:"บอร์ดต้องการภาพสรุปความเสี่ยงเชิงธุรกิจที่เปลี่ยนแปลงหรือเกินระดับที่ยอมรับได้ ไม่ใช่รายละเอียดทางเทคนิคที่มากเกินไป"
+        }
       },
       {
         title:"Third-party / Vendor Risk",
@@ -451,7 +547,13 @@ const DATA = [
         terms:[["Due Diligence","การประเมินความเสี่ยงของ vendor ก่อนทำสัญญา"],["Right-to-audit clause","ข้อตกลงที่ให้สิทธิ์องค์กรตรวจสอบ security ของ vendor ได้"]],
         scenario:"องค์กรกำลังจะใช้ cloud provider รายใหม่สำหรับข้อมูลสำคัญ ควรทำอะไรก่อนเซ็นสัญญา? — ประเมินความเสี่ยงของ vendor ผ่าน security questionnaire/certification และเจรจา SLA พร้อม right-to-audit clause ก่อนเริ่มใช้งาน",
         trap:"อย่าลืมว่าการโอนความรับผิดชอบทางเทคนิคให้ vendor ไม่ได้โอน 'ความรับผิดชอบทางกฎหมาย' ออกจากองค์กรเสมอไป",
-        rec:"ถ้าโซลูชันของเราเกี่ยวข้องกับ third-party integration (เช่น cloud, MSSP) ให้เตรียมเอกสาร security certification ของเราให้พร้อม จะช่วยผ่านขั้นตอน vendor risk assessment ของลูกค้าได้เร็วขึ้น"
+        rec:"ถ้าโซลูชันของเราเกี่ยวข้องกับ third-party integration (เช่น cloud, MSSP) ให้เตรียมเอกสาร security certification ของเราให้พร้อม จะช่วยผ่านขั้นตอน vendor risk assessment ของลูกค้าได้เร็วขึ้น",
+        quiz:{
+          q:"ก่อนเริ่มใช้ cloud provider รายใหม่สำหรับข้อมูลสำคัญ ควรทำอะไรก่อน?",
+          choices:["เซ็นสัญญาทันทีเพื่อความรวดเร็ว","ประเมินความเสี่ยงผ่าน due diligence และเจรจา SLA/right-to-audit clause","รอให้เกิดปัญหาก่อนแล้วค่อยแก้ไข","มอบหมายให้ vendor รับผิดชอบความเสี่ยงทั้งหมด"],
+          answer:1,
+          explain:"ต้องทำ due diligence ประเมินความเสี่ยงของ vendor ก่อนเสมอ และกำหนดข้อตกลง SLA พร้อม right-to-audit clause ไว้ในสัญญา"
+        }
       }
     ]
   },
@@ -466,7 +568,13 @@ const DATA = [
         terms:[["Preventive","ป้องกันไม่ให้เหตุการณ์เกิดขึ้น เช่น firewall"],["Detective","ตรวจจับเมื่อเกิดเหตุการณ์ เช่น IDS/log monitoring"],["Corrective","แก้ไขความเสียหายหลังเกิดเหตุ เช่น restore backup"],["Compensating","control ทดแทนเมื่อ control หลักไม่สามารถใช้ได้"]],
         scenario:"ระบบ legacy ไม่สามารถติดตั้ง patch ตามมาตรฐานได้ ควรทำอย่างไร? — พิจารณา compensating control เช่น network segmentation หรือ enhanced monitoring แทนการ patch โดยตรง",
         trap:"ข้อสอบมักถามหา control ประเภทที่ 'เหมาะสมที่สุด' ในสถานการณ์ ไม่ใช่ control ที่ 'แข็งแกร่งที่สุด' เสมอไป ต้องพิจารณาบริบท",
-        rec:"เมื่อเสนอโซลูชัน WAF/IAM/PAM ให้ระบุชัดว่ามันเป็น control ประเภทไหน (preventive/detective) และช่วยเสริมชั้นไหนใน defense-in-depth ของลูกค้า"
+        rec:"เมื่อเสนอโซลูชัน WAF/IAM/PAM ให้ระบุชัดว่ามันเป็น control ประเภทไหน (preventive/detective) และช่วยเสริมชั้นไหนใน defense-in-depth ของลูกค้า",
+        quiz:{
+          q:"ระบบ legacy ไม่สามารถ patch ได้ตามมาตรฐาน ควรใช้ control ประเภทใดทดแทน?",
+          choices:["Preventive control เพิ่มเติมแบบเดียวกับระบบอื่น","Compensating control เช่น network segmentation หรือ enhanced monitoring","ไม่ต้องทำอะไร เพราะ patch ไม่ได้","Decommission ระบบทันทีโดยไม่แจ้งผู้ใช้งาน"],
+          answer:1,
+          explain:"เมื่อ control หลัก (patch) ทำไม่ได้ ต้องใช้ compensating control ทดแทน เช่น การจำกัดเครือข่ายหรือเฝ้าระวังเพิ่มเติม"
+        }
       },
       {
         title:"Asset Classification",
@@ -475,7 +583,13 @@ const DATA = [
         terms:[["Public","ข้อมูลที่เปิดเผยได้โดยไม่มีความเสี่ยง"],["Internal","ข้อมูลใช้ภายในองค์กร ไม่เปิดเผยสาธารณะ"],["Confidential","ข้อมูลสำคัญ จำกัดการเข้าถึง"],["Restricted","ข้อมูลอ่อนไหวสูงสุด เข้าถึงได้เฉพาะผู้ที่ได้รับอนุญาต"]],
         scenario:"ลูกค้าต้องการซื้อ DLP เพื่อป้องกันข้อมูลรั่วไหล แต่ยังไม่เคยจัดประเภทข้อมูลเลย ควรแนะนำอะไรก่อน? — แนะนำให้ทำ asset/data classification ก่อน เพราะ DLP ต้องอาศัย classification เป็นพื้นฐานในการกำหนดกฎ ไม่งั้นจะป้องกันแบบเหวี่ยงแหหรือพลาดจุดสำคัญ",
         trap:"นี่คือกับดักที่พบบ่อยที่สุดใน Domain 3 — อย่าข้าม classification ไปสู่ control เทคนิคทันที แม้ลูกค้าจะรีบร้อนแค่ไหน",
-        rec:"เสนอ workshop สั้นๆ ช่วยลูกค้าทำ data classification เบื้องต้นก่อนเสนอโซลูชันจริง จะทำให้ solution ที่เสนอแม่นยำและน่าเชื่อถือกว่า"
+        rec:"เสนอ workshop สั้นๆ ช่วยลูกค้าทำ data classification เบื้องต้นก่อนเสนอโซลูชันจริง จะทำให้ solution ที่เสนอแม่นยำและน่าเชื่อถือกว่า",
+        quiz:{
+          q:"ก่อนเลือกซื้อเครื่องมือ DLP ควรทำขั้นตอนใดก่อนเสมอ?",
+          choices:["เปรียบเทียบราคาจากหลาย vendor","ทำ asset/data classification เพื่อรู้ว่าอะไรสำคัญและต้องป้องกันระดับใด","ติดตั้งระบบทดลองใช้ก่อนตัดสินใจ","สอบถามความเห็นจากพนักงานทุกคน"],
+          answer:1,
+          explain:"DLP ต้องอาศัย data classification เป็นพื้นฐานในการกำหนดกฎการป้องกัน หากข้ามขั้นตอนนี้จะป้องกันแบบเหวี่ยงแหหรือพลาดจุดสำคัญ"
+        }
       },
       {
         title:"Third-party / Vendor Management (ในบริบท Program)",
@@ -484,7 +598,13 @@ const DATA = [
         terms:[["SLA Monitoring","การติดตามผลงาน vendor ตามข้อตกลงบริการ"],["Exit Strategy","แผนรองรับเมื่อสิ้นสุดความสัมพันธ์กับ vendor"]],
         scenario:"องค์กรใช้ MSSP ภายนอกดูแล SOC มา 2 ปี ควรมีกระบวนการใดต่อเนื่อง? — ทำ periodic SLA review, compliance audit, และเตรียม exit/transition plan ไว้ล่วงหน้าเผื่อต้องเปลี่ยน vendor",
         trap:"อย่าคิดว่าความเสี่ยง vendor จบแค่ตอนเซ็นสัญญา — program ต้องมีกระบวนการติดตามตลอดอายุสัญญา",
-        rec:"ถ้าเราคือ vendor ของลูกค้า ให้เตรียมรายงาน SLA compliance สม่ำเสมอโดยไม่ต้องให้ลูกค้าเรียกร้อง จะสร้างความน่าเชื่อถือระยะยาว"
+        rec:"ถ้าเราคือ vendor ของลูกค้า ให้เตรียมรายงาน SLA compliance สม่ำเสมอโดยไม่ต้องให้ลูกค้าเรียกร้อง จะสร้างความน่าเชื่อถือระยะยาว",
+        quiz:{
+          q:"องค์กรใช้ MSSP ภายนอกดูแล SOC มา 2 ปี ควรมีกระบวนการต่อเนื่องใด?",
+          choices:["ไม่ต้องทำอะไรเพิ่มเพราะเซ็นสัญญาแล้ว","Periodic SLA review, compliance audit และเตรียม exit/transition plan","เปลี่ยน MSSP ทุกปีโดยอัตโนมัติ","ให้ MSSP ตัดสินใจนโยบาย security ขององค์กรแทน"],
+          answer:1,
+          explain:"การบริหาร vendor ต้องต่อเนื่องตลอดอายุสัญญา ผ่านการ review SLA, compliance audit และเตรียมแผนรองรับหากต้องเปลี่ยน vendor"
+        }
       },
       {
         title:"Awareness & Training Program",
@@ -493,7 +613,13 @@ const DATA = [
         terms:[["Awareness","กิจกรรมสร้างความตระหนักรู้สำหรับพนักงานทุกคน"],["Training","การฝึกอบรมเฉพาะบทบาทที่ต้องการความรู้เชิงลึก"],["Phishing Simulation","การทดสอบจำลองเพื่อวัดความตระหนักรู้ของพนักงาน"]],
         scenario:"อัตราการคลิกลิงก์ phishing simulation ของพนักงานสูงขึ้นต่อเนื่อง 3 ไตรมาส ควรทำอย่างไร? — ทบทวนโปรแกรม awareness ว่าเนื้อหาน่าสนใจและเข้าถึงพนักงานเพียงพอหรือไม่ อาจต้องปรับรูปแบบหรือความถี่ ไม่ใช่แค่ลงโทษพนักงาน",
         trap:"อย่าเข้าใจผิดว่า awareness กับ training เป็นเรื่องเดียวกัน ข้อสอบมักถามแยกกลุ่มเป้าหมายที่ต่างกัน",
-        rec:"เสนอ phishing simulation หรือ awareness platform เป็นส่วนเสริมของดีลใหญ่ได้ เพราะเป็นสิ่งที่ auditor และผู้บริหารมักถามหาเสมอ"
+        rec:"เสนอ phishing simulation หรือ awareness platform เป็นส่วนเสริมของดีลใหญ่ได้ เพราะเป็นสิ่งที่ auditor และผู้บริหารมักถามหาเสมอ",
+        quiz:{
+          q:"อัตราการคลิกลิงก์ phishing simulation ของพนักงานสูงขึ้นต่อเนื่อง 3 ไตรมาส ควรทำอย่างไร?",
+          choices:["ลงโทษพนักงานที่คลิกลิงก์ทุกคน","ทบทวนและปรับปรุงเนื้อหา/รูปแบบโปรแกรม awareness","ยกเลิกโปรแกรม phishing simulation ทั้งหมด","ไม่ต้องทำอะไร เพราะเป็นเรื่องปกติ"],
+          answer:1,
+          explain:"ต้องทบทวนว่าโปรแกรม awareness เข้าถึงและน่าสนใจเพียงพอหรือไม่ แล้วปรับปรุง ไม่ใช่ลงโทษพนักงานเป็นทางแก้หลัก"
+        }
       },
       {
         title:"Program Metrics: KPI vs KRI",
@@ -502,7 +628,13 @@ const DATA = [
         terms:[["KPI","วัดประสิทธิภาพของ program เช่น % patch compliance"],["KRI","สัญญาณเตือนล่วงหน้าของความเสี่ยงที่เพิ่มขึ้น"]],
         scenario:"ผู้บริหารถามว่า security program ปีนี้ 'ทำงานดีขึ้นไหม' ควรตอบด้วยข้อมูลอะไร? — นำเสนอ KPI ที่แสดงแนวโน้มดีขึ้น (เช่น patch compliance เพิ่มขึ้น) ควบคู่กับ KRI ที่ยังต้องเฝ้าระวัง ไม่ใช่รายงานแค่ตัวเลขทางเทคนิคดิบๆ",
         trap:"ข้อสอบมักสลับตัวอย่าง KPI กับ KRI ให้จำหลักว่า KPI วัด 'ผลงาน' ส่วน KRI วัด 'สัญญาณเตือนความเสี่ยง'",
-        rec:"นี่คือจุดที่ตรงกับงาน dashboard/KPI tracking ที่คุณเคยทำให้ สตม. — ใช้เป็น reference case ในการเสนอ metrics dashboard ให้ลูกค้าใหม่ได้"
+        rec:"นี่คือจุดที่ตรงกับงาน dashboard/KPI tracking ที่คุณเคยทำให้ สตม. — ใช้เป็น reference case ในการเสนอ metrics dashboard ให้ลูกค้าใหม่ได้",
+        quiz:{
+          q:"ข้อใดคือตัวอย่างของ KRI ไม่ใช่ KPI?",
+          choices:["เปอร์เซ็นต์ระบบที่ patch ตรงเวลา","จำนวนความพยายาม login ที่ผิดปกติเพิ่มขึ้น","จำนวนพนักงานที่ผ่านการอบรม awareness","เวลาเฉลี่ยในการปิด ticket"],
+          answer:1,
+          explain:"KRI เป็นสัญญาณเตือนล่วงหน้าว่าความเสี่ยงกำลังเพิ่มขึ้น เช่น login ผิดปกติ ส่วนตัวเลือกอื่นเป็น KPI ที่วัดประสิทธิภาพการทำงาน"
+        }
       },
       {
         title:"Budget & Resource Management",
@@ -511,7 +643,13 @@ const DATA = [
         terms:[["Resource Planning","การวางแผนบุคลากรและงบประมาณระยะยาวของ program"]],
         scenario:"Security program ขาดบุคลากรที่มีทักษะเฉพาะทาง ควรแก้ปัญหาอย่างไรในระยะยาว? — วางแผนผสมระหว่างการพัฒนาบุคลากรภายในและการใช้ managed service ในระยะสั้น พร้อมเสนอ business case ของบเพิ่มระยะยาว",
         trap:"อย่าเสนอแก้ปัญหาขาดบุคลากรด้วยการซื้อเครื่องมือเพิ่มเพียงอย่างเดียวโดยไม่แก้ที่ต้นเหตุเรื่องทรัพยากร",
-        rec:"ถ้าลูกค้าขาดบุคลากร เสนอ managed service หรือ co-managed model ควบคู่กับผลิตภัณฑ์ จะตอบโจทย์ resource constraint ได้ตรงจุดกว่า"
+        rec:"ถ้าลูกค้าขาดบุคลากร เสนอ managed service หรือ co-managed model ควบคู่กับผลิตภัณฑ์ จะตอบโจทย์ resource constraint ได้ตรงจุดกว่า",
+        quiz:{
+          q:"Security program ขาดบุคลากรที่มีทักษะเฉพาะทาง ทางแก้ระยะยาวที่เหมาะสมที่สุดคือ?",
+          choices:["ซื้อเครื่องมือเพิ่มเพียงอย่างเดียว","วางแผนผสมระหว่างพัฒนาบุคลากรภายในและใช้ managed service ระยะสั้น พร้อมเสนอ business case ของบเพิ่ม","ลดขอบเขตงาน security ลงให้พอดีกับคนที่มี","จ้าง freelance รายวันไปเรื่อยๆ โดยไม่วางแผน"],
+          answer:1,
+          explain:"การแก้ปัญหาขาดบุคลากรอย่างยั่งยืนต้องผสมทั้งการพัฒนาคนภายในและใช้บริการภายนอกช่วยระยะสั้น พร้อมของบสนับสนุนระยะยาวอย่างเป็นระบบ"
+        }
       }
     ]
   },
@@ -526,7 +664,13 @@ const DATA = [
         terms:[["Containment","การควบคุมไม่ให้ความเสียหายลุกลาม แบ่งเป็น short/long-term"],["Eradication","การกำจัดต้นเหตุของเหตุการณ์ออกจากระบบ"],["Post-Incident Review","การทบทวนบทเรียนหลังเหตุการณ์เพื่อป้อนกลับเข้า program"]],
         scenario:"พบมัลแวร์กำลังแพร่กระจายในเครือข่าย ควรทำอะไรเป็นลำดับแรก? — Containment ก่อนเสมอ (เช่น ตัดการเชื่อมต่อเครือข่ายที่ติดเชื้อ) เพื่อหยุดความเสียหายก่อนที่จะไป eradication",
         trap:"ข้อสอบมักถามลำดับขั้นตอนสลับกัน ต้องจำลำดับ Containment ก่อน Eradication เสมอ และ Post-Incident Review ไม่ใช่ขั้นตอนสุดท้ายที่ถูกมองข้ามได้",
-        rec:"เวลาคุยกับลูกค้าเรื่อง incident response ให้ถามว่ามี post-incident review process หรือไม่ ถ้าไม่มี นี่คือช่องว่างที่ solution ด้าน SIEM/SOAR ของเราช่วยเติมเต็มได้"
+        rec:"เวลาคุยกับลูกค้าเรื่อง incident response ให้ถามว่ามี post-incident review process หรือไม่ ถ้าไม่มี นี่คือช่องว่างที่ solution ด้าน SIEM/SOAR ของเราช่วยเติมเต็มได้",
+        quiz:{
+          q:"พบมัลแวร์กำลังแพร่กระจายในเครือข่าย ควรทำอะไรเป็นลำดับแรก?",
+          choices:["Eradication - ลบมัลแวร์ออกจากทุกเครื่องทันที","Containment - ตัดการเชื่อมต่อเครือข่ายที่ติดเชื้อก่อน","Post-incident review","แจ้งสื่อมวลชนทันที"],
+          answer:1,
+          explain:"ต้อง Containment ก่อนเสมอเพื่อหยุดความเสียหายไม่ให้ลุกลาม แล้วจึงไปสู่ขั้นตอน Eradication ต่อไป"
+        }
       },
       {
         title:"RTO, RPO, MTD/MTO, SDO",
@@ -535,7 +679,13 @@ const DATA = [
         terms:[["RTO","เวลาสูงสุดที่ระบบหยุดได้ก่อนต้องกู้คืน"],["RPO","ข้อมูลสูงสุดที่ยอมสูญเสียได้ (วัดเป็นเวลาย้อนหลัง)"],["MTD/MTO","เวลาสูงสุดที่ธุรกิจทนได้ก่อนเสียหายร้ายแรง"],["SDO","ระดับบริการขั้นต่ำระหว่างกู้คืน"]],
         scenario:"ระบบมี RTO ที่วางแผนไว้ 8 ชั่วโมง แต่ MTD ทางธุรกิจจริงคือ 4 ชั่วโมง ปัญหาคืออะไร? — RTO สูงกว่า MTD หมายความว่าแผนกู้คืนไม่ทันเวลาที่ธุรกิจทนได้จริง ต้องปรับแผนกู้คืนให้เร็วขึ้นหรือปรับ MTD ใหม่ตามความเป็นจริงทางธุรกิจ",
         trap:"RTO กับ MTD ไม่ใช่ตัวเดียวกัน ข้อสอบมักทดสอบว่าเข้าใจว่า RTO ควรสั้นกว่าหรือเท่ากับ MTD เสมอ",
-        rec:"ใช้ RTO/RPO เป็นตัวเลขเปิดบทสนทนาเรื่อง DR/Backup solution — ถามลูกค้าว่า RTO/RPO ปัจจุบันเทียบกับที่ระบบรองรับได้จริงต่างกันแค่ไหน"
+        rec:"ใช้ RTO/RPO เป็นตัวเลขเปิดบทสนทนาเรื่อง DR/Backup solution — ถามลูกค้าว่า RTO/RPO ปัจจุบันเทียบกับที่ระบบรองรับได้จริงต่างกันแค่ไหน",
+        quiz:{
+          q:"ระบบมี RTO ที่วางแผนไว้ 8 ชั่วโมง แต่ MTD ทางธุรกิจจริงคือ 4 ชั่วโมง ปัญหาคืออะไร?",
+          choices:["ไม่มีปัญหา เพราะ RTO และ MTD ไม่เกี่ยวข้องกัน","แผนกู้คืนไม่ทันเวลาที่ธุรกิจทนได้จริง ต้องปรับแผนให้เร็วขึ้น","ควรเพิ่ม RTO ให้นานขึ้นแทน","MTD ควรปรับให้เท่ากับ RPO"],
+          answer:1,
+          explain:"RTO ควรสั้นกว่าหรือเท่ากับ MTD เสมอ หาก RTO นานกว่า MTD หมายความว่าแผนกู้คืนช้าเกินกว่าที่ธุรกิจจะทนได้จริง ต้องปรับแผนใหม่"
+        }
       },
       {
         title:"BCP vs DR",
@@ -544,7 +694,13 @@ const DATA = [
         terms:[["BCP","แผนความต่อเนื่องทางธุรกิจ ครอบคลุมคน กระบวนการ สถานที่ ระบบ"],["DR","แผนกู้คืนระบบ IT/ข้อมูล เป็นส่วนย่อยของ BCP"]],
         scenario:"สำนักงานใหญ่ถูกน้ำท่วมจนพนักงานเข้าทำงานไม่ได้ แต่ระบบ IT ยังทำงานปกติบน cloud ปัญหานี้ควรแก้ด้วยแผนใด? — เป็นเรื่องของ BCP ไม่ใช่ DR เพราะปัญหาคือคนและสถานที่ ไม่ใช่ระบบ IT",
         trap:"อย่าใช้ DR แทน BCP ในทุกสถานการณ์ — DR แก้ปัญหาระบบ IT เท่านั้น ไม่ครอบคลุมคนและสถานที่",
-        rec:"เมื่อเสนอ DR solution ให้ถามลูกค้าด้วยว่ามี BCP ระดับองค์กรรองรับหรือยัง เพื่อวางตำแหน่งโซลูชันให้ถูกต้องว่าเป็นส่วนหนึ่งของภาพใหญ่"
+        rec:"เมื่อเสนอ DR solution ให้ถามลูกค้าด้วยว่ามี BCP ระดับองค์กรรองรับหรือยัง เพื่อวางตำแหน่งโซลูชันให้ถูกต้องว่าเป็นส่วนหนึ่งของภาพใหญ่",
+        quiz:{
+          q:"สำนักงานใหญ่ถูกน้ำท่วมจนพนักงานเข้าทำงานไม่ได้ แต่ระบบ IT บน cloud ยังทำงานปกติ ควรใช้แผนใดแก้ปัญหาหลัก?",
+          choices:["Disaster Recovery (DR) เพราะเป็นปัญหาระบบ IT","Business Continuity Plan (BCP) เพราะเป็นปัญหาคนและสถานที่","ไม่ต้องมีแผนใดเพราะระบบยังทำงานอยู่","Incident Response Plan"],
+          answer:1,
+          explain:"ปัญหานี้เกี่ยวกับคนและสถานที่ทำงาน ไม่ใช่ระบบ IT จึงเป็นเรื่องของ BCP ไม่ใช่ DR ซึ่งครอบคลุมเฉพาะการกู้คืนระบบ"
+        }
       },
       {
         title:"Testing Plans: Tabletop / Simulation / Full Interruption",
@@ -553,7 +709,13 @@ const DATA = [
         terms:[["Tabletop Exercise","พูดคุยจำลองสถานการณ์ ไม่ลงมือจริง"],["Simulation","จำลองใกล้เคียงสถานการณ์จริงมากขึ้น"],["Full Interruption Test","ทดสอบเต็มรูปแบบ เสี่ยงสุดแต่มั่นใจสุด"]],
         scenario:"องค์กรไม่เคยทดสอบ DR plan มาก่อนและกลัวผลกระทบจากการทดสอบเต็มรูปแบบ ควรเริ่มจากอะไร? — เริ่มจาก tabletop exercise ก่อนเพื่อลดความเสี่ยง แล้วค่อยขยับไป simulation และ full interruption test เมื่อมั่นใจมากขึ้น",
         trap:"อย่าข้ามไปทดสอบแบบ full interruption ทันทีถ้าองค์กรไม่เคยทดสอบแผนมาก่อน ควรเริ่มจากระดับเบาที่สุดก่อนเสมอ",
-        rec:"เสนอบริการช่วยจัด tabletop exercise ให้ลูกค้าเป็นจุดเริ่มต้นความสัมพันธ์ได้ ก่อนเสนอโซลูชันเทคนิคที่ใหญ่ขึ้น"
+        rec:"เสนอบริการช่วยจัด tabletop exercise ให้ลูกค้าเป็นจุดเริ่มต้นความสัมพันธ์ได้ ก่อนเสนอโซลูชันเทคนิคที่ใหญ่ขึ้น",
+        quiz:{
+          q:"องค์กรไม่เคยทดสอบ DR plan มาก่อน ควรเริ่มทดสอบจากระดับใด?",
+          choices:["Full interruption test ทันทีเพื่อความมั่นใจสูงสุด","Tabletop exercise ก่อน แล้วค่อยขยับไป simulation และ full test","ข้ามการทดสอบเพราะมีความเสี่ยงเกินไป","ให้ vendor ทดสอบแทนทั้งหมด"],
+          answer:1,
+          explain:"ควรเริ่มจากระดับที่เสี่ยงน้อยที่สุดก่อนเสมอคือ tabletop exercise แล้วค่อยขยับความเข้มข้นขึ้นเมื่อมั่นใจมากขึ้น"
+        }
       },
       {
         title:"Post-Incident Review & Lessons Learned",
@@ -562,7 +724,13 @@ const DATA = [
         terms:[["Lessons Learned","บทเรียนจากเหตุการณ์ที่ต้องป้อนกลับเข้า program"],["Root Cause Analysis","การวิเคราะห์หาสาเหตุที่แท้จริงของเหตุการณ์"]],
         scenario:"หลังจบการตอบสนอง incident ทีมรีบปิดเคสทันทีเพื่อกลับไปทำงานปกติ ขาดขั้นตอนอะไรไป? — ขาด post-incident review และ root cause analysis ซึ่งจำเป็นเพื่อป้องกันไม่ให้เหตุการณ์แบบเดียวกันเกิดซ้ำ",
         trap:"ข้อสอบมักตั้งคำถามที่ดูเหมือนจบแล้วหลัง recovery แต่คำตอบที่ถูกต้องคือยังไม่จบจนกว่าจะมี post-incident review",
-        rec:"เสนอบริการช่วยทำ post-incident review ให้ลูกค้าหลังเกิดเหตุการณ์ เป็นโอกาสสร้างความไว้วางใจและนำไปสู่การเสนอโซลูชันป้องกันในอนาคต"
+        rec:"เสนอบริการช่วยทำ post-incident review ให้ลูกค้าหลังเกิดเหตุการณ์ เป็นโอกาสสร้างความไว้วางใจและนำไปสู่การเสนอโซลูชันป้องกันในอนาคต",
+        quiz:{
+          q:"หลังจบการตอบสนอง incident ทีมรีบปิดเคสทันทีเพื่อกลับไปทำงานปกติ ขาดขั้นตอนสำคัญใด?",
+          choices:["การแจ้งลูกค้าทุกราย","Post-incident review และ root cause analysis เพื่อป้องกันไม่ให้เกิดซ้ำ","การสำรองข้อมูลเพิ่มเติม","การเปลี่ยนรหัสผ่านทั้งองค์กร"],
+          answer:1,
+          explain:"เหตุการณ์ยังไม่จบจนกว่าจะมี post-incident review และ root cause analysis เพื่อป้อนบทเรียนกลับเข้าสู่ program และป้องกันการเกิดซ้ำ"
+        }
       }
     ]
   }
@@ -668,9 +836,46 @@ function renderTopic(){
   document.getElementById('t-scenario').textContent = t.scenario;
   document.getElementById('t-trap').textContent = t.trap;
   document.getElementById('t-rec').textContent = t.rec;
+  renderQuiz(t.quiz);
 
   document.getElementById('btn-prev').classList.toggle('disabled', currentTopicIdx === 0);
   document.getElementById('btn-next').classList.toggle('disabled', currentTopicIdx === currentDomain.topics.length - 1);
+}
+
+const LETTERS = ['A','B','C','D'];
+
+function renderQuiz(quiz){
+  const qEl = document.getElementById('quiz-q');
+  const choicesEl = document.getElementById('quiz-choices');
+  const resultEl = document.getElementById('quiz-result');
+  if(!quiz){
+    qEl.textContent = '';
+    choicesEl.innerHTML = '';
+    resultEl.className = 'quiz-result';
+    return;
+  }
+  qEl.textContent = quiz.q;
+  resultEl.className = 'quiz-result';
+  resultEl.innerHTML = '';
+  choicesEl.innerHTML = quiz.choices.map((c,i) => `
+    <div class="quiz-choice" data-idx="${i}" onclick="checkQuiz(${i}, ${quiz.answer}, '${quiz.explain.replace(/'/g, "\\'")}')">
+      <span class="qc-letter">${LETTERS[i]}</span>
+      <span>${c}</span>
+    </div>
+  `).join('');
+}
+
+function checkQuiz(chosenIdx, answerIdx, explain){
+  const choices = document.querySelectorAll('.quiz-choice');
+  choices.forEach(c => c.classList.add('disabled'));
+  choices[answerIdx].classList.add('correct');
+  if(chosenIdx !== answerIdx){
+    choices[chosenIdx].classList.add('wrong');
+  }
+  const resultEl = document.getElementById('quiz-result');
+  const isCorrect = chosenIdx === answerIdx;
+  resultEl.className = 'quiz-result show ' + (isCorrect ? 'is-correct' : 'is-wrong');
+  resultEl.innerHTML = `<b>${isCorrect ? 'ถูกต้อง' : 'ยังไม่ใช่ คำตอบที่ถูกคือ ' + LETTERS[answerIdx]}</b>${explain}`;
 }
 
 function navTopic(dir){
