@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISM Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0A0F1C;
+    --bg-panel: #101828;
+    --bg-card: #141F35;
+    --bg-card-hover: #1A2740;
+    --line: #24304A;
+    --line-soft: #1B2740;
+    --text: #E9EDF5;
+    --text-dim: #8B96AD;
+    --text-faint: #5C6785;
+    --gold: #C9A227;
+    --gold-dim: #7A6420;
+    --danger: #D6564A;
+    --ok: #4FBE8D;
+    --d1: #6E86D6;
+    --d2: #9B72CF;
+    --d3: #C9A227;
+    --d4: #3FA9A4;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --display: 'Space Grotesk', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(ellipse at top right, rgba(110,134,214,0.08), transparent 45%),
+      radial-gradient(ellipse at bottom left, rgba(201,162,39,0.05), transparent 40%),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--serif);
+    min-height:100vh;
+    line-height:1.55;
+  }
+  ::selection{background:var(--gold); color:#100C02;}
+
+  /* Grid schematic overlay */
+  .schematic-bg{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 30% 20%, black 0%, transparent 70%);
+  }
+
+  .app{position:relative; z-index:1; max-width:1180px; margin:0 auto; padding:0 28px 100px;}
+
+  /* ===== HEADER ===== */
+  header{
+    padding:44px 0 30px;
+    display:flex; justify-content:space-between; align-items:flex-end;
+    border-bottom:1px solid var(--line-soft);
+    margin-bottom:8px;
+  }
+  .brand{display:flex; flex-direction:column; gap:6px;}
+  .brand-mark{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.18em; color:var(--gold);
+    text-transform:uppercase;
+  }
+  .brand-title{
+    font-family:var(--display); font-size:28px; font-weight:700; letter-spacing:-0.01em;
+  }
+  .brand-sub{font-family:var(--mono); font-size:11.5px; color:var(--text-faint); letter-spacing:0.04em;}
+  .clearance-stamp{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:0.12em; color:var(--bg);
+    background:var(--gold); padding:6px 14px; border-radius:3px; text-transform:uppercase;
+    transform:rotate(2deg); font-weight:600; white-space:nowrap;
+  }
+
+  /* ===== BREADCRUMB ===== */
+  .crumb{
+    font-family:var(--mono); font-size:11.5px; color:var(--text-faint);
+    letter-spacing:0.06em; text-transform:uppercase;
+    padding:18px 0 22px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+    min-height:20px;
+  }
+  .crumb .seg{cursor:pointer; transition:color .15s;}
+  .crumb .seg:hover{color:var(--gold);}
+  .crumb .seg.active{color:var(--text); cursor:default;}
+  .crumb .sep{color:var(--line);}
+
+  /* ===== VIEW SWITCHING ===== */
+  .view{display:none; animation:fadeIn .35s ease;}
+  .view.active{display:block;}
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  /* ===== HOME VIEW ===== */
+  .hero{padding:34px 0 46px;}
+  .hero-eyebrow{
+    font-family:var(--mono); font-size:12px; color:var(--gold); letter-spacing:0.14em;
+    text-transform:uppercase; margin-bottom:14px;
+  }
+  .hero h1{
+    font-family:var(--display); font-size:44px; font-weight:700; letter-spacing:-0.015em;
+    max-width:780px; margin-bottom:18px;
+  }
+  .hero p{font-size:16.5px; color:var(--text-dim); max-width:640px;}
+
+  .domain-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:16px; margin-top:38px;
+  }
+  @media(max-width:720px){ .domain-grid{grid-template-columns:1fr;} }
+
+  .domain-card{
+    position:relative;
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:26px 26px 24px;
+    cursor:pointer;
+    transition:transform .18s ease, border-color .18s ease, background .18s ease;
+    overflow:hidden;
+  }
+  .domain-card:hover{ transform:translateY(-3px); border-color:var(--card-accent, var(--gold)); background:var(--bg-card-hover); }
+  .domain-card::after{
+    content:""; position:absolute; top:0; right:0; width:90px; height:90px;
+    background:radial-gradient(circle at top right, var(--card-accent, var(--gold)), transparent 70%);
+    opacity:0.12; pointer-events:none;
+  }
+  .domain-card .dnum{
+    font-family:var(--mono); font-size:12px; color:var(--card-accent, var(--gold));
+    letter-spacing:0.12em; text-transform:uppercase; margin-bottom:10px; display:block;
+  }
+  .domain-card h3{font-family:var(--display); font-size:21px; font-weight:600; margin-bottom:10px;}
+  .domain-card p{font-size:13.5px; color:var(--text-dim); margin-bottom:18px; max-width:90%;}
+  .domain-card .foot-row{display:flex; align-items:center; justify-content:space-between;}
+  .weight-badge{
+    font-family:var(--mono); font-size:12px; font-weight:600; color:var(--bg);
+    background:var(--card-accent, var(--gold)); padding:4px 10px; border-radius:20px;
+  }
+  .topic-count{font-family:var(--mono); font-size:11.5px; color:var(--text-faint);}
+  .bar-track{height:4px; background:var(--line-soft); border-radius:2px; margin-bottom:18px; overflow:hidden;}
+  .bar-fill{height:100%; background:var(--card-accent, var(--gold)); border-radius:2px;}
+
+  .mindset-note{
+    margin-top:44px; padding:22px 26px; border:1px solid var(--line);
+    border-radius:10px; background:var(--bg-panel);
+    display:flex; gap:18px; align-items:flex-start;
+  }
+  .mindset-note .icon-box{
+    font-family:var(--mono); font-size:11px; color:var(--gold); border:1px solid var(--gold-dim);
+    padding:6px 8px; border-radius:6px; letter-spacing:0.06em; white-space:nowrap;
+  }
+  .mindset-note p{font-size:13.5px; color:var(--text-dim);}
+  .mindset-note strong{color:var(--text); font-weight:600;}
+
+  /* ===== DOMAIN VIEW ===== */
+  .domain-header{padding:20px 0 32px; border-bottom:1px solid var(--line-soft); margin-bottom:32px;}
+  .domain-tag{
+    display:inline-block; font-family:var(--mono); font-size:11.5px; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--bg); background:var(--dom-accent, var(--gold));
+    padding:5px 12px; border-radius:4px; margin-bottom:16px; font-weight:600;
+  }
+  .domain-header h2{font-family:var(--display); font-size:34px; font-weight:700; margin-bottom:12px; letter-spacing:-0.01em;}
+  .domain-header .desc{font-size:15.5px; color:var(--text-dim); max-width:720px; margin-bottom:18px;}
+  .domain-meta{display:flex; gap:28px; flex-wrap:wrap;}
+  .meta-item{font-family:var(--mono); font-size:12px; color:var(--text-faint);}
+  .meta-item b{color:var(--text); font-family:var(--serif); font-size:14px; display:block; margin-bottom:2px; font-weight:600;}
+
+  .topic-list{display:flex; flex-direction:column; gap:10px;}
+  .topic-row{
+    display:flex; align-items:center; gap:18px;
+    background:var(--bg-card); border:1px solid var(--line); border-radius:8px;
+    padding:18px 22px; cursor:pointer; transition:all .15s ease;
+  }
+  .topic-row:hover{background:var(--bg-card-hover); border-color:var(--dom-accent, var(--gold)); padding-left:26px;}
+  .topic-idx{
+    font-family:var(--mono); font-size:13px; color:var(--dom-accent, var(--gold));
+    min-width:28px; font-weight:600;
+  }
+  .topic-row .t-body{flex:1;}
+  .topic-row h4{font-family:var(--display); font-size:16px; font-weight:600; margin-bottom:4px;}
+  .topic-row .t-summary{font-size:13px; color:var(--text-dim);}
+  .topic-arrow{font-family:var(--mono); color:var(--text-faint); font-size:16px; transition:transform .15s;}
+  .topic-row:hover .topic-arrow{transform:translateX(4px); color:var(--dom-accent, var(--gold));}
+
+  .back-link{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:12px;
+    color:var(--text-dim); cursor:pointer; letter-spacing:0.05em; text-transform:uppercase;
+    margin-bottom:22px; transition:color .15s;
+  }
+  .back-link:hover{color:var(--gold);}
+
+  /* ===== TOPIC DETAIL VIEW ===== */
+  .topic-detail-header{padding:16px 0 28px;}
+  .topic-detail-header .domain-tag{margin-bottom:14px;}
+  .topic-detail-header h2{font-family:var(--display); font-size:30px; font-weight:700; margin-bottom:14px; letter-spacing:-0.01em;}
+
+  .detail-section{margin-bottom:28px;}
+  .detail-section .sec-label{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--text-faint); margin-bottom:12px; display:flex; align-items:center; gap:10px;
+  }
+  .detail-section .sec-label::after{content:""; flex:1; height:1px; background:var(--line-soft);}
+  .detail-section .body-text{font-size:15px; color:var(--text); max-width:760px;}
+  .detail-section .body-text p{margin-bottom:12px;}
+
+  .term-table{width:100%; border-collapse:collapse; margin-top:6px; max-width:760px;}
+  .term-table th{
+    text-align:left; font-family:var(--mono); font-size:11px; color:var(--text-faint);
+    text-transform:uppercase; letter-spacing:0.06em; padding:8px 12px; border-bottom:1px solid var(--line);
+  }
+  .term-table td{padding:12px; border-bottom:1px solid var(--line-soft); font-size:13.5px; vertical-align:top;}
+  .term-table td:first-child{font-family:var(--mono); font-weight:600; color:var(--dom-accent, var(--gold)); white-space:nowrap;}
+
+  .callout{
+    display:flex; gap:16px; padding:20px 22px; border-radius:8px; margin-top:8px; max-width:760px;
+  }
+  .callout .c-icon{
+    font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:0.06em;
+    padding:4px 9px; border-radius:4px; height:fit-content; white-space:nowrap; text-transform:uppercase;
+  }
+  .callout.trap{background:rgba(214,86,74,0.08); border:1px solid rgba(214,86,74,0.35);}
+  .callout.trap .c-icon{background:var(--danger); color:#1A0705;}
+  .callout.rec{background:rgba(79,190,141,0.08); border:1px solid rgba(79,190,141,0.35);}
+  .callout.rec .c-icon{background:var(--ok); color:#062015;}
+  .callout.scenario{background:var(--bg-panel); border:1px solid var(--line);}
+  .callout.scenario .c-icon{background:var(--dom-accent, var(--gold)); color:#100C02;}
+  .callout p{font-size:13.8px; color:var(--text);}
+  .callout p em{color:var(--text-dim); font-style:italic;}
+
+  .topic-nav{
+    display:flex; justify-content:space-between; gap:16px; margin-top:44px;
+    padding-top:22px; border-top:1px solid var(--line-soft);
+  }
+  .nav-btn{
+    font-family:var(--mono); font-size:12px; color:var(--text-dim); letter-spacing:0.04em;
+    cursor:pointer; padding:10px 16px; border:1px solid var(--line); border-radius:6px;
+    transition:all .15s; text-transform:uppercase; display:flex; align-items:center; gap:8px;
+  }
+  .nav-btn:hover{border-color:var(--gold); color:var(--gold);}
+  .nav-btn.disabled{opacity:0.25; pointer-events:none;}
+
+  footer{
+    text-align:center; padding:40px 0 10px; font-family:var(--mono); font-size:11px;
+    color:var(--text-faint); letter-spacing:0.06em;
+  }
+
+  @media(max-width:600px){
+    header{flex-direction:column; align-items:flex-start; gap:14px;}
+    .hero h1{font-size:32px;}
+    .domain-header h2{font-size:26px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="schematic-bg"></div>
+
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="brand-mark">BAYCOMS · PRE-SALES ENABLEMENT</div>
+      <div class="brand-title">CISM Field Guide</div>
+      <div class="brand-sub">DRILL-DOWN REFERENCE · 4 DOMAINS</div>
+    </div>
+    <div class="clearance-stamp">Working Copy</div>
+  </header>
+
+  <div class="crumb" id="crumb"></div>
+
+  <!-- HOME VIEW -->
+  <div class="view active" id="view-home">
+    <div class="hero">
+      <div class="hero-eyebrow">Certified Information Security Manager</div>
+      <h1>เข้าใจ CISM ผ่านมุมมอง Governance ไม่ใช่แค่เทคนิค</h1>
+      <p>คลิกที่ Domain เพื่อดูหัวข้อย่อยทั้งหมด แล้วคลิกลึกเข้าไปในแต่ละหัวข้อเพื่อดูคำอธิบาย ตัวอย่าง กับดักข้อสอบ และคำแนะนำเชิงปฏิบัติ</p>
+    </div>
+
+    <div class="domain-grid" id="domain-grid"></div>
+
+    <div class="mindset-note">
+      <div class="icon-box">MINDSET</div>
+      <p><strong>กฎข้อเดียวที่ใช้ได้ทุก Domain:</strong> ประเมินผลกระทบทางธุรกิจและความเสี่ยงก่อนเสมอ แล้วค่อยพูดถึงเทคโนโลยี — คำตอบที่ "ถูกทางเทคนิคที่สุด" มักไม่ใช่คำตอบที่ CISM ต้องการ</p>
+    </div>
+  </div>
+
+  <!-- DOMAIN VIEW -->
+  <div class="view" id="view-domain">
+    <span class="back-link" onclick="goHome()">‹ กลับหน้ารวม Domain</span>
+    <div class="domain-header">
+      <span class="domain-tag" id="d-tag"></span>
+      <h2 id="d-title"></h2>
+      <p class="desc" id="d-desc"></p>
+      <div class="domain-meta">
+        <div class="meta-item"><b id="d-weight"></b>น้ำหนักข้อสอบ</div>
+        <div class="meta-item"><b id="d-topics"></b>หัวข้อย่อย</div>
+      </div>
+    </div>
+    <div class="topic-list" id="topic-list"></div>
+  </div>
+
+  <!-- TOPIC DETAIL VIEW -->
+  <div class="view" id="view-topic">
+    <span class="back-link" onclick="goDomain()">‹ กลับไป <span id="back-domain-name"></span></span>
+    <div class="topic-detail-header">
+      <span class="domain-tag" id="t-tag"></span>
+      <h2 id="t-title"></h2>
+    </div>
+
+    <div class="detail-section">
+      <div class="sec-label">คำอธิบาย</div>
+      <div class="body-text" id="t-explanation"></div>
+    </div>
+
+    <div class="detail-section" id="t-terms-wrap">
+      <div class="sec-label">ศัพท์ / แนวคิดสำคัญ</div>
+      <table class="term-table" id="t-terms"></table>
+    </div>
+
+    <div class="detail-section" id="t-scenario-wrap">
+      <div class="sec-label">สถานการณ์ตัวอย่าง</div>
+      <div class="callout scenario">
+        <div class="c-icon">CASE</div>
+        <p id="t-scenario"></p>
+      </div>
+    </div>
+
+    <div class="detail-section" id="t-trap-wrap">
+      <div class="sec-label">กับดักข้อสอบ</div>
+      <div class="callout trap">
+        <div class="c-icon">Trap</div>
+        <p id="t-trap"></p>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="sec-label">คำแนะนำสำหรับ Presales</div>
+      <div class="callout rec">
+        <div class="c-icon">ใช้จริง</div>
+        <p id="t-rec"></p>
+      </div>
+    </div>
+
+    <div class="topic-nav">
+      <div class="nav-btn" id="btn-prev" onclick="navTopic(-1)">‹ หัวข้อก่อนหน้า</div>
+      <div class="nav-btn" id="btn-next" onclick="navTopic(1)">หัวข้อถัดไป ›</div>
+    </div>
+  </div>
+
+  <footer>CISM FIELD GUIDE — REFERENCE MATERIAL, NOT OFFICIAL ISACA CONTENT</footer>
+</div>
+
+<script>
+const DATA = [
+  {
+    id:"d1", num:"D1", accent:"#6E86D6", title:"Information Security Governance", weight:"17%",
+    desc:"กลไกที่ทำให้การลงทุนและกิจกรรมด้าน security สอดคล้องกับเป้าหมายทางธุรกิจ ผ่านโครงสร้างการตัดสินใจ สายรายงาน และความรับผิดชอบที่ชัดเจน",
+    topics:[
+      {
+        title:"Enterprise Governance vs Information Security Governance",
+        summary:"แยกให้ออกว่า InfoSec Governance ต้อง nest อยู่ใต้ enterprise governance เสมอ",
+        explanation:"Enterprise Governance คือการกำกับดูแลองค์กรทั้งหมดโดยบอร์ดและผู้บริหารระดับสูง ส่วน Information Security Governance เป็นส่วนย่อยที่ต้องออกแบบให้สอดคล้องและอยู่ภายใต้กรอบใหญ่นั้น ไม่ใช่แผนกที่แยกตัวเป็นอิสระ ถ้า security strategy ไม่เชื่อมกับ business strategy จะกลายเป็นการลงทุนที่พิสูจน์คุณค่าไม่ได้และมักถูกตัดงบก่อน",
+        terms:[["Enterprise Governance","การกำกับดูแลองค์กรทั้งหมดโดยบอร์ด/ผู้บริหารสูงสุด"],["InfoSec Governance","ส่วนย่อยที่ทำให้ security strategy สอดคล้องกับเป้าหมายองค์กร"]],
+        scenario:"CISO ต้องการเสนอ security strategy ฉบับใหม่ต่อบอร์ด ควรเริ่มต้นจากอะไร? — เริ่มจากการทำความเข้าใจ business objective และ risk appetite ขององค์กรก่อน แล้วจึงออกแบบ strategy ให้ตอบโจทย์นั้น ไม่ใช่เริ่มจากรายการเทคโนโลยีที่อยากซื้อ",
+        trap:"ข้อสอบมักมีตัวเลือกที่ดู 'ทันสมัย' ทางเทคนิคแต่ไม่เชื่อมกับ business objective ให้ตัดตัวเลือกเหล่านั้นทิ้งก่อนเสมอ",
+        rec:"เวลาคุยกับลูกค้า ให้ถามหา business objective ก่อนเสนอโซลูชัน ถ้าลูกค้าตอบไม่ได้ว่า security เชื่อมกับเป้าหมายธุรกิจอย่างไร นั่นคือสัญญาณว่าต้องช่วยลูกค้าวาง governance framework ก่อน ไม่ใช่ขายผลิตภัณฑ์ทันที"
+      },
+      {
+        title:"Policy, Standard, Procedure, Guideline",
+        summary:"ลำดับชั้นเอกสารกำกับดูแล และระดับการบังคับใช้ที่ต่างกัน",
+        explanation:"Policy คือหลักการระดับสูงสุดกำหนดโดยผู้บริหาร บอก 'อะไร' และ 'ทำไม' Standard คือข้อกำหนดเฉพาะเจาะจงที่บังคับต้องทำตาม Procedure คือขั้นตอนปฏิบัติละเอียดบอก 'อย่างไร' และ Guideline คือคำแนะนำที่ไม่บังคับ การแยกทั้งสี่ระดับให้ถูกต้องเป็นพื้นฐานสำคัญของ governance เอกสาร",
+        terms:[["Policy","หลักการระดับสูงสุด กำหนดโดยผู้บริหาร (บังคับ)"],["Standard","ข้อกำหนดเฉพาะเจาะจงที่ต้องทำตาม (บังคับ)"],["Procedure","ขั้นตอนปฏิบัติละเอียด (บังคับ)"],["Guideline","คำแนะนำ ไม่บังคับ"]],
+        scenario:"องค์กรกำหนดว่า 'รหัสผ่านต้องมีความยาวอย่างน้อย 12 ตัวอักษร' — นี่คือ Policy, Standard, หรือ Procedure? คำตอบคือ Standard เพราะเป็นข้อกำหนดเฉพาะเจาะจงที่วัดผลได้ ไม่ใช่หลักการกว้างระดับ Policy",
+        trap:"ข้อสอบชอบสลับใช้คำว่า Policy/Standard/Procedure/Guideline ในโจทย์เดียวกัน ต้องอ่านให้ละเอียดว่าระดับความเฉพาะเจาะจงและการบังคับใช้ตรงกับนิยามไหน",
+        rec:"เวลาช่วยลูกค้าออกแบบ solution ให้เช็คว่าลูกค้ามี policy ระดับบนที่ชัดเจนหรือยัง ถ้ามีแต่ standard/procedure แต่ไม่มี policy รองรับ อาจเป็นสัญญาณว่า governance ยังไม่สมบูรณ์"
+      },
+      {
+        title:"Roles, Responsibilities & Steering Committee",
+        summary:"ใครควรเป็นเจ้าของการตัดสินใจ และบทบาทของ steering committee",
+        explanation:"Steering Committee คือกลุ่มผู้บริหารข้ามสายงานที่กำกับทิศทางของ security program ทั้งองค์กร ทำหน้าที่อนุมัติงบ จัดลำดับความสำคัญ และรับผิดชอบร่วมกัน CISM มักถามหาว่า 'ใครควรเป็นเจ้าของ' การตัดสินใจแต่ละประเภท เช่น การยอมรับความเสี่ยง (risk acceptance) ควรเป็นเจ้าของ asset หรือผู้บริหารระดับสูง ไม่ใช่ทีมเทคนิค",
+        terms:[["Steering Committee","กลุ่มผู้บริหารข้ามสายงานที่กำกับทิศทาง program"],["Data/Asset Owner","ผู้รับผิดชอบการตัดสินใจเกี่ยวกับ asset นั้นๆ รวมถึง risk acceptance"]],
+        scenario:"ทีม IT ต้องการยอมรับความเสี่ยงของช่องโหว่ระดับกลางเพื่อประหยัดเวลา ควรเป็นใครที่อนุมัติ? — ต้องเป็น asset owner หรือผู้บริหารที่มีอำนาจ ไม่ใช่ทีมเทคนิคตัดสินใจเอง เพราะ risk acceptance ต้องมีการอนุมัติอย่างเป็นทางการ",
+        trap:"โจทย์มักหลอกให้เลือกคนที่ 'รู้เรื่องเทคนิคที่สุด' เป็นผู้อนุมัติ แต่คำตอบที่ถูกต้องมักเป็นผู้มีอำนาจตัดสินใจทางธุรกิจ",
+        rec:"ระบุให้ชัดในการเสนอโครงการว่าใครในฝั่งลูกค้าควรเป็น sponsor หรือ approver — ช่วยให้ deal เดินหน้าได้เร็วขึ้นเพราะไม่ติดขั้นตอนอนุมัติที่ไม่ชัดเจน"
+      },
+      {
+        title:"Legal, Regulatory & Contractual Requirements",
+        summary:"ข้อกำหนดทางกฎหมายที่ต้องผนวกเข้ากับ governance framework",
+        explanation:"Governance ต้องคำนึงถึงข้อกำหนดทางกฎหมาย ระเบียบ และสัญญาที่เกี่ยวข้อง เช่น PDPA ในประเทศไทย, GDPR สำหรับข้อมูลที่เกี่ยวกับ EU citizen หรือข้อกำหนดเฉพาะอุตสาหกรรม การไม่ปฏิบัติตามอาจนำไปสู่ค่าปรับหรือความเสียหายต่อชื่อเสียง",
+        terms:[["PDPA","กฎหมายคุ้มครองข้อมูลส่วนบุคคลของไทย"],["Contractual Requirement","ข้อกำหนดด้าน security ที่ระบุในสัญญากับลูกค้า/คู่ค้า"]],
+        scenario:"ลูกค้าต้องการเก็บข้อมูลส่วนบุคคลของประชาชนในระบบใหม่ ควรพิจารณาอะไรก่อนเริ่มออกแบบระบบ? — ต้องเช็คข้อกำหนด PDPA เรื่อง data classification, consent, และ retention period ตั้งแต่ขั้นตอนออกแบบ ไม่ใช่เพิ่มทีหลัง",
+        trap:"อย่าลืมว่าข้อกำหนดทางกฎหมายบางครั้ง 'เข้มงวดกว่า' มาตรฐานภายในองค์กร — ถ้าขัดแย้งกัน กฎหมายมีลำดับความสำคัญเหนือกว่า",
+        rec:"จุดแข็งของคุณคือมีประสบการณ์ตรงกับ PDPA จากงาน government proposal ใช้เป็นจุดขายในการคุยกับลูกค้าภาคเอกชนที่เพิ่งเริ่มปฏิบัติตาม PDPA ได้เลย"
+      },
+      {
+        title:"Business Case & Budget",
+        summary:"การพิสูจน์คุณค่าทางธุรกิจของ security program เพื่อขอสนับสนุนงบประมาณ",
+        explanation:"Governance ที่ดีต้องแปลง security investment เป็นภาษาทางธุรกิจที่ผู้บริหารเข้าใจ ผ่าน business case ที่ระบุ cost, benefit, และความเสี่ยงที่ลดได้ การของบโดยไม่มี business case ที่ชัดเจนมักถูกปฏิเสธหรือถูกตัดในภาวะ budget cut",
+        terms:[["Business Case","เอกสารพิสูจน์ความคุ้มค่าของการลงทุนต่อผู้บริหาร"],["ROI/Cost-Benefit","การเปรียบเทียบผลตอบแทนกับต้นทุนของ security investment"]],
+        scenario:"งบ security ปีนี้ถูกตัด 20% ทีม security ควรทำอย่างไรเพื่อรักษาโครงการสำคัญไว้? — จัดลำดับความสำคัญของโครงการตาม risk-based prioritization และนำเสนอ business case ที่ชัดเจนว่าโครงการไหนกระทบความเสี่ยงสูงสุดหากถูกตัด",
+        trap:"อย่าเสนอโครงการโดยอิงแค่ 'ความเสี่ยงทางเทคนิค' ต้องแปลงเป็นผลกระทบทางธุรกิจที่วัดได้เสมอ",
+        rec:"ช่วยลูกค้าทำ business case ให้ ไม่ใช่แค่ส่ง quotation — การช่วยแปลง technical benefit เป็นภาษาธุรกิจคือสิ่งที่ทำให้ pre-sales ของเราแตกต่างจากคู่แข่ง"
+      }
+    ]
+  },
+  {
+    id:"d2", num:"D2", accent:"#9B72CF", title:"Information Security Risk Management", weight:"20%",
+    desc:"กระบวนการระบุ ประเมิน และจัดการความเสี่ยงด้านสารสนเทศให้อยู่ในระดับที่องค์กรยอมรับได้ โดยสมดุลกับต้นทุน",
+    topics:[
+      {
+        title:"Risk Appetite vs Risk Tolerance vs Risk Capacity",
+        summary:"สามคำที่มักสับสน แต่ข้อสอบชอบถามแยกความต่าง",
+        explanation:"Risk Appetite คือระดับความเสี่ยงที่องค์กร 'เต็มใจ' รับได้ในภาพรวม กำหนดโดยบอร์ด Risk Tolerance คือขอบเขตความเบี่ยงเบนที่ยอมรับได้จาก appetite ในแต่ละสถานการณ์ (แคบกว่า) และ Risk Capacity คือขีดจำกัดสูงสุดที่องค์กร 'รับไหว' จริงๆ ทางการเงินหรือปฏิบัติการ ความสัมพันธ์คือ Capacity ≥ Appetite ≥ Tolerance",
+        terms:[["Risk Appetite","ระดับความเสี่ยงที่องค์กรเต็มใจรับ (กำหนดโดยบอร์ด)"],["Risk Tolerance","ขอบเขตเบี่ยงเบนที่ยอมรับได้ในแต่ละกรณี"],["Risk Capacity","ขีดจำกัดสูงสุดที่องค์กรรับไหวจริง"]],
+        scenario:"องค์กรกำหนด risk appetite ไว้ต่ำ แต่โครงการหนึ่งมีความเสี่ยงเกิน capacity จริงของงบประมาณ ควรทำอย่างไร? — ต้องยกเลิกหรือปรับโครงการทันที เพราะเกิน capacity คือเกินขีดจำกัดที่รับไหวจริง ไม่ใช่แค่เรื่องความเต็มใจ",
+        trap:"ข้อสอบมักใช้สามคำนี้ปนกันในโจทย์เดียว ให้จำลำดับ Capacity (เพดานจริง) ≥ Appetite (สิ่งที่อยากรับ) ≥ Tolerance (ขอบเขตต่อกรณี)",
+        rec:"เวลาเสนอโซลูชัน ให้ถามลูกค้าว่า risk appetite ระดับองค์กรเป็นอย่างไร จะช่วยให้เข้าใจว่าลูกค้าจะยอมลงทุนระดับไหนใน security control"
+      },
+      {
+        title:"Risk Treatment: Mitigate / Transfer / Avoid / Accept",
+        summary:"สี่ทางเลือกจัดการความเสี่ยง และเงื่อนไขของแต่ละทาง",
+        explanation:"Mitigate คือลดโอกาสเกิดหรือผลกระทบด้วย control เพิ่มเติม Transfer คือโอนความเสี่ยงไปที่อื่นเช่นประกันภัยหรือ outsource Avoid คือหยุดกิจกรรมที่ก่อความเสี่ยงนั้น และ Accept คือยอมรับความเสี่ยงโดยรู้ตัว ซึ่งต้องมีการอนุมัติอย่างเป็นทางการจากผู้มีอำนาจเสมอ ไม่ใช่แค่ปล่อยผ่าน",
+        terms:[["Mitigate","ลดโอกาสเกิด/ผลกระทบด้วย control"],["Transfer","โอนความเสี่ยง เช่น insurance, outsource"],["Avoid","หยุดกิจกรรมที่ก่อความเสี่ยง"],["Accept","ยอมรับความเสี่ยงโดยมีการอนุมัติอย่างเป็นทางการ"]],
+        scenario:"ทีมพบช่องโหว่ความเสี่ยงต่ำที่ค่าใช้จ่ายในการแก้สูงกว่าผลกระทบ ควรทำอย่างไร? — พิจารณา risk acceptance แต่ต้องเสนอให้ผู้มีอำนาจอนุมัติอย่างเป็นทางการ พร้อมบันทึกไว้ใน risk register",
+        trap:"'Accept' ที่ไม่มีการอนุมัติอย่างเป็นทางการ ถือเป็นความประมาท ไม่ใช่ risk acceptance ที่ถูกต้องตามหลัก governance",
+        rec:"เมื่อเสนอโซลูชันที่เป็น 'mitigate' ให้ชัดเจนว่ามันลด likelihood หรือ impact ด้านไหน จะช่วยให้ลูกค้าเทียบกับทางเลือก transfer/avoid/accept ได้ง่ายขึ้น"
+      },
+      {
+        title:"Qualitative vs Quantitative Risk Analysis",
+        summary:"สองวิธีประเมินความเสี่ยง และสูตรคำนวณ ALE ที่ต้องจำ",
+        explanation:"Qualitative analysis ใช้ scale เช่น สูง/กลาง/ต่ำ รวดเร็วแต่ subjective ส่วน Quantitative analysis ใช้ตัวเลขทางการเงิน สูตรหลักคือ ALE (Annualized Loss Expectancy) = SLE × ARO โดย SLE (Single Loss Expectancy) = Asset Value × Exposure Factor และ ARO (Annualized Rate of Occurrence) คือความถี่ที่คาดว่าจะเกิดต่อปี",
+        terms:[["SLE","Asset Value × Exposure Factor"],["ARO","ความถี่ที่คาดว่าจะเกิดต่อปี"],["ALE","SLE × ARO = ค่าความเสียหายคาดการณ์ต่อปี"]],
+        scenario:"Asset มูลค่า 10 ล้านบาท มี exposure factor 20% และคาดว่าเกิดเหตุการณ์นี้ 0.5 ครั้งต่อปี ALE เท่ากับเท่าไหร่? — SLE = 10,000,000 × 0.20 = 2,000,000 บาท, ALE = 2,000,000 × 0.5 = 1,000,000 บาทต่อปี",
+        trap:"ข้อสอบชอบให้คำนวณ ALE จากตัวเลขที่ให้มา อย่าลืมสูตร SLE ก่อนแล้วค่อยคูณ ARO",
+        rec:"ใช้ ALE ช่วยพิสูจน์ ROI ของโซลูชันในเชิงตัวเลข เช่น 'โซลูชันนี้ราคา X บาทต่อปี แต่ลด ALE ได้ Y บาท' เป็นภาษาที่ CFO ฝั่งลูกค้าเข้าใจทันที"
+      },
+      {
+        title:"Risk Register & Reporting",
+        summary:"เครื่องมือกลางในการติดตามและสื่อสารความเสี่ยงต่อผู้บริหาร",
+        explanation:"Risk Register คือฐานข้อมูลกลางที่บันทึกความเสี่ยงทั้งหมดที่ระบุได้ พร้อมสถานะการจัดการ เจ้าของความเสี่ยง และแผนบรรเทา ต้องมีการรายงานต่อผู้บริหารอย่างสม่ำเสมอในรูปแบบที่เข้าใจง่าย ไม่ใช่รายงานเชิงเทคนิคล้วน",
+        terms:[["Risk Register","ฐานข้อมูลกลางบันทึกความเสี่ยงทั้งหมดขององค์กร"],["Risk Owner","ผู้รับผิดชอบติดตามและจัดการความเสี่ยงแต่ละรายการ"]],
+        scenario:"บอร์ดต้องการทราบภาพรวมความเสี่ยงองค์กรในที่ประชุมรายไตรมาส ควรนำเสนออะไร? — สรุปจาก risk register โดยเน้นความเสี่ยงที่เปลี่ยนสถานะหรือเกิน risk appetite ไม่ใช่รายละเอียดทางเทคนิคทั้งหมด",
+        trap:"ระวังการนำเสนอข้อมูลทางเทคนิคที่มากเกินไปต่อบอร์ด ควรสรุปเป็นภาษาความเสี่ยงทางธุรกิจ",
+        rec:"เสนอให้ลูกค้าใช้ dashboard หรือรายงานสรุปความเสี่ยงที่เชื่อมกับ risk register ของเขา เป็นจุดขายเสริมนอกเหนือจากตัวโซลูชันหลัก"
+      },
+      {
+        title:"Third-party / Vendor Risk",
+        summary:"ความเสี่ยงจากคู่ค้าและซัพพลายเชนที่มักถูกมองข้าม",
+        explanation:"องค์กรต้องประเมินความเสี่ยงของ vendor ก่อนเริ่มความสัมพันธ์ทางธุรกิจ (due diligence) และกำหนดข้อตกลงด้าน security ในสัญญา เช่น SLA และ right-to-audit clause ความเสี่ยงจาก third-party มักเป็นจุดที่องค์กรมองข้ามที่สุด",
+        terms:[["Due Diligence","การประเมินความเสี่ยงของ vendor ก่อนทำสัญญา"],["Right-to-audit clause","ข้อตกลงที่ให้สิทธิ์องค์กรตรวจสอบ security ของ vendor ได้"]],
+        scenario:"องค์กรกำลังจะใช้ cloud provider รายใหม่สำหรับข้อมูลสำคัญ ควรทำอะไรก่อนเซ็นสัญญา? — ประเมินความเสี่ยงของ vendor ผ่าน security questionnaire/certification และเจรจา SLA พร้อม right-to-audit clause ก่อนเริ่มใช้งาน",
+        trap:"อย่าลืมว่าการโอนความรับผิดชอบทางเทคนิคให้ vendor ไม่ได้โอน 'ความรับผิดชอบทางกฎหมาย' ออกจากองค์กรเสมอไป",
+        rec:"ถ้าโซลูชันของเราเกี่ยวข้องกับ third-party integration (เช่น cloud, MSSP) ให้เตรียมเอกสาร security certification ของเราให้พร้อม จะช่วยผ่านขั้นตอน vendor risk assessment ของลูกค้าได้เร็วขึ้น"
+      }
+    ]
+  },
+  {
+    id:"d3", num:"D3", accent:"#C9A227", title:"Information Security Program", weight:"33%",
+    desc:"การนำ Governance และ Risk Management ไปปฏิบัติจริง ผ่านการออกแบบ สร้าง และบริหารโปรแกรมความมั่นคงปลอดภัยทั้งระบบ — น้ำหนักข้อสอบสูงสุด",
+    topics:[
+      {
+        title:"Security Architecture & Control Implementation",
+        summary:"ประเภทของ control และแนวคิด defense-in-depth",
+        explanation:"Control แบ่งเป็นหลายประเภท: Preventive (ป้องกันก่อนเกิด), Detective (ตรวจจับเมื่อเกิด), Corrective (แก้ไขหลังเกิด), Deterrent (ป้องปราม), และ Compensating (ทดแทนเมื่อ control หลักทำไม่ได้) แนวคิด defense-in-depth คือการวาง control หลายชั้นไม่พึ่งพาชั้นเดียว",
+        terms:[["Preventive","ป้องกันไม่ให้เหตุการณ์เกิดขึ้น เช่น firewall"],["Detective","ตรวจจับเมื่อเกิดเหตุการณ์ เช่น IDS/log monitoring"],["Corrective","แก้ไขความเสียหายหลังเกิดเหตุ เช่น restore backup"],["Compensating","control ทดแทนเมื่อ control หลักไม่สามารถใช้ได้"]],
+        scenario:"ระบบ legacy ไม่สามารถติดตั้ง patch ตามมาตรฐานได้ ควรทำอย่างไร? — พิจารณา compensating control เช่น network segmentation หรือ enhanced monitoring แทนการ patch โดยตรง",
+        trap:"ข้อสอบมักถามหา control ประเภทที่ 'เหมาะสมที่สุด' ในสถานการณ์ ไม่ใช่ control ที่ 'แข็งแกร่งที่สุด' เสมอไป ต้องพิจารณาบริบท",
+        rec:"เมื่อเสนอโซลูชัน WAF/IAM/PAM ให้ระบุชัดว่ามันเป็น control ประเภทไหน (preventive/detective) และช่วยเสริมชั้นไหนใน defense-in-depth ของลูกค้า"
+      },
+      {
+        title:"Asset Classification",
+        summary:"การจัดกลุ่มข้อมูล/ระบบที่ต้องทำก่อนเลือก control เสมอ",
+        explanation:"Asset Classification คือการจัดกลุ่มข้อมูลและระบบตามความสำคัญ เช่น Public, Internal, Confidential, Restricted กระบวนการนี้ต้องทำก่อนการเลือก security control เสมอ เพราะ control ที่เหมาะสมขึ้นอยู่กับระดับความสำคัญของ asset นั้น",
+        terms:[["Public","ข้อมูลที่เปิดเผยได้โดยไม่มีความเสี่ยง"],["Internal","ข้อมูลใช้ภายในองค์กร ไม่เปิดเผยสาธารณะ"],["Confidential","ข้อมูลสำคัญ จำกัดการเข้าถึง"],["Restricted","ข้อมูลอ่อนไหวสูงสุด เข้าถึงได้เฉพาะผู้ที่ได้รับอนุญาต"]],
+        scenario:"ลูกค้าต้องการซื้อ DLP เพื่อป้องกันข้อมูลรั่วไหล แต่ยังไม่เคยจัดประเภทข้อมูลเลย ควรแนะนำอะไรก่อน? — แนะนำให้ทำ asset/data classification ก่อน เพราะ DLP ต้องอาศัย classification เป็นพื้นฐานในการกำหนดกฎ ไม่งั้นจะป้องกันแบบเหวี่ยงแหหรือพลาดจุดสำคัญ",
+        trap:"นี่คือกับดักที่พบบ่อยที่สุดใน Domain 3 — อย่าข้าม classification ไปสู่ control เทคนิคทันที แม้ลูกค้าจะรีบร้อนแค่ไหน",
+        rec:"เสนอ workshop สั้นๆ ช่วยลูกค้าทำ data classification เบื้องต้นก่อนเสนอโซลูชันจริง จะทำให้ solution ที่เสนอแม่นยำและน่าเชื่อถือกว่า"
+      },
+      {
+        title:"Third-party / Vendor Management (ในบริบท Program)",
+        summary:"การบริหาร vendor อย่างต่อเนื่องตลอดวงจรชีวิต ไม่ใช่แค่ตอนเริ่มสัญญา",
+        explanation:"ต่างจาก Domain 2 ที่เน้นการประเมินความเสี่ยงตอนเริ่มต้น ใน Domain 3 นี้เน้นการบริหาร vendor ตลอดอายุสัญญา เช่น การติดตาม compliance, การ review performance ตาม SLA, และการวางแผน exit strategy เมื่อสิ้นสุดสัญญา",
+        terms:[["SLA Monitoring","การติดตามผลงาน vendor ตามข้อตกลงบริการ"],["Exit Strategy","แผนรองรับเมื่อสิ้นสุดความสัมพันธ์กับ vendor"]],
+        scenario:"องค์กรใช้ MSSP ภายนอกดูแล SOC มา 2 ปี ควรมีกระบวนการใดต่อเนื่อง? — ทำ periodic SLA review, compliance audit, และเตรียม exit/transition plan ไว้ล่วงหน้าเผื่อต้องเปลี่ยน vendor",
+        trap:"อย่าคิดว่าความเสี่ยง vendor จบแค่ตอนเซ็นสัญญา — program ต้องมีกระบวนการติดตามตลอดอายุสัญญา",
+        rec:"ถ้าเราคือ vendor ของลูกค้า ให้เตรียมรายงาน SLA compliance สม่ำเสมอโดยไม่ต้องให้ลูกค้าเรียกร้อง จะสร้างความน่าเชื่อถือระยะยาว"
+      },
+      {
+        title:"Awareness & Training Program",
+        summary:"แยกความต่างระหว่าง awareness (ทุกคน) กับ training (เฉพาะบทบาท)",
+        explanation:"Awareness คือกิจกรรมสร้างความตระหนักรู้ทั่วไปสำหรับพนักงานทุกคน ส่วน Training คือการฝึกอบรมเฉพาะบทบาทที่ต้องการความรู้ลึกกว่า เช่น developer ต้องเรียน secure coding ส่วน admin ต้องเรียนการจัดการ privileged access การวัดผลทำได้ผ่าน metrics เช่น phishing simulation click-rate",
+        terms:[["Awareness","กิจกรรมสร้างความตระหนักรู้สำหรับพนักงานทุกคน"],["Training","การฝึกอบรมเฉพาะบทบาทที่ต้องการความรู้เชิงลึก"],["Phishing Simulation","การทดสอบจำลองเพื่อวัดความตระหนักรู้ของพนักงาน"]],
+        scenario:"อัตราการคลิกลิงก์ phishing simulation ของพนักงานสูงขึ้นต่อเนื่อง 3 ไตรมาส ควรทำอย่างไร? — ทบทวนโปรแกรม awareness ว่าเนื้อหาน่าสนใจและเข้าถึงพนักงานเพียงพอหรือไม่ อาจต้องปรับรูปแบบหรือความถี่ ไม่ใช่แค่ลงโทษพนักงาน",
+        trap:"อย่าเข้าใจผิดว่า awareness กับ training เป็นเรื่องเดียวกัน ข้อสอบมักถามแยกกลุ่มเป้าหมายที่ต่างกัน",
+        rec:"เสนอ phishing simulation หรือ awareness platform เป็นส่วนเสริมของดีลใหญ่ได้ เพราะเป็นสิ่งที่ auditor และผู้บริหารมักถามหาเสมอ"
+      },
+      {
+        title:"Program Metrics: KPI vs KRI",
+        summary:"การวัดผล program ด้วยตัวชี้วัดสองประเภทที่ตอบโจทย์ต่างกัน",
+        explanation:"KPI (Key Performance Indicator) วัดประสิทธิภาพของ program เช่น % ของระบบที่ patch ตรงเวลา ส่วน KRI (Key Risk Indicator) เป็นสัญญาณเตือนล่วงหน้าว่าความเสี่ยงกำลังเพิ่มขึ้น เช่น จำนวนความพยายาม login ที่ผิดปกติ ทั้งสองต้องถูกรายงานเป็นภาษาที่ผู้บริหารเข้าใจ",
+        terms:[["KPI","วัดประสิทธิภาพของ program เช่น % patch compliance"],["KRI","สัญญาณเตือนล่วงหน้าของความเสี่ยงที่เพิ่มขึ้น"]],
+        scenario:"ผู้บริหารถามว่า security program ปีนี้ 'ทำงานดีขึ้นไหม' ควรตอบด้วยข้อมูลอะไร? — นำเสนอ KPI ที่แสดงแนวโน้มดีขึ้น (เช่น patch compliance เพิ่มขึ้น) ควบคู่กับ KRI ที่ยังต้องเฝ้าระวัง ไม่ใช่รายงานแค่ตัวเลขทางเทคนิคดิบๆ",
+        trap:"ข้อสอบมักสลับตัวอย่าง KPI กับ KRI ให้จำหลักว่า KPI วัด 'ผลงาน' ส่วน KRI วัด 'สัญญาณเตือนความเสี่ยง'",
+        rec:"นี่คือจุดที่ตรงกับงาน dashboard/KPI tracking ที่คุณเคยทำให้ สตม. — ใช้เป็น reference case ในการเสนอ metrics dashboard ให้ลูกค้าใหม่ได้"
+      },
+      {
+        title:"Budget & Resource Management",
+        summary:"การจัดสรรทรัพยากรให้ program อย่างยั่งยืน",
+        explanation:"การบริหาร program ต้องคำนึงถึงความยั่งยืนของงบประมาณและบุคลากร ไม่ใช่แค่การของบครั้งเดียว ต้องวางแผนระยะยาวรวมถึงการพัฒนาบุคลากรภายในและการใช้ outsource อย่างสมดุล",
+        terms:[["Resource Planning","การวางแผนบุคลากรและงบประมาณระยะยาวของ program"]],
+        scenario:"Security program ขาดบุคลากรที่มีทักษะเฉพาะทาง ควรแก้ปัญหาอย่างไรในระยะยาว? — วางแผนผสมระหว่างการพัฒนาบุคลากรภายในและการใช้ managed service ในระยะสั้น พร้อมเสนอ business case ของบเพิ่มระยะยาว",
+        trap:"อย่าเสนอแก้ปัญหาขาดบุคลากรด้วยการซื้อเครื่องมือเพิ่มเพียงอย่างเดียวโดยไม่แก้ที่ต้นเหตุเรื่องทรัพยากร",
+        rec:"ถ้าลูกค้าขาดบุคลากร เสนอ managed service หรือ co-managed model ควบคู่กับผลิตภัณฑ์ จะตอบโจทย์ resource constraint ได้ตรงจุดกว่า"
+      }
+    ]
+  },
+  {
+    id:"d4", num:"D4", accent:"#3FA9A4", title:"Incident Management", weight:"30%",
+    desc:"การเตรียมพร้อม ตรวจจับ ตอบสนอง และฟื้นฟูจากเหตุการณ์ด้านความมั่นคงปลอดภัย รวมถึงความต่อเนื่องทางธุรกิจและการกู้คืนระบบ",
+    topics:[
+      {
+        title:"Incident Response Lifecycle",
+        summary:"6 ขั้นตอนที่ต้องท่องให้ขึ้นใจ",
+        explanation:"วงจรการตอบสนองเหตุการณ์ประกอบด้วย Preparation, Detection & Analysis, Containment, Eradication, Recovery, และ Post-Incident Review Containment มักแบ่งเป็น short-term (หยุดความเสียหายทันที) กับ long-term (แก้ไขก่อน eradication เต็มรูปแบบ) ขั้นตอน Post-Incident Review มักถูกมองข้ามแต่สำคัญมากในมุมมอง CISM",
+        terms:[["Containment","การควบคุมไม่ให้ความเสียหายลุกลาม แบ่งเป็น short/long-term"],["Eradication","การกำจัดต้นเหตุของเหตุการณ์ออกจากระบบ"],["Post-Incident Review","การทบทวนบทเรียนหลังเหตุการณ์เพื่อป้อนกลับเข้า program"]],
+        scenario:"พบมัลแวร์กำลังแพร่กระจายในเครือข่าย ควรทำอะไรเป็นลำดับแรก? — Containment ก่อนเสมอ (เช่น ตัดการเชื่อมต่อเครือข่ายที่ติดเชื้อ) เพื่อหยุดความเสียหายก่อนที่จะไป eradication",
+        trap:"ข้อสอบมักถามลำดับขั้นตอนสลับกัน ต้องจำลำดับ Containment ก่อน Eradication เสมอ และ Post-Incident Review ไม่ใช่ขั้นตอนสุดท้ายที่ถูกมองข้ามได้",
+        rec:"เวลาคุยกับลูกค้าเรื่อง incident response ให้ถามว่ามี post-incident review process หรือไม่ ถ้าไม่มี นี่คือช่องว่างที่ solution ด้าน SIEM/SOAR ของเราช่วยเติมเต็มได้"
+      },
+      {
+        title:"RTO, RPO, MTD/MTO, SDO",
+        summary:"ตัวชี้วัดเวลาที่ต้องแยกความหมายให้แม่นยำ",
+        explanation:"RTO (Recovery Time Objective) คือระยะเวลาสูงสุดที่ระบบหยุดทำงานได้ก่อนต้องกู้คืน RPO (Recovery Point Objective) คือปริมาณข้อมูลสูงสุดที่ยอมสูญเสียได้ MTD/MTO (Maximum Tolerable Downtime/Outage) คือเวลาสูงสุดที่ธุรกิจทนได้ก่อนเกิดผลกระทบร้ายแรง (กว้างกว่า RTO) และ SDO (Service Delivery Objective) คือระดับบริการขั้นต่ำที่ต้องรักษาระหว่างกู้คืน",
+        terms:[["RTO","เวลาสูงสุดที่ระบบหยุดได้ก่อนต้องกู้คืน"],["RPO","ข้อมูลสูงสุดที่ยอมสูญเสียได้ (วัดเป็นเวลาย้อนหลัง)"],["MTD/MTO","เวลาสูงสุดที่ธุรกิจทนได้ก่อนเสียหายร้ายแรง"],["SDO","ระดับบริการขั้นต่ำระหว่างกู้คืน"]],
+        scenario:"ระบบมี RTO ที่วางแผนไว้ 8 ชั่วโมง แต่ MTD ทางธุรกิจจริงคือ 4 ชั่วโมง ปัญหาคืออะไร? — RTO สูงกว่า MTD หมายความว่าแผนกู้คืนไม่ทันเวลาที่ธุรกิจทนได้จริง ต้องปรับแผนกู้คืนให้เร็วขึ้นหรือปรับ MTD ใหม่ตามความเป็นจริงทางธุรกิจ",
+        trap:"RTO กับ MTD ไม่ใช่ตัวเดียวกัน ข้อสอบมักทดสอบว่าเข้าใจว่า RTO ควรสั้นกว่าหรือเท่ากับ MTD เสมอ",
+        rec:"ใช้ RTO/RPO เป็นตัวเลขเปิดบทสนทนาเรื่อง DR/Backup solution — ถามลูกค้าว่า RTO/RPO ปัจจุบันเทียบกับที่ระบบรองรับได้จริงต่างกันแค่ไหน"
+      },
+      {
+        title:"BCP vs DR",
+        summary:"ภาพกว้างของความต่อเนื่องทางธุรกิจ เทียบกับการกู้คืนระบบเฉพาะจุด",
+        explanation:"BCP (Business Continuity Plan) ครอบคลุมภาพกว้างทำให้ธุรกิจดำเนินต่อได้ ทั้งคน กระบวนการ สถานที่ และระบบ ส่วน DR (Disaster Recovery) เป็นส่วนย่อยของ BCP ที่เจาะจงเรื่องกู้คืนระบบ IT และข้อมูลเท่านั้น",
+        terms:[["BCP","แผนความต่อเนื่องทางธุรกิจ ครอบคลุมคน กระบวนการ สถานที่ ระบบ"],["DR","แผนกู้คืนระบบ IT/ข้อมูล เป็นส่วนย่อยของ BCP"]],
+        scenario:"สำนักงานใหญ่ถูกน้ำท่วมจนพนักงานเข้าทำงานไม่ได้ แต่ระบบ IT ยังทำงานปกติบน cloud ปัญหานี้ควรแก้ด้วยแผนใด? — เป็นเรื่องของ BCP ไม่ใช่ DR เพราะปัญหาคือคนและสถานที่ ไม่ใช่ระบบ IT",
+        trap:"อย่าใช้ DR แทน BCP ในทุกสถานการณ์ — DR แก้ปัญหาระบบ IT เท่านั้น ไม่ครอบคลุมคนและสถานที่",
+        rec:"เมื่อเสนอ DR solution ให้ถามลูกค้าด้วยว่ามี BCP ระดับองค์กรรองรับหรือยัง เพื่อวางตำแหน่งโซลูชันให้ถูกต้องว่าเป็นส่วนหนึ่งของภาพใหญ่"
+      },
+      {
+        title:"Testing Plans: Tabletop / Simulation / Full Interruption",
+        summary:"ระดับความเข้มข้นของการทดสอบแผนตอบสนองเหตุการณ์",
+        explanation:"Tabletop exercise คือการพูดคุยจำลองสถานการณ์โดยไม่ลงมือจริง เบาที่สุดแต่ทำได้บ่อย Simulation คือการจำลองใกล้เคียงจริงมากขึ้น และ Full interruption test คือการทดสอบเต็มรูปแบบซึ่งเสี่ยงที่สุดแต่ให้ความมั่นใจสูงสุดว่าแผนใช้ได้จริง",
+        terms:[["Tabletop Exercise","พูดคุยจำลองสถานการณ์ ไม่ลงมือจริง"],["Simulation","จำลองใกล้เคียงสถานการณ์จริงมากขึ้น"],["Full Interruption Test","ทดสอบเต็มรูปแบบ เสี่ยงสุดแต่มั่นใจสุด"]],
+        scenario:"องค์กรไม่เคยทดสอบ DR plan มาก่อนและกลัวผลกระทบจากการทดสอบเต็มรูปแบบ ควรเริ่มจากอะไร? — เริ่มจาก tabletop exercise ก่อนเพื่อลดความเสี่ยง แล้วค่อยขยับไป simulation และ full interruption test เมื่อมั่นใจมากขึ้น",
+        trap:"อย่าข้ามไปทดสอบแบบ full interruption ทันทีถ้าองค์กรไม่เคยทดสอบแผนมาก่อน ควรเริ่มจากระดับเบาที่สุดก่อนเสมอ",
+        rec:"เสนอบริการช่วยจัด tabletop exercise ให้ลูกค้าเป็นจุดเริ่มต้นความสัมพันธ์ได้ ก่อนเสนอโซลูชันเทคนิคที่ใหญ่ขึ้น"
+      },
+      {
+        title:"Post-Incident Review & Lessons Learned",
+        summary:"ขั้นตอนที่มักถูกมองข้ามแต่สำคัญที่สุดในการพัฒนา program ต่อเนื่อง",
+        explanation:"หลังจบเหตุการณ์ องค์กรต้องทำการทบทวนอย่างเป็นระบบ เพื่อระบุจุดที่ควรปรับปรุงในกระบวนการ เทคโนโลยี หรือบุคลากร แล้วป้อนบทเรียนนั้นกลับเข้าสู่ risk management และ program โดยตรง ไม่ใช่แค่ปิดเคสแล้วจบ",
+        terms:[["Lessons Learned","บทเรียนจากเหตุการณ์ที่ต้องป้อนกลับเข้า program"],["Root Cause Analysis","การวิเคราะห์หาสาเหตุที่แท้จริงของเหตุการณ์"]],
+        scenario:"หลังจบการตอบสนอง incident ทีมรีบปิดเคสทันทีเพื่อกลับไปทำงานปกติ ขาดขั้นตอนอะไรไป? — ขาด post-incident review และ root cause analysis ซึ่งจำเป็นเพื่อป้องกันไม่ให้เหตุการณ์แบบเดียวกันเกิดซ้ำ",
+        trap:"ข้อสอบมักตั้งคำถามที่ดูเหมือนจบแล้วหลัง recovery แต่คำตอบที่ถูกต้องคือยังไม่จบจนกว่าจะมี post-incident review",
+        rec:"เสนอบริการช่วยทำ post-incident review ให้ลูกค้าหลังเกิดเหตุการณ์ เป็นโอกาสสร้างความไว้วางใจและนำไปสู่การเสนอโซลูชันป้องกันในอนาคต"
+      }
+    ]
+  }
+];
+
+let currentDomain = null;
+let currentTopicIdx = null;
+
+function renderHome(){
+  const grid = document.getElementById('domain-grid');
+  grid.innerHTML = DATA.map(d => `
+    <div class="domain-card" style="--card-accent:${d.accent}" onclick="goDomain('${d.id}')">
+      <span class="dnum">Domain ${d.num.slice(1)}</span>
+      <h3>${d.title}</h3>
+      <p>${d.desc}</p>
+      <div class="bar-track"><div class="bar-fill" style="width:${d.weight}"></div></div>
+      <div class="foot-row">
+        <span class="weight-badge">${d.weight} ของข้อสอบ</span>
+        <span class="topic-count">${d.topics.length} หัวข้อ</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateCrumb(){
+  const crumb = document.getElementById('crumb');
+  let html = `<span class="seg ${!currentDomain ? 'active' : ''}" onclick="goHome()">CISM Field Guide</span>`;
+  if(currentDomain){
+    html += `<span class="sep">›</span><span class="seg ${currentTopicIdx===null ? 'active':''}" onclick="goDomain('${currentDomain.id}')">${currentDomain.title}</span>`;
+  }
+  if(currentDomain && currentTopicIdx !== null){
+    html += `<span class="sep">›</span><span class="seg active">${currentDomain.topics[currentTopicIdx].title}</span>`;
+  }
+  crumb.innerHTML = html;
+}
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function goHome(){
+  currentDomain = null; currentTopicIdx = null;
+  updateCrumb();
+  showView('view-home');
+}
+
+function goDomain(id){
+  if(id) currentDomain = DATA.find(d => d.id === id);
+  currentTopicIdx = null;
+  document.documentElement.style.setProperty('--dom-accent', currentDomain.accent);
+  document.getElementById('d-tag').textContent = `Domain ${currentDomain.num.slice(1)}`;
+  document.getElementById('d-tag').style.background = currentDomain.accent;
+  document.getElementById('d-title').textContent = currentDomain.title;
+  document.getElementById('d-desc').textContent = currentDomain.desc;
+  document.getElementById('d-weight').textContent = currentDomain.weight;
+  document.getElementById('d-topics').textContent = currentDomain.topics.length;
+
+  const list = document.getElementById('topic-list');
+  list.innerHTML = currentDomain.topics.map((t,i) => `
+    <div class="topic-row" onclick="goTopic(${i})">
+      <span class="topic-idx">${String(i+1).padStart(2,'0')}</span>
+      <div class="t-body">
+        <h4>${t.title}</h4>
+        <div class="t-summary">${t.summary}</div>
+      </div>
+      <span class="topic-arrow">›</span>
+    </div>
+  `).join('');
+
+  updateCrumb();
+  showView('view-domain');
+}
+
+function goTopic(idx){
+  currentTopicIdx = idx;
+  renderTopic();
+  updateCrumb();
+  showView('view-topic');
+}
+
+function renderTopic(){
+  const t = currentDomain.topics[currentTopicIdx];
+  document.documentElement.style.setProperty('--dom-accent', currentDomain.accent);
+  document.getElementById('t-tag').textContent = `${currentDomain.title.toUpperCase()}`;
+  document.getElementById('t-tag').style.background = currentDomain.accent;
+  document.getElementById('t-title').textContent = t.title;
+  document.getElementById('t-explanation').innerHTML = `<p>${t.explanation}</p>`;
+  document.getElementById('back-domain-name').textContent = currentDomain.title;
+
+  const termsWrap = document.getElementById('t-terms-wrap');
+  if(t.terms && t.terms.length){
+    termsWrap.style.display = 'block';
+    document.getElementById('t-terms').innerHTML = `
+      <tr><th style="width:180px">คำศัพท์</th><th>ความหมาย</th></tr>
+      ${t.terms.map(([k,v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('')}
+    `;
+  } else {
+    termsWrap.style.display = 'none';
+  }
+
+  document.getElementById('t-scenario').textContent = t.scenario;
+  document.getElementById('t-trap').textContent = t.trap;
+  document.getElementById('t-rec').textContent = t.rec;
+
+  document.getElementById('btn-prev').classList.toggle('disabled', currentTopicIdx === 0);
+  document.getElementById('btn-next').classList.toggle('disabled', currentTopicIdx === currentDomain.topics.length - 1);
+}
+
+function navTopic(dir){
+  const newIdx = currentTopicIdx + dir;
+  if(newIdx < 0 || newIdx >= currentDomain.topics.length) return;
+  currentTopicIdx = newIdx;
+  renderTopic();
+  updateCrumb();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+renderHome();
+updateCrumb();
+</script>
+</body>
+</html>
