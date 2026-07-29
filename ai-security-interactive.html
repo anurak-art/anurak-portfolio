@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Security — Interactive Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0f1c; --panel:#111a2e; --card:#16223b; --card2:#1a2843; --line:#22324f; --line2:#2c4066;
+    --text:#e8eef9; --muted:#9aabc7; --faint:#6b7e9e;
+    --cy:#38bdf8; --teal:#22d3ee; --amb:#fbbf24; --red:#f87171; --grn:#34d399; --vio:#a78bfa;
+    --reddim:#2a1620; --grndim:#0f2a20; --ambdim:#2a2109; --soldim:#0d2233;
+    --sans:'IBM Plex Sans Thai',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans Thai',Tahoma,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:
+      radial-gradient(1100px 520px at 84% -12%, #16243f 0%, transparent 56%),
+      radial-gradient(820px 460px at 2% 0%, #101a30 0%, transparent 52%),
+      var(--ink);
+    color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  .wrap{max-width:1160px;margin:0 auto;padding:34px 24px 90px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
+
+  header .h1{font-size:clamp(30px,5vw,44px);font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+  header p{color:var(--muted);max-width:620px}
+
+  /* controls */
+  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:26px 0 8px}
+  .search{flex:1;min-width:220px;position:relative}
+  .search input{width:100%;background:var(--card);border:1px solid var(--line2);border-radius:11px;
+    color:var(--text);font-family:var(--sans);font-size:14px;padding:12px 14px 12px 40px;outline:none}
+  .search input:focus{border-color:var(--cy)}
+  .search input::placeholder{color:var(--faint)}
+  .search svg{position:absolute;left:13px;top:12px;width:17px;height:17px;stroke:var(--faint);fill:none;stroke-width:2}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--muted);cursor:pointer;
+    background:var(--card);border:1px solid var(--line2);border-radius:999px;padding:8px 15px;transition:.15s;user-select:none}
+  .chip:hover{color:var(--text)}
+  .chip.on{background:var(--card2);color:var(--text);border-color:currentColor}
+  .chip[data-cat="frameworks"].on{color:var(--vio)} .chip[data-cat="owasp"].on{color:var(--cy)}
+  .chip[data-cat="attacks"].on{color:var(--red)} .chip[data-cat="defenses"].on{color:var(--grn)}
+  .chip[data-cat="data"].on{color:var(--teal)} .chip[data-cat="all"].on{color:var(--amb)}
+
+  .catlabel{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--faint);margin:30px 0 12px;display:flex;align-items:center;gap:10px}
+  .catlabel::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:13px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 17px;cursor:pointer;
+    transition:.16s;position:relative;display:flex;flex-direction:column;min-height:132px}
+  .tile:hover{border-color:var(--hl);transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.35)}
+  .tile .code{font-family:var(--mono);font-weight:600;font-size:11.5px;color:#08111f;border-radius:7px;
+    padding:5px 10px;align-self:flex-start;margin-bottom:10px}
+  .tile h4{font-size:15px;font-weight:600;margin-bottom:5px}
+  .tile p{color:var(--muted);font-size:12.8px;flex:1}
+  .tile .more{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:11px;transition:.15s}
+  .tile:hover .more{color:var(--hl)}
+  .empty{color:var(--faint);text-align:center;padding:50px;font-size:14px}
+
+  /* modal */
+  .backdrop{position:fixed;inset:0;background:rgba(4,8,16,.72);backdrop-filter:blur(4px);opacity:0;
+    pointer-events:none;transition:.2s;z-index:60}
+  .backdrop.open{opacity:1;pointer-events:auto}
+  .modal{position:fixed;top:0;right:0;height:100%;width:min(620px,100%);background:var(--panel);
+    border-left:1px solid var(--line2);z-index:61;transform:translateX(100%);transition:transform .28s cubic-bezier(.2,.7,.2,1);
+    display:flex;flex-direction:column}
+  .modal.open{transform:translateX(0)}
+  .mtop{display:flex;align-items:center;gap:12px;padding:18px 24px;border-bottom:1px solid var(--line)}
+  .mtop .navbtn{background:var(--card2);border:1px solid var(--line2);color:var(--muted);width:34px;height:34px;
+    border-radius:9px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .mtop .navbtn:hover{color:var(--text);border-color:var(--cy)}
+  .mtop .navbtn:disabled{opacity:.35;cursor:default}
+  .mtop .crumb{flex:1;font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.06em;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mbody{padding:24px;overflow-y:auto;flex:1}
+  .mbody .code{font-family:var(--mono);font-weight:600;font-size:12px;color:#08111f;border-radius:8px;padding:6px 12px;display:inline-block;margin-bottom:12px}
+  .mbody h3{font-size:23px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+  .mbody .cat{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px}
+  .block{margin-bottom:18px}
+  .block .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;display:block}
+  .block p{color:var(--text);font-size:14px}
+  .block.tint{border-radius:12px;padding:14px 16px}
+  .block.ex{background:var(--reddim)} .block.fx{background:var(--grndim)} .block.note{background:var(--ambdim)} .block.sol{background:var(--soldim);border:1px solid var(--line2)}
+  .tools{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+  .tool{font-family:var(--mono);font-size:11.5px;color:var(--cy);background:var(--card2);border:1px solid var(--line2);border-radius:7px;padding:5px 10px}
+  .tool.gold{color:var(--amb);background:#241d0a;border-color:#5a4a1e}
+
+  /* architecture diagram */
+  .arch{margin:26px 0 4px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px 16px}
+  .arch h2{font-size:20px;font-weight:700;margin-bottom:4px}
+  .arch .sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+  #archDiagram{width:100%;height:auto;display:block}
+  #archDiagram text{font-family:var(--sans)}
+  .anode{cursor:pointer}
+  .anode .abox{transition:.15s}
+  .anode:hover .abox{stroke-width:2.6px}
+  .anode:hover text.at{fill:var(--text)}
+  .block ul{list-style:none}
+  .block li{position:relative;padding-left:16px;margin-bottom:6px;font-size:13.5px;color:var(--text)}
+  .block li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.7}
+  .related{border-top:1px solid var(--line);padding-top:16px;margin-top:6px}
+  .related .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;display:block}
+  .rchips{display:flex;flex-wrap:wrap;gap:8px}
+  .rchip{background:var(--card);border:1px solid var(--line2);border-radius:9px;padding:8px 13px;cursor:pointer;
+    font-size:13px;color:var(--text);transition:.15s;display:flex;align-items:center;gap:8px}
+  .rchip:hover{border-color:var(--cy);background:var(--card2)}
+  .rchip .rc{font-family:var(--mono);font-size:10px;font-weight:600;color:#08111f;border-radius:5px;padding:2px 6px}
+
+  footer{color:var(--faint);font-size:12.5px;text-align:center;margin-top:44px}
+  .hint{color:var(--faint);font-size:12.5px;margin-top:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">INTERACTIVE STUDY · เจาะรายละเอียดได้</div>
+    <div class="h1">AI Security</div>
+    <p>คลิกการ์ดหัวข้อใดก็ได้เพื่อเจาะดูรายละเอียดเชิงลึก — ในแต่ละหัวข้อมี “เกี่ยวข้อง” ที่คลิกเจาะต่อไปได้เรื่อย ๆ พร้อมปุ่มย้อนกลับ</p>
+    <div class="controls">
+      <div class="search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+        <input id="q" type="text" placeholder="ค้นหาหัวข้อ เช่น injection, poisoning, ISO 42001…" autocomplete="off">
+      </div>
+    </div>
+    <div class="chips" id="chips">
+      <span class="chip on" data-cat="all">ทั้งหมด</span>
+      <span class="chip" data-cat="frameworks">Frameworks</span>
+      <span class="chip" data-cat="owasp">OWASP</span>
+      <span class="chip" data-cat="attacks">Attacks</span>
+      <span class="chip" data-cat="defenses">Defenses</span>
+      <span class="chip" data-cat="data">Data & Privacy</span>
+    </div>
+    <div class="hint">เคล็ดลับ: กด <b>Esc</b> เพื่อปิดแผงรายละเอียด · แต่ละหัวข้อมีส่วน <b>“โซลูชันที่ตอบโจทย์”</b> พร้อมตัวอย่างเครื่องมือ</div>
+    <div class="hint">โซลูชันเป็นตัวอย่าง vendor-neutral · ชิปสีทอง ★ = vendor ที่ถูกอ้างถึงใน Gartner / Forrester ในหมวดนั้น (อ้างอิง Gartner AI TRiSM Market Guide 2025, Gartner MQ, Forrester Wave 2025)</div>
+    <div class="hint">หมายเหตุ: AI security ยังไม่มี Gartner Magic Quadrant — TRiSM เป็น “Market Guide” ระบุ Representative Vendors (ไม่จัดอันดับ) · การจัดวางเปลี่ยนบ่อย เช็กรายงานล่าสุดก่อนเสนอลูกค้า</div>
+  </header>
+
+  <section class="arch">
+    <h2>AI Security Reference Architecture</h2>
+    <div class="sub">แต่ละโซลูชันวางอยู่ตรงไหนใน flow — คลิกกล่องใด ๆ เพื่อดูรายละเอียด + โซลูชันที่ตอบโจทย์</div>
+    <svg id="archDiagram" viewBox="0 0 928 566" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI Security reference architecture">
+      <defs>
+        <marker id="ah" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="#6b7e9e"/></marker>
+      </defs>
+
+      <!-- Governance band -->
+      <g class="anode" data-id="fw-rmf">
+        <rect class="abox" x="36" y="28" width="856" height="60" rx="12" fill="#191330" stroke="#a78bfa" stroke-width="1.4" stroke-dasharray="5 4"/>
+      </g>
+      <text x="56" y="53" fill="#a78bfa" font-size="13" font-weight="600" letter-spacing="1.5">GOVERNANCE &amp; COMPLIANCE</text>
+      <text x="56" y="72" fill="#8ea0bf" font-size="10.5">กำกับตลอดวงจร — คลิกชิปเพื่อเจาะแต่ละกรอบ</text>
+      <g class="anode" data-id="fw-rmf"><rect class="abox" x="596" y="42" width="94" height="32" rx="8" fill="#1b1533" stroke="#a78bfa" stroke-width="1.3"/><text class="at" x="643" y="62" fill="#a78bfa" font-size="11" font-weight="600" text-anchor="middle">NIST RMF</text></g>
+      <g class="anode" data-id="fw-iso"><rect class="abox" x="700" y="42" width="100" height="32" rx="8" fill="#1b1533" stroke="#a78bfa" stroke-width="1.3"/><text class="at" x="750" y="62" fill="#a78bfa" font-size="11" font-weight="600" text-anchor="middle">ISO 42001</text></g>
+      <g class="anode" data-id="fw-eu"><rect class="abox" x="810" y="42" width="82" height="32" rx="8" fill="#1b1533" stroke="#a78bfa" stroke-width="1.3"/><text class="at" x="851" y="62" fill="#a78bfa" font-size="11" font-weight="600" text-anchor="middle">EU AI Act</text></g>
+
+      <text x="36" y="150" fill="#6b7e9e" font-size="10.5" font-family="'IBM Plex Mono',monospace" letter-spacing="2">REQUEST / RESPONSE FLOW</text>
+
+      <!-- Main flow -->
+      <g><rect x="36" y="176" width="116" height="84" rx="11" fill="#16223b" stroke="#2c4066" stroke-width="1.4"/>
+        <text x="94" y="214" fill="#9aabc7" font-size="13" font-weight="600" text-anchor="middle">ผู้ใช้ / แอป</text>
+        <text x="94" y="233" fill="#6b7e9e" font-size="10" text-anchor="middle">client</text></g>
+
+      <g class="anode" data-id="def-gateway"><rect class="abox" x="196" y="176" width="150" height="84" rx="11" fill="#10261d" stroke="#34d399" stroke-width="1.5"/>
+        <text class="at" x="271" y="210" fill="#34d399" font-size="13.5" font-weight="600" text-anchor="middle">AI Gateway</text>
+        <text x="271" y="231" fill="#8ea0bf" font-size="10" text-anchor="middle">authN/Z · rate-limit · log</text></g>
+
+      <g class="anode" data-id="def-guardrail"><rect class="abox" x="378" y="176" width="150" height="84" rx="11" fill="#10261d" stroke="#34d399" stroke-width="1.5"/>
+        <text class="at" x="453" y="205" fill="#34d399" font-size="13" font-weight="600" text-anchor="middle">Guardrail — Input</text>
+        <text x="453" y="223" fill="#8ea0bf" font-size="9.5" text-anchor="middle">injection · jailbreak</text>
+        <text x="453" y="237" fill="#8ea0bf" font-size="9.5" text-anchor="middle">PII detection</text></g>
+
+      <g class="anode" data-id="fw-owasp"><rect class="abox" x="560" y="176" width="150" height="84" rx="11" fill="#0d2233" stroke="#38bdf8" stroke-width="1.7"/>
+        <text class="at" x="635" y="210" fill="#38bdf8" font-size="14" font-weight="700" text-anchor="middle">LLM / Model</text>
+        <text x="635" y="231" fill="#8ea0bf" font-size="10" text-anchor="middle">OWASP LLM Top 10</text></g>
+
+      <g class="anode" data-id="def-guardrail"><rect class="abox" x="742" y="176" width="150" height="84" rx="11" fill="#10261d" stroke="#34d399" stroke-width="1.5"/>
+        <text class="at" x="817" y="205" fill="#34d399" font-size="13" font-weight="600" text-anchor="middle">Guardrail — Output</text>
+        <text x="817" y="223" fill="#8ea0bf" font-size="9.5" text-anchor="middle">PII redaction · toxicity</text>
+        <text x="817" y="237" fill="#8ea0bf" font-size="9.5" text-anchor="middle">grounding check</text></g>
+
+      <!-- flow arrows -->
+      <line x1="154" y1="218" x2="192" y2="218" stroke="#6b7e9e" stroke-width="1.6" marker-end="url(#ah)"/>
+      <line x1="348" y1="218" x2="374" y2="218" stroke="#6b7e9e" stroke-width="1.6" marker-end="url(#ah)"/>
+      <line x1="530" y1="218" x2="556" y2="218" stroke="#6b7e9e" stroke-width="1.6" marker-end="url(#ah)"/>
+      <line x1="712" y1="218" x2="738" y2="218" stroke="#6b7e9e" stroke-width="1.6" marker-end="url(#ah)"/>
+      <!-- response -->
+      <path d="M817,262 L817,298 L94,298 L94,264" fill="none" stroke="#4a5c7a" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+      <text x="440" y="292" fill="#6b7e9e" font-size="10" text-anchor="middle">response</text>
+
+      <text x="36" y="326" fill="#6b7e9e" font-size="10.5" font-family="'IBM Plex Mono',monospace" letter-spacing="2">SUPPORTING LAYER</text>
+
+      <!-- support row -->
+      <g class="anode" data-id="llm03"><rect class="abox" x="36" y="340" width="176" height="80" rx="11" fill="#0d2233" stroke="#38bdf8" stroke-width="1.5"/>
+        <text class="at" x="124" y="372" fill="#38bdf8" font-size="12.5" font-weight="600" text-anchor="middle">Model Supply Chain</text>
+        <text x="124" y="392" fill="#8ea0bf" font-size="9.5" text-anchor="middle">provenance · signing · ML-BOM</text></g>
+
+      <g class="anode" data-id="d-minim"><rect class="abox" x="250" y="340" width="150" height="80" rx="11" fill="#0b2830" stroke="#22d3ee" stroke-width="1.5"/>
+        <text class="at" x="325" y="372" fill="#22d3ee" font-size="12.5" font-weight="600" text-anchor="middle">Data · PII / DLP</text>
+        <text x="325" y="392" fill="#8ea0bf" font-size="9.5" text-anchor="middle">redaction · minimization</text></g>
+
+      <g class="anode" data-id="llm08"><rect class="abox" x="470" y="340" width="150" height="80" rx="11" fill="#0d2233" stroke="#38bdf8" stroke-width="1.5"/>
+        <text class="at" x="545" y="372" fill="#38bdf8" font-size="12.5" font-weight="600" text-anchor="middle">RAG / Vector DB</text>
+        <text x="545" y="392" fill="#8ea0bf" font-size="9.5" text-anchor="middle">tenant isolation · RBAC</text></g>
+
+      <g class="anode" data-id="def-leastpriv"><rect class="abox" x="690" y="340" width="150" height="80" rx="11" fill="#10261d" stroke="#34d399" stroke-width="1.5"/>
+        <text class="at" x="765" y="372" fill="#34d399" font-size="12.5" font-weight="600" text-anchor="middle">Tools — Least Priv</text>
+        <text x="765" y="392" fill="#8ea0bf" font-size="9.5" text-anchor="middle">scoped token · approval</text></g>
+
+      <!-- support connectors -->
+      <line x1="400" y1="378" x2="466" y2="378" stroke="#6b7e9e" stroke-width="1.4" marker-end="url(#ah)"/>
+      <line x1="560" y1="340" x2="612" y2="264" stroke="#6b7e9e" stroke-width="1.4" marker-end="url(#ah)"/>
+      <text x="588" y="312" fill="#6b7e9e" font-size="9" text-anchor="middle">retrieve</text>
+      <line x1="672" y1="264" x2="748" y2="340" stroke="#6b7e9e" stroke-width="1.4" marker-end="url(#ah)"/>
+      <text x="726" y="312" fill="#6b7e9e" font-size="9" text-anchor="middle">actions</text>
+      <path d="M140,340 C150,300 520,300 588,264" fill="none" stroke="#4a5c7a" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+
+      <!-- Monitoring band -->
+      <g class="anode" data-id="def-monitor">
+        <rect class="abox" x="36" y="452" width="856" height="62" rx="12" fill="#0e2019" stroke="#34d399" stroke-width="1.4" stroke-dasharray="5 4"/>
+      </g>
+      <text x="56" y="478" fill="#34d399" font-size="13" font-weight="600" letter-spacing="1.2">MONITORING · OBSERVABILITY · AI-SPM</text>
+      <text x="56" y="499" fill="#8ea0bf" font-size="10.5">log · drift · anomaly detection · incident response — ครอบคลุมทุกชั้นแบบ cross-cutting</text>
+
+      <!-- legend -->
+      <rect x="40" y="536" width="12" height="12" rx="3" fill="#34d399"/><text x="58" y="546" fill="#9aabc7" font-size="10.5">Defenses / Controls</text>
+      <rect x="200" y="536" width="12" height="12" rx="3" fill="#38bdf8"/><text x="218" y="546" fill="#9aabc7" font-size="10.5">OWASP / Model</text>
+      <rect x="352" y="536" width="12" height="12" rx="3" fill="#22d3ee"/><text x="370" y="546" fill="#9aabc7" font-size="10.5">Data &amp; Privacy</text>
+      <rect x="474" y="536" width="12" height="12" rx="3" fill="#a78bfa"/><text x="492" y="546" fill="#9aabc7" font-size="10.5">Governance</text>
+    </svg>
+  </section>
+
+  <div id="board"></div>
+  <footer>AI Security — Interactive Study · BAYCOMS · Bay Computing</footer>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+<aside class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="mtop">
+    <button class="navbtn" id="backBtn" title="ย้อนกลับ" disabled>←</button>
+    <div class="crumb" id="crumb"></div>
+    <button class="navbtn" id="closeBtn" title="ปิด">✕</button>
+  </div>
+  <div class="mbody" id="mbody"></div>
+</aside>
+
+<script>
+const CAT={
+  frameworks:{name:"Frameworks",color:"var(--vio)"}, owasp:{name:"OWASP LLM Top 10",color:"var(--cy)"},
+  attacks:{name:"Adversarial ML",color:"var(--red)"}, defenses:{name:"Defenses",color:"var(--grn)"},
+  data:{name:"Data & Privacy",color:"var(--teal)"}
+};
+// section builder helpers
+const T=(lab,text)=>({t:"text",lab,text});
+const EX=items=>({t:"list",cls:"ex",lab:"ตัวอย่างการโจมตี",color:"var(--red)",items});
+const FX=items=>({t:"list",cls:"fx",lab:"การป้องกัน",color:"var(--grn)",items});
+const NOTE=text=>({t:"note",lab:"โน้ตข้อสอบ",text});
+const LIST=(lab,color,items)=>({t:"list",lab,color,items});
+
+const N={
+  // ---------- FRAMEWORKS ----------
+  "fw-owasp":{cat:"frameworks",code:"OWASP",title:"OWASP LLM Top 10",summary:"ความเสี่ยงเชิงเทคนิค 10 อันดับของแอป LLM — ออกสอบบ่อยสุด",
+    sec:[T("คืออะไร","รายการความเสี่ยงด้านความปลอดภัย 10 อันดับสำหรับแอปพลิเคชันที่ใช้ LLM จัดทำโดย OWASP เป็นมาตรฐานอ้างอิงที่ข้อสอบใช้มากที่สุด"),
+      NOTE("ต้องจำได้ว่า LLM01 = Prompt Injection เสมอ และแยกแต่ละหมวดออกจากกันได้")],
+    rel:["llm01","llm04","llm06","fw-atlas"]},
+  "fw-atlas":{cat:"frameworks",code:"MITRE",title:"MITRE ATLAS",summary:"knowledge base ของ tactics/techniques ที่ใช้โจมตี AI/ML",
+    sec:[T("คืออะไร","Adversarial Threat Landscape for AI Systems — โครงคู่ขนานกับ ATT&CK แต่เพิ่มขั้นเฉพาะ ML"),
+      LIST("Tactics สำคัญ","var(--vio)",["Reconnaissance → Resource Development → Initial Access","ML Model Access (ขั้นที่ ATT&CK ไม่มี)","Execution → Persistence → Defense Evasion","Exfiltration → Impact"]),
+      LIST("เทคนิคที่ต้องรู้","var(--cy)",["ML Model Access ผ่าน inference API","Poison Training Data","Evade ML Model (adversarial input)","Exfiltration via ML Inference API (extraction/membership)","Backdoor ML Model"]),
+      NOTE("จุดต่างจาก ATT&CK ที่ออกสอบคือขั้น “ML Model Access”")],
+    rel:["atk-poison","atk-evasion","atk-extract","fw-owasp"]},
+  "fw-rmf":{cat:"frameworks",code:"NIST",title:"NIST AI RMF",summary:"กรอบบริหารความเสี่ยง สมัครใจ เป็น process",
+    sec:[T("คืออะไร","กรอบบริหารความเสี่ยง AI (สมัครใจ) เน้นทำให้ AI น่าเชื่อถือ (trustworthy) ตลอดวงจร"),
+      LIST("4 ฟังก์ชันหลัก","var(--teal)",["GOVERN — วัฒนธรรม/นโยบาย/บทบาท (แกนกลาง)","MAP — ระบุบริบทและกรอบความเสี่ยง","MEASURE — วิเคราะห์/ประเมิน/ติดตาม","MANAGE — จัดลำดับและตอบสนอง"]),
+      LIST("Trustworthy AI 7 ข้อ","var(--amb)",["Valid & Reliable","Safe","Secure & Resilient","Accountable & Transparent","Explainable & Interpretable","Privacy-Enhanced","Fair (บริหาร bias)"]),
+      NOTE("RMF = “ทำอย่างไร” (process/สมัครใจ) — ต่างจาก ISO 42001 ที่ certify ได้")],
+    rel:["fw-iso","fw-eu"]},
+  "fw-iso":{cat:"frameworks",code:"ISO",title:"ISO/IEC 42001 (AIMS)",summary:"ระบบบริหารจัดการ AI — ขอ certify ได้ เหมือน ISO 27001",
+    sec:[T("คืออะไร","มาตรฐานระบบบริหารจัดการ AI (AI Management System) ฉบับแรก ออกปลายปี 2023 — องค์กร “ขอการรับรอง (certify)” ได้"),
+      LIST("สาระสำคัญ","var(--grn)",["ใช้โครง Annex SL / วงจร PDCA เหมือน 27001 & 9001","ข้อกำหนด clause 4–10 + Annex A (controls)","AI system impact assessment","จัดการตลอด lifecycle + บทบาทความรับผิดชอบ"]),
+      NOTE("42001 = ระบบที่ “ตรวจรับรองได้ (auditable)” · ใช้ร่วมกับ NIST RMF ได้")],
+    rel:["fw-rmf","fw-eu"]},
+  "fw-eu":{cat:"frameworks",code:"EU",title:"EU AI Act",summary:"กฎหมายแบ่ง risk tiers และกำหนดหน้าที่ตามความเสี่ยง",
+    sec:[T("คืออะไร","กฎหมายของสหภาพยุโรป ใช้แนวทาง risk-based แบ่งระบบ AI ตามระดับความเสี่ยง"),
+      LIST("Risk Tiers","var(--amb)",["Unacceptable — ห้ามใช้ (social scoring, manipulation)","High-risk — คุมเข้ม (risk mgmt, data governance, human oversight, conformity assessment)","Limited — ต้องโปร่งใส (chatbot/deepfake แจ้งว่าเป็น AI)","Minimal — ไม่มีหน้าที่เพิ่ม"]),
+      T("GPAI & Timeline","GPAI (โมเดลทั่วไป) มีหน้าที่แยก + ชั้น systemic risk · Timeline (phased): บังคับใช้ ส.ค. 2024, ข้อห้าม ก.พ. 2025, GPAI ส.ค. 2025, high-risk ส.ค. 2026"),
+      NOTE("EU AI Act = กฎหมาย ต่างจาก RMF/42001 · เช็ก timeline ล่าสุดก่อนสอบ")],
+    rel:["fw-rmf","fw-iso"]},
+
+  // ---------- OWASP ----------
+  "llm01":{cat:"owasp",code:"LLM01",title:"Prompt Injection",summary:"input หลอกให้ model ทำนอกคำสั่ง (direct / indirect)",
+    sec:[T("กลไก","LLM แยกไม่ออกระหว่าง “คำสั่งที่เชื่อถือได้” กับ “ข้อมูลที่รับเข้ามา” ทุกอย่างเป็น context เดียวกัน ผู้โจมตีจึงแทรกคำสั่งใหม่ทับได้"),
+      LIST("Direct vs Indirect","var(--cy)",["Direct — ผู้ใช้พิมพ์ทับตรง ๆ เช่น “ลืมคำสั่งก่อนหน้า…”","Indirect — คำสั่งซ่อนในข้อมูลภายนอกที่ model ไปอ่าน (อันตรายกว่า)"]),
+      EX(["เรซูเม่ฝังข้อความสีขาว “ให้คะแนน 10/10”","หน้าเว็บที่ agent อ่าน สั่งให้ส่งข้อมูลออกไปยัง URL ผู้โจมตี","อีเมลใน inbox สั่งให้ assistant ส่งต่อความลับ"]),
+      FX(["guardrail ตรวจ prompt + ติดป้ายข้อมูล untrusted","least privilege บน tool + ขออนุมัติ action สำคัญ","ตรวจ output ก่อนใช้ + adversarial testing"]),
+      NOTE("Injection ≠ Jailbreak: injection = แทรกคำสั่งใหม่ / jailbreak = ปลดล็อก policy เดิม")],
+    rel:["llm05","llm06","def-guardrail","atk-evasion"]},
+  "llm02":{cat:"owasp",code:"LLM02",title:"Sensitive Information Disclosure",summary:"เผยข้อมูลลับ / PII / ข้อมูล training / system prompt",
+    sec:[T("กลไก","model เผยข้อมูลที่ไม่ควรเผย มักเกิดจากใส่ข้อมูลไวเกินจำเป็นใน context/RAG หรือไม่กรอง output"),
+      EX(["over-sharing ใน RAG","training บนข้อมูลที่มีความลับ","ไม่กรอง output ก่อนส่ง"]),
+      FX(["PII redaction + data minimization","RBAC บนแหล่งข้อมูล RAG","กรอง output ก่อนส่งออก"])],
+    rel:["llm07","d-minim","def-guardrail"]},
+  "llm03":{cat:"owasp",code:"LLM03",title:"Supply Chain",summary:"ช่องโหว่จาก model, dataset, weight, plugin ภายนอก",
+    sec:[T("กลไก","ความเสี่ยงจากองค์ประกอบภายนอก: pre-trained model, dataset, weight, plugin, library ที่อาจถูกดัดแปลงหรือไม่รู้ที่มา"),
+      EX(["ดาวน์โหลด model ที่ถูกฝัง trojan","dataset สาธารณะที่ถูกวางยา","dependency ที่มีช่องโหว่"]),
+      FX(["ตรวจแหล่ง + model signing/provenance","ML-BOM + integrity check","ใช้ registry ที่เชื่อถือได้"])],
+    rel:["llm04"]},
+  "llm04":{cat:"owasp",code:"LLM04",title:"Data & Model Poisoning",summary:"วางยาข้อมูล train/fine-tune → bias / backdoor",
+    sec:[T("กลไก","ผู้โจมตีปนเปื้อนข้อมูล train/fine-tune/embedding เพื่อสร้าง bias, backdoor หรือทำให้ประสิทธิภาพตก บาง backdoor ทำงานเมื่อเจอ trigger เฉพาะ"),
+      EX(["วางยา dataset สาธารณะ","ฝัง backdoor trigger phrase","ปนข้อมูล fine-tune"]),
+      FX(["ตรวจสอบ/ทำความสะอาดข้อมูล","anomaly detection","ควบคุม pipeline การ train"]),
+      NOTE("Poisoning โจมตีที่ “ข้อมูล” ต่างจาก Extraction ที่ขโมย “ตัว model”")],
+    rel:["llm03","atk-poison","atk-backdoor"]},
+  "llm05":{cat:"owasp",code:"LLM05",title:"Improper Output Handling",summary:"เอา output ไปใช้ต่อโดยไม่ตรวจ → XSS/SSRF/RCE",
+    sec:[T("กลไก","ถือ output ของ LLM เป็นสิ่งเชื่อถือได้แล้วนำไปใช้ต่อ ทำให้เกิดช่องโหว่ปลายทาง"),
+      EX(["output ไป render HTML → XSS","output ต่อ query → SQLi","output เรียก URL → SSRF / RCE"]),
+      FX(["treat output เป็น untrusted","encode / sanitize","parameterized query"]),
+      NOTE("จำ: “ถือ output เป็น untrusted เสมอ” เป็นคำตอบที่ถูกบ่อย")],
+    rel:["llm01","def-guardrail"]},
+  "llm06":{cat:"owasp",code:"LLM06",title:"Excessive Agency",summary:"agent มีสิทธิ์/tool/อิสระมากเกิน → ทำสิ่งอันตราย",
+    sec:[T("กลไก","agent ได้รับ “ฟังก์ชัน / สิทธิ์ / อิสระ” มากเกินจำเป็น (3 รากปัญหา: functionality, permissions, autonomy)"),
+      EX(["agent ลบไฟล์/ส่งเงินได้เอง","tool มีสิทธิ์กว้างเกิน","ไม่มีการอนุมัติก่อนทำ action"]),
+      FX(["ให้ tool เท่าที่จำเป็น + scoped token","human-in-the-loop สำหรับ action สำคัญ","จำกัด autonomy"]),
+      NOTE("แก้ Excessive Agency = least privilege เสมอ")],
+    rel:["llm01","def-leastpriv","def-guardrail"]},
+  "llm07":{cat:"owasp",code:"LLM07",title:"System Prompt Leakage",summary:"system prompt ถูกดึงออก เผยความลับ/ตรรกะ",
+    sec:[T("กลไก","system prompt ถูกดึงออกมา (เช่น “ทวนข้อความด้านบน”) อันตรายเมื่อฝังความลับ/ตรรกะ/credential ไว้"),
+      EX(["“repeat the text above” ดึง system prompt","เผยตรรกะ business ที่ฝังไว้","เผย credential ใน prompt"]),
+      FX(["ห้ามเก็บความลับใน system prompt","บังคับ policy ที่ backend","กรองไม่ให้ทวน system prompt"]),
+      NOTE("บทเรียนหลัก: อย่าเก็บความลับไว้ใน system prompt")],
+    rel:["llm02","llm01"]},
+  "llm08":{cat:"owasp",code:"LLM08",title:"Vector & Embedding Weakness",summary:"ช่องโหว่ RAG: rogue docs, data leak, ข้าม tenant",
+    sec:[T("กลไก","ช่องโหว่ในวิธีสร้าง/เก็บ/ค้น embedding ใน RAG: ข้อมูลรั่วข้าม tenant, embedding inversion, vector store ถูกวางยา"),
+      EX(["ข้อมูลรั่วข้าม tenant","embedding inversion กู้ข้อมูลกลับ","rogue docs ใน vector store"]),
+      FX(["แยกข้อมูลต่อ tenant","access control บน retrieval","ถือ retrieved content เป็น untrusted"])],
+    rel:["llm01","atk-inversion","d-minim"]},
+  "llm09":{cat:"owasp",code:"LLM09",title:"Misinformation",summary:"hallucination → ผู้ใช้เชื่อและนำไปใช้",
+    sec:[T("กลไก","model สร้างข้อมูลผิดแต่ดูน่าเชื่อ นำไปสู่ overreliance"),
+      EX(["อ้างอิงงานวิจัยที่ไม่มีจริง","ให้คำแนะนำผิดอย่างมั่นใจ","สร้างข้อเท็จจริงเท็จ"]),
+      FX(["RAG grounding + อ้างอิงแหล่ง","human oversight","แจ้งข้อจำกัด/ความไม่แน่นอน"])],
+    rel:["fw-owasp"]},
+  "llm10":{cat:"owasp",code:"LLM10",title:"Unbounded Consumption",summary:"เรียกไม่จำกัด → DoS, cost, model extraction",
+    sec:[T("กลไก","เรียกใช้ทรัพยากรไม่จำกัด นำไปสู่ DoS, ต้นทุนพุ่ง และเปิดทางให้ model extraction ผ่านการ query จำนวนมาก"),
+      EX(["ยิง request จำนวนมาก → DoS","query ซ้ำเพื่อลอก model","input ยาวผิดปกติดูดทรัพยากร"]),
+      FX(["rate limit + quota","จำกัดขนาด input","ตรวจจับการใช้ผิดปกติ"])],
+    rel:["atk-extract","def-monitor"]},
+
+  // ---------- ATTACKS ----------
+  "atk-evasion":{cat:"attacks",code:"EVA",title:"Evasion",summary:"input แต่งให้ model ทายผิด (adversarial example) ตอน inference",
+    sec:[T("โจมตีอะไร / เมื่อไหร่","โจมตีตอน inference — สร้าง input ที่ถูกแต่งเล็กน้อยให้ model ทายผิดโดยมนุษย์ยังดูปกติ"),
+      T("ตัวอย่าง","แต่ง pixel ในภาพให้ระบบจำแนกผิด / ปรับข้อความให้ผ่าน content filter"),
+      FX(["adversarial training","input sanitization","ensemble / robustness testing"])],
+    rel:["atk-poison","llm01","fw-atlas"]},
+  "atk-poison":{cat:"attacks",code:"POI",title:"Poisoning",summary:"วางยาข้อมูล train ให้ model เพี้ยน/มี backdoor",
+    sec:[T("โจมตีอะไร / เมื่อไหร่","โจมตีตอน training — ปนเปื้อนข้อมูลเพื่อสร้าง bias หรือ backdoor"),
+      T("ตัวอย่าง","วางยา dataset สาธารณะ / ปนข้อมูล fine-tune ให้ทำงานผิดเมื่อเจอ trigger"),
+      FX(["ตรวจสอบแหล่งข้อมูล","data validation + anomaly detection","ควบคุม training pipeline"])],
+    rel:["llm04","atk-backdoor","fw-atlas"]},
+  "atk-extract":{cat:"attacks",code:"EXT",title:"Model Extraction",summary:"query จำนวนมากเพื่อลอก/ขโมย model",
+    sec:[T("โจมตีอะไร","ขโมย “ตัว model” โดยส่ง query จำนวนมากแล้วเรียนรู้พฤติกรรมมาสร้าง model จำลอง"),
+      T("ตัวอย่าง","เรียก inference API ซ้ำ ๆ เพื่อ reconstruct โมเดล"),
+      FX(["rate limit + quota","ตรวจจับ query ผิดปกติ","watermark / output perturbation"]),
+      NOTE("Extraction = ขโมย model · ต่างจาก Poisoning ที่โจมตีข้อมูล")],
+    rel:["llm10","atk-membership","fw-atlas"]},
+  "atk-membership":{cat:"attacks",code:"MEM",title:"Membership Inference",summary:"เดาว่าข้อมูลหนึ่งอยู่ในชุด train หรือไม่",
+    sec:[T("โจมตีอะไร (privacy)","เดาว่าข้อมูลชิ้นหนึ่งถูกใช้ train model หรือไม่ — เสี่ยงต่อความเป็นส่วนตัว"),
+      FX(["Differential Privacy","regularization กัน overfitting","จำกัดข้อมูลที่เปิดเผยใน output"]),
+      NOTE("Membership = “อยู่ในชุด train ไหม” · Inversion = “สร้างข้อมูลกลับคืน”")],
+    rel:["atk-inversion","d-diffp"]},
+  "atk-inversion":{cat:"attacks",code:"INV",title:"Model Inversion",summary:"สร้างข้อมูล/ฟีเจอร์ training กลับคืนมา",
+    sec:[T("โจมตีอะไร (privacy)","ใช้ผลลัพธ์ของ model สร้างข้อมูล training หรือฟีเจอร์กลับคืนมา"),
+      FX(["Differential Privacy","จำกัด confidence/logit ใน output","access control"])],
+    rel:["atk-membership","llm08","d-diffp"]},
+  "atk-backdoor":{cat:"attacks",code:"BKD",title:"Backdoor / Trojan",summary:"ฝัง trigger ลับ ทำงานเมื่อเจอ input เฉพาะ",
+    sec:[T("โจมตีอะไร","ฝัง trigger ลับใน model ระหว่าง train/supply chain ให้ทำงานผิดเมื่อเจอ input เฉพาะ"),
+      FX(["ตรวจ provenance + model signing","neural cleanse / trigger detection","จำกัดแหล่ง model"])],
+    rel:["atk-poison","llm03","llm04"]},
+
+  // ---------- DEFENSES ----------
+  "def-gateway":{cat:"defenses",code:"GW",title:"AI Gateway",summary:"proxy จุดรวมทางเข้า: authN/Z, rate-limit, logging",
+    sec:[T("บทบาท","จุดรวมทางเข้าเดียวสำหรับ traffic ไปยัง model — จัดการ authentication/authorization, rate-limit, routing และ logging กลาง"),
+      NOTE("ต่อยอดจาก API gateway/WAF ที่คุ้นเคย เพียงเปลี่ยน payload เป็น prompt")],
+    rel:["def-guardrail","llm10"]},
+  "def-guardrail":{cat:"defenses",code:"GR",title:"Guardrail / LLM Firewall",summary:"classifier อ่าน prompt & output แล้วบล็อก",
+    sec:[T("บทบาท","classifier ที่อ่านทั้ง prompt และ output แล้วตัดสินใจบล็อก/แก้ไข"),
+      LIST("INPUT (ขาเข้า)","var(--cy)",["injection / jailbreak detection","PII detection","topic/intent restriction","input size & token limit"]),
+      LIST("OUTPUT (ขาออก)","var(--amb)",["PII redaction","toxicity filtering","hallucination / grounding check","format validation + secret scanning"]),
+      NOTE("ไม่มี guardrail ตัวเดียวกันได้หมด — ต้องซ้อนหลายชั้น")],
+    rel:["def-gateway","llm01","llm05"]},
+  "def-leastpriv":{cat:"defenses",code:"LP",title:"Least-Privilege Tools",summary:"จำกัดสิทธิ์ agent/tool, scoped token, ขออนุมัติ",
+    sec:[T("บทบาท","จำกัดสิทธิ์และเครื่องมือของ agent ให้เหลือเท่าที่จำเป็น เพื่อแก้ Excessive Agency"),
+      FX(["scoped token แยกงาน","human-in-the-loop สำหรับ action สำคัญ","sandbox + validate arguments"])],
+    rel:["llm06","def-monitor"]},
+  "def-monitor":{cat:"defenses",code:"MON",title:"Monitor & Audit",summary:"log, anomaly/drift detection, incident response",
+    sec:[T("บทบาท","เก็บ log, ตรวจจับพฤติกรรมผิดปกติและ drift, พร้อมกระบวนการ incident response"),
+      FX(["logging กลาง + audit trail","anomaly & drift detection","incident response playbook"])],
+    rel:["def-leastpriv","llm10"]},
+
+  // ---------- DATA & PRIVACY ----------
+  "d-minim":{cat:"data",code:"MIN",title:"Data Minimization & PII",summary:"เก็บ/ใช้เท่าที่จำเป็น + redact PII",
+    sec:[T("แนวคิด","เก็บและใช้ข้อมูลเท่าที่จำเป็น และจัดการ PII ก่อนเข้า model"),
+      FX(["PII detection → redaction / anonymization / pseudonymization","จำกัดข้อมูลใน context/RAG","retention policy"])],
+    rel:["d-diffp","llm02","d-pdpa"]},
+  "d-diffp":{cat:"data",code:"DP",title:"Differential Privacy",summary:"เพิ่ม noise เพื่อกันการระบุตัวบุคคล",
+    sec:[T("แนวคิด","เพิ่ม noise ทางสถิติเพื่อให้ไม่สามารถระบุว่าข้อมูลบุคคลใดอยู่ในชุดข้อมูล ป้องกัน membership/inversion"),
+      NOTE("เป็นเทคนิคที่ตอบโจทย์ privacy attacks โดยตรง")],
+    rel:["atk-membership","atk-inversion","d-federated"]},
+  "d-federated":{cat:"data",code:"FL",title:"Federated Learning",summary:"train โดยไม่ย้ายข้อมูลดิบ",
+    sec:[T("แนวคิด","train model แบบกระจายโดยข้อมูลดิบไม่ออกจากต้นทาง ส่งเฉพาะ model update ตอบโจทย์ PDPA/อธิปไตยข้อมูล"),
+      NOTE("ธีมที่ใช้บ่อยในบริบทภาครัฐไทย (PDPA + data residency)")],
+    rel:["d-pdpa","d-residency","d-diffp"]},
+  "d-pdpa":{cat:"data",code:"PDPA",title:"PDPA / GDPR",summary:"consent, สิทธิเจ้าของข้อมูล, purpose limitation",
+    sec:[T("แนวคิด","PDPA (ไทย) ≈ GDPR: ต้องมี lawful basis, consent, purpose limitation และเคารพสิทธิเจ้าของข้อมูล"),
+      FX(["consent + purpose limitation","สิทธิเข้าถึง/ลบข้อมูล","data protection by design"])],
+    rel:["d-minim","d-residency","d-federated"]},
+  "d-residency":{cat:"data",code:"GDCC",title:"Data Residency (GDCC)",summary:"ข้อมูลภาครัฐไทยต้องอยู่ในเขตอธิปไตย",
+    sec:[T("แนวคิด","ข้อมูลภาครัฐไทยต้องอยู่ในเขตอธิปไตย → เลือก self-host หรือ sovereign cloud (GDCC)"),
+      NOTE("ข้อจำกัดที่ทำให้ต้องออกแบบสถาปัตยกรรมแบบ on-prem/sovereign")],
+    rel:["d-federated","d-pdpa"]}
+};
+
+const SOLUTIONS={
+  "fw-owasp":{approach:"ใช้ scanner + runtime guardrail ที่ map กับ OWASP LLM Top 10 โดยตรง",tools:["Garak (test)","LLM Guard","Promptfoo","Lakera (Check Point)"]},
+  "fw-atlas":{approach:"ทำ threat modeling + red teaming ตาม tactics ของ ATLAS",tools:["Microsoft PyRIT","NVIDIA Garak","ATLAS case DB"]},
+  "fw-rmf":{approach:"ใช้ AI governance/GRC platform + model documentation เพื่อ operationalize 4 ฟังก์ชัน",tools:["Credo AI","Holistic AI","IBM watsonx.governance","Model Cards"]},
+  "fw-iso":{approach:"ใช้เครื่องมือ AIMS/GRC + จ้าง certification body ตรวจรับรอง",tools:["Credo AI","OneTrust AI Governance","ISMS/GRC tools"]},
+  "fw-eu":{approach:"ใช้ compliance/GRC tooling ทำ risk register + conformity documentation",tools:["OneTrust","Credo AI","Holistic AI"]},
+  "llm01":{approach:"วาง guardrail/LLM firewall ตรวจ prompt + แยกข้อมูล untrusted",tools:["Lakera (Check Point)","LLM Guard","NeMo Guardrails","Palo Alto AIRS","Aim Security"]},
+  "llm02":{approach:"DLP + PII redaction ที่ชั้น guardrail และ RBAC บน RAG",tools:["LLM Guard (PII)","Nightfall AI","Protecto","Microsoft Purview"]},
+  "llm03":{approach:"ตรวจ provenance + สแกน model/artifact + ทำ ML-BOM",tools:["Protect AI (Palo Alto)","HiddenLayer","Sigstore (model signing)"]},
+  "llm04":{approach:"สแกน model หา backdoor + data validation + anomaly detection",tools:["HiddenLayer","Protect AI (Palo Alto)","data quality tools"]},
+  "llm05":{approach:"sanitize/encode output + วาง WAF ปลายทาง",tools:["output guardrails","WAF","AppSec encoding/CSP"]},
+  "llm06":{approach:"agent authorization + least privilege + human approval",tools:["Cerbos","OPA","CyberArk (PAM)","scoped OAuth"]},
+  "llm07":{approach:"ย้ายความลับออกจาก prompt ไปยัง secrets manager + กรอง output",tools:["HashiCorp Vault","CyberArk Conjur","output filter"]},
+  "llm08":{approach:"เปิด RBAC/tenant isolation บน vector DB + ป้องกัน RAG",tools:["Vector DB RBAC (Pinecone/Milvus)","Lasso Security","Noma"]},
+  "llm09":{approach:"RAG grounding + hallucination detection + citation",tools:["Patronus AI","Galileo","RAG frameworks","human review"]},
+  "llm10":{approach:"rate limit + quota ที่ AI gateway + cost control",tools:["Kong AI Gateway","Portkey","LiteLLM","WAF rate-limit"]},
+  "atk-evasion":{approach:"adversarial robustness testing + model hardening",tools:["IBM ART","NVIDIA Garak","adversarial training"]},
+  "atk-poison":{approach:"data provenance + model scanning + anomaly detection",tools:["HiddenLayer","Protect AI (Palo Alto)","data validation"]},
+  "atk-extract":{approach:"rate limit + query anomaly monitoring + watermarking",tools:["AI gateway rate-limit","anomaly detection","model watermarking"]},
+  "atk-membership":{approach:"ฝึกด้วย differential privacy กันการอนุมานสมาชิก",tools:["Opacus (PyTorch DP)","TensorFlow Privacy","OpenDP"]},
+  "atk-inversion":{approach:"DP + จำกัด confidence/logit ใน output",tools:["Opacus","TensorFlow Privacy","output limiting"]},
+  "atk-backdoor":{approach:"สแกน model หา trigger + model signing",tools:["HiddenLayer","Protect AI Guardian","Neural Cleanse","Sigstore"]},
+  "def-gateway":{approach:"deploy AI gateway เป็นจุดรวมทางเข้า",tools:["Kong AI Gateway","Portkey","LiteLLM","Cloudflare AI Gateway"]},
+  "def-guardrail":{approach:"deploy guardrail/LLM firewall คุม input + output",tools:["Lakera (Check Point)","LLM Guard","NeMo Guardrails","Palo Alto AIRS","Noma"]},
+  "def-leastpriv":{approach:"authorization engine + PAM + scoped token",tools:["Cerbos","OPA","CyberArk (PAM)"]},
+  "def-monitor":{approach:"LLM observability + AI-SPM",tools:["Langfuse","Arize / Fiddler","Datadog LLM Obs","Wiz AI-SPM"]},
+  "d-minim":{approach:"DLP + PII discovery/redaction",tools:["Nightfall AI","Protecto","Microsoft Purview"]},
+  "d-diffp":{approach:"ใช้ differential privacy library ตอน train",tools:["Opacus","TensorFlow Privacy","OpenDP"]},
+  "d-federated":{approach:"ใช้ federated learning framework",tools:["Flower","NVIDIA FLARE","TensorFlow Federated"]},
+  "d-pdpa":{approach:"consent + data governance platform",tools:["OneTrust","data governance/DLP"]},
+  "d-residency":{approach:"self-host / sovereign cloud",tools:["GDCC","private cloud","on-prem model hosting"]}
+};
+
+const _AT="Gartner AI TRiSM Market Guide 2025 · Representative Vendors";
+const ANALYST={
+  "fw-owasp":[{r:_AT,v:["Lasso Security","HiddenLayer","Mindgard","Zenity"]}],
+  "fw-atlas":[{r:_AT+" (AI red teaming)",v:["Mindgard","HiddenLayer","F5 (AI Red Team)"]}],
+  "fw-rmf":[{r:_AT+" · AI Governance",v:["Credo AI","Securiti","AIShield (Bosch)"]}],
+  "fw-iso":[{r:_AT+" · AI Governance",v:["Credo AI","Securiti"]}],
+  "fw-eu":[{r:_AT+" · AI Governance",v:["Credo AI","Securiti"]}],
+  "llm01":[{r:_AT+" · Runtime Inspection & Enforcement",v:["Lasso Security","HiddenLayer","Zenity","F5"]}],
+  "llm02":[{r:_AT+" · Information Governance",v:["Securiti"]},{r:"Gartner: Data Security / DLP",v:["Microsoft Purview"]}],
+  "llm03":[{r:_AT,v:["HiddenLayer","AIShield (Bosch)","Mindgard"]}],
+  "llm04":[{r:_AT,v:["HiddenLayer","AIShield (Bosch)","Mindgard"]}],
+  "llm05":[{r:"Gartner MQ: Cloud WAAP",v:["Cloudflare","Akamai","Imperva","F5","Fortinet"]}],
+  "llm06":[{r:_AT+" · AI Agent Security",v:["Zenity"]},{r:"Gartner MQ: Privileged Access Management",v:["CyberArk"]}],
+  "llm07":[{r:"Gartner MQ: Privileged Access Management",v:["CyberArk","Delinea","BeyondTrust"]}],
+  "llm08":[{r:_AT,v:["Lasso Security","Securiti"]}],
+  "llm09":[{r:_AT+" · Runtime Inspection & Enforcement",v:["Lasso Security","HiddenLayer"]}],
+  "llm10":[{r:"Gartner MQ: API Management",v:["Google Apigee","Kong","MuleSoft (Salesforce)"]}],
+  "atk-evasion":[{r:_AT,v:["HiddenLayer","Mindgard"]}],
+  "atk-poison":[{r:_AT,v:["HiddenLayer","AIShield (Bosch)","Mindgard"]}],
+  "atk-extract":[{r:_AT,v:["HiddenLayer","Mindgard"]}],
+  "atk-membership":[{r:_AT+" · Information Governance",v:["Securiti"]}],
+  "atk-inversion":[{r:_AT+" · Information Governance",v:["Securiti"]}],
+  "atk-backdoor":[{r:_AT,v:["HiddenLayer","AIShield (Bosch)"]}],
+  "def-gateway":[{r:"Gartner MQ: API Management",v:["Google Apigee","Kong","MuleSoft (Salesforce)","Microsoft","IBM"]}],
+  "def-guardrail":[{r:_AT+" · Runtime Inspection & Enforcement",v:["Lasso Security","HiddenLayer","AIShield (Bosch)","Zenity","F5"]}],
+  "def-leastpriv":[{r:"Gartner MQ: Privileged Access Management",v:["CyberArk","Delinea","BeyondTrust"]},{r:_AT+" · AI Agent",v:["Zenity"]}],
+  "def-monitor":[{r:"Forrester Wave: Security Analytics Platforms 2025",v:["CrowdStrike","Microsoft","Splunk","Google","Palo Alto"]},{r:_AT+" · AI-SPM / AIDR",v:["Zenity"]}],
+  "d-minim":[{r:"Gartner: Data Security / DLP",v:["Microsoft Purview","Securiti","Forcepoint"]}],
+  "d-pdpa":[{r:"Gartner: Privacy Management",v:["OneTrust","Securiti"]}]
+};
+
+const catColor=c=>getComputedStyle(document.documentElement).getPropertyValue(CAT[c].color.replace("var(","").replace(")","")).trim()||CAT[c].color;
+const colorVar=c=>CAT[c].color;
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+
+let activeCat="all", query="", stack=[], current=null;
+
+const board=document.getElementById("board");
+function renderBoard(){
+  const ids=Object.keys(N).filter(id=>{
+    const n=N[id];
+    if(activeCat!=="all" && n.cat!==activeCat) return false;
+    if(query){ const hay=(n.title+" "+n.summary+" "+n.code).toLowerCase(); if(!hay.includes(query)) return false; }
+    return true;
+  });
+  if(!ids.length){ board.innerHTML='<div class="empty">ไม่พบหัวข้อที่ค้นหา</div>'; return; }
+  const cats = activeCat==="all" ? Object.keys(CAT) : [activeCat];
+  let html="";
+  cats.forEach(cat=>{
+    const inCat=ids.filter(id=>N[id].cat===cat);
+    if(!inCat.length) return;
+    html+=`<div class="catlabel">${CAT[cat].name}</div><div class="grid">`;
+    inCat.forEach(id=>{ const n=N[id]; const col=colorVar(cat);
+      html+=`<div class="tile" style="--hl:${col}" data-id="${id}">
+        <span class="code" style="background:${col}">${esc(n.code)}</span>
+        <h4>${esc(n.title)}</h4><p>${esc(n.summary)}</p>
+        <span class="more">ดูรายละเอียด →</span></div>`; });
+    html+="</div>";
+  });
+  board.innerHTML=html;
+  board.querySelectorAll(".tile").forEach(t=>t.addEventListener("click",()=>openNode(t.dataset.id,true,true)));
+}
+
+const modal=document.getElementById("modal"), backdrop=document.getElementById("backdrop"),
+      mbody=document.getElementById("mbody"), crumb=document.getElementById("crumb"),
+      backBtn=document.getElementById("backBtn");
+
+function renderDetail(id){
+  const n=N[id]; const col=colorVar(n.cat);
+  let html=`<span class="code" style="background:${col}">${esc(n.code)}</span>
+    <h3>${esc(n.title)}</h3><div class="cat" style="color:${col}">${CAT[n.cat].name}</div>`;
+  n.sec.forEach(b=>{
+    if(b.t==="text"){ html+=`<div class="block"><span class="lab" style="color:${col}">${esc(b.lab)}</span><p>${esc(b.text)}</p></div>`; }
+    else if(b.t==="note"){ html+=`<div class="block tint note"><span class="lab" style="color:var(--amb)">${esc(b.lab)}</span><p>${esc(b.text)}</p></div>`; }
+    else if(b.t==="list"){ const cls=b.cls?("tint "+b.cls):""; const c=b.color||col;
+      html+=`<div class="block ${cls}"><span class="lab" style="color:${c}">${esc(b.lab)}</span><ul style="color:${c}">${b.items.map(x=>`<li><span style="color:var(--text)">${esc(x)}</span></li>`).join("")}</ul></div>`; }
+  });
+  const sol=SOLUTIONS[id];
+  if(sol){
+    let an="";
+    const A=ANALYST[id];
+    if(A){ an=`<div style="margin-top:12px;border-top:1px dashed var(--line2);padding-top:10px"><span class="lab" style="color:var(--amb)">★ ANALYST-RECOGNIZED VENDORS</span>`+
+      A.map(g=>`<p style="font-size:11px;color:var(--faint);margin:6px 0 5px">${esc(g.r)}</p><div class="tools">${g.v.map(v=>`<span class="tool gold">${esc(v)}</span>`).join("")}</div>`).join("")+`</div>`; }
+    html+=`<div class="block tint sol"><span class="lab" style="color:var(--cy)">โซลูชันที่ตอบโจทย์</span><p style="margin-bottom:9px">${esc(sol.approach)}</p><div class="tools">${sol.tools.map(t=>`<span class="tool">${esc(t)}</span>`).join("")}</div>${an}</div>`;
+  }
+  if(n.rel && n.rel.length){
+    html+=`<div class="related"><span class="lab">หัวข้อที่เกี่ยวข้อง — คลิกเจาะต่อ</span><div class="rchips">`;
+    n.rel.forEach(rid=>{ const r=N[rid]; if(!r) return; const rc=colorVar(r.cat);
+      html+=`<span class="rchip" data-id="${rid}"><span class="rc" style="background:${rc}">${esc(r.code)}</span>${esc(r.title)}</span>`; });
+    html+=`</div></div>`;
+  }
+  mbody.innerHTML=html; mbody.scrollTop=0;
+  mbody.querySelectorAll(".rchip").forEach(c=>c.addEventListener("click",()=>openNode(c.dataset.id,true,false)));
+  crumb.textContent = stack.map(s=>N[s].code).concat(N[id].code).join("  ›  ");
+  backBtn.disabled = stack.length===0;
+}
+function openNode(id,push,fresh){
+  if(fresh) stack=[];
+  else if(push && current) stack.push(current);
+  current=id; renderDetail(id);
+  backdrop.classList.add("open"); modal.classList.add("open");
+}
+function back(){ if(!stack.length) return; current=stack.pop(); renderDetail(current); }
+function close(){ backdrop.classList.remove("open"); modal.classList.remove("open"); stack=[]; current=null; }
+
+backBtn.addEventListener("click",back);
+document.getElementById("closeBtn").addEventListener("click",close);
+backdrop.addEventListener("click",close);
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") close(); });
+
+document.getElementById("chips").addEventListener("click",e=>{
+  const c=e.target.closest(".chip"); if(!c) return;
+  activeCat=c.dataset.cat;
+  document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===c));
+  renderBoard();
+});
+document.getElementById("q").addEventListener("input",e=>{ query=e.target.value.trim().toLowerCase(); renderBoard(); });
+
+document.querySelectorAll('#archDiagram [data-id]').forEach(el=>el.addEventListener('click',()=>openNode(el.getAttribute('data-id'),true,true)));
+
+renderBoard();
+</script>
+</body>
+</html>
