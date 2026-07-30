@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CISM Foundation for Presales - Domain 1</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#121936;
+      --panel2:#182246;
+      --text:#eef3ff;
+      --muted:#aeb9d6;
+      --accent:#69d2ff;
+      --accent2:#7cf0c5;
+      --danger:#ff8a8a;
+      --warning:#ffd166;
+      --border:#2a3767;
+      --shadow:0 14px 40px rgba(0,0,0,.28);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:linear-gradient(180deg,#080c18 0%,#0b1020 55%,#0d1430 100%);
+      color:var(--text);
+      line-height:1.65;
+    }
+    a{color:inherit;text-decoration:none}
+    .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+    aside{
+      position:sticky;top:0;height:100vh;overflow:auto;
+      padding:24px 18px;background:rgba(10,15,32,.94);
+      border-right:1px solid var(--border);backdrop-filter:blur(14px)
+    }
+    .brand{
+      padding:18px;border:1px solid var(--border);border-radius:18px;
+      background:linear-gradient(135deg,rgba(105,210,255,.14),rgba(124,240,197,.08));
+      box-shadow:var(--shadow);margin-bottom:18px
+    }
+    .brand h1{font-size:20px;line-height:1.3;margin:0 0 8px}
+    .brand p{font-size:13px;color:var(--muted);margin:0}
+    .progress-wrap{margin:18px 0 20px}
+    .progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:7px}
+    .progress{height:9px;background:#202b55;border-radius:999px;overflow:hidden}
+    .progress > div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.3s}
+    nav button{
+      width:100%;text-align:left;border:0;background:transparent;color:var(--muted);
+      padding:11px 12px;border-radius:12px;cursor:pointer;margin:3px 0;font-size:14px
+    }
+    nav button:hover,nav button.active{background:var(--panel2);color:var(--text)}
+    main{padding:34px;max-width:1200px;width:100%;margin:auto}
+    .hero{
+      padding:36px;border:1px solid var(--border);border-radius:28px;
+      background:
+        radial-gradient(circle at 85% 15%,rgba(105,210,255,.24),transparent 30%),
+        linear-gradient(135deg,#141d3e,#111832);
+      box-shadow:var(--shadow);margin-bottom:28px
+    }
+    .eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);font-weight:700}
+    .hero h2{font-size:clamp(30px,5vw,54px);line-height:1.12;margin:10px 0 14px}
+    .hero p{color:var(--muted);font-size:18px;max-width:840px}
+    .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+    .pill{padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.04);font-size:13px}
+    section.lesson{
+      display:none;padding:28px;border:1px solid var(--border);border-radius:22px;
+      background:rgba(18,25,54,.86);box-shadow:var(--shadow);margin-bottom:24px
+    }
+    section.lesson.active{display:block}
+    h3{font-size:28px;margin:0 0 8px}
+    h4{font-size:20px;margin:28px 0 10px}
+    .lead{color:var(--muted);font-size:17px}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .card{
+      padding:18px;border:1px solid var(--border);border-radius:16px;background:var(--panel2)
+    }
+    .card h5{font-size:17px;margin:0 0 8px}
+    .card p{margin:0;color:var(--muted)}
+    .callout{
+      border-left:4px solid var(--accent);padding:16px 18px;background:rgba(105,210,255,.08);
+      border-radius:0 14px 14px 0;margin:18px 0
+    }
+    .warning{border-left-color:var(--warning);background:rgba(255,209,102,.08)}
+    .success{border-left-color:var(--accent2);background:rgba(124,240,197,.08)}
+    table{width:100%;border-collapse:collapse;margin:16px 0;background:#111831;border-radius:14px;overflow:hidden}
+    th,td{padding:13px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+    th{background:#1a2448;text-align:left}
+    tr:last-child td{border-bottom:0}
+    .diagram{
+      display:grid;gap:12px;justify-items:center;padding:22px;background:#0e1530;border-radius:16px;border:1px dashed #3a4b85
+    }
+    .node{padding:12px 18px;border-radius:12px;background:#1d2a55;border:1px solid #4560a9;min-width:220px;text-align:center}
+    .arrow{font-size:24px;color:var(--accent)}
+    .quiz{margin-top:24px;padding:20px;border:1px solid var(--border);border-radius:16px;background:#0f1631}
+    .quiz h4{margin-top:0}
+    .choice{display:block;padding:11px 12px;margin:8px 0;border:1px solid var(--border);border-radius:12px;cursor:pointer}
+    .choice:hover{background:#1a2448}
+    .quiz-result{margin-top:12px;font-weight:700}
+    .actions{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
+    .btn{
+      border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));color:#07111e
+    }
+    .btn.secondary{background:#202b55;color:var(--text);border:1px solid var(--border)}
+    .workshop{
+      background:linear-gradient(135deg,rgba(124,240,197,.08),rgba(105,210,255,.06));
+      border:1px solid #355f6b;border-radius:16px;padding:20px;margin-top:18px
+    }
+    .footer{color:var(--muted);font-size:13px;text-align:center;padding:24px}
+    @media(max-width:900px){
+      .app{grid-template-columns:1fr}
+      aside{position:relative;height:auto}
+      main{padding:18px}
+      .grid{grid-template-columns:1fr}
+      nav{display:grid;grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand">
+      <h1>CISM Foundation for Presales</h1>
+      <p>Domain 1: Information Security Governance</p>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-label"><span>ความคืบหน้า</span><span id="progressText">0%</span></div>
+      <div class="progress"><div id="progressBar"></div></div>
+    </div>
+
+    <nav id="nav"></nav>
+  </aside>
+
+  <main>
+    <div class="hero">
+      <div class="eyebrow">Learning Series</div>
+      <h2>เข้าใจ CISM Domain 1<br>จากพื้นฐานสู่มุมมองผู้บริหาร</h2>
+      <p>บทเรียนนี้ออกแบบสำหรับทีม Presales ให้เข้าใจ Governance, Business Alignment, Risk Appetite, Strategy, Policy, Roles และ Metrics โดยเชื่อมโยงกับการขายโซลูชันจริง</p>
+      <div class="pill-row">
+        <div class="pill">ภาษาไทย</div>
+        <div class="pill">เหมาะสำหรับผู้เริ่มต้น</div>
+        <div class="pill">มี Quiz</div>
+        <div class="pill">มี Workshop</div>
+      </div>
+    </div>
+
+    <div id="content"></div>
+    <div class="footer">CISM Foundation Series • Designed for Cybersecurity Presales</div>
+  </main>
+</div>
+
+<script>
+const lessons = [
+{
+  title:"1. Business ก่อน Security",
+  subtitle:"เข้าใจว่า Security มีหน้าที่สนับสนุนธุรกิจ ไม่ใช่เป็นผู้ขัดขวางธุรกิจ",
+  body:`
+    <div class="diagram">
+      <div class="node">Business Strategy</div><div class="arrow">↓</div>
+      <div class="node">Governance</div><div class="arrow">↓</div>
+      <div class="node">Information Security</div><div class="arrow">↓</div>
+      <div class="node">Technology & Operations</div>
+    </div>
+    <div class="callout success"><b>แนวคิดสำคัญ:</b> CISM เริ่มจากคำถามว่า “ธุรกิจต้องการไปที่ไหน” แล้วจึงกำหนด Security ให้ช่วยธุรกิจไปถึงเป้าหมายนั้นอย่างปลอดภัย</div>
+    <h4>ตัวอย่างสำหรับ Presales</h4>
+    <table>
+      <tr><th>ลูกค้าพูด</th><th>คำตอบแบบ Product Seller</th><th>คำตอบแบบ CISM Presales</th></tr>
+      <tr><td>ต้องการเปิด Mobile Application</td><td>เสนอ WAF และ MFA</td><td>ถาม Business Goal, ข้อมูลที่เกี่ยวข้อง, ความเสี่ยง, Compliance และระดับ Availability ก่อนออกแบบ Solution</td></tr>
+      <tr><td>ต้องการซื้อ SIEM</td><td>เสนอ EPS และราคา</td><td>ถาม Use Case, Threat Scenario, SLA การตรวจจับ, ทีมปฏิบัติการ และผลลัพธ์ทางธุรกิจ</td></tr>
+    </table>
+  `,
+  question:"ข้อใดสะท้อนแนวคิดของ CISM มากที่สุด?",
+  choices:["เลือกเทคโนโลยีที่ดีที่สุดก่อน","เริ่มจากเป้าหมายธุรกิจและความเสี่ยง","เริ่มจากงบประมาณที่มี","เริ่มจาก Vendor ที่องค์กรใช้อยู่"],
+  answer:1
+},
+{
+  title:"2. Governance vs Management",
+  subtitle:"แยกให้ออกว่าใครกำหนดทิศทาง และใครนำไปปฏิบัติ",
+  body:`
+    <div class="grid">
+      <div class="card"><h5>Governance</h5><p>กำหนดทิศทาง เป้าหมาย หลักการ ความรับผิดชอบ และติดตามผล</p></div>
+      <div class="card"><h5>Management</h5><p>วางแผน ดำเนินงาน จัดสรรทรัพยากร และควบคุมงานประจำวัน</p></div>
+    </div>
+    <div class="callout"><b>จำง่าย:</b><br>Governance = Are we doing the right things?<br>Management = Are we doing things right?</div>
+    <h4>ตัวอย่าง</h4>
+    <table>
+      <tr><th>ระดับ</th><th>หน้าที่</th></tr>
+      <tr><td>Board / Executive</td><td>อนุมัติทิศทาง Risk Appetite และทรัพยากร</td></tr>
+      <tr><td>CISO / Security Management</td><td>แปลงทิศทางเป็น Strategy, Program และ Roadmap</td></tr>
+      <tr><td>Security Operations</td><td>ดำเนินงาน ตรวจจับ ตอบสนอง และรายงานผล</td></tr>
+    </table>
+  `,
+  question:"ใครควรเป็นผู้กำหนด Risk Appetite ขององค์กร?",
+  choices:["SOC Analyst","System Administrator","ผู้บริหารระดับสูงหรือคณะกรรมการ","Vendor"],
+  answer:2
+},
+{
+  title:"3. Corporate & Security Governance",
+  subtitle:"ทำความเข้าใจโครงสร้างการกำกับดูแลขององค์กร",
+  body:`
+    <div class="diagram">
+      <div class="node">Board of Directors</div><div class="arrow">↓</div>
+      <div class="node">CEO / Executive Committee</div><div class="arrow">↓</div>
+      <div class="node">CIO / CISO / Business Leaders</div><div class="arrow">↓</div>
+      <div class="node">Managers / Operations / Users</div>
+    </div>
+    <div class="callout warning"><b>ข้อควรระวัง:</b> Security ไม่ใช่ความรับผิดชอบของฝ่าย IT เพียงฝ่ายเดียว แต่เป็นความรับผิดชอบร่วมของทั้งองค์กร</div>
+    <h4>บทบาทที่สำคัญ</h4>
+    <table>
+      <tr><th>บทบาท</th><th>ความรับผิดชอบหลัก</th></tr>
+      <tr><td>Board</td><td>กำกับดูแลและรับรองว่าความเสี่ยงอยู่ในระดับที่ยอมรับได้</td></tr>
+      <tr><td>Executive Management</td><td>จัดสรรงบประมาณและสนับสนุน Security Strategy</td></tr>
+      <tr><td>CISO</td><td>จัดทำ Strategy, Program, Policy และรายงานความเสี่ยง</td></tr>
+      <tr><td>Business Owner</td><td>เป็นเจ้าของข้อมูลและตัดสินใจเรื่องความเสี่ยงของกระบวนการธุรกิจ</td></tr>
+      <tr><td>Users</td><td>ปฏิบัติตาม Policy และรายงานเหตุผิดปกติ</td></tr>
+    </table>
+  `,
+  question:"ใครควรเป็นเจ้าของความเสี่ยงของระบบธุรกิจ?",
+  choices:["Vendor","Business Owner","SOC","ผู้ดูแล Firewall"],
+  answer:1
+},
+{
+  title:"4. Vision, Mission, Objective, Strategy",
+  subtitle:"เรียนรู้ลำดับความคิดจากภาพอนาคตไปสู่แผนปฏิบัติ",
+  body:`
+    <div class="grid">
+      <div class="card"><h5>Vision</h5><p>ภาพอนาคตที่องค์กรต้องการเป็น เช่น “Trusted Digital Organization”</p></div>
+      <div class="card"><h5>Mission</h5><p>สิ่งที่องค์กรจะทำเพื่อไปถึง Vision</p></div>
+      <div class="card"><h5>Objectives</h5><p>เป้าหมายที่วัดผลได้ เช่น ลดเวลา Detect Incident ลง 50%</p></div>
+      <div class="card"><h5>Strategy</h5><p>แนวทางที่จะใช้ เช่น Zero Trust, SOC Modernization, Cloud Security</p></div>
+    </div>
+    <div class="workshop">
+      <b>Workshop:</b> ให้ทีมเลือกองค์กรสมมติ 1 แห่ง แล้วเขียน Vision, Mission, Objectives และ Strategy อย่างละ 1 ข้อ
+    </div>
+  `,
+  question:"ข้อใดเป็น Objective ที่ดี?",
+  choices:["มีความปลอดภัยสูง","ใช้ Zero Trust","ลด Mean Time to Detect จาก 24 ชั่วโมงเหลือ 4 ชั่วโมง","ซื้อ SIEM ใหม่"],
+  answer:2
+},
+{
+  title:"5. Business Alignment",
+  subtitle:"เชื่อมโยง Feature ทางเทคนิคกับ Business Value",
+  body:`
+    <table>
+      <tr><th>Solution</th><th>Technical Value</th><th>Business Value</th></tr>
+      <tr><td>MFA</td><td>เพิ่มขั้นตอนยืนยันตัวตน</td><td>ลด Account Takeover และลด Fraud</td></tr>
+      <tr><td>PAM</td><td>ควบคุมบัญชีสิทธิ์สูง</td><td>ลด Insider Risk และเพิ่ม Auditability</td></tr>
+      <tr><td>SIEM</td><td>รวม Log และ Correlate Event</td><td>ลดเวลาตรวจจับและลดผลกระทบจาก Incident</td></tr>
+      <tr><td>Backup / DR</td><td>สำรองและกู้คืนข้อมูล</td><td>ลด Downtime และรักษาความต่อเนื่องทางธุรกิจ</td></tr>
+      <tr><td>DLP</td><td>ตรวจจับข้อมูลสำคัญ</td><td>ลดข้อมูลรั่วไหลและค่าปรับด้านกฎหมาย</td></tr>
+    </table>
+    <div class="callout"><b>เทคนิคสำหรับ Presales:</b> ทุก Feature ควรตอบได้ 3 เรื่อง — ลดความเสี่ยงอะไร, ช่วยธุรกิจอย่างไร, วัดผลอย่างไร</div>
+  `,
+  question:"การอธิบาย SIEM แบบใดเหมาะกับผู้บริหารที่สุด?",
+  choices:["รองรับ 100,000 EPS","มี Correlation Engine","ลดเวลา Detect Incident และลดผลกระทบทางธุรกิจ","รองรับ Syslog"],
+  answer:2
+},
+{
+  title:"6. Stakeholder Management",
+  subtitle:"สื่อสารเรื่องเดียวกันให้เหมาะกับแต่ละกลุ่ม",
+  body:`
+    <table>
+      <tr><th>Stakeholder</th><th>สิ่งที่สนใจ</th><th>ภาษาที่ควรใช้</th></tr>
+      <tr><td>CEO</td><td>Revenue, Reputation, Growth</td><td>Business Impact และความเชื่อมั่น</td></tr>
+      <tr><td>CFO</td><td>Cost, ROI, Financial Risk</td><td>TCO, Loss Avoidance, Budget</td></tr>
+      <tr><td>Legal / Compliance</td><td>กฎหมายและข้อกำหนด</td><td>Compliance Gap และหลักฐาน</td></tr>
+      <tr><td>CIO / IT</td><td>Availability และ Integration</td><td>Architecture, Operations, SLA</td></tr>
+      <tr><td>SOC</td><td>Detection และ Response</td><td>Use Case, Alert, Workflow</td></tr>
+    </table>
+    <div class="workshop"><b>Workshop:</b> อธิบาย Solution SIEM ให้ CEO, CFO และ SOC คนละ 1 ประโยค โดยห้ามใช้ประโยคเดียวกัน</div>
+  `,
+  question:"เมื่อนำเสนอ CFO ควรเน้นเรื่องใดมากที่สุด?",
+  choices:["จำนวน Rule","เทคโนโลยี AI","TCO และผลกระทบทางการเงิน","จำนวน Dashboard"],
+  answer:2
+},
+{
+  title:"7. Risk Appetite & Risk Tolerance",
+  subtitle:"เข้าใจระดับความเสี่ยงที่องค์กรยอมรับได้",
+  body:`
+    <div class="grid">
+      <div class="card"><h5>Risk Appetite</h5><p>ระดับความเสี่ยงโดยรวมที่องค์กรยินยอมรับเพื่อให้บรรลุเป้าหมาย</p></div>
+      <div class="card"><h5>Risk Tolerance</h5><p>ระดับความเบี่ยงเบนที่ยอมรับได้ในแต่ละกิจกรรมหรือ KPI</p></div>
+    </div>
+    <h4>ตัวอย่าง</h4>
+    <table>
+      <tr><th>องค์กร</th><th>Risk Appetite</th></tr>
+      <tr><td>ธนาคาร</td><td>ต่ำมากสำหรับข้อมูลลูกค้าและธุรกรรม</td></tr>
+      <tr><td>Startup</td><td>อาจยอมรับความเสี่ยงด้าน Availability มากขึ้นเพื่อความเร็ว</td></tr>
+      <tr><td>หน่วยงานความมั่นคง</td><td>ต่ำมากสำหรับข้อมูลลับและ Data Sovereignty</td></tr>
+    </table>
+  `,
+  question:"Risk Appetite ควรถูกกำหนดโดยใคร?",
+  choices:["Presales","Vendor","ผู้บริหารระดับสูง","ผู้ดูแลระบบ"],
+  answer:2
+},
+{
+  title:"8. Security Strategy & Roadmap",
+  subtitle:"แปลงเป้าหมายธุรกิจเป็นแผนงานด้าน Security",
+  body:`
+    <div class="diagram">
+      <div class="node">Business Objectives</div><div class="arrow">↓</div>
+      <div class="node">Risk Assessment</div><div class="arrow">↓</div>
+      <div class="node">Security Strategy</div><div class="arrow">↓</div>
+      <div class="node">Program / Roadmap / Budget</div><div class="arrow">↓</div>
+      <div class="node">Metrics & Review</div>
+    </div>
+    <h4>องค์ประกอบของ Strategy</h4>
+    <div class="grid">
+      <div class="card"><h5>People</h5><p>ทักษะ โครงสร้างทีม และ Awareness</p></div>
+      <div class="card"><h5>Process</h5><p>Policy, Procedure, Incident Process</p></div>
+      <div class="card"><h5>Technology</h5><p>Control และ Platform ที่เหมาะสม</p></div>
+      <div class="card"><h5>Governance</h5><p>เจ้าของงาน การตัดสินใจ และการติดตามผล</p></div>
+    </div>
+  `,
+  question:"Security Roadmap ที่ดีควรเริ่มจากอะไร?",
+  choices:["Vendor Roadmap","Business Objective และ Risk","ราคาผลิตภัณฑ์","Technology Trend"],
+  answer:1
+},
+{
+  title:"9. Policy Hierarchy",
+  subtitle:"แยก Policy, Standard, Procedure และ Guideline",
+  body:`
+    <table>
+      <tr><th>เอกสาร</th><th>ความหมาย</th><th>ตัวอย่าง</th></tr>
+      <tr><td>Policy</td><td>ระบุสิ่งที่องค์กรต้องทำและหลักการระดับสูง</td><td>ต้องใช้ MFA สำหรับ Remote Access</td></tr>
+      <tr><td>Standard</td><td>ข้อกำหนดที่เป็นรูปธรรมและบังคับใช้</td><td>รหัสผ่านต้องยาวอย่างน้อย 14 ตัวอักษร</td></tr>
+      <tr><td>Procedure</td><td>ขั้นตอนการดำเนินงานทีละขั้น</td><td>ขั้นตอน Reset Password</td></tr>
+      <tr><td>Guideline</td><td>แนวทางแนะนำ ไม่บังคับเท่า Standard</td><td>แนวทางตั้ง Passphrase ที่จำง่าย</td></tr>
+    </table>
+    <div class="callout warning"><b>จุดที่มักออกสอบ:</b> Policy ต้องได้รับการอนุมัติจากผู้บริหาร และควรสอดคล้องกับเป้าหมายธุรกิจและความเสี่ยง</div>
+  `,
+  question:"เอกสารใดอธิบายขั้นตอนปฏิบัติงานทีละขั้น?",
+  choices:["Policy","Standard","Procedure","Guideline"],
+  answer:2
+},
+{
+  title:"10. Roles, Responsibility & RACI",
+  subtitle:"ทำให้ทุกคนรู้ว่าใครทำ ใครอนุมัติ และใครต้องรับรู้",
+  body:`
+    <table>
+      <tr><th>RACI</th><th>ความหมาย</th></tr>
+      <tr><td>Responsible</td><td>ผู้ลงมือทำงาน</td></tr>
+      <tr><td>Accountable</td><td>ผู้รับผิดชอบสูงสุดและอนุมัติผล</td></tr>
+      <tr><td>Consulted</td><td>ผู้ให้คำปรึกษา</td></tr>
+      <tr><td>Informed</td><td>ผู้ที่ต้องรับทราบ</td></tr>
+    </table>
+    <div class="workshop"><b>Workshop:</b> สร้าง RACI สำหรับเหตุการณ์ Ransomware โดยมี Board, CISO, SOC, IT, Legal, PR และ Business Owner</div>
+  `,
+  question:"ในหนึ่งกิจกรรมควรมี Accountable กี่คนเป็นหลัก?",
+  choices:["หลายคนเท่าไรก็ได้","หนึ่งคน","ไม่มี","เฉพาะ Vendor"],
+  answer:1
+},
+{
+  title:"11. KPI, KRI & KGI",
+  subtitle:"วัดงาน วัดความเสี่ยง และวัดผลลัพธ์",
+  body:`
+    <div class="grid">
+      <div class="card"><h5>KPI</h5><p>วัดประสิทธิภาพการทำงาน เช่น Patch Compliance 95%</p></div>
+      <div class="card"><h5>KRI</h5><p>วัดสัญญาณความเสี่ยง เช่น Critical Vulnerability 200 รายการ</p></div>
+      <div class="card"><h5>KGI</h5><p>วัดผลลัพธ์ปลายทาง เช่น ผ่าน Audit โดยไม่มี Major Finding</p></div>
+      <div class="card"><h5>Metric ที่ดี</h5><p>ต้องสัมพันธ์กับ Objective, วัดได้ และใช้ตัดสินใจได้</p></div>
+    </div>
+    <div class="callout"><b>หลักคิด:</b> Dashboard ผู้บริหารควรแสดง Trend, Risk, Business Impact และสิ่งที่ต้องตัดสินใจ ไม่ใช่แสดง Log จำนวนมาก</div>
+  `,
+  question:"จำนวน Critical Vulnerability ที่ยังไม่แก้ไขจัดเป็นอะไร?",
+  choices:["KGI","KRI","Vision","Mission"],
+  answer:1
+},
+{
+  title:"12. Awareness, Resources & Third Party",
+  subtitle:"Governance ต้องครอบคลุมคน งบประมาณ และคู่ค้า",
+  body:`
+    <h4>Security Awareness</h4>
+    <p class="lead">ไม่ใช่แค่ส่งอีเมลอบรม แต่ต้องเปลี่ยนพฤติกรรม วัดผล และสร้างวัฒนธรรมความปลอดภัย</p>
+    <h4>Resource Management</h4>
+    <div class="grid">
+      <div class="card"><h5>People</h5><p>จำนวนคน ทักษะ และ Succession Plan</p></div>
+      <div class="card"><h5>Budget</h5><p>จัดลำดับตาม Risk และ Business Priority</p></div>
+      <div class="card"><h5>Technology</h5><p>ลดความซ้ำซ้อนและรองรับการเติบโต</p></div>
+      <div class="card"><h5>Vendor</h5><p>กำหนด SLA, Responsibility และ Exit Plan</p></div>
+    </div>
+    <h4>Third-Party Governance</h4>
+    <table>
+      <tr><th>ช่วง</th><th>สิ่งที่ต้องทำ</th></tr>
+      <tr><td>ก่อนเริ่มสัญญา</td><td>Due Diligence และ Risk Assessment</td></tr>
+      <tr><td>ระหว่างสัญญา</td><td>SLA Monitoring, Audit Right, Incident Notification</td></tr>
+      <tr><td>สิ้นสุดสัญญา</td><td>Data Return/Deletion และ Exit Plan</td></tr>
+    </table>
+  `,
+  question:"ข้อใดควรทำก่อนเลือกใช้ Cloud Provider?",
+  choices:["ติดตั้งระบบก่อน","ทำ Third-Party Risk Assessment","รอ Audit","ซื้อ License จำนวนมาก"],
+  answer:1
+},
+{
+  title:"13. Continuous Improvement & Executive Reporting",
+  subtitle:"Security Governance ต้องทบทวนและพัฒนาอย่างต่อเนื่อง",
+  body:`
+    <div class="diagram">
+      <div class="node">Plan</div><div class="arrow">↓</div>
+      <div class="node">Do</div><div class="arrow">↓</div>
+      <div class="node">Check</div><div class="arrow">↓</div>
+      <div class="node">Act</div>
+    </div>
+    <h4>Executive Dashboard ที่ดีควรตอบ</h4>
+    <ul>
+      <li>ความเสี่ยงสำคัญคืออะไร</li>
+      <li>แนวโน้มดีขึ้นหรือแย่ลง</li>
+      <li>กระทบ Business อย่างไร</li>
+      <li>ผู้บริหารต้องตัดสินใจอะไร</li>
+    </ul>
+    <div class="callout success"><b>หลักการ:</b> “Less technical, more decision-oriented.”</div>
+  `,
+  question:"รายงานต่อ Board ควรเน้นอะไร?",
+  choices:["รายละเอียด Syslog","Business Risk และสิ่งที่ต้องตัดสินใจ","Command Line","ชื่อไฟล์ Log"],
+  answer:1
+},
+{
+  title:"14. Final Workshop",
+  subtitle:"นำทุกแนวคิดมาประยุกต์ใช้กับโจทย์ลูกค้าจริง",
+  body:`
+    <div class="workshop">
+      <h4 style="margin-top:0">สถานการณ์</h4>
+      <p>องค์กรรัฐแห่งหนึ่งกำลังทำ Digital Transformation มีระบบ Cloud, Mobile Application และข้อมูลประชาชน แต่ยังไม่มี Security Governance ที่ชัดเจน</p>
+      <h4>ภารกิจทีม</h4>
+      <ol>
+        <li>ระบุ Business Objectives</li>
+        <li>ระบุ Stakeholders</li>
+        <li>กำหนด Risk Appetite เบื้องต้น</li>
+        <li>สร้าง Security Vision และ Objectives</li>
+        <li>ออกแบบ Roadmap 3 ระยะ</li>
+        <li>กำหนด KPI/KRI อย่างน้อย 5 ตัว</li>
+        <li>นำเสนอผู้บริหารภายใน 10 นาที</li>
+      </ol>
+    </div>
+    <div class="callout"><b>ผลลัพธ์ที่ต้องการ:</b> เปลี่ยนจาก “การขาย Product” ไปสู่ “การให้คำปรึกษาเชิง Governance และ Risk”</div>
+  `,
+  question:"ลำดับที่เหมาะสมที่สุดคือข้อใด?",
+  choices:["Product → Budget → Risk","Business → Risk → Strategy → Solution → Metrics","Vendor → Feature → Price","Technology → Policy → Business"],
+  answer:1
+}
+];
+
+let current = 0;
+let completed = JSON.parse(localStorage.getItem("cism_completed") || "[]");
+
+const nav = document.getElementById("nav");
+const content = document.getElementById("content");
+
+function renderNav(){
+  nav.innerHTML = "";
+  lessons.forEach((l,i)=>{
+    const b = document.createElement("button");
+    b.textContent = (completed.includes(i) ? "✓ " : "") + l.title;
+    if(i===current) b.classList.add("active");
+    b.onclick=()=>{current=i;render();};
+    nav.appendChild(b);
+  });
+}
+
+function render(){
+  renderNav();
+  const l = lessons[current];
+  content.innerHTML = `
+    <section class="lesson active">
+      <h3>${l.title}</h3>
+      <p class="lead">${l.subtitle}</p>
+      ${l.body}
+      <div class="quiz">
+        <h4>แบบทดสอบท้ายบท</h4>
+        <p><b>${l.question}</b></p>
+        ${l.choices.map((c,i)=>`<label class="choice"><input type="radio" name="q" value="${i}"> ${c}</label>`).join("")}
+        <button class="btn" onclick="checkQuiz()">ตรวจคำตอบ</button>
+        <div id="quizResult" class="quiz-result"></div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="prevLesson()" ${current===0?"disabled":""}>← บทก่อนหน้า</button>
+        <button class="btn" onclick="nextLesson()">${current===lessons.length-1?"กลับบทแรก":"บทถัดไป →"}</button>
+      </div>
+    </section>`;
+  updateProgress();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function checkQuiz(){
+  const selected = document.querySelector('input[name="q"]:checked');
+  const result = document.getElementById("quizResult");
+  if(!selected){ result.textContent="กรุณาเลือกคำตอบ"; result.style.color="var(--warning)"; return; }
+  if(Number(selected.value)===lessons[current].answer){
+    result.textContent="ถูกต้อง ✓";
+    result.style.color="var(--accent2)";
+    if(!completed.includes(current)){
+      completed.push(current);
+      localStorage.setItem("cism_completed",JSON.stringify(completed));
+      renderNav(); updateProgress();
+    }
+  }else{
+    result.textContent="ยังไม่ถูก ลองทบทวนเนื้อหาอีกครั้ง";
+    result.style.color="var(--danger)";
+  }
+}
+
+function nextLesson(){ current = current===lessons.length-1 ? 0 : current+1; render(); }
+function prevLesson(){ if(current>0){current--;render();} }
+function updateProgress(){
+  const pct = Math.round((completed.length/lessons.length)*100);
+  document.getElementById("progressBar").style.width=pct+"%";
+  document.getElementById("progressText").textContent=pct+"%";
+}
+render();
+</script>
+</body>
+</html>
