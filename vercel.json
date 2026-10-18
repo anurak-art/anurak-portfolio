@@ -5,6 +5,9 @@
     },
     "api/sitemap.js": {
       "includeFiles": "content/blog.json"
+    },
+    "api/news.js": {
+      "maxDuration": 30
     }
   },
   "redirects": [

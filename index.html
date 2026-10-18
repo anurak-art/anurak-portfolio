@@ -694,9 +694,6 @@ function setLang(lang){
   renderAbout();
   renderCases();
   renderNews();
-  if(lang === 'th' && newsState === 'live'){
-    Promise.all(getCurrentNewsPageItems().map(ensureThaiTranslation)).then(renderNews);
-  }
 }
 
 // admin-editable content -> content/*.json (edited via /admin, falls back to these defaults)
@@ -798,7 +795,7 @@ async function loadContent(){
   renderCerts();
 }
 
-// cyber attack news -> live RSS feed via rss2json, with a curated fallback
+// cyber attack news -> /api/news (shared, cached, pre-translated); falls back to rss2json in the browser, then to curated items
 const NEWS_FEEDS = [
   { url: 'https://feeds.feedburner.com/TheHackersNews', name: 'The Hacker News' },
   { url: 'https://www.bleepingcomputer.com/feed/', name: 'BleepingComputer' }
@@ -859,11 +856,8 @@ function getCurrentNewsPageItems(){
   return newsItems.slice(start, start + NEWS_PAGE_SIZE);
 }
 
-async function goToNewsPage(page){
+function goToNewsPage(page){
   currentNewsPage = page;
-  if(window.__currentLang === 'th' && newsState === 'live'){
-    await Promise.all(getCurrentNewsPageItems().map(ensureThaiTranslation));
-  }
   renderNews();
 }
 
@@ -916,31 +910,6 @@ function renderNews(){
   }
 }
 
-async function translateToThai(text){
-  if(!text) return text;
-  try{
-    const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=th&dt=t&q=${encodeURIComponent(text)}`);
-    if(!res.ok) return text;
-    const data = await res.json();
-    if(!Array.isArray(data) || !Array.isArray(data[0])) return text;
-    const translated = data[0].map(seg => seg[0]).join('');
-    return translated || text;
-  }catch(err){
-    return text;
-  }
-}
-
-async function ensureThaiTranslation(item){
-  if(item.title_th && item.description_th) return item;
-  const [title_th, description_th] = await Promise.all([
-    item.title_th ? item.title_th : translateToThai(item.title),
-    item.description_th ? item.description_th : translateToThai(item.description)
-  ]);
-  item.title_th = title_th;
-  item.description_th = description_th;
-  return item;
-}
-
 async function fetchNewsFeed(feed){
   const endpoint = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed.url)}`;
   const res = await fetch(endpoint);
@@ -956,23 +925,39 @@ async function fetchNewsFeed(feed){
   }));
 }
 
+async function loadServerNews(){
+  const res = await fetch('/api/news');
+  if(!res.ok) throw new Error('news api ' + res.status);
+  const data = await res.json();
+  const items = (data.items || []).filter(it => it.title && it.link);
+  if(!items.length) throw new Error('no items');
+  return items;
+}
+
+async function loadFeedsInBrowser(){
+  const results = await Promise.allSettled(NEWS_FEEDS.map(fetchNewsFeed));
+  const merged = results
+    .filter(r => r.status === 'fulfilled')
+    .flatMap(r => r.value)
+    .filter(item => item.title && item.link);
+  if(!merged.length) throw new Error('no live items');
+  merged.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+  return merged;
+}
+
 async function loadNews(){
   newsState = 'loading';
   renderNews();
   try{
-    const results = await Promise.allSettled(NEWS_FEEDS.map(fetchNewsFeed));
-    const merged = results
-      .filter(r => r.status === 'fulfilled')
-      .flatMap(r => r.value)
-      .filter(item => item.title && item.link);
-    if(!merged.length) throw new Error('no live items');
-    merged.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-    newsItems = merged.slice(0, 40);
+    let items;
+    try{
+      items = await loadServerNews();
+    }catch(err){
+      items = await loadFeedsInBrowser();
+    }
+    newsItems = items.slice(0, 40);
     newsState = 'live';
     currentNewsPage = 1;
-    if(window.__currentLang === 'th'){
-      await Promise.all(getCurrentNewsPageItems().map(ensureThaiTranslation));
-    }
   }catch(err){
     newsItems = NEWS_FALLBACK;
     newsState = 'fallback';
