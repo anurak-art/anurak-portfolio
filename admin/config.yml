@@ -90,3 +90,29 @@ collections:
                 name: "tools"
                 widget: "list"
                 field: {label: "เทคโนโลยี", name: "tool", widget: "string"}
+
+  - name: "blog"
+    label: "บทความ (Blog)"
+    files:
+      - name: "blog"
+        label: "รายการบทความ"
+        file: "content/blog.json"
+        fields:
+          - label: "บทความ"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.date}} · {{fields.title_th}}"
+            fields:
+              - {label: "ชื่อลิงก์ (slug)", name: "slug", widget: "string", hint: "ภาษาอังกฤษพิมพ์เล็ก ใช้ - คั่นคำ ห้ามซ้ำกับบทความอื่น เช่น what-is-zero-trust"}
+              - {label: "วันที่เผยแพร่", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
+              - label: "แท็ก"
+                name: "tags"
+                widget: "list"
+                required: false
+                field: {label: "แท็ก", name: "tag", widget: "string"}
+              - {label: "ชื่อบทความ (ไทย)", name: "title_th", widget: "string"}
+              - {label: "Title (English)", name: "title_en", widget: "string", required: false}
+              - {label: "คำโปรย (ไทย)", name: "summary_th", widget: "text"}
+              - {label: "Summary (English)", name: "summary_en", widget: "text", required: false}
+              - {label: "เนื้อหา (ไทย)", name: "body_th", widget: "text", hint: "เว้น 1 บรรทัดเพื่อขึ้นย่อหน้าใหม่ | ขึ้นต้นด้วย ## คือหัวข้อ | ขึ้นต้นด้วย - คือรายการ | ใส่ **ตัวหนา** ได้"}
+              - {label: "Body (English)", name: "body_en", widget: "text", required: false, hint: "Leave a blank line for a new paragraph | ## heading | - bullet | **bold**. If empty, the Thai text is shown."}

@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "slug": "ransomware-first-5-steps",
+      "date": "2026-10-18",
+      "tags": ["Ransomware", "Incident Response"],
+      "title_th": "5 ขั้นตอนเริ่มต้นรับมือแรนซัมแวร์",
+      "title_en": "5 First Steps to Defend Against Ransomware",
+      "summary_th": "ไม่ต้องรอซื้อเครื่องมือราคาแพง 5 เรื่องพื้นฐานนี้ลดความเสียหายจากแรนซัมแวร์ได้มากที่สุด",
+      "summary_en": "You don't need expensive tools first. These five basics cut the most ransomware damage.",
+      "body_th": "แรนซัมแวร์ยังเป็นภัยที่สร้างความเสียหายต่อองค์กรมากที่สุดเรื่องหนึ่ง แต่การป้องกันส่วนใหญ่เริ่มจากพื้นฐานที่ทำได้ทันที\n\n## 1. สำรองข้อมูลแบบ 3-2-1\n\nเก็บข้อมูล 3 สำเนา บนสื่อ 2 ประเภท และอย่างน้อย 1 สำเนาต้องแยกออกจากเครือข่าย (offline หรือ immutable) เพราะแรนซัมแวร์มักเข้ารหัสหรือลบข้อมูลสำรองที่ต่ออยู่ในเครือข่ายด้วย\n\n## 2. เปิด MFA ทุกบัญชีสำคัญ\n\nโดยเฉพาะอีเมล VPN และบัญชีผู้ดูแลระบบ เพราะการขโมยรหัสผ่านเป็นทางเข้าที่พบบ่อย\n\n## 3. อัปเดตแพตช์ระบบที่เปิดสู่อินเทอร์เน็ต\n\nเริ่มจาก VPN, firewall, remote access และเซิร์ฟเวอร์เว็บ ช่องโหว่ที่ถูกโจมตีจริงควรมาก่อนช่องโหว่ทั่วไป\n\n## 4. จำกัดสิทธิ์ผู้ใช้ให้เท่าที่จำเป็น\n\n- ผู้ใช้ทั่วไปไม่ควรเป็น local admin\n- แยกบัญชีผู้ดูแลระบบออกจากบัญชีใช้งานประจำวัน\n- แบ่งส่วนเครือข่ายเพื่อไม่ให้การโจมตีลามทั้งระบบ\n\n## 5. ซ้อมแผนรับมือเหตุการณ์\n\nรู้ล่วงหน้าว่าใครตัดสินใจ ใครติดต่อใคร และจะแยกระบบที่ติดเชื้อออกอย่างไร การซ้อมแผนสั้นๆ ปีละครั้งช่วยลดเวลาตอบสนองได้มาก",
+      "body_en": "Ransomware remains one of the costliest threats to organizations, yet most defenses start with basics you can do right away.\n\n## 1. Follow the 3-2-1 backup rule\n\nKeep 3 copies on 2 types of media, with at least 1 copy isolated from the network (offline or immutable). Ransomware often encrypts or deletes connected backups too.\n\n## 2. Enable MFA on every critical account\n\nEspecially email, VPN, and admin accounts, since stolen passwords are a common way in.\n\n## 3. Patch internet-facing systems first\n\nStart with VPNs, firewalls, remote access, and web servers. Actively exploited vulnerabilities come before the rest.\n\n## 4. Limit user privileges\n\n- Regular users should not be local admins\n- Separate admin accounts from daily-use accounts\n- Segment the network so an attack can't spread everywhere\n\n## 5. Rehearse your incident response plan\n\nKnow in advance who decides, who contacts whom, and how infected systems get isolated. A short yearly drill cuts response time significantly."
+    },
+    {
+      "slug": "what-is-zero-trust",
+      "date": "2026-10-11",
+      "tags": ["Zero Trust", "Architecture"],
+      "title_th": "Zero Trust คืออะไร และองค์กรควรเริ่มตรงไหน",
+      "title_en": "What Is Zero Trust, and Where Should You Start?",
+      "summary_th": "แนวคิด never trust, always verify อธิบายแบบเข้าใจง่าย พร้อมจุดเริ่มต้นที่ทำได้จริง",
+      "summary_en": "The never-trust, always-verify idea explained simply, with practical places to start.",
+      "body_th": "Zero Trust คือแนวคิดที่ไม่เชื่อใจผู้ใช้หรืออุปกรณ์ใดโดยอัตโนมัติ แม้จะอยู่ในเครือข่ายภายในองค์กรแล้วก็ตาม ทุกคำขอเข้าถึงต้องถูกตรวจสอบก่อนเสมอ\n\n## หลักคิดสำคัญ\n\n- ตรวจสอบตัวตนและสถานะอุปกรณ์ทุกครั้งที่เข้าถึง\n- ให้สิทธิ์น้อยที่สุดเท่าที่จำเป็น (least privilege)\n- สมมติว่าระบบอาจถูกเจาะแล้ว และออกแบบให้จำกัดความเสียหาย\n\n## เริ่มต้นอย่างไรโดยไม่ต้องรื้อระบบ\n\n- เริ่มจากตัวตน: เปิด MFA และรวมศูนย์การล็อกอิน (SSO)\n- เลือกแอปพลิเคชันสำคัญ 1-2 ตัว แล้วเปลี่ยนจาก VPN แบบเข้าถึงทั้งเครือข่ายเป็นการเข้าถึงรายแอป (ZTNA)\n- แบ่งส่วนเครือข่ายระหว่างระบบสำคัญ เพื่อลดการเคลื่อนที่ของผู้โจมตี\n- เก็บ log และตรวจจับพฤติกรรมผิดปกติ\n\nZero Trust ไม่ใช่ผลิตภัณฑ์ที่ซื้อครั้งเดียวจบ แต่เป็นทิศทางที่ค่อยๆ ปรับปรุงทีละขั้น",
+      "body_en": "Zero Trust means never automatically trusting any user or device, even inside the corporate network. Every access request is verified first.\n\n## Core ideas\n\n- Verify identity and device health on every access\n- Grant the least privilege necessary\n- Assume breach and design to limit the damage\n\n## How to start without ripping everything out\n\n- Start with identity: enable MFA and centralize sign-in (SSO)\n- Pick one or two key applications and move from network-wide VPN access to per-app access (ZTNA)\n- Segment the network between critical systems to limit attacker movement\n- Collect logs and detect anomalous behavior\n\nZero Trust is not a product you buy once. It is a direction you improve step by step."
+    },
+    {
+      "slug": "mfa-which-is-safer",
+      "date": "2026-10-04",
+      "tags": ["IAM", "MFA"],
+      "title_th": "MFA แบบไหนปลอดภัยกว่ากัน",
+      "title_en": "Which MFA Method Is Safer?",
+      "summary_th": "SMS, แอปยืนยันตัวตน และ Passkey ต่างกันอย่างไร และทำไมบางแบบถึงถูกหลอกได้ง่ายกว่า",
+      "summary_en": "How SMS, authenticator apps, and passkeys differ, and why some are easier to phish.",
+      "body_th": "MFA ดีกว่าไม่มี MFA เสมอ แต่ทุกแบบไม่ได้ปลอดภัยเท่ากัน\n\n## เรียงจากป้องกันได้น้อยไปมาก\n\n- **SMS / โทรศัพท์**: ใช้ง่าย แต่เสี่ยงต่อการโอนเบอร์ (SIM swap) และการหลอกให้บอกรหัส\n- **แอปยืนยันตัวตน (TOTP)**: ปลอดภัยกว่า SMS แต่ผู้โจมตียังหลอกให้กรอกรหัสบนเว็บปลอมได้\n- **Push notification**: สะดวก แต่เสี่ยงโดนส่งคำขอรัวๆ จนผู้ใช้กดอนุมัติเอง (MFA fatigue)\n- **Passkey / FIDO2 security key**: ผูกกับโดเมนจริง จึงทนต่อฟิชชิ่งได้ดีที่สุด\n\n## คำแนะนำ\n\nบัญชีผู้ดูแลระบบและผู้บริหารควรใช้ Passkey หรือ security key เป็นอันดับแรก ส่วนผู้ใช้ทั่วไปควรเลิกใช้ SMS ถ้ามีทางเลือกอื่น",
+      "body_en": "Any MFA beats no MFA, but not every method is equally safe.\n\n## From weakest to strongest\n\n- **SMS / phone call**: easy to use, but exposed to SIM swapping and code-phishing\n- **Authenticator app (TOTP)**: safer than SMS, but attackers can still trick users into typing codes on fake sites\n- **Push notification**: convenient, but vulnerable to repeated prompts until a user approves (MFA fatigue)\n- **Passkey / FIDO2 security key**: bound to the real domain, so the most phishing-resistant\n\n## Recommendation\n\nAdmins and executives should use passkeys or security keys first. Everyone else should move away from SMS where alternatives exist."
+    }
+  ]
+}
