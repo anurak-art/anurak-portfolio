@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ประเมินความพร้อมด้าน Cybersecurity เบื้องต้น (Self-Assessment) · Anurak</title>
+<meta name="description" content="แบบประเมินตนเองด้าน Cybersecurity 5 นาที ครอบคลุม MFA, สำรองข้อมูล, การตรวจจับ, PDPA และอื่นๆ ได้แผนปรับปรุง 30/90/180 วันเบื้องต้น ไม่เก็บข้อมูล ประมวลผลในเบราว์เซอร์">
+<link rel="canonical" href="https://www.dynasec.pro/assessment.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="Anurak">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ประเมินความพร้อมด้าน Cybersecurity เบื้องต้น (Self-Assessment)">
+<meta property="og:description" content="แบบประเมินตนเอง 5 นาที ได้แผนปรับปรุงความปลอดภัยไซเบอร์ 30/90/180 วันเบื้องต้น ไม่เก็บข้อมูล">
+<meta property="og:url" content="https://www.dynasec.pro/assessment.html">
+<meta property="og:image" content="https://www.dynasec.pro/assets/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"แบบประเมินความพร้อมด้าน Cybersecurity เบื้องต้น","url":"https://www.dynasec.pro/assessment.html","description":"แบบประเมินตนเองด้านความมั่นคงปลอดภัยไซเบอร์ที่ให้แผนปรับปรุงเบื้องต้น ประมวลผลในเบราว์เซอร์ ไม่เก็บข้อมูล","applicationCategory":"SecurityApplication","operatingSystem":"Any","inLanguage":["th","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"THB"},"author":{"@type":"Person","name":"Anurak","url":"https://www.dynasec.pro/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"https://www.dynasec.pro/"},{"@type":"ListItem","position":2,"name":"ประเมินความพร้อมด้าน Cybersecurity เบื้องต้น","item":"https://www.dynasec.pro/assessment.html"}]}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0B1220;--panel:#121B2E;--panel-2:#0F1626;--line:#24344D;--text:#E8EEF5;--muted:#8CA0B8;--amber:#FFB020;--teal:#4FD1C5;--danger:#FF7A7A;--radius:10px;--maxw:1120px;}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter','Noto Sans Thai',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Space Grotesk','Noto Sans Thai',sans-serif;font-weight:600;letter-spacing:-0.01em;margin:0;}
+  .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:0.02em;}
+  a{color:inherit;text-decoration:none;}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  .narrow{max-width:820px;margin:0 auto;}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(11,18,32,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;}
+  .brand-mark{width:28px;height:28px;border:1px solid var(--teal);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--teal);font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  nav.links{display:flex;gap:24px;font-size:14px;color:var(--muted);}
+  nav.links a:hover{color:var(--text);}
+  nav.links a.current{color:var(--teal);}
+  .lang-toggle{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);padding:6px 10px;cursor:pointer;}
+  .lang-toggle button.active{background:var(--panel);color:var(--teal);}
+  @media (max-width:860px){nav.links{display:none;}}
+
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--teal);letter-spacing:0.12em;display:flex;align-items:center;gap:8px;margin-bottom:18px;}
+  .eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(79,209,197,0.15);}
+  .page-hero{padding:56px 0 36px;border-bottom:1px solid var(--line);}
+  .page-hero h1{font-size:clamp(28px,4vw,42px);line-height:1.2;max-width:780px;}
+  .page-hero p.sub{color:var(--muted);max-width:680px;margin:16px 0 0;font-size:15.5px;}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+  .badge{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--teal);border:1px solid var(--line);border-radius:20px;padding:5px 12px;}
+  .crumbs{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:22px;display:flex;gap:6px;flex-wrap:wrap;}
+  .crumbs a{color:var(--teal);}
+
+  section.block{padding:44px 0;border-bottom:1px solid var(--line);}
+  .block h2{font-size:clamp(21px,2.6vw,26px);margin-bottom:14px;}
+  .block p{color:var(--muted);margin:0 0 14px;max-width:760px;}
+  .steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;}
+  .step3{border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--panel);}
+  .step3 b{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:12px;letter-spacing:0.08em;}
+  .step3 h3{font-size:16px;margin:6px 0;}
+  .step3 p{font-size:13.5px;margin:0;}
+  .domain-list{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-wrap:wrap;gap:8px;}
+  .domain-list li{font-size:13px;border:1px solid var(--line);border-radius:6px;padding:6px 12px;background:var(--panel-2);color:var(--text);}
+  @media (max-width:760px){.steps3{grid-template-columns:1fr;}}
+
+  /* tool */
+  #tool{padding:48px 0 72px;border-bottom:1px solid var(--line);scroll-margin-top:70px;}
+  .tool-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:30px;}
+  .progress{display:flex;align-items:center;gap:14px;margin-bottom:26px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);}
+  .bar{flex:1;height:6px;background:var(--line);border-radius:4px;overflow:hidden;}
+  .bar>i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s ease;}
+  .step-title{font-size:22px;margin-bottom:6px;}
+  .step-sub{color:var(--muted);font-size:14px;margin:0 0 24px;}
+  fieldset{border:0;margin:0 0 26px;padding:0;min-width:0;}
+  legend{padding:0;font-weight:600;font-size:15.5px;line-height:1.5;margin-bottom:4px;}
+  .hint{color:var(--muted);font-size:13px;margin:0 0 12px;}
+  .opts{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+  .opts.two{grid-template-columns:repeat(2,1fr);}
+  .opts.three{grid-template-columns:repeat(3,1fr);}
+  .opts.four{grid-template-columns:repeat(4,1fr);}
+  .opt{position:relative;}
+  .opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer;}
+  .opt span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:54px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);font-size:13px;line-height:1.35;color:var(--muted);transition:border-color .15s,background .15s,color .15s;}
+  .opt input:hover+span{border-color:var(--teal);color:var(--text);}
+  .opt input:checked+span{background:rgba(79,209,197,0.12);border-color:var(--teal);color:var(--text);}
+  .opt input:focus-visible+span{outline:2px solid var(--teal);outline-offset:2px;}
+  .opt.unsure input:checked+span{background:rgba(255,176,32,0.10);border-color:var(--amber);}
+  @media (max-width:700px){.opts,.opts.four{grid-template-columns:repeat(2,1fr);}.opts.three{grid-template-columns:1fr;}}
+  .nav-btns{display:flex;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid transparent;font-family:inherit;transition:transform .15s ease,opacity .15s ease;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+  .btn-primary{background:var(--amber);color:#1a1206;}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--text);}
+  .btn-ghost:hover:not(:disabled){border-color:var(--teal);color:var(--teal);}
+  .privacy{margin:18px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);}
+
+  /* results */
+  .res-head{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:var(--panel);margin-bottom:28px;}
+  .score{font-family:'Space Grotesk',sans-serif;font-size:56px;font-weight:700;line-height:1;color:var(--c,var(--teal));}
+  .score small{font-size:20px;color:var(--muted);font-weight:500;}
+  .res-head h3{font-size:20px;margin-bottom:6px;}
+  .res-head p{color:var(--muted);font-size:14px;margin:0;}
+  @media (max-width:640px){.res-head{grid-template-columns:1fr;gap:12px;}}
+  .res-h{font-size:18px;margin:34px 0 14px;}
+  .dom-row{display:grid;grid-template-columns:minmax(150px,230px) 1fr 52px;gap:14px;align-items:center;padding:8px 0;font-size:14px;}
+  .dom-row .meter{height:10px;border-radius:5px;background:var(--line);overflow:hidden;}
+  .dom-row .meter i{display:block;height:100%;border-radius:5px;background:var(--c);width:var(--w);}
+  .dom-row .pct{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);text-align:right;}
+  @media (max-width:640px){.dom-row{grid-template-columns:1fr 46px;}.dom-row .meter{grid-column:1 / -1;order:3;}}
+  .prio{display:grid;gap:14px;}
+  .prio-card{border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:8px;padding:18px 20px;background:var(--panel);}
+  .prio-card h4{font-size:16px;margin-bottom:4px;}
+  .prio-card .why{color:var(--muted);font-size:13.5px;margin:0 0 10px;}
+  .prio-card ul{margin:0 0 10px;padding-left:20px;font-size:14px;}
+  .prio-card li{margin-bottom:4px;}
+  .prio-card .rel{font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  .prio-card .rel a{color:var(--teal);text-decoration:underline;text-underline-offset:3px;}
+  .road{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .road-col{border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--panel);}
+  .road-col h4{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;color:var(--teal);margin-bottom:12px;}
+  .road-col ul{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:13.5px;}
+  .road-col li{padding-left:14px;position:relative;}
+  .road-col li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--amber);}
+  .road-col .none{color:var(--muted);}
+  @media (max-width:860px){.road{grid-template-columns:1fr;}}
+  .notes{display:grid;gap:10px;padding:0;margin:0;list-style:none;}
+  .notes li{border:1px solid var(--line);border-radius:8px;padding:12px 16px;background:var(--panel-2);font-size:14px;}
+  .unsure-note{color:var(--amber);font-size:13.5px;margin-top:10px;}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+  .disclaimer{margin-top:28px;border:1px dashed var(--line);border-radius:8px;padding:14px 18px;font-size:13px;color:var(--muted);}
+  .refs{font-size:13px;color:var(--muted);margin-top:14px;}
+  .refs a{color:var(--teal);text-decoration:underline;text-underline-offset:3px;}
+  .toast{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--teal);align-self:center;}
+
+  footer{padding:32px 0;text-align:center;color:var(--muted);font-size:13px;font-family:'IBM Plex Mono',monospace;}
+
+  @media print{
+    header,footer,.progress,.nav-btns,.actions,.privacy,.page-hero,section.block,.lang-toggle{display:none !important;}
+    body{background:#fff;color:#111;}
+    #tool{padding:0;border:0;}
+    .tool-card,.res-head,.prio-card,.road-col,.notes li,.disclaimer{background:#fff !important;border-color:#bbb !important;color:#111 !important;}
+    .res-head p,.prio-card .why,.dom-row .pct,.road-col .none,.refs,.disclaimer{color:#444 !important;}
+    .dom-row .meter{background:#ddd;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .dom-row .meter i{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .score{color:#111;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="/"><div class="brand-mark">AN</div><span>Anurak</span></a>
+    <nav class="links" aria-label="Main">
+      <a href="/#about" data-i18n="navAbout">เกี่ยวกับ</a>
+      <a href="/#services" data-i18n="navServices">บริการ</a>
+      <a href="/solutions.html" data-i18n="navSolutions">โซลูชัน</a>
+      <a href="/assessment.html" class="current" aria-current="page" data-i18n="navAssessment">ประเมินเบื้องต้น</a>
+      <a href="/blog" data-i18n="navBlog">บทความ</a>
+      <a href="/#cases" data-i18n="navCases">ผลงาน</a>
+      <a href="/#news" data-i18n="navNews">ข่าว Cyber Attack</a>
+      <a href="/#contact" data-i18n="navContact">ติดต่อ</a>
+    </nav>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button id="btn-th" type="button" class="active">TH</button>
+      <button id="btn-en" type="button">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="page-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/" data-i18n="home">หน้าแรก</a><span>›</span><span data-i18n="crumb">ประเมินเบื้องต้น</span></nav>
+    <div class="eyebrow" data-i18n="heroEyebrow">SELF-ASSESSMENT · CYBERSECURITY</div>
+    <h1 data-i18n="heroTitle">ประเมินความพร้อมด้าน Cybersecurity เบื้องต้น</h1>
+    <p class="sub" data-i18n="heroSub">ตอบคำถามสั้นๆ ประมาณ 5 นาที เพื่อดูภาพรวมจุดแข็งและช่องว่างด้านความปลอดภัยไซเบอร์ขององค์กร พร้อมแผนปรับปรุงเบื้องต้นแบ่งเป็น 30 / 90 / 180 วัน</p>
+    <div class="badges"><span class="badge" data-i18n="b1">ฟรี</span><span class="badge" data-i18n="b2">ไม่เก็บข้อมูล</span><span class="badge" data-i18n="b3">ประมวลผลในเบราว์เซอร์</span><span class="badge" data-i18n="b4">ใช้ได้ทั้งไทย/อังกฤษ</span></div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2 data-i18n="howTitle">ใช้งานอย่างไร</h2>
+    <p data-i18n="howIntro">แบบประเมินนี้ช่วยให้ผู้บริหารและทีมไอทีเห็นว่าควรเริ่มแก้ไขเรื่องใดก่อน โดยไม่ต้องมีความรู้เชิงลึกด้านความปลอดภัยไซเบอร์ คำถามออกแบบตามแนวคิดของ <a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline">NIST Cybersecurity Framework</a> และ <a href="https://www.cisecurity.org/controls" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline">CIS Controls</a> แต่ย่อให้เหมาะกับการประเมินตนเองเบื้องต้น</p>
+    <div class="steps3">
+      <div class="step3"><b>01</b><h3 data-i18n="s1t">บอกเกี่ยวกับองค์กร</h3><p data-i18n="s1d">ขนาด อุตสาหกรรม และข้อมูลที่ดูแล เพื่อปรับคำแนะนำให้เหมาะ</p></div>
+      <div class="step3"><b>02</b><h3 data-i18n="s2t">ตอบคำถามรายด้าน</h3><p data-i18n="s2d">ประเมินมาตรการที่มีอยู่ในแต่ละด้านตามความเป็นจริง ตอบ "ไม่แน่ใจ" ได้</p></div>
+      <div class="step3"><b>03</b><h3 data-i18n="s3t">รับผลและแผนปรับปรุง</h3><p data-i18n="s3d">ได้คะแนนรายด้าน ลำดับความสำคัญ และแผน 30/90/180 วัน</p></div>
+    </div>
+    <h2 style="margin-top:34px" data-i18n="coverTitle">หัวข้อที่ครอบคลุม</h2>
+    <ul class="domain-list" id="domain-list"></ul>
+  </div>
+</section>
+
+<section id="tool">
+  <div class="wrap">
+    <div class="narrow">
+      <noscript><p style="color:var(--amber)">แบบประเมินนี้ต้องเปิดใช้งาน JavaScript / This assessment requires JavaScript.</p></noscript>
+      <div class="tool-card" id="tool-card" aria-live="polite"></div>
+      <p class="privacy" data-i18n="privacy">คำตอบทั้งหมดประมวลผลในเบราว์เซอร์ของคุณเท่านั้น ไม่ถูกส่งหรือจัดเก็บที่เซิร์ฟเวอร์</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><span data-i18n="footerText">© 2026 · Pre-Sales Engineer, Cybersecurity · ผลประเมินเป็นคำแนะนำเบื้องต้น ไม่ใช่การตรวจประเมินอย่างเป็นทางการ</span></footer>
+
+<script>
+/* ============================ UI text ============================ */
+const UI = {
+  th: {
+    navAbout:'เกี่ยวกับ', navServices:'บริการ', navSolutions:'โซลูชัน', navAssessment:'ประเมินเบื้องต้น', navBlog:'บทความ', navCases:'ผลงาน', navNews:'ข่าว Cyber Attack', navContact:'ติดต่อ',
+    home:'หน้าแรก', crumb:'ประเมินเบื้องต้น', heroEyebrow:'SELF-ASSESSMENT · CYBERSECURITY',
+    heroTitle:'ประเมินความพร้อมด้าน Cybersecurity เบื้องต้น',
+    heroSub:'ตอบคำถามสั้นๆ ประมาณ 5 นาที เพื่อดูภาพรวมจุดแข็งและช่องว่างด้านความปลอดภัยไซเบอร์ขององค์กร พร้อมแผนปรับปรุงเบื้องต้นแบ่งเป็น 30 / 90 / 180 วัน',
+    b1:'ฟรี', b2:'ไม่เก็บข้อมูล', b3:'ประมวลผลในเบราว์เซอร์', b4:'ใช้ได้ทั้งไทย/อังกฤษ',
+    howTitle:'ใช้งานอย่างไร',
+    howIntro:'แบบประเมินนี้ช่วยให้ผู้บริหารและทีมไอทีเห็นว่าควรเริ่มแก้ไขเรื่องใดก่อน โดยไม่ต้องมีความรู้เชิงลึกด้านความปลอดภัยไซเบอร์ คำถามออกแบบตามแนวคิดของ <a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline">NIST Cybersecurity Framework</a> และ <a href="https://www.cisecurity.org/controls" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline">CIS Controls</a> แต่ย่อให้เหมาะกับการประเมินตนเองเบื้องต้น',
+    s1t:'บอกเกี่ยวกับองค์กร', s1d:'ขนาด อุตสาหกรรม และข้อมูลที่ดูแล เพื่อปรับคำแนะนำให้เหมาะ',
+    s2t:'ตอบคำถามรายด้าน', s2d:'ประเมินมาตรการที่มีอยู่ในแต่ละด้านตามความเป็นจริง ตอบ "ไม่แน่ใจ" ได้',
+    s3t:'รับผลและแผนปรับปรุง', s3d:'ได้คะแนนรายด้าน ลำดับความสำคัญ และแผน 30/90/180 วัน',
+    coverTitle:'หัวข้อที่ครอบคลุม',
+    privacy:'คำตอบทั้งหมดประมวลผลในเบราว์เซอร์ของคุณเท่านั้น ไม่ถูกส่งหรือจัดเก็บที่เซิร์ฟเวอร์',
+    footerText:'© 2026 · Pre-Sales Engineer, Cybersecurity · ผลประเมินเป็นคำแนะนำเบื้องต้น ไม่ใช่การตรวจประเมินอย่างเป็นทางการ',
+    stepOf:'ขั้นที่', of:'จาก', back:'← ย้อนกลับ', next:'ถัดไป →', start:'เริ่มประเมิน →', seeResult:'ดูผลการวิเคราะห์',
+    profileTitle:'เริ่มจากทำความรู้จักองค์กรของคุณ', profileSub:'ข้อมูลนี้ใช้ปรับคำแนะนำเท่านั้น ไม่ถูกเก็บ',
+    answerAll:'กรุณาตอบทุกข้อเพื่อไปต่อ', levels:['ยังไม่มี','มีบางส่วน ไม่เป็นระบบ','มีและใช้งานจริงเป็นส่วนใหญ่','ครบถ้วน และทบทวนสม่ำเสมอ'], unsure:'ไม่แน่ใจ',
+    domainSub:'เลือกให้ตรงกับสถานการณ์จริงที่สุด ถ้าไม่แน่ใจให้เลือก "ไม่แน่ใจ" (ระบบจะนับเป็นช่องว่างที่ควรตรวจสอบ)',
+    resTitle:'ผลการวิเคราะห์เบื้องต้น', overall:'ความพร้อมโดยรวม', byDomain:'คะแนนรายด้าน', topGaps:'ลำดับความสำคัญ: ควรเริ่มแก้ตรงไหนก่อน',
+    roadmap:'แผนปรับปรุงเบื้องต้น', d30:'ภายใน 30 วัน', d90:'ภายใน 90 วัน', d180:'ภายใน 180 วัน', noneAct:'ไม่มีรายการเร่งด่วนในช่วงนี้',
+    notesTitle:'ข้อสังเกตตามลักษณะองค์กรของคุณ', unsureNote:'คุณตอบ "ไม่แน่ใจ" ใน {n} ข้อ ซึ่งถูกนับเป็นช่องว่าง ควรตรวจสอบให้ชัดเจนก่อนสรุปผล',
+    firstActions:'สิ่งที่ควรทำก่อน', related:'อ่านเพิ่มเติม', solutionsLink:'ดูกลุ่มโซลูชันที่เกี่ยวข้อง',
+    noGaps:'จากคำตอบ ไม่พบช่องว่างสำคัญ (ทุกข้อตอบว่ามีและใช้งานจริง) ขั้นต่อไปควรยืนยันด้วยการทดสอบจริง เช่น การทดสอบเจาะระบบ การซ้อมรับมือเหตุการณ์ และการตรวจสอบจากบุคคลภายนอก',
+    copy:'คัดลอกสรุป', copied:'คัดลอกแล้ว', print:'พิมพ์ / บันทึกเป็น PDF', email:'ส่งสรุปให้ผู้เชี่ยวชาญทางอีเมล', consult:'นัดปรึกษาผู้เชี่ยวชาญ', restart:'ประเมินใหม่',
+    disclaimer:'ข้อควรทราบ: ผลนี้มาจากการประเมินตนเองตามคำตอบที่ให้ ใช้เป็นจุดเริ่มต้นการพูดคุยและจัดลำดับความสำคัญเท่านั้น ไม่ใช่การตรวจประเมินหรือการทดสอบเจาะระบบ และไม่รับรองว่าองค์กรปลอดภัยหรือเป็นไปตามกฎหมายใดๆ การบริหารความเสี่ยงที่แท้จริงต้องพิจารณาสินทรัพย์ ภัยคุกคาม และบริบทธุรกิจของแต่ละองค์กร',
+    bands:[
+      {t:'เสี่ยงสูง: ควรเร่งวางพื้นฐาน', d:'ยังขาดมาตรการพื้นฐานหลายด้าน การโจมตีทั่วไปอาจสร้างความเสียหายได้มาก ควรเริ่มจากรายการ 30 วันก่อน'},
+      {t:'มีพื้นฐานบางส่วน: ยังมีช่องว่างสำคัญ', d:'มีมาตรการอยู่แล้วแต่ยังไม่ครอบคลุมหรือไม่เป็นระบบ ควรปิดช่องว่างที่มีผลกระทบสูงก่อน'},
+      {t:'กำลังพัฒนา: เสริมจุดอ่อนเฉพาะด้าน', d:'พื้นฐานค่อนข้างดี ควรเน้นด้านที่คะแนนต่ำและทำให้เป็นระบบ ทบทวนสม่ำเสมอ'},
+      {t:'เข้มแข็ง: รักษาและทดสอบต่อเนื่อง', d:'ผลจากการประเมินตนเองอยู่ในเกณฑ์ดี ควรยืนยันด้วยการทดสอบและการตรวจประเมินจริงอย่างสม่ำเสมอ'}
+    ],
+    mailSubject:'ขอคำปรึกษาจากผลประเมิน Cybersecurity เบื้องต้น', mailIntro:'สวัสดีครับ ผมทำแบบประเมินเบื้องต้นที่ dynasec.pro และต้องการปรึกษาต่อ'
+  },
+  en: {
+    navAbout:'About', navServices:'Services', navSolutions:'Solutions', navAssessment:'Assessment', navBlog:'Blog', navCases:'Case Studies', navNews:'Cyber News', navContact:'Contact',
+    home:'Home', crumb:'Assessment', heroEyebrow:'SELF-ASSESSMENT · CYBERSECURITY',
+    heroTitle:'Cybersecurity Readiness Self-Assessment',
+    heroSub:'Answer a few short questions in about 5 minutes to see your organization\'s strengths and gaps in cybersecurity, with a preliminary 30 / 90 / 180-day improvement plan.',
+    b1:'Free', b2:'No data stored', b3:'Runs in your browser', b4:'Thai and English',
+    howTitle:'How it works',
+    howIntro:'This assessment helps executives and IT teams see what to fix first, without deep security knowledge. The questions follow the ideas of the <a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline">NIST Cybersecurity Framework</a> and <a href="https://www.cisecurity.org/controls" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline">CIS Controls</a>, condensed for a quick self-assessment.',
+    s1t:'Describe your organization', s1d:'Size, sector, and the data you handle, so advice can be tailored',
+    s2t:'Answer by domain', s2d:'Rate the controls you have in each area honestly. "Not sure" is allowed',
+    s3t:'Get results and a plan', s3d:'Domain scores, priorities, and a 30/90/180-day plan',
+    coverTitle:'Topics covered',
+    privacy:'All answers are processed in your browser only. Nothing is sent to or stored on a server.',
+    footerText:'© 2026 · Pre-Sales Engineer, Cybersecurity · Results are preliminary guidance, not a formal audit',
+    stepOf:'Step', of:'of', back:'← Back', next:'Next →', start:'Start →', seeResult:'See results',
+    profileTitle:'First, tell us about your organization', profileSub:'Used only to tailor the advice. Nothing is stored.',
+    answerAll:'Please answer every question to continue', levels:['Not yet','Partial or ad hoc','In place and mostly applied','Complete and regularly reviewed'], unsure:'Not sure',
+    domainSub:'Choose what best matches reality. If unsure, pick "Not sure" (counted as a gap to verify).',
+    resTitle:'Preliminary results', overall:'Overall readiness', byDomain:'Score by domain', topGaps:'Priorities: where to start',
+    roadmap:'Preliminary improvement plan', d30:'Within 30 days', d90:'Within 90 days', d180:'Within 180 days', noneAct:'No urgent items in this window',
+    notesTitle:'Observations for your type of organization', unsureNote:'You answered "Not sure" on {n} question(s). These count as gaps; verify them before drawing conclusions.',
+    firstActions:'Do first', related:'Read more', solutionsLink:'See related solution categories',
+    noGaps:'Your answers show no major gaps (everything is in place and applied). Next, confirm with real testing: penetration testing, incident response exercises, and independent review.',
+    copy:'Copy summary', copied:'Copied', print:'Print / Save as PDF', email:'Email the summary to an expert', consult:'Book a consultation', restart:'Start over',
+    disclaimer:'Please note: these results come from self-assessment based on your answers. Use them as a starting point for discussion and prioritization only. They are not an audit or penetration test, and do not certify that the organization is secure or compliant with any law. Real risk management must consider each organization\'s assets, threats, and business context.',
+    bands:[
+      {t:'High exposure: build the basics first', d:'Many baseline controls are missing, and a common attack could cause major damage. Start with the 30-day list.'},
+      {t:'Partial basics: significant gaps remain', d:'Controls exist but are not complete or systematic. Close the highest-impact gaps first.'},
+      {t:'Developing: strengthen specific weak areas', d:'The basics are fairly good. Focus on the lowest-scoring areas and make them systematic and reviewed regularly.'},
+      {t:'Strong: maintain and keep testing', d:'Self-assessment results look good. Confirm them with regular testing and real assessments.'}
+    ],
+    mailSubject:'Consultation request from the cybersecurity self-assessment', mailIntro:'Hello, I completed the self-assessment at dynasec.pro and would like to discuss the results.'
+  }
+};
+
+/* ============================ Question bank ============================ */
+const FRAMEWORK_FN = { iam:'Protect', endpoint:'Protect', network:'Protect', cloud:'Identify · Protect', data:'Protect · Recover', soc:'Detect · Respond', vuln:'Identify', grc:'Govern', third:'Govern', ai:'Govern', ot:'Protect' };
+
+const DOMAINS = [
+  { id:'iam', w:1.3, th:'ตัวตนและการเข้าถึง (IAM)', en:'Identity and access (IAM)',
+    why_th:'บัญชีที่ถูกขโมยเป็นหนึ่งในทางเข้าที่พบบ่อยของผู้โจมตี', why_en:'Stolen credentials are one of the most common ways in for attackers.',
+    post:'mfa-which-is-safer', post_th:'MFA แบบไหนปลอดภัยกว่ากัน', post_en:'Which MFA Is Safer?' },
+  { id:'endpoint', w:1.1, th:'อุปกรณ์ปลายทางและการอัปเดตแพตช์', en:'Endpoints and patching',
+    why_th:'เครื่องของผู้ใช้และเซิร์ฟเวอร์คือจุดที่มัลแวร์และแรนซัมแวร์ลงมือจริง', why_en:'User devices and servers are where malware and ransomware actually run.',
+    post:'ransomware-first-5-steps', post_th:'วิธีป้องกันแรนซัมแวร์ 5 ขั้นตอน', post_en:'How to Prevent Ransomware: 5 First Steps' },
+  { id:'network', w:1.0, th:'เครือข่ายและการเข้าถึงระยะไกล', en:'Network and remote access',
+    why_th:'ช่องทางเข้าถึงระยะไกลที่ควบคุมไม่ดีเป็นเป้าหมายที่ผู้โจมตีมองหา', why_en:'Poorly controlled remote access is something attackers actively look for.',
+    post:'what-is-zero-trust', post_th:'Zero Trust คืออะไร', post_en:'What Is Zero Trust?' },
+  { id:'cloud', w:1.0, th:'คลาวด์และ SaaS', en:'Cloud and SaaS',
+    why_th:'การตั้งค่าผิดพลาดบนคลาวด์ทำให้ข้อมูลเปิดสู่สาธารณะได้โดยไม่ตั้งใจ', why_en:'Cloud misconfigurations can expose data publicly without anyone noticing.',
+    post:'what-is-zero-trust', post_th:'Zero Trust คืออะไร', post_en:'What Is Zero Trust?' },
+  { id:'data', w:1.3, th:'ข้อมูลและการสำรองข้อมูล', en:'Data and backup',
+    why_th:'การสำรองข้อมูลที่กู้คืนได้จริงคือสิ่งที่ตัดสินว่าองค์กรฟื้นตัวจากแรนซัมแวร์ได้หรือไม่', why_en:'Backups you can actually restore decide whether you recover from ransomware.',
+    post:'ransomware-first-5-steps', post_th:'วิธีป้องกันแรนซัมแวร์ 5 ขั้นตอน', post_en:'How to Prevent Ransomware: 5 First Steps' },
+  { id:'soc', w:1.2, th:'การตรวจจับและตอบสนองเหตุการณ์', en:'Detection and incident response',
+    why_th:'ยิ่งตรวจพบและตอบสนองช้า ความเสียหายยิ่งขยายวงกว้าง', why_en:'The slower you detect and respond, the wider the damage spreads.',
+    post:'ai-in-soc-mttd-mttr', post_th:'นำ AI มาใช้ใน SOC เพื่อลด MTTD และ MTTR', post_en:'Using AI in the SOC to Reduce MTTD and MTTR' },
+  { id:'vuln', w:1.0, th:'ช่องโหว่และการบริหารความเสี่ยง', en:'Vulnerabilities and risk management',
+    why_th:'ต้องรู้ว่าช่องโหว่และความเสี่ยงอยู่ที่ไหน จึงจะจัดลำดับการแก้ไขได้ถูกจุด', why_en:'You must know where vulnerabilities and risks are to prioritize fixes correctly.',
+    post:'ransomware-first-5-steps', post_th:'วิธีป้องกันแรนซัมแวร์ 5 ขั้นตอน', post_en:'How to Prevent Ransomware: 5 First Steps' },
+  { id:'grc', w:1.0, th:'นโยบาย บุคลากร และ PDPA', en:'Policy, people, and PDPA',
+    why_th:'พนักงานคือด่านแรกของการป้องกัน และกฎหมายกำหนดหน้าที่ขององค์กรที่ดูแลข้อมูลส่วนบุคคล', why_en:'Employees are the first line of defense, and the law sets duties for organizations that handle personal data.',
+    post:'', solutionsAnchor:true },
+  { id:'third', w:0.8, th:'คู่ค้าและผู้รับเหมา', en:'Third parties and contractors',
+    why_th:'ผู้ให้บริการที่เข้าถึงระบบของคุณเป็นช่องทางเข้าโจมตีทางอ้อม', why_en:'Providers with access to your systems are an indirect way in.',
+    post:'what-is-zero-trust', post_th:'Zero Trust คืออะไร', post_en:'What Is Zero Trust?' },
+  { id:'ai', w:0.8, th:'การใช้ AI ในองค์กร', en:'AI use in the organization',
+    why_th:'พนักงานอาจนำข้อมูลสำคัญไปใส่ในเครื่องมือ AI ภายนอกโดยไม่รู้ตัว', why_en:'Employees may paste sensitive data into outside AI tools without realizing the risk.',
+    post:'shadow-ai-risks-and-response', post_th:'Shadow AI คืออะไร', post_en:'What Is Shadow AI?' },
+  { id:'ot', w:1.2, ot:true, th:'ระบบควบคุมอุตสาหกรรม (OT)', en:'Industrial control systems (OT)',
+    why_th:'ระบบ OT กระทบความปลอดภัยของคนและการผลิต และมักแพตช์ไม่ได้ง่าย', why_en:'OT affects safety and production, and is often hard to patch.',
+    post:'zero-trust-for-ot', post_th:'Zero Trust กับระบบ OT', post_en:'Zero Trust for OT' }
+];
+
+const QUESTIONS = [
+  { id:'iam1', d:'iam', h:30,
+    q_th:'บัญชีสำคัญ (อีเมล, VPN, คลาวด์, ผู้ดูแลระบบ) เปิดใช้การยืนยันตัวตนหลายปัจจัย (MFA) ครบถ้วนเพียงใด',
+    q_en:'How completely is multi-factor authentication (MFA) enabled on key accounts (email, VPN, cloud, administrators)?',
+    hint_th:'นับว่าครบเมื่อครอบคลุมผู้ใช้ทุกคนสำหรับอีเมลและการเข้าถึงระยะไกล และผู้ดูแลระบบทุกบัญชี', hint_en:'Complete means every user for email and remote access, and every administrator account.',
+    fix_th:'เปิด MFA กับอีเมล VPN และบัญชีผู้ดูแลระบบทั้งหมดก่อน แล้วเลือกชนิดที่ทนฟิชชิ่ง (เช่น Passkey) สำหรับบัญชีสำคัญ',
+    fix_en:'Enable MFA on all email, VPN, and administrator accounts first, then use phishing-resistant methods (such as passkeys) for critical accounts.' },
+  { id:'iam2', d:'iam', h:30,
+    q_th:'องค์กรให้สิทธิ์ผู้ใช้เท่าที่จำเป็น แยกบัญชีผู้ดูแลระบบจากบัญชีใช้งานประจำ และปิดบัญชีพนักงานที่ลาออก/ทบทวนสิทธิ์เป็นระยะเพียงใด',
+    q_en:'How well does the organization grant least privilege, separate admin accounts from daily accounts, and disable leavers\' accounts and review access regularly?',
+    hint_th:'เช่น ผู้ใช้ทั่วไปไม่เป็น local admin และมีรอบทบทวนสิทธิ์', hint_en:'For example, regular users are not local admins, and access is reviewed on a schedule.',
+    fix_th:'สำรวจบัญชีผู้ดูแลระบบและบัญชีที่ไม่ใช้งาน ปิดบัญชีพนักงานเก่า แยกบัญชีแอดมินออกจากบัญชีประจำวัน และตั้งรอบทบทวนสิทธิ์ทุกไตรมาส',
+    fix_en:'Inventory admin and dormant accounts, disable former employees\' accounts, separate admin from daily accounts, and review access quarterly.' },
+  { id:'ep1', d:'endpoint', h:90,
+    q_th:'คอมพิวเตอร์และเซิร์ฟเวอร์ทุกเครื่องมีซอฟต์แวร์ป้องกัน (AV/EDR) ที่บริหารจากส่วนกลางและตรวจจับพฤติกรรมผิดปกติได้เพียงใด',
+    q_en:'How well are all computers and servers covered by centrally managed protection (AV/EDR) that can detect abnormal behavior?',
+    hint_th:'ตรวจดูว่ามีเครื่องที่ไม่ได้ติดตั้งหรือไม่ได้รายงานเข้าคอนโซลหรือไม่', hint_en:'Check for machines that are missing the agent or not reporting to the console.',
+    fix_th:'ติดตั้ง EDR/AV ที่มีคอนโซลกลางให้ครบทุกเครื่อง ตั้งการแจ้งเตือนถึงผู้รับผิดชอบ และตรวจสอบเครื่องที่ยังไม่ได้ติดตั้ง',
+    fix_en:'Deploy EDR/AV with a central console on every machine, route alerts to a named owner, and track machines still missing the agent.' },
+  { id:'ep2', d:'endpoint', h:30,
+    q_th:'การอัปเดตแพตช์ระบบปฏิบัติการและซอฟต์แวร์ มีกำหนดเวลาชัดเจนและติดตามผล โดยเฉพาะช่องโหว่ที่ถูกโจมตีจริงเพียงใด',
+    q_en:'How well is patching of operating systems and software done on a clear schedule and tracked, especially actively exploited vulnerabilities?',
+    hint_th:'รวมถึงอุปกรณ์เครือข่ายและระบบที่เปิดสู่อินเทอร์เน็ต', hint_en:'Include network devices and internet-facing systems.',
+    fix_th:'กำหนดเวลาอัปเดตแพตช์ (ช่องโหว่ร้ายแรงที่ถูกโจมตีจริงต้องเร็วที่สุด) เริ่มจากระบบที่เปิดสู่อินเทอร์เน็ต และทำรายงานเครื่องที่ยังไม่อัปเดต',
+    fix_en:'Set patch deadlines (actively exploited critical flaws fastest), starting with internet-facing systems, and report on machines still unpatched.' },
+  { id:'nw1', d:'network', h:90,
+    q_th:'ไฟร์วอลล์ตั้งกฎอย่างเหมาะสมและทบทวนเป็นระยะ และมีการแบ่งส่วนเครือข่ายระหว่างผู้ใช้ เซิร์ฟเวอร์ และระบบสำคัญเพียงใด',
+    q_en:'How well are firewall rules appropriate and reviewed, with the network segmented between users, servers, and critical systems?',
+    hint_th:'เครือข่ายแบนราบ (ทุกเครื่องคุยกันได้หมด) ถือว่ายังไม่แบ่งส่วน', hint_en:'A flat network where everything can reach everything counts as not segmented.',
+    fix_th:'ทบทวนกฎไฟร์วอลล์ที่เปิดกว้างเกินจำเป็น แล้วแบ่งส่วนเครือข่ายให้ระบบสำคัญแยกจากเครือข่ายผู้ใช้ทั่วไป เริ่มจากเซิร์ฟเวอร์และระบบการเงิน',
+    fix_en:'Review overly broad firewall rules, then segment critical systems from the general user network, starting with servers and finance systems.' },
+  { id:'nw2', d:'network', h:30,
+    q_th:'การเข้าถึงระยะไกล (VPN, Remote Desktop, เครื่องมือซัพพอร์ต) ถูกควบคุม มี MFA และบันทึกการใช้งาน และไม่เปิด RDP ตรงสู่อินเทอร์เน็ตเพียงใด',
+    q_en:'How well is remote access (VPN, Remote Desktop, support tools) controlled with MFA and logging, with no RDP exposed directly to the internet?',
+    hint_th:'รวมเครื่องมือรีโมตของผู้ขายและผู้รับเหมา', hint_en:'Include vendors\' and contractors\' remote tools.',
+    fix_th:'ปิดการเปิด RDP/บริการภายในสู่อินเทอร์เน็ตโดยตรง รวมการเข้าถึงระยะไกลให้ผ่านทางเดียวที่มี MFA และเก็บ log',
+    fix_en:'Stop exposing RDP and internal services directly to the internet, and route remote access through one path with MFA and logging.' },
+  { id:'cl1', d:'cloud', h:90,
+    q_th:'องค์กรรู้ว่ามีบริการคลาวด์/SaaS อะไรบ้าง ใครเป็นเจ้าของ และตรวจการตั้งค่าที่เสี่ยง (เช่น เปิดสาธารณะโดยไม่ตั้งใจ สิทธิ์เกินจำเป็น) เป็นระยะเพียงใด',
+    q_en:'How well does the organization know which cloud/SaaS services it uses, who owns them, and regularly check risky settings (accidental public exposure, excess permissions)?',
+    hint_th:'รวมบริการที่แผนกต่างๆ สมัครใช้เอง', hint_en:'Include services that departments signed up for on their own.',
+    fix_th:'ทำรายการบริการคลาวด์/SaaS ทั้งหมดพร้อมเจ้าของ และตรวจการตั้งค่าที่เสี่ยง (storage เปิดสาธารณะ คีย์/สิทธิ์เกินจำเป็น) เริ่มจากบริการที่เก็บข้อมูลสำคัญ',
+    fix_en:'List every cloud/SaaS service with an owner and check risky settings (public storage, excess keys or permissions), starting with services holding sensitive data.' },
+  { id:'dt1', d:'data', h:30,
+    q_th:'ข้อมูลสำคัญสำรองตามหลัก 3-2-1 มีสำเนาที่แยกจากเครือข่าย (offline/immutable) และทดสอบกู้คืนจริงเป็นระยะเพียงใด',
+    q_en:'How well are critical data backed up on the 3-2-1 rule, with an isolated (offline/immutable) copy and restores tested regularly?',
+    hint_th:'3 สำเนา บนสื่อ 2 ประเภท และ 1 สำเนาแยกจากเครือข่าย', hint_en:'3 copies, 2 media types, 1 copy isolated from the network.',
+    fix_th:'สำรองข้อมูลระบบสำคัญตามหลัก 3-2-1 เพิ่มสำเนาแบบ offline หรือ immutable และกำหนดวันทดสอบกู้คืนอย่างน้อยปีละครั้ง',
+    fix_en:'Back up critical systems on the 3-2-1 rule, add an offline or immutable copy, and schedule a restore test at least yearly.' },
+  { id:'dt2', d:'data', h:90,
+    q_th:'องค์กรระบุได้ว่าข้อมูลสำคัญและข้อมูลส่วนบุคคลอยู่ที่ไหน จัดชั้นความลับ และป้องกันด้วยการเข้ารหัสหรือการควบคุมสิทธิ์เพียงใด',
+    q_en:'How well does the organization know where sensitive and personal data live, classify it, and protect it with encryption or access control?',
+    hint_th:'รวมไฟล์ที่เก็บในอีเมล เครื่องผู้ใช้ และระบบคลาวด์', hint_en:'Include files in email, on user devices, and in cloud systems.',
+    fix_th:'ทำแผนผังข้อมูลสำคัญและข้อมูลส่วนบุคคล จัดชั้นความลับ แล้วเข้ารหัสและจำกัดสิทธิ์เข้าถึงตามชั้น',
+    fix_en:'Map sensitive and personal data, classify it, then encrypt it and restrict access by classification.' },
+  { id:'so1', d:'soc', h:90,
+    q_th:'มีการเก็บ log จากระบบสำคัญ (อีเมล ไฟร์วอลล์ เซิร์ฟเวอร์ ระบบยืนยันตัวตน) และมีคนหรือบริการเฝ้าระวังแจ้งเตือนจริงเพียงใด',
+    q_en:'How well are logs collected from key systems (email, firewall, servers, identity) and actually monitored by people or a service?',
+    hint_th:'การเก็บ log ไว้เฉย ๆ โดยไม่มีใครดูถือว่ายังไม่เฝ้าระวัง', hint_en:'Keeping logs that nobody reviews does not count as monitoring.',
+    fix_th:'เก็บ log ของระบบสำคัญไว้ส่วนกลางและกำหนดผู้รับผิดชอบเฝ้าระวัง หากไม่มีทีมเอง พิจารณาใช้บริการ MDR/SOC-as-a-Service',
+    fix_en:'Centralize logs from key systems and assign monitoring ownership. If you have no team of your own, consider an MDR or SOC-as-a-service.' },
+  { id:'so2', d:'soc', h:30,
+    q_th:'มีแผนรับมือเหตุการณ์เป็นลายลักษณ์อักษร ระบุผู้ตัดสินใจและช่องทางติดต่อ และเคยซ้อมแผนเพียงใด',
+    q_en:'How well is there a written incident response plan naming decision makers and contacts, and has it been rehearsed?',
+    hint_th:'รวมวิธีแยกระบบที่ติดเชื้อและการแจ้งเหตุต่อผู้เกี่ยวข้อง', hint_en:'Include how to isolate infected systems and who to notify.',
+    fix_th:'เขียนแผนรับมือเหตุการณ์ฉบับสั้น (ใครตัดสินใจ ใครติดต่อใคร วิธีแยกระบบ ช่องทางแจ้งเหตุ) และซ้อมแบบ tabletop อย่างน้อยปีละครั้ง',
+    fix_en:'Write a short incident response plan (who decides, who contacts whom, how to isolate systems, how to report) and run a tabletop exercise at least yearly.' },
+  { id:'vr1', d:'vuln', h:90,
+    q_th:'มีการสแกนช่องโหว่ระบบ (ภายในและที่เปิดสู่อินเทอร์เน็ต) เป็นประจำ จัดลำดับความสำคัญ และติดตามการแก้ไขเพียงใด',
+    q_en:'How regularly are systems (internal and internet-facing) scanned for vulnerabilities, prioritized, and tracked to closure?',
+    hint_th:'รวมการทดสอบเจาะระบบสำหรับระบบสำคัญ', hint_en:'Include penetration testing of critical systems.',
+    fix_th:'เริ่มสแกนช่องโหว่ระบบที่เปิดสู่อินเทอร์เน็ตเป็นประจำ จัดลำดับโดยดูช่องโหว่ที่ถูกโจมตีจริงก่อน และติดตามจนปิดงาน',
+    fix_en:'Start scanning internet-facing systems regularly, prioritize actively exploited flaws first, and track them to closure.' },
+  { id:'vr2', d:'vuln', h:180,
+    q_th:'เคยประเมินความเสี่ยงด้านไซเบอร์อย่างเป็นระบบ มีผู้รับผิดชอบความเสี่ยงแต่ละข้อ และรายงานผู้บริหารเป็นรอบเพียงใด',
+    q_en:'How well has a systematic cyber risk assessment been done, with an owner for each risk and regular reporting to management?',
+    hint_th:'ควรระบุสินทรัพย์สำคัญ ภัยคุกคาม และมาตรการจัดการ', hint_en:'It should identify critical assets, threats, and treatments.',
+    fix_th:'ทำการประเมินความเสี่ยงเบื้องต้นจากสินทรัพย์ที่สำคัญ กำหนดเจ้าของความเสี่ยง และรายงานผู้บริหารเป็นรอบ',
+    fix_en:'Run an initial risk assessment starting from critical assets, assign risk owners, and report to management on a cycle.' },
+  { id:'gr1', d:'grc', h:180,
+    q_th:'มีนโยบายความมั่นคงปลอดภัยที่ผู้บริหารอนุมัติและสื่อสารแล้ว รวมถึงขั้นตอนด้าน PDPA เช่น ประกาศความเป็นส่วนตัวและกระบวนการแจ้งเหตุละเมิดข้อมูลเพียงใด',
+    q_en:'How well is there an executive-approved, communicated security policy, including PDPA procedures such as a privacy notice and a breach notification process?',
+    hint_th:'ถ้าองค์กรไม่ได้ดูแลข้อมูลส่วนบุคคลเลย ให้ประเมินเฉพาะส่วนนโยบาย', hint_en:'If you handle no personal data, rate only the policy part.',
+    fix_th:'จัดทำหรือทบทวนนโยบายความมั่นคงปลอดภัยให้ผู้บริหารอนุมัติ และตรวจว่ามีประกาศความเป็นส่วนตัวและขั้นตอนแจ้งเหตุละเมิดข้อมูลส่วนบุคคลตาม PDPA (ควรปรึกษาที่ปรึกษากฎหมายประกอบ)',
+    fix_en:'Draft or review the security policy for executive approval, and confirm a privacy notice and a personal-data breach notification procedure exist under PDPA (consult legal counsel).' },
+  { id:'gr2', d:'grc', h:90,
+    q_th:'พนักงานได้รับการอบรมด้านความปลอดภัยเป็นประจำ และมีการทดสอบฟิชชิ่งเพียงใด',
+    q_en:'How regularly do employees receive security awareness training and phishing tests?',
+    hint_th:'รวมการสอนวิธีรายงานอีเมลน่าสงสัย', hint_en:'Include teaching how to report suspicious email.',
+    fix_th:'จัดอบรมสั้นๆ เรื่องฟิชชิ่งและการรายงานอีเมลน่าสงสัยให้พนักงานทุกคนอย่างน้อยปีละครั้ง และทดสอบฟิชชิ่งเป็นระยะ',
+    fix_en:'Run short training on phishing and reporting suspicious email for all staff at least yearly, and test with phishing simulations periodically.' },
+  { id:'tp1', d:'third', h:180,
+    q_th:'คู่ค้า ผู้รับเหมา หรือผู้ให้บริการที่เข้าถึงระบบ/ข้อมูลได้รับการประเมินความเสี่ยง มีข้อตกลงด้านความปลอดภัย และถูกจำกัดสิทธิ์/เวลาเข้าถึงเพียงใด',
+    q_en:'How well are partners, contractors, or providers with access to systems or data risk-assessed, covered by security terms, and limited in access rights and time?',
+    hint_th:'รวมผู้ให้บริการไอที ที่ปรึกษา และผู้ขายที่เข้ามาซัพพอร์ต', hint_en:'Include IT providers, consultants, and vendors who provide support.',
+    fix_th:'ทำรายการผู้ให้บริการที่เข้าถึงระบบหรือข้อมูล กำหนดข้อกำหนดด้านความปลอดภัยในสัญญา และจำกัดสิทธิ์/เวลาการเข้าถึงของผู้รับเหมา',
+    fix_en:'List providers with access to systems or data, add security requirements to contracts, and limit contractors\' access rights and duration.' },
+  { id:'ai1', d:'ai', h:30,
+    q_th:'มีนโยบายการใช้เครื่องมือ AI (เช่น แชตบอต) ระบุว่าข้อมูลระดับใดห้ามใส่ และมีเครื่องมือที่องค์กรอนุมัติให้ใช้เพียงใด',
+    q_en:'How well is there a policy on AI tools (such as chatbots) stating which data must never be entered, with approved tools provided?',
+    hint_th:'ถ้ายังไม่รู้ว่าพนักงานใช้เครื่องมือ AI อะไรบ้าง ให้ตอบว่ายังไม่มี', hint_en:'If you don\'t yet know which AI tools staff use, answer "not yet".',
+    fix_th:'ออกนโยบายสั้นๆ เรื่องการใช้ AI (ข้อมูลที่ห้ามใส่ เครื่องมือที่อนุมัติ) และสำรวจว่าพนักงานใช้เครื่องมือใดอยู่ก่อนกำหนดมาตรการ',
+    fix_en:'Issue a short AI-use policy (data not to enter, approved tools) and survey which tools staff already use before setting controls.' },
+  { id:'ot1', d:'ot', h:90,
+    q_th:'ระบบ OT/ระบบควบคุมการผลิตแยกจากเครือข่ายองค์กร (IT) ชัดเจน และรู้ว่ามีอุปกรณ์ OT อะไรบ้างเพียงใด',
+    q_en:'How well is the OT/production control network clearly separated from the corporate (IT) network, with a known inventory of OT devices?',
+    hint_th:'รวมการมีรายการอุปกรณ์ PLC/HMI/SCADA ที่เป็นปัจจุบัน', hint_en:'Include an up-to-date inventory of PLC/HMI/SCADA devices.',
+    fix_th:'ทำรายการอุปกรณ์ OT แบบ passive และแยกเครือข่าย OT ออกจาก IT ให้ชัดเจน ก่อนแบ่งโซนย่อยตาม IEC 62443',
+    fix_en:'Build a passive OT asset inventory and clearly separate OT from IT before creating sub-zones per IEC 62443.' },
+  { id:'ot2', d:'ot', h:30,
+    q_th:'การเข้าถึง OT ระยะไกลโดยผู้ขายหรือผู้รับเหมาผ่านจุดเดียวที่ควบคุมได้ มี MFA จำกัดเวลา และบันทึกเซสชันเพียงใด',
+    q_en:'How well is remote access to OT by vendors or contractors routed through one controlled point with MFA, time limits, and session recording?',
+    hint_th:'การให้ผู้ขายต่อเข้าโดยตรงหรือใช้โปรแกรมรีโมตหลายตัวถือว่ายังไม่ควบคุม', hint_en:'Direct vendor connections or several remote tools count as not controlled.',
+    fix_th:'รวมการเข้าถึง OT ระยะไกลให้เหลือเส้นทางเดียวที่มี MFA จำกัดเวลา และบันทึกเซสชัน',
+    fix_en:'Consolidate remote OT access into one path with MFA, time limits, and session recording.' }
+];
+
+const PROFILE = [
+  { id:'size', th:'ขนาดองค์กร (จำนวนพนักงาน)', en:'Organization size (employees)',
+    opts:[['xs','น้อยกว่า 50','Under 50'],['s','50–250','50–250'],['m','251–1,000','251–1,000'],['l','มากกว่า 1,000','Over 1,000']] },
+  { id:'sector', th:'อุตสาหกรรม', en:'Sector',
+    opts:[['fin','การเงิน/ประกัน','Finance / insurance'],['health','สาธารณสุข','Healthcare'],['mfg','การผลิต/พลังงาน','Manufacturing / energy'],['gov','ภาครัฐ/การศึกษา','Government / education'],['other','อื่นๆ','Other']] },
+  { id:'pii', th:'องค์กรเก็บหรือประมวลผลข้อมูลส่วนบุคคลของลูกค้าหรือพนักงานหรือไม่', en:'Does the organization collect or process personal data of customers or employees?',
+    opts:[['yes','ใช่','Yes'],['no','ไม่','No']] },
+  { id:'ot', th:'มีระบบควบคุมอุตสาหกรรม (OT/SCADA/PLC) หรือไม่', en:'Do you operate industrial control systems (OT/SCADA/PLC)?',
+    opts:[['yes','มี','Yes'],['no','ไม่มี','No']] },
+  { id:'cloud', th:'การใช้คลาวด์และ SaaS', en:'Cloud and SaaS use',
+    opts:[['low','น้อย/ไม่มี','Little or none'],['mid','ปานกลาง','Moderate'],['high','มาก (ระบบหลักอยู่บนคลาวด์)','Heavy (core systems in the cloud)']] }
+];
+
+/* ============================ State & helpers ============================ */
+let lang = 'th';
+let stepIndex = 0;           // 0 = profile, 1..n = domains, n+1 = results
+const profile = {};
+const answers = {};          // qid -> 0..3 or 'u'
+
+const el = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+const L = (o, k) => o[k + '_' + lang] || o[k + '_th'] || '';
+const t = k => UI[lang][k];
+
+function activeDomains(){ return DOMAINS.filter(d => !d.ot || profile.ot === 'yes'); }
+function qsFor(domainId){ return QUESTIONS.filter(q => q.d === domainId); }
+function totalSteps(){ return activeDomains().length + 2; }   // profile + domains + results
+
+function scoreOf(a){ return a === 'u' || a == null ? 0 : a; }
+function domainScore(d){
+  const qs = qsFor(d.id);
+  return qs.reduce((s, q) => s + scoreOf(answers[q.id]), 0) / (qs.length * 3);
+}
+function overallScore(){
+  const ds = activeDomains();
+  const wsum = ds.reduce((s, d) => s + d.w, 0);
+  return ds.reduce((s, d) => s + domainScore(d) * d.w, 0) / wsum;
+}
+function bandIndex(p){ return p < 0.30 ? 0 : p < 0.55 ? 1 : p < 0.80 ? 2 : 3; }
+function colorFor(r){
+  const stops = [[255,122,122],[255,176,32],[79,209,197]];
+  const x = Math.min(1, Math.max(0, r)) * 2, i = Math.min(1, Math.floor(x)), f = x - i;
+  return 'rgb(' + [0,1,2].map(k => Math.round(stops[i][k] + (stops[i+1][k] - stops[i][k]) * f)).join(',') + ')';
+}
+function postUrl(slug){ return (lang === 'en' ? '/en/blog/' : '/blog/') + slug; }
+
+/* ============================ Analysis ============================ */
+function analyze(){
+  const ds = activeDomains();
+  const domainRows = ds.map(d => ({ d, score: domainScore(d) }));
+  const priorities = domainRows.filter(r => r.score < 0.8)
+    .sort((a, b) => ((1 - b.score) * b.d.w) - ((1 - a.score) * a.d.w)).slice(0, 3);
+  const gapQs = QUESTIONS.filter(q => ds.some(d => d.id === q.d) && scoreOf(answers[q.id]) <= 1)
+    .map(q => ({ q, s: scoreOf(answers[q.id]), w: ds.find(d => d.id === q.d).w }))
+    .map(o => Object.assign(o, { need: (3 - o.s) * o.w }))
+    .sort((a, b) => b.need - a.need);
+  const caps = { 30: 5, 90: 4, 180: 3 };
+  const road = { 30: [], 90: [], 180: [] };
+  gapQs.forEach(o => { const h = o.q.h; if(road[h].length < caps[h]) road[h].push(o.q); });
+  const unsure = Object.keys(answers).filter(k => answers[k] === 'u' && QUESTIONS.some(q => q.id === k && ds.some(d => d.id === q.d))).length;
+  return { domainRows, priorities, gapQs, road, unsure };
+}
+
+function profileNotes(){
+  const n = [];
+  const th = lang === 'th';
+  if(profile.size === 'xs' || profile.size === 's') n.push(th ? 'องค์กรขนาดเล็กถึงกลางมักมีทีมไอทีจำกัด ควรเลือกบริการแบบ managed (เช่น MDR, backup as a service, email security) แทนการสร้างและดูแลเองทั้งหมด จะคุ้มค่ากว่า' : 'Small to mid-size organizations usually have limited IT staff. Managed services (MDR, backup as a service, email security) are often more cost-effective than building and running everything yourself.');
+  if(profile.pii === 'yes') n.push(th ? 'เนื่องจากองค์กรประมวลผลข้อมูลส่วนบุคคล ควรทำแผนผังข้อมูล (data inventory) บันทึกกิจกรรมการประมวลผล และมีขั้นตอนแจ้งเหตุละเมิดข้อมูลตาม PDPA ควบคู่กับมาตรการทางเทคนิค ควรปรึกษาที่ปรึกษากฎหมายประกอบ' : 'Because you process personal data, build a data inventory, record processing activities, and have a breach notification procedure under PDPA alongside the technical controls. Consult legal counsel as well.');
+  if(profile.ot === 'yes') n.push(th ? 'ระบบ OT มีข้อจำกัดต่างจาก IT (แพตช์ยาก ห้ามกระทบการผลิต) ควรออกแบบมาตรการเฉพาะ อ่านเพิ่มเติมที่บทความ Zero Trust กับระบบ OT' : 'OT has different constraints from IT (hard to patch, must not disturb production), so design measures specifically for it. See the article on Zero Trust for OT.');
+  if(profile.cloud === 'high') n.push(th ? 'เมื่อระบบหลักอยู่บนคลาวด์ การตั้งค่าและตัวตนคือแนวป้องกันหลัก ควรให้ความสำคัญกับ MFA การตรวจการตั้งค่า และการเก็บ log ของคลาวด์เป็นพิเศษ' : 'With core systems in the cloud, configuration and identity are the main line of defense. Prioritize MFA, configuration checks, and cloud logging.');
+  if(profile.sector === 'fin' || profile.sector === 'health' || profile.sector === 'gov') n.push(th ? 'อุตสาหกรรมของคุณมักมีข้อกำหนดเฉพาะจากหน่วยงานกำกับ ควรตรวจสอบข้อกำหนดที่เกี่ยวข้องเพิ่มเติม นอกเหนือจากผลประเมินเบื้องต้นนี้' : 'Your sector often has specific regulatory requirements. Check the applicable rules in addition to this preliminary assessment.');
+  return n;
+}
+
+/* ============================ Rendering ============================ */
+function renderDomainList(){
+  el('domain-list').innerHTML = DOMAINS.map(d => `<li>${esc(lang === 'en' ? d.en : d.th)}</li>`).join('');
+}
+
+function progressHtml(){
+  const total = totalSteps(), cur = stepIndex + 1;
+  return `<div class="progress"><span>${t('stepOf')} ${cur} ${t('of')} ${total}</span><div class="bar" role="progressbar" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${cur}"><i style="width:${Math.round(cur / total * 100)}%"></i></div></div>`;
+}
+
+function profileComplete(){ return PROFILE.every(p => profile[p.id]); }
+function stepComplete(){
+  if(stepIndex === 0) return profileComplete();
+  const d = activeDomains()[stepIndex - 1];
+  return qsFor(d.id).every(q => answers[q.id] !== undefined);
+}
+
+function renderStep(){
+  const card = el('tool-card');
+  const total = totalSteps();
+  if(stepIndex >= total - 1){ renderResults(card); return; }
+  let body = '';
+  if(stepIndex === 0){
+    body = `<h2 class="step-title">${t('profileTitle')}</h2><p class="step-sub">${t('profileSub')}</p>` + PROFILE.map(p => {
+      const cls = p.opts.length === 2 ? 'two' : p.opts.length === 3 ? 'three' : p.opts.length === 4 ? 'four' : '';
+      return `<fieldset><legend>${esc(lang === 'en' ? p.en : p.th)}</legend><div class="opts ${cls}">` + p.opts.map(o =>
+        `<label class="opt"><input type="radio" name="p_${p.id}" value="${o[0]}" data-profile="${p.id}"${profile[p.id] === o[0] ? ' checked' : ''}><span>${esc(lang === 'en' ? o[2] : o[1])}</span></label>`).join('') + `</div></fieldset>`;
+    }).join('');
+  } else {
+    const d = activeDomains()[stepIndex - 1];
+    body = `<h2 class="step-title">${esc(lang === 'en' ? d.en : d.th)}</h2><p class="step-sub">${t('domainSub')}</p>` + qsFor(d.id).map(q => `
+      <fieldset><legend>${esc(L(q, 'q'))}</legend><p class="hint">${esc(L(q, 'hint'))}</p><div class="opts">` +
+      UI[lang].levels.map((lv, i) => `<label class="opt"><input type="radio" name="q_${q.id}" value="${i}" data-q="${q.id}"${answers[q.id] === i ? ' checked' : ''}><span>${esc(lv)}</span></label>`).join('') +
+      `<label class="opt unsure"><input type="radio" name="q_${q.id}" value="u" data-q="${q.id}"${answers[q.id] === 'u' ? ' checked' : ''}><span>${t('unsure')}</span></label></div></fieldset>`).join('');
+  }
+  const last = stepIndex === total - 2;
+  card.innerHTML = progressHtml() + body + `<div class="nav-btns">
+    <button type="button" class="btn btn-ghost" id="btn-back"${stepIndex === 0 ? ' disabled' : ''}>${t('back')}</button>
+    <button type="button" class="btn btn-primary" id="btn-next"${stepComplete() ? '' : ' disabled'}>${stepIndex === 0 ? t('start') : last ? t('seeResult') : t('next')}</button></div>
+    <p class="hint" id="need-all" style="margin-top:10px;${stepComplete() ? 'display:none' : ''}">${t('answerAll')}</p>`;
+}
+
+function renderResults(card){
+  const r = analyze();
+  const ov = overallScore(), pct = Math.round(ov * 100), band = UI[lang].bands[bandIndex(ov)];
+  const c = colorFor(ov);
+  let h = `<div class="progress"><span>${t('resTitle')}</span><div class="bar"><i style="width:100%"></i></div></div>`;
+  h += `<div class="res-head"><div class="score" style="--c:${c}">${pct}<small>%</small></div><div><h3>${esc(band.t)}</h3><p>${esc(band.d)}</p><p class="mono" style="margin-top:8px;font-size:11.5px">${t('overall')}</p></div></div>`;
+  if(r.unsure) h += `<p class="unsure-note">${t('unsureNote').replace('{n}', r.unsure)}</p>`;
+
+  h += `<h3 class="res-h">${t('byDomain')}</h3>` + r.domainRows.map(row => {
+    const p = Math.round(row.score * 100);
+    return `<div class="dom-row"><span>${esc(lang === 'en' ? row.d.en : row.d.th)}</span><div class="meter"><i style="--w:${p}%;--c:${colorFor(row.score)}"></i></div><span class="pct">${p}%</span></div>`;
+  }).join('');
+
+  if(r.priorities.length){
+    h += `<h3 class="res-h">${t('topGaps')}</h3><div class="prio">` + r.priorities.map(row => {
+      const acts = r.gapQs.filter(o => o.q.d === row.d.id).slice(0, 2).map(o => L(o.q, 'fix'));
+      const link = row.d.post ? `<a href="${postUrl(row.d.post)}">${esc(lang === 'en' ? row.d.post_en : row.d.post_th)}</a>` : `<a href="/solutions.html">${t('solutionsLink')}</a>`;
+      return `<div class="prio-card"><h4>${esc(lang === 'en' ? row.d.en : row.d.th)} <span class="mono" style="font-size:11px;color:var(--muted)">· ${FRAMEWORK_FN[row.d.id]} · ${Math.round(row.score * 100)}%</span></h4>
+        <p class="why">${esc(L(row.d, 'why'))}</p>
+        ${acts.length ? `<ul>${acts.map(a => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
+        <div class="rel">${t('related')}: ${link}</div></div>`;
+    }).join('') + `</div>`;
+  } else {
+    h += `<p style="margin-top:28px;color:var(--muted)">${t('noGaps')}</p>`;
+  }
+
+  h += `<h3 class="res-h">${t('roadmap')}</h3><div class="road">` + [[30,'d30'],[90,'d90'],[180,'d180']].map(([hz, key]) =>
+    `<div class="road-col"><h4>${t(key)}</h4>` + (r.road[hz].length ? `<ul>${r.road[hz].map(q => `<li>${esc(L(q, 'fix'))}</li>`).join('')}</ul>` : `<p class="none">${t('noneAct')}</p>`) + `</div>`).join('') + `</div>`;
+
+  const notes = profileNotes();
+  if(notes.length) h += `<h3 class="res-h">${t('notesTitle')}</h3><ul class="notes">${notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`;
+
+  h += `<div class="actions"><button type="button" class="btn btn-primary" id="btn-consult">${t('consult')}</button>
+    <button type="button" class="btn btn-ghost" id="btn-email">${t('email')}</button>
+    <button type="button" class="btn btn-ghost" id="btn-copy">${t('copy')}</button>
+    <button type="button" class="btn btn-ghost" id="btn-print">${t('print')}</button>
+    <button type="button" class="btn btn-ghost" id="btn-restart">${t('restart')}</button><span class="toast" id="toast" role="status"></span></div>
+    <p class="disclaimer">${esc(t('disclaimer'))}</p>`;
+  card.innerHTML = h;
+}
+
+function summaryText(){
+  const r = analyze(), ov = overallScore(), band = UI[lang].bands[bandIndex(ov)];
+  const lines = [];
+  lines.push((lang === 'th' ? 'ผลประเมินความพร้อมด้าน Cybersecurity เบื้องต้น' : 'Preliminary cybersecurity readiness assessment') + ' — dynasec.pro/assessment.html');
+  lines.push(`${t('overall')}: ${Math.round(ov * 100)}% — ${band.t}`);
+  lines.push('');
+  lines.push(t('byDomain') + ':');
+  r.domainRows.forEach(row => lines.push(`- ${lang === 'en' ? row.d.en : row.d.th}: ${Math.round(row.score * 100)}%`));
+  if(r.priorities.length){ lines.push(''); lines.push(t('topGaps') + ':'); r.priorities.forEach((row, i) => lines.push(`${i + 1}. ${lang === 'en' ? row.d.en : row.d.th}`)); }
+  [[30,'d30'],[90,'d90'],[180,'d180']].forEach(([hz, key]) => { if(r.road[hz].length){ lines.push(''); lines.push(t(key) + ':'); r.road[hz].forEach(q => lines.push('- ' + L(q, 'fix'))); } });
+  lines.push(''); lines.push(t('disclaimer'));
+  return lines.join('\n');
+}
+
+/* ============================ Events ============================ */
+function setLang(l){
+  lang = l;
+  document.documentElement.lang = l;
+  el('btn-th').classList.toggle('active', l === 'th');
+  el('btn-en').classList.toggle('active', l === 'en');
+  document.querySelectorAll('[data-i18n]').forEach(n => { const v = UI[l][n.getAttribute('data-i18n')]; if(v !== undefined) n.innerHTML = v; });
+  renderDomainList();
+  renderStep();
+}
+function go(i){
+  stepIndex = i;
+  renderStep();
+  const tool = el('tool');
+  if(tool) tool.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+el('btn-th').addEventListener('click', () => setLang('th'));
+el('btn-en').addEventListener('click', () => setLang('en'));
+
+el('tool-card').addEventListener('change', e => {
+  const inp = e.target;
+  if(inp.dataset.profile){ profile[inp.dataset.profile] = inp.value; }
+  else if(inp.dataset.q){ answers[inp.dataset.q] = inp.value === 'u' ? 'u' : Number(inp.value); }
+  const ok = stepComplete();
+  const nb = el('btn-next'), need = el('need-all');
+  if(nb) nb.disabled = !ok;
+  if(need) need.style.display = ok ? 'none' : '';
+});
+
+let contactEmail = '';
+fetch('/content/about.json').then(r => r.ok ? r.json() : null).then(d => { if(d && d.email) contactEmail = d.email; }).catch(() => {});
+
+el('tool-card').addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if(!b) return;
+  if(b.id === 'btn-next'){ if(stepComplete()) go(stepIndex + 1); }
+  else if(b.id === 'btn-back'){ if(stepIndex > 0) go(stepIndex - 1); }
+  else if(b.id === 'btn-restart'){ Object.keys(answers).forEach(k => delete answers[k]); Object.keys(profile).forEach(k => delete profile[k]); go(0); }
+  else if(b.id === 'btn-print'){ window.print(); }
+  else if(b.id === 'btn-consult'){ location.href = '/#contact'; }
+  else if(b.id === 'btn-copy'){
+    const done = () => { const tt = el('toast'); if(tt){ tt.textContent = t('copied'); setTimeout(() => { tt.textContent = ''; }, 1800); } };
+    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(summaryText()).then(done, () => {});
+  }
+  else if(b.id === 'btn-email'){
+    if(!contactEmail){ location.href = '/#contact'; return; }
+    const body = t('mailIntro') + '\n\n' + summaryText();
+    location.href = 'mailto:' + contactEmail + '?subject=' + encodeURIComponent(t('mailSubject')) + '&body=' + encodeURIComponent(body);
+  }
+});
+
+setLang('th');
+</script>
+</body>
+</html>
