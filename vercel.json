@@ -1,0 +1,16 @@
+{
+  "functions": {
+    "api/blog.js": { "includeFiles": "content/blog.json" },
+    "api/sitemap.js": { "includeFiles": "content/blog.json" }
+  },
+  "redirects": [
+    { "source": "/blog.html", "destination": "/blog", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/blog", "destination": "/api/blog?lang=th" },
+    { "source": "/blog/:slug", "destination": "/api/blog?lang=th&slug=:slug" },
+    { "source": "/en/blog", "destination": "/api/blog?lang=en" },
+    { "source": "/en/blog/:slug", "destination": "/api/blog?lang=en&slug=:slug" },
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" }
+  ]
+}

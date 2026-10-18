@@ -103,8 +103,9 @@ collections:
             widget: "list"
             summary: "{{fields.date}} · {{fields.title_th}}"
             fields:
-              - {label: "ชื่อลิงก์ (slug)", name: "slug", widget: "string", hint: "ภาษาอังกฤษพิมพ์เล็ก ใช้ - คั่นคำ ห้ามซ้ำกับบทความอื่น เช่น what-is-zero-trust"}
+              - {label: "ชื่อลิงก์ (slug)", name: "slug", widget: "string", hint: "นี่คือส่วนท้ายของ URL (dynasec.pro/blog/ชื่อลิงก์) ใช้ภาษาอังกฤษพิมพ์เล็กและ - คั่นคำ ห้ามซ้ำ และไม่ควรเปลี่ยนหลังเผยแพร่แล้ว"}
               - {label: "วันที่เผยแพร่", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
+              - {label: "วันที่อัปเดตล่าสุด (ถ้าแก้ไขเนื้อหาสำคัญ)", name: "updated", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", required: false, hint: "Google ใช้วันที่นี้ประกอบการแสดงผล ใส่เมื่อแก้ไขเนื้อหาจริงเท่านั้น"}
               - label: "แท็ก"
                 name: "tags"
                 widget: "list"
@@ -112,9 +113,9 @@ collections:
                 field: {label: "แท็ก", name: "tag", widget: "string"}
               - {label: "ชื่อบทความ (ไทย)", name: "title_th", widget: "string"}
               - {label: "Title (English)", name: "title_en", widget: "string", required: false}
-              - {label: "คำโปรย (ไทย)", name: "summary_th", widget: "text"}
-              - {label: "Summary (English)", name: "summary_en", widget: "text", required: false}
-              - {label: "เนื้อหา (ไทย)", name: "body_th", widget: "text", hint: "เว้น 1 บรรทัดเพื่อขึ้นย่อหน้าใหม่ | ขึ้นต้นด้วย ## คือหัวข้อ | ขึ้นต้นด้วย - คือรายการ | ใส่ **ตัวหนา** ได้"}
+              - {label: "คำโปรย (ไทย) — แสดงเป็นคำอธิบายบน Google", name: "summary_th", widget: "text", hint: "เขียน 1-2 ประโยค ประมาณ 100-150 ตัวอักษร สรุปประเด็นหลักของบทความ ไม่ซ้ำกับบทความอื่น"}
+              - {label: "Summary (English) — shown as the Google description", name: "summary_en", widget: "text", required: false, hint: "1-2 sentences, about 110-155 characters. Unique per article."}
+              - {label: "เนื้อหา (ไทย)", name: "body_th", widget: "text", hint: "เว้น 1 บรรทัดเพื่อขึ้นย่อหน้าใหม่ | ขึ้นต้นด้วย ## คือหัวข้อ | ขึ้นต้นด้วย - คือรายการ | ใส่ **ตัวหนา** ได้ | ลิงก์ [ข้อความลิงก์](https://...) หรือลิงก์ไปบทความอื่น [ข้อความ](post:slug-ของบทความ)"}
               - {label: "Body (English)", name: "body_en", widget: "text", required: false, hint: "Leave a blank line for a new paragraph | ## heading | - bullet | **bold**. If empty, the Thai text is shown."}
               - label: "Infographic (ใส่ได้หลายรูป ไม่ใส่ก็ได้)"
                 name: "infographics"
