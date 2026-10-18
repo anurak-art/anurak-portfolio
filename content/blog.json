@@ -1,6 +1,93 @@
 {
   "items": [
     {
+      "slug": "zero-trust-for-ot",
+      "date": "2026-10-18",
+      "tags": [
+        "Zero Trust",
+        "OT Security",
+        "ICS"
+      ],
+      "title_th": "Zero Trust กับระบบ OT: ปรับใช้อย่างไรให้โรงงานไม่สะดุด",
+      "title_en": "Zero Trust for OT: Adapting It Without Disrupting the Plant",
+      "summary_th": "หลัก never trust, always verify ใช้กับโรงงานและระบบควบคุมได้ แต่ต้องปรับให้เข้ากับข้อจำกัดของ OT ไม่ใช่ก๊อปปี้จากฝั่ง IT",
+      "summary_en": "Never trust, always verify can work on the plant floor, but it must be adapted to OT constraints rather than copied from IT.",
+      "body_th": "เมื่อโรงงานเชื่อมระบบ OT เข้ากับเครือข่ายองค์กรและผู้รับเหมาเข้าถึงจากระยะไกลมากขึ้น แนวคิดว่า \"ภายในเครือข่ายคือที่ปลอดภัย\" ก็ใช้ไม่ได้อีกต่อไป Zero Trust จึงเข้ามาเกี่ยวข้องกับ OT แต่ต้องปรับใช้ให้เหมาะ เพราะเป้าหมายของ OT คือความปลอดภัยของคนและความต่อเนื่องของการผลิต ไม่ใช่แค่การปกป้องข้อมูล\n\n## ทำไม OT ต่างจาก IT\n\n- **ความพร้อมใช้งานและความปลอดภัยมาก่อน**: การหยุดสายการผลิตหรือกระทบกระบวนการควบคุมมีผลต่อชีวิตและทรัพย์สิน\n- **อุปกรณ์เก่าและอายุใช้งานยาว**: PLC และ HMI จำนวนมากใช้งานหลายสิบปี อัปเดตแพตช์ไม่ได้หรือทำได้เฉพาะช่วงหยุดบำรุงรักษา\n- **โปรโตคอลที่ไม่มีการยืนยันตัวตน**: โปรโตคอลอุตสาหกรรมรุ่นเก่า เช่น Modbus ออกแบบมาโดยไม่มีการยืนยันตัวตนหรือการเข้ารหัส\n- **ติดตั้ง agent บนอุปกรณ์ไม่ได้**: อุปกรณ์ควบคุมส่วนใหญ่ไม่รองรับซอฟต์แวร์ตรวจสอบแบบที่ใช้กับคอมพิวเตอร์ทั่วไป\n- **ผู้ขายและผู้รับเหมาต้องเข้าถึงระยะไกล**: เป็นเส้นทางที่ผู้โจมตีมักใช้\n\n## หลัก Zero Trust ที่ปรับใช้กับ OT ได้\n\n- **รู้ว่ามีอะไรในเครือข่าย**: ทำ asset inventory ด้วยการสังเกตทราฟฟิกแบบ passive ก่อน แทนการสแกนเชิงรุกที่อาจทำให้อุปกรณ์เก่าค้าง\n- **แบ่งโซนและกำหนดช่องทางสื่อสาร (zones and conduits)**: แนวทางตามมาตรฐาน IEC 62443 กำหนดว่าโซนไหนคุยกับโซนไหนได้ ผ่านช่องทางใด และปิดที่เหลือทั้งหมด (deny by default)\n- **ควบคุมการเข้าถึงระยะไกล**: ให้เข้าผ่านจุดเดียวที่ควบคุมได้ ใช้ MFA จำกัดเวลาและสิทธิ์รายงาน และบันทึกเซสชัน\n- **ให้สิทธิ์น้อยที่สุดตามบทบาท**: วิศวกรควบคุม ผู้ปฏิบัติงาน และผู้รับเหมา ควรเข้าถึงได้เฉพาะสิ่งที่ต้องใช้\n- **เฝ้าระวังด้วยเครื่องมือที่เข้าใจ OT**: ตรวจจับคำสั่งหรือการสื่อสารที่ผิดปกติจากพฤติกรรมปกติของกระบวนการ\n- **ใช้มาตรการทดแทนเมื่อแพตช์ไม่ได้**: เช่น กั้นอุปกรณ์เสี่ยงไว้หลังไฟร์วอลล์ภายในและจำกัดการสื่อสารให้เหลือเท่าที่จำเป็น\n\n## ข้อควรระวัง\n\n- **ห้ามให้มาตรการความปลอดภัยไซเบอร์กระทบความปลอดภัยของกระบวนการ**: ทดสอบนอกสายการผลิตหรือในช่วงหยุดบำรุงรักษา\n- **ระวังการสแกนเชิงรุก**: อุปกรณ์เก่าบางรุ่นตอบสนองผิดปกติหรือหยุดทำงานเมื่อถูกสแกน\n- **MFA ในจุดที่ต้องตอบสนองเร็ว**: จุดปฏิบัติงานที่ต้องเข้าถึงทันทีในสถานการณ์ฉุกเฉินต้องออกแบบกระบวนการเฉพาะ ไม่ใช่บังคับแบบเดียวกับพนักงานออฟฟิศ\n- **เปลี่ยนทีละโซน**: การแบ่งส่วนเครือข่ายครั้งเดียวทั้งโรงงานเสี่ยงต่อการตัดการสื่อสารที่กระบวนการต้องใช้\n\n## เริ่มต้นอย่างไร\n\n- **ทำ asset inventory แบบ passive**: รู้ว่ามีอุปกรณ์อะไร ใครคุยกับใคร\n- **แบ่งโซนตามความสำคัญ**: เริ่มจากแยก IT ออกจาก OT ให้ชัด แล้วค่อยแบ่งโซนย่อยในฝั่ง OT\n- **ปิดช่องทางเข้าถึงระยะไกลที่ไม่ได้ควบคุม**: ให้ทุกคนเข้าผ่านจุดเดียวที่มี MFA และบันทึกเซสชัน\n- **ติดตั้งระบบเฝ้าระวังแบบ passive**: ดูพฤติกรรมปกติก่อนตั้งกฎแจ้งเตือน\n- **ขยายตามความเสี่ยง**: ทำทีละโซนในช่วงหยุดบำรุงรักษา และทบทวนผลทุกครั้ง\n\n## จุดเริ่มต้นที่ทำได้ทันที\n\nตรวจสอบว่าใครเข้าถึงระบบ OT จากระยะไกลได้บ้างและผ่านทางไหน แล้วรวมให้เหลือเส้นทางเดียวที่มี MFA และบันทึกเซสชัน เป็นขั้นตอนที่คุ้มค่าที่สุดและกระทบการผลิตน้อยที่สุด",
+      "body_en": "As plants connect OT systems to corporate networks and contractors gain more remote access, the idea that \"inside the network means safe\" no longer holds. Zero Trust is relevant to OT, but it must be adapted, because OT exists to protect people and keep production running, not just to protect data.\n\n## Why OT differs from IT\n\n- **Availability and safety come first**: stopping a production line or disturbing the control process affects lives and assets\n- **Old equipment with long lifecycles**: many PLCs and HMIs run for decades and can't be patched, or only during maintenance shutdowns\n- **Protocols without authentication**: older industrial protocols such as Modbus were designed without authentication or encryption\n- **No agents on devices**: most controllers can't run the monitoring software used on ordinary computers\n- **Vendors and contractors need remote access**: a path attackers often use\n\n## Zero Trust principles that adapt to OT\n\n- **Know what is on the network**: build an asset inventory by passively observing traffic first, rather than actively scanning, which can freeze old devices\n- **Define zones and conduits**: the approach in IEC 62443 states which zone may talk to which, through which conduit, and blocks everything else (deny by default)\n- **Control remote access**: route everyone through one controlled entry point with MFA, per-task time and permission limits, and session recording\n- **Least privilege by role**: control engineers, operators, and contractors should reach only what they need\n- **Monitor with OT-aware tools**: detect abnormal commands or communication against the process's normal behavior\n- **Use compensating controls when patching isn't possible**: for example, place risky devices behind an internal firewall and limit communication to what is necessary\n\n## Things to watch\n\n- **Never let cybersecurity measures affect process safety**: test off the line or during maintenance shutdowns\n- **Be careful with active scanning**: some older devices respond abnormally or stop when scanned\n- **MFA where fast response matters**: stations that need immediate access in an emergency need a purpose-built process, not the same rule as office staff\n- **Change one zone at a time**: segmenting the whole plant at once risks cutting communication the process depends on\n\n## How to start\n\n- **Build a passive asset inventory**: know which devices exist and who talks to whom\n- **Segment by criticality**: start by clearly separating IT from OT, then create sub-zones within OT\n- **Close uncontrolled remote access**: send everyone through one entry point with MFA and session recording\n- **Deploy passive monitoring**: learn normal behavior before writing alert rules\n- **Expand by risk**: go zone by zone during maintenance windows and review the results each time\n\n## A starting point you can use today\n\nFind out who can reach your OT systems remotely and by which paths, then consolidate them into one path with MFA and session recording. It is the highest-value step with the least impact on production.",
+      "infographics": [
+        {
+          "type": "flow",
+          "title_th": "เส้นทางเข้าถึงระบบ OT แบบ Zero Trust",
+          "title_en": "A Zero Trust access path into OT",
+          "items": [
+            {
+              "label_th": "ผู้ใช้หรือผู้รับเหมา",
+              "label_en": "User or contractor",
+              "detail_th": "ไม่ได้รับความไว้ใจโดยปริยาย แม้อยู่ในองค์กร",
+              "detail_en": "Not trusted by default, even inside the organization",
+              "tone": "danger"
+            },
+            {
+              "label_th": "จุดเข้าถึงระยะไกลจุดเดียว",
+              "label_en": "One remote access point",
+              "detail_th": "MFA จำกัดเวลาและสิทธิ์ และบันทึกเซสชัน",
+              "detail_en": "MFA, time and permission limits, session recording"
+            },
+            {
+              "label_th": "โซนกลาง (DMZ)",
+              "label_en": "Intermediate zone (DMZ)",
+              "detail_th": "อนุญาตเฉพาะการสื่อสารที่กำหนดไว้ (deny by default)",
+              "detail_en": "Only defined communication allowed (deny by default)"
+            },
+            {
+              "label_th": "โซนควบคุม",
+              "label_en": "Control zone",
+              "detail_th": "PLC และ HMI อยู่หลังช่องทางที่ควบคุม",
+              "detail_en": "PLCs and HMIs sit behind controlled conduits",
+              "tone": "ok"
+            }
+          ]
+        },
+        {
+          "type": "steps",
+          "title_th": "แผนเริ่มต้น Zero Trust ใน OT ทีละขั้น",
+          "title_en": "A step-by-step Zero Trust start for OT",
+          "items": [
+            {
+              "label_th": "รู้ว่ามีอะไรในเครือข่าย",
+              "label_en": "Know what is on the network",
+              "detail_th": "asset inventory แบบ passive ไม่สแกนเชิงรุกบนอุปกรณ์เก่า",
+              "detail_en": "Passive asset inventory, no active scanning of old devices"
+            },
+            {
+              "label_th": "แบ่งโซนและช่องทางสื่อสาร",
+              "label_en": "Define zones and conduits",
+              "detail_th": "แยก IT จาก OT ก่อน แล้วแบ่งโซนย่อยตาม IEC 62443",
+              "detail_en": "Separate IT from OT first, then sub-zones per IEC 62443"
+            },
+            {
+              "label_th": "คุมการเข้าถึงระยะไกล",
+              "label_en": "Control remote access",
+              "detail_th": "จุดเดียว มี MFA จำกัดสิทธิ์ และบันทึกเซสชัน",
+              "detail_en": "One entry point with MFA, limited rights, session recording"
+            },
+            {
+              "label_th": "เฝ้าระวังแบบเข้าใจ OT",
+              "label_en": "Monitor with OT awareness",
+              "detail_th": "เรียนรู้พฤติกรรมปกติก่อนตั้งกฎแจ้งเตือน",
+              "detail_en": "Learn normal behavior before writing alert rules"
+            },
+            {
+              "label_th": "ขยายทีละโซน",
+              "label_en": "Expand zone by zone",
+              "detail_th": "ทำในช่วงหยุดบำรุงรักษา และทบทวนผลทุกครั้ง",
+              "detail_en": "Do it in maintenance windows and review each time"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "slug": "ai-in-soc-mttd-mttr",
       "date": "2026-10-18",
       "tags": [
