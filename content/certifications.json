@@ -11,6 +11,10 @@
     {
       "name": "CCNA",
       "issuer": "Cisco"
+    },
+    {
+      "name": "Certified Information Security Manager Training",
+      "issuer": "Vnohow"
     }
   ]
 }
