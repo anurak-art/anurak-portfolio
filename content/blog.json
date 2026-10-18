@@ -1,6 +1,122 @@
 {
   "items": [
     {
+      "slug": "ai-in-soc-mttd-mttr",
+      "date": "2026-10-18",
+      "tags": [
+        "SOC",
+        "AI Security",
+        "MTTD/MTTR"
+      ],
+      "title_th": "นำ AI มาใช้ใน SOC เพื่อลด MTTD และ MTTR",
+      "title_en": "Using AI in the SOC to Reduce MTTD and MTTR",
+      "summary_th": "AI ช่วยให้ SOC เจอภัยเร็วขึ้นและตอบสนองเร็วขึ้นได้ตรงไหนบ้าง พร้อมข้อควรระวังและวิธีเริ่มต้นอย่างปลอดภัย",
+      "summary_en": "Where AI helps a SOC detect and respond faster, plus the guardrails and a safe way to start.",
+      "body_th": "ทีม SOC ส่วนใหญ่เจอปัญหาเดียวกัน คือ alert มีจำนวนมากเกินกว่าคนจะไล่ดูได้ทัน นักวิเคราะห์เสียเวลากับงานซ้ำๆ เช่น เก็บข้อมูลประกอบและเขียนสรุป ขณะที่ภัยจริงอาจจมอยู่ในกองสัญญาณรบกวน AI จึงเข้ามาช่วยลดเวลาในส่วนที่เป็นแรงงานก่อน ไม่ได้มาแทนนักวิเคราะห์\n\n## MTTD และ MTTR คืออะไร\n\n- **MTTD (Mean Time to Detect)**: เวลาเฉลี่ยตั้งแต่เหตุการณ์เริ่มต้นจนทีมตรวจพบ\n- **MTTR (Mean Time to Respond / Resolve)**: เวลาเฉลี่ยตั้งแต่ตรวจพบจนตอบสนองหรือแก้ไขเสร็จ แต่ละองค์กรนิยามจุดสิ้นสุดไม่เหมือนกัน ควรตกลงให้ชัดก่อนวัดผล เพื่อเทียบก่อนและหลังใช้ AI ได้ตรงกัน\n\n## AI ช่วยได้ตรงไหน\n\n- **ตรวจจับ (ลด MTTD)**: วิเคราะห์พฤติกรรมผิดปกติของผู้ใช้และอุปกรณ์ (UEBA) จับความเชื่อมโยงของเหตุการณ์ที่กระจายอยู่หลายระบบ และช่วยตัดสัญญาณรบกวนที่ไม่ต้องดู\n- **คัดแยก (ลด MTTR)**: เติมบริบทให้ alert อัตโนมัติ เช่น ข้อมูลผู้ใช้ ความสำคัญของเครื่อง และ threat intelligence แล้วจัดลำดับความสำคัญให้\n- **สืบสวน (ลด MTTR)**: สรุปไทม์ไลน์เหตุการณ์ และให้นักวิเคราะห์ค้น log ด้วยภาษาธรรมชาติแทนการเขียน query ยาวๆ\n- **ตอบสนอง (ลด MTTR)**: เสนอ playbook หรือขั้นตอนถัดไป และสั่งงานผ่าน SOAR เช่น แยกเครื่องหรือปิดบัญชี โดยให้คนอนุมัติสำหรับการกระทำที่มีผลกระทบสูง\n- **ปรับปรุงต่อเนื่อง**: ช่วยร่างและปรับแต่ง detection rule จากเหตุการณ์ที่ผ่านมา เพื่อให้ MTTD ดีขึ้นในรอบถัดไป\n\n## ข้อควรระวัง\n\n- **คำตอบผิดพลาดแต่ฟังดูมั่นใจ**: AI อาจสรุปหรือสร้างข้อมูลที่ไม่มีอยู่จริง การตัดสินใจสำคัญต้องมีหลักฐานจาก log ให้ตรวจสอบได้\n- **Prompt injection ผ่านข้อมูลที่วิเคราะห์**: ข้อความใน log อีเมล หรือไฟล์ที่ผู้โจมตีควบคุมได้ อาจมีคำสั่งแฝงที่หลอก AI ได้\n- **ข้อมูลรั่วไหล**: log มีข้อมูลอ่อนไหว ต้องรู้ว่าส่งไปที่ไหน เก็บนานแค่ไหน และถูกนำไปเทรนหรือไม่\n- **อัตโนมัติเกินไป**: การตอบสนองอัตโนมัติที่ผิดพลาดอาจตัดระบบสำคัญของธุรกิจเอง\n- **พึ่งพา AI จนทักษะทีมลดลง**: ต้องให้นักวิเคราะห์ยังเข้าใจตรรกะเบื้องหลังผลลัพธ์\n\n## เริ่มต้นอย่างไร\n\n- **วัดค่าเริ่มต้นก่อน**: บันทึก MTTD และ MTTR ปัจจุบัน แยกตามประเภทเหตุการณ์ เพื่อใช้เทียบ\n- **เลือก use case ที่เสี่ยงต่ำและทำซ้ำบ่อย**: เช่น การเติมบริบทและสรุป alert ก่อนไปถึงการตอบสนองอัตโนมัติ\n- **ให้ AI แนะนำ คนเป็นผู้ตัดสินใจ**: ค่อยเพิ่มระดับอัตโนมัติเมื่อมีข้อมูลยืนยันความแม่นยำ\n- **ตั้ง guardrail**: จำกัดสิทธิ์ที่ AI ใช้งานได้ บันทึกทุกการกระทำ และมีปุ่มหยุดฉุกเฉิน\n- **วัดผลซ้ำและทบทวนเป็นรอบ**: ดูทั้งความเร็วและความแม่นยำ รวมถึงจำนวน alert ที่ AI จัดผิด\n\n## จุดเริ่มต้นที่ทำได้ทันที\n\nเลือกประเภท alert ที่ทีมเจอบ่อยที่สุด 1 ประเภท ให้ AI ช่วยเติมบริบทและสรุปให้นักวิเคราะห์ แล้ววัด MTTR ของประเภทนั้นเทียบกับก่อนใช้ภายใน 1-2 เดือน",
+      "body_en": "Most SOC teams share the same problem: far more alerts than people can review. Analysts burn time on repetitive work like gathering context and writing summaries, while real threats can hide in the noise. AI helps by cutting the labor-heavy time first. It does not replace analysts.\n\n## What are MTTD and MTTR?\n\n- **MTTD (Mean Time to Detect)**: the average time from when an incident begins to when the team detects it\n- **MTTR (Mean Time to Respond / Resolve)**: the average time from detection to response or resolution. Organizations define the end point differently, so agree on it before measuring, to compare before and after AI fairly\n\n## Where AI helps\n\n- **Detect (lower MTTD)**: analyze abnormal user and device behavior (UEBA), connect related events scattered across systems, and filter noise nobody needs to review\n- **Triage (lower MTTR)**: automatically enrich alerts with user details, asset criticality, and threat intelligence, then prioritize them\n- **Investigate (lower MTTR)**: summarize the incident timeline and let analysts search logs in natural language instead of writing long queries\n- **Respond (lower MTTR)**: suggest a playbook or next step and trigger actions through SOAR, such as isolating a host or disabling an account, with human approval for high-impact actions\n- **Improve continuously**: help draft and tune detection rules from past incidents so MTTD gets better next time\n\n## Things to watch\n\n- **Confident but wrong answers**: AI can summarize or invent facts that aren't there. Important decisions need log evidence that can be checked\n- **Prompt injection through analyzed data**: text in logs, emails, or files an attacker controls may contain hidden instructions that fool the AI\n- **Data leakage**: logs hold sensitive data. Know where it is sent, how long it is kept, and whether it is used for training\n- **Too much automation**: a wrong automated response can take down systems the business depends on\n- **Skill erosion**: analysts must still understand the reasoning behind the results\n\n## How to start\n\n- **Measure a baseline first**: record current MTTD and MTTR by incident type for comparison\n- **Pick a low-risk, high-repetition use case**: such as alert enrichment and summaries, before automated response\n- **Let AI recommend and people decide**: raise the automation level only once accuracy is confirmed with data\n- **Set guardrails**: limit the permissions AI can use, log every action, and keep an emergency stop\n- **Re-measure and review regularly**: track both speed and accuracy, including how many alerts the AI misclassified\n\n## A starting point you can use today\n\nPick the one alert type your team sees most. Have AI enrich and summarize it for analysts, then compare that type's MTTR with the period before, over the next 1-2 months.",
+      "infographics": [
+        {
+          "type": "flow",
+          "title_th": "MTTD และ MTTR อยู่ตรงไหนของวงจร SOC และ AI ช่วยอะไร",
+          "title_en": "Where MTTD and MTTR sit in the SOC cycle, and what AI does",
+          "items": [
+            {
+              "label_th": "ตรวจจับ · MTTD",
+              "label_en": "Detect · MTTD",
+              "detail_th": "AI จับพฤติกรรมผิดปกติ และตัดสัญญาณรบกวน",
+              "detail_en": "AI spots anomalies and filters noise"
+            },
+            {
+              "label_th": "คัดแยก · MTTR",
+              "label_en": "Triage · MTTR",
+              "detail_th": "AI เติมบริบทและจัดลำดับความสำคัญ",
+              "detail_en": "AI adds context and prioritizes"
+            },
+            {
+              "label_th": "สืบสวน · MTTR",
+              "label_en": "Investigate · MTTR",
+              "detail_th": "AI สรุปไทม์ไลน์ ค้น log ด้วยภาษาธรรมชาติ",
+              "detail_en": "AI summarizes the timeline and searches logs in plain language"
+            },
+            {
+              "label_th": "ตอบสนอง · MTTR",
+              "label_en": "Respond · MTTR",
+              "detail_th": "AI เสนอ playbook คนอนุมัติก่อนลงมือ",
+              "detail_en": "AI proposes a playbook, a human approves",
+              "tone": "ok"
+            }
+          ]
+        },
+        {
+          "type": "columns",
+          "title_th": "ความเสี่ยงของการใช้ AI ใน SOC และ guardrail ที่ควรมี",
+          "title_en": "Risks of AI in the SOC and the guardrails to put in place",
+          "label_a_th": "ความเสี่ยง",
+          "label_a_en": "RISKS",
+          "label_b_th": "GUARDRAIL",
+          "label_b_en": "GUARDRAILS",
+          "items": [
+            {
+              "label_th": "คำตอบผิดแต่ฟังดูมั่นใจ",
+              "label_en": "Confident but wrong answers",
+              "detail_th": "อาจสรุปหรือสร้างข้อมูลที่ไม่มีจริง",
+              "detail_en": "May summarize or invent facts",
+              "side": "a"
+            },
+            {
+              "label_th": "Prompt injection ผ่านข้อมูล",
+              "label_en": "Prompt injection via data",
+              "detail_th": "คำสั่งแฝงใน log อีเมล หรือไฟล์",
+              "detail_en": "Hidden instructions in logs, email, or files",
+              "side": "a"
+            },
+            {
+              "label_th": "ข้อมูลอ่อนไหวรั่วไหล",
+              "label_en": "Sensitive data leakage",
+              "detail_th": "log ถูกส่งออกหรือนำไปเทรน",
+              "detail_en": "Logs sent out or used for training",
+              "side": "a"
+            },
+            {
+              "label_th": "อัตโนมัติเกินไป",
+              "label_en": "Over-automation",
+              "detail_th": "สั่งตัดระบบสำคัญผิดพลาด",
+              "detail_en": "Wrongly cutting off critical systems",
+              "side": "a"
+            },
+            {
+              "label_th": "ให้คนตัดสินใจเรื่องสำคัญ",
+              "label_en": "Humans decide high-impact actions",
+              "detail_th": "AI แนะนำ คนอนุมัติ",
+              "detail_en": "AI recommends, a person approves",
+              "side": "b"
+            },
+            {
+              "label_th": "ตรวจสอบย้อนกลับได้",
+              "label_en": "Keep evidence traceable",
+              "detail_th": "ทุกข้อสรุปอ้างอิง log ได้",
+              "detail_en": "Every conclusion links back to logs",
+              "side": "b"
+            },
+            {
+              "label_th": "ควบคุมที่ข้อมูลและสิทธิ์",
+              "label_en": "Control data and permissions",
+              "detail_th": "เลือกผู้ให้บริการและจำกัดสิทธิ์ของ AI",
+              "detail_en": "Vet providers and limit AI permissions",
+              "side": "b"
+            },
+            {
+              "label_th": "บันทึกทุกการกระทำ + ปุ่มหยุด",
+              "label_en": "Log every action + a kill switch",
+              "detail_th": "ย้อนดูและหยุดได้ทันที",
+              "detail_en": "Review afterwards and stop instantly",
+              "side": "b"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "slug": "pqc-risks-and-response",
       "date": "2026-10-18",
       "tags": [
