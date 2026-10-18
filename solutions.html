@@ -157,24 +157,25 @@
 
   footer{padding:32px 0;text-align:center;color:var(--muted);font-size:13px;font-family:'IBM Plex Mono',monospace;}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"https://www.dynasec.pro/"},{"@type":"ListItem","position":2,"name":"โซลูชันควบคุมภัยคุกคามไซเบอร์","item":"https://www.dynasec.pro/solutions.html"}]}</script>
 </head>
 <body>
 
 <header>
   <div class="nav">
-    <a class="brand" href="index.html">
+    <a class="brand" href="/">
       <div class="brand-mark">AN</div>
       <span>Anurak</span>
     </a>
     <nav class="links">
-      <a href="index.html#about" data-i18n="navAbout">เกี่ยวกับ</a>
-      <a href="index.html#services" data-i18n="navServices">บริการ</a>
+      <a href="/#about" data-i18n="navAbout">เกี่ยวกับ</a>
+      <a href="/#services" data-i18n="navServices">บริการ</a>
       <a href="solutions.html" class="current" data-i18n="navSolutions">โซลูชัน</a>
       <a href="/blog" data-i18n="navBlog">บทความ</a>
-      <a href="index.html#cases" data-i18n="navCases">ผลงาน</a>
-      <a href="index.html#news" data-i18n="navNews">ข่าว Cyber Attack</a>
-      <a href="index.html#certs" data-i18n="navCerts">ใบรับรอง</a>
-      <a href="index.html#contact" data-i18n="navContact">ติดต่อ</a>
+      <a href="/#cases" data-i18n="navCases">ผลงาน</a>
+      <a href="/#news" data-i18n="navNews">ข่าว Cyber Attack</a>
+      <a href="/#certs" data-i18n="navCerts">ใบรับรอง</a>
+      <a href="/#contact" data-i18n="navContact">ติดต่อ</a>
     </nav>
     <div class="nav-right">
       <div class="lang-toggle">
@@ -185,6 +186,7 @@
   </div>
 </header>
 
+<main>
 <section class="page-hero">
   <div class="wrap">
     <div class="eyebrow" data-i18n="heroEyebrow">SOLUTION UPDATE · CYBERSECURITY</div>
@@ -196,7 +198,7 @@
 
 <section id="solutions">
   <div class="wrap">
-    <div class="solutions-grid" id="solutions-grid"></div>
+    <div class="solutions-grid" id="solutions-grid"><!--ssr:solutions--><!--/ssr:solutions--></div>
   </div>
 </section>
 
@@ -207,10 +209,12 @@
         <h2 data-i18n="ctaTitle">ต้องการออกแบบโซลูชันที่เหมาะกับองค์กรของคุณ?</h2>
         <p data-i18n="ctaSub">ผมช่วยประเมินความเสี่ยงและเลือกเครื่องมือที่ตอบโจทย์งบประมาณและระบบที่มีอยู่ได้</p>
       </div>
-      <a href="index.html#contact" class="btn btn-primary" data-i18n="ctaButton">นัดคุยโซลูชัน</a>
+      <a href="/#contact" class="btn btn-primary" data-i18n="ctaButton">นัดคุยโซลูชัน</a>
     </div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <span data-i18n="footerText">© 2026 · Pre-Sales Engineer, Cybersecurity · ข้อมูลอ้างอิงประกอบการนำเสนอ</span>
@@ -336,7 +340,7 @@ function renderSolutions(){
     <div class="solution-card">
       <div class="head">
         <h2>${lang === 'th' ? s.name_th : s.name_en}</h2>
-        <span class="idx mono">0${i + 1}</span>
+        <span class="idx mono">${String(i + 1).padStart(2, "0")}</span>
       </div>
       <div class="row">
         <div class="k">${dict.kThreat}</div>

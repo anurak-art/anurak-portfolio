@@ -217,6 +217,21 @@
   .case-card hr{border:none;border-top:1px solid var(--line);margin:2px 0;}
   @media (max-width:900px){.case-grid{grid-template-columns:1fr;}}
 
+  /* latest articles (prerendered from content/blog.json) */
+  .latest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .latest-card{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:var(--panel);display:flex;flex-direction:column;gap:10px;}
+  .latest-card:hover{border-color:var(--teal);}
+  .latest-card time{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);}
+  .latest-card h3{font-size:16px;line-height:1.4;}
+  .latest-card .card-link::after{content:'';position:absolute;inset:0;}
+  .latest-card p{color:var(--muted);font-size:13.5px;margin:0;}
+  .latest-all{display:inline-block;margin-top:24px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber);}
+  .lt-en{display:none;}
+  html[lang="en"] .lt-th{display:none;}
+  html[lang="en"] .latest-grid.lt-en{display:grid;}
+  html[lang="en"] a.latest-all.lt-en{display:inline-block;}
+  @media (max-width:900px){.latest-grid{grid-template-columns:1fr;}}
+
   /* cyber attack news */
   .news-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
   .news-updated{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.05em;}
@@ -277,6 +292,7 @@
 
   footer{padding:32px 0;text-align:center;color:var(--muted);font-size:13px;font-family:'IBM Plex Mono',monospace;}
 </style>
+<!--ssr:jsonld--><!--/ssr:jsonld-->
 </head>
 <body>
 
@@ -305,6 +321,7 @@
   </div>
 </header>
 
+<main>
 <section class="hero">
   <div class="wrap">
     <div class="eyebrow" data-i18n="heroEyebrow">PRE-SALES ENGINEER · CYBERSECURITY</div>
@@ -382,11 +399,11 @@
       <h2 data-i18n="aboutTitle">เกี่ยวกับผม</h2>
     </div>
     <div class="about-grid">
-      <div class="avatar" id="about-avatar">Anurak<br>Pre-Sales Engineer</div>
+      <div class="avatar" id="about-avatar"><!--ssr:avatar-->Anurak<br>Pre-Sales Engineer<!--/ssr:avatar--></div>
       <div>
-        <p id="about-bio1">ผมเป็น Pre-Sales Engineer ด้าน Cybersecurity ทำหน้าที่เชื่อมระหว่างทีมขาย ทีมเทคนิค และลูกค้า เพื่อออกแบบโซลูชันความปลอดภัยที่ตอบทั้งความต้องการทางเทคนิคและเป้าหมายทางธุรกิจ ตั้งแต่การวิเคราะห์ความเสี่ยง จัดทำ PoC ไปจนถึงตอบเอกสาร RFP</p>
-        <p id="about-bio2" style="margin-top:14px;">มีประสบการณ์ทำงานร่วมกับลูกค้าในหลายอุตสาหกรรม ทั้งธนาคาร การผลิต และสาธารณสุข พร้อมความเข้าใจในแนวทาง Zero Trust, SOC/SIEM, Endpoint Security และ Compliance ตามมาตรฐาน PDPA / ISO 27001</p>
-        <div class="tags" id="about-tags">
+        <p id="about-bio1"><!--ssr:bio1-->ผมเป็น Pre-Sales Engineer ด้าน Cybersecurity ทำหน้าที่เชื่อมระหว่างทีมขาย ทีมเทคนิค และลูกค้า เพื่อออกแบบโซลูชันความปลอดภัยที่ตอบทั้งความต้องการทางเทคนิคและเป้าหมายทางธุรกิจ ตั้งแต่การวิเคราะห์ความเสี่ยง จัดทำ PoC ไปจนถึงตอบเอกสาร RFP<!--/ssr:bio1--></p>
+        <p id="about-bio2" style="margin-top:14px;"><!--ssr:bio2-->มีประสบการณ์ทำงานร่วมกับลูกค้าในหลายอุตสาหกรรม ทั้งธนาคาร การผลิต และสาธารณสุข พร้อมความเข้าใจในแนวทาง Zero Trust, SOC/SIEM, Endpoint Security และ Compliance ตามมาตรฐาน PDPA / ISO 27001<!--/ssr:bio2--></p>
+        <div class="tags" id="about-tags"><!--ssr:tags-->
           <span class="tag">Network Security</span>
           <span class="tag">Cloud Security</span>
           <span class="tag">Zero Trust</span>
@@ -394,7 +411,7 @@
           <span class="tag">Endpoint / XDR</span>
           <span class="tag">IAM</span>
           <span class="tag">GRC / PDPA</span>
-          <span class="tag">Vulnerability Mgmt</span>
+          <span class="tag">Vulnerability Mgmt</span><!--/ssr:tags-->
         </div>
       </div>
     </div>
@@ -450,7 +467,21 @@
       <h2 data-i18n="casesTitle">ตัวอย่างผลงาน (ไม่ระบุชื่อลูกค้า)</h2>
       <p data-i18n="casesSub">สรุปแบบไม่ระบุตัวตนลูกค้า ตามข้อตกลงการรักษาความลับ</p>
     </div>
-    <div class="case-grid" id="case-grid"></div>
+    <div class="case-grid" id="case-grid"><!--ssr:cases--><!--/ssr:cases--></div>
+  </div>
+</section>
+
+<section id="latest" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" data-i18n="latestEyebrow">LATEST ARTICLES</div>
+      <h2 data-i18n="latestTitle">บทความล่าสุดด้าน Cybersecurity</h2>
+      <p data-i18n="latestSub">ความรู้และแนวทางปฏิบัติที่เขียนให้เข้าใจง่าย ทั้งสำหรับทีมเทคนิคและผู้บริหาร</p>
+    </div>
+    <div class="latest-grid lt-th"><!--ssr:latest-th--><!--/ssr:latest-th--></div>
+    <div class="latest-grid lt-en"><!--ssr:latest-en--><!--/ssr:latest-en--></div>
+    <a class="latest-all lt-th" href="/blog">ดูบทความทั้งหมด →</a>
+    <a class="latest-all lt-en" href="/en/blog">See all articles →</a>
   </div>
 </section>
 
@@ -476,7 +507,7 @@
       <div class="eyebrow" data-i18n="certsEyebrow">CREDENTIALS</div>
       <h2 data-i18n="certsTitle">ใบรับรองและมาตรฐาน</h2>
     </div>
-    <div class="cert-row" id="cert-grid"></div>
+    <div class="cert-row" id="cert-grid"><!--ssr:certs--><!--/ssr:certs--></div>
   </div>
 </section>
 
@@ -534,7 +565,7 @@
           </div>
           <div class="txt">
             <div class="k" data-i18n="kEmail">EMAIL</div>
-            <div class="v" id="contact-email">dynasecpro@gmail.com</div>
+            <div class="v" id="contact-email"><!--ssr:email-->dynasecpro@gmail.com<!--/ssr:email--></div>
           </div>
         </div>
         <div class="direct-item">
@@ -543,13 +574,15 @@
           </div>
           <div class="txt">
             <div class="k" data-i18n="kLocation">LOCATION</div>
-            <div class="v" id="contact-location">กรุงเทพมหานคร ประเทศไทย</div>
+            <div class="v" id="contact-location"><!--ssr:location-->กรุงเทพมหานคร ประเทศไทย<!--/ssr:location--></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <span data-i18n="footerText">© 2026 · Pre-Sales Engineer, Cybersecurity · ข้อมูลติดต่อเพื่อธุรกิจ</span>
@@ -582,6 +615,8 @@ const translations = {
     casesSub: "สรุปแบบไม่ระบุตัวตนลูกค้า ตามข้อตกลงการรักษาความลับ",
     kChallenge: "โจทย์", kApproach: "แนวทาง", kOutcome: "ผลลัพธ์",
     navNews: "ข่าว Cyber Attack",
+    latestEyebrow: "LATEST ARTICLES", latestTitle: "บทความล่าสุดด้าน Cybersecurity",
+    latestSub: "ความรู้และแนวทางปฏิบัติที่เขียนให้เข้าใจง่าย ทั้งสำหรับทีมเทคนิคและผู้บริหาร",
     newsEyebrow: "LIVE THREAT FEED", newsTitle: "ข่าว Cyber Attack ล่าสุด",
     newsSub: "อัปเดตอัตโนมัติจากแหล่งข่าวความปลอดภัยไซเบอร์ชั้นนำ ใช้เป็นข้อมูลประกอบการพูดคุยกับลูกค้าได้ทันที",
     newsRefresh: "รีเฟรช",
@@ -623,6 +658,8 @@ const translations = {
     casesSub: "Anonymized per confidentiality agreements.",
     kChallenge: "CHALLENGE", kApproach: "APPROACH", kOutcome: "OUTCOME",
     navNews: "Cyber News",
+    latestEyebrow: "LATEST ARTICLES", latestTitle: "Latest Cybersecurity Articles",
+    latestSub: "Practical knowledge and guidance written in plain language, for technical teams and executives.",
     newsEyebrow: "LIVE THREAT FEED", newsTitle: "Latest Cyber Attack News",
     newsSub: "Auto-updated from leading cybersecurity news sources — ready to reference in client conversations.",
     newsRefresh: "Refresh",

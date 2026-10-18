@@ -1,16 +1,46 @@
 {
   "functions": {
-    "api/blog.js": { "includeFiles": "content/blog.json" },
-    "api/sitemap.js": { "includeFiles": "content/blog.json" }
+    "api/blog.js": {
+      "includeFiles": "content/blog.json"
+    },
+    "api/sitemap.js": {
+      "includeFiles": "content/blog.json"
+    }
   },
   "redirects": [
-    { "source": "/blog.html", "destination": "/blog", "permanent": true }
+    {
+      "source": "/blog.html",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/blog", "destination": "/api/blog?lang=th" },
-    { "source": "/blog/:slug", "destination": "/api/blog?lang=th&slug=:slug" },
-    { "source": "/en/blog", "destination": "/api/blog?lang=en" },
-    { "source": "/en/blog/:slug", "destination": "/api/blog?lang=en&slug=:slug" },
-    { "source": "/sitemap.xml", "destination": "/api/sitemap" }
-  ]
+    {
+      "source": "/blog",
+      "destination": "/api/blog?lang=th"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/api/blog?lang=th&slug=:slug"
+    },
+    {
+      "source": "/en/blog",
+      "destination": "/api/blog?lang=en"
+    },
+    {
+      "source": "/en/blog/:slug",
+      "destination": "/api/blog?lang=en&slug=:slug"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    }
+  ],
+  "buildCommand": "node scripts/prerender.js",
+  "outputDirectory": "."
 }
