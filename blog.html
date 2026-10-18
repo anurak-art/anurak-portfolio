@@ -102,6 +102,75 @@
   .share button:hover{border-color:var(--teal);}
   .share span{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);}
 
+  /* ---------- Infographics ---------- */
+  :root{--danger:#FF7A7A;}
+  .infographic{margin:8px 0 32px;padding:26px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);}
+  .ig-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--teal);letter-spacing:0.12em;margin-bottom:8px;}
+  .infographic h3{font-size:18px;line-height:1.35;margin:0 0 22px;}
+  .ig-steps{display:flex;flex-direction:column;}
+  .ig-step{position:relative;display:grid;grid-template-columns:40px 1fr;gap:16px;padding-bottom:22px;}
+  .ig-step:last-child{padding-bottom:0;}
+  .ig-step:not(:last-child)::before{content:'';position:absolute;left:19.5px;top:42px;bottom:2px;width:1px;background:var(--line);}
+  .ig-num{width:40px;height:40px;border-radius:50%;border:1px solid var(--teal);color:var(--teal);display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-size:14px;background:var(--panel-2);}
+  .ig-step .t{font-weight:600;font-size:15px;margin-top:6px;}
+  .ig-step .d{color:var(--muted);font-size:13.5px;margin-top:2px;line-height:1.55;}
+
+  .ig-spec{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end;}
+  .ig-spec-item{display:flex;flex-direction:column;justify-content:flex-end;gap:10px;}
+  .ig-bar{height:calc(24px + var(--r) * 110px);border-radius:6px 6px 2px 2px;background:var(--c);}
+  .ig-spec-item .t{font-weight:600;font-size:14px;line-height:1.35;}
+  .ig-spec-item .d{color:var(--muted);font-size:12.5px;line-height:1.5;margin-top:-4px;}
+  .ig-axis{display:flex;justify-content:space-between;gap:12px;margin-top:18px;padding-top:12px;border-top:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);}
+
+  .ig-flow{display:flex;align-items:stretch;gap:10px;}
+  .ig-node{flex:1;border:1px solid var(--line);border-radius:8px;padding:16px;background:var(--panel);display:flex;flex-direction:column;gap:6px;}
+  .ig-node .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:var(--muted);}
+  .ig-node .t{font-weight:600;font-size:14.5px;line-height:1.4;}
+  .ig-node .d{color:var(--muted);font-size:12.5px;line-height:1.5;}
+  .ig-node.danger{border-color:var(--danger);}
+  .ig-node.danger .k{color:var(--danger);}
+  .ig-node.ok{border-color:var(--teal);}
+  .ig-node.ok .k{color:var(--teal);}
+  .ig-arrow{display:grid;place-items:center;color:var(--muted);flex:none;width:22px;}
+
+  .ig-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .ig-col{border:1px solid var(--line);border-radius:8px;padding:18px;background:var(--panel);}
+  .ig-col.a{border-top:3px solid var(--danger);}
+  .ig-col.b{border-top:3px solid var(--teal);}
+  .ig-col h4{margin:0 0 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;}
+  .ig-col.a h4{color:var(--danger);}
+  .ig-col.b h4{color:var(--teal);}
+  .ig-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;}
+  .ig-col li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:13.5px;line-height:1.5;}
+  .ig-col li svg{margin-top:3px;}
+  .ig-col li .d{display:block;color:var(--muted);font-size:12.5px;}
+
+  .ig-hub-center{position:relative;width:max-content;max-width:100%;margin:0 auto;text-align:center;border:1px solid var(--amber);border-radius:999px;padding:12px 26px;background:var(--panel);}
+  .ig-hub-center::after{content:'';position:absolute;top:100%;left:50%;height:17px;width:1px;background:var(--line);}
+  .ig-hub-center .t{font-weight:600;font-size:15px;color:var(--amber);}
+  .ig-hub-center .d{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);}
+  .ig-hub-grid{position:relative;display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:34px;}
+  .ig-hub-grid::before{content:'';position:absolute;top:-17px;left:calc(50% / var(--n));right:calc(50% / var(--n));height:1px;background:var(--line);}
+  .ig-pillar{position:relative;border:1px solid var(--line);border-radius:8px;padding:14px 12px;background:var(--panel);}
+  .ig-pillar::before{content:'';position:absolute;top:-17px;left:50%;height:17px;width:1px;background:var(--line);}
+  .ig-pillar .t{font-weight:600;font-size:14px;color:var(--teal);margin-bottom:4px;}
+  .ig-pillar .d{color:var(--muted);font-size:12px;line-height:1.5;}
+
+  @media (max-width:700px){
+    .infographic{padding:20px;}
+    .ig-spec{grid-template-columns:1fr;align-items:stretch;}
+    .ig-spec-item{display:grid;grid-template-columns:1fr;gap:6px;}
+    .ig-bar{height:14px;width:calc(20% + var(--r) * 80%);border-radius:3px;order:2;}
+    .ig-spec-item .t{order:1;}
+    .ig-spec-item .d{order:3;margin-top:0;}
+    .ig-flow{flex-direction:column;}
+    .ig-arrow{width:auto;height:22px;transform:rotate(90deg);}
+    .ig-cols{grid-template-columns:1fr;}
+    .ig-hub-grid{grid-template-columns:1fr;margin-top:24px;}
+    .ig-hub-grid::before,.ig-pillar::before,.ig-hub-center::after{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+
   footer{padding:32px 0;text-align:center;color:var(--muted);font-size:13px;font-family:'IBM Plex Mono',monospace;border-top:1px solid var(--line);}
 </style>
 </head>
@@ -205,18 +274,91 @@ function fmtDate(d){
 function inline(s){
   return esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 }
-function renderBody(text){
+function renderBody(text, afterFirst){
+  let first = true;
   return String(text || '').replace(/\r/g, '').split(/\n{2,}/).map(block => {
     const b = block.trim();
     if(!b) return '';
-    if(b.startsWith('## ')) return `<h2>${inline(b.slice(3))}</h2>`;
-    const lines = b.split('\n');
-    if(lines.every(l => l.trim().startsWith('- '))){
-      return `<ul>${lines.map(l => `<li>${inline(l.trim().slice(2))}</li>`).join('')}</ul>`;
+    if(first && afterFirst){
+      first = false;
+      return blockHtml(b) + afterFirst;
     }
-    return `<p>${lines.map(inline).join('<br>')}</p>`;
+    return blockHtml(b);
   }).join('');
 }
+function blockHtml(b){
+  if(b.startsWith('## ')) return `<h2>${inline(b.slice(3))}</h2>`;
+  const lines = b.split('\n');
+  if(lines.every(l => l.trim().startsWith('- '))){
+    return `<ul>${lines.map(l => `<li>${inline(l.trim().slice(2))}</li>`).join('')}</ul>`;
+  }
+  return `<p>${lines.map(inline).join('<br>')}</p>`;
+}
+
+function tx(o, base){
+  const th = o[base + '_th'], en = o[base + '_en'];
+  return lang() === 'th' ? (th || en || '') : (en || th || '');
+}
+function levelColor(r){
+  const stops = [[255,122,122],[255,176,32],[79,209,197]];
+  const x = Math.min(1, Math.max(0, r)) * (stops.length - 1);
+  const i = Math.min(stops.length - 2, Math.floor(x));
+  const t = x - i;
+  return 'rgb(' + [0,1,2].map(k => Math.round(stops[i][k] + (stops[i+1][k] - stops[i][k]) * t)).join(',') + ')';
+}
+const ICON_BAD = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#FF7A7A" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="9" r="7.2"/><path d="M6.2 6.2l5.6 5.6M11.8 6.2l-5.6 5.6"/></svg>';
+const ICON_GOOD = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#4FD1C5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="7.2"/><path d="M5.6 9.3l2.4 2.4 4.4-4.9"/></svg>';
+const ICON_ARROW = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M11 5l5 5-5 5"/></svg>';
+
+function igSteps(g){
+  return '<div class="ig-steps">' + (g.items || []).map((it, i) => `
+    <div class="ig-step"><div class="ig-num">${i + 1}</div>
+      <div><div class="t">${esc(tx(it, 'label'))}</div><div class="d">${esc(tx(it, 'detail'))}</div></div></div>`).join('') + '</div>';
+}
+function igSpectrum(g){
+  const items = g.items || [];
+  const max = Math.max(1, ...items.map(it => Number(it.level) || 1));
+  return `<div class="ig-spec" style="--n:${items.length || 1}">` + items.map(it => {
+    const lv = Number(it.level) || 1;
+    const r = max > 1 ? (lv - 1) / (max - 1) : 1;
+    return `<div class="ig-spec-item"><div class="ig-bar" style="--r:${r.toFixed(2)};--c:${levelColor(r)}"></div>
+      <div class="t">${esc(tx(it, 'label'))}</div><div class="d">${esc(tx(it, 'detail'))}</div></div>`;
+  }).join('') + '</div>' +
+  ((tx(g, 'label_a') || tx(g, 'label_b')) ? `<div class="ig-axis"><span>${esc(tx(g, 'label_a'))}</span><span>${esc(tx(g, 'label_b'))}</span></div>` : '');
+}
+function igFlow(g){
+  const nodes = (g.items || []).map((it, i) => `
+    <div class="ig-node ${esc(it.tone || '')}"><div class="k">${String(i + 1).padStart(2, '0')}</div>
+      <div class="t">${esc(tx(it, 'label'))}</div><div class="d">${esc(tx(it, 'detail'))}</div></div>`);
+  return '<div class="ig-flow">' + nodes.join(`<div class="ig-arrow">${ICON_ARROW}</div>`) + '</div>';
+}
+function igColumns(g){
+  const col = (side, icon) => {
+    const rows = (g.items || []).filter(it => (it.side || 'a') === side).map(it => `
+      <li>${icon}<span>${esc(tx(it, 'label'))}${tx(it, 'detail') ? `<span class="d">${esc(tx(it, 'detail'))}</span>` : ''}</span></li>`).join('');
+    return `<div class="ig-col ${side}"><h4>${esc(tx(g, 'label_' + side))}</h4><ul>${rows}</ul></div>`;
+  };
+  return '<div class="ig-cols">' + col('a', ICON_BAD) + col('b', ICON_GOOD) + '</div>';
+}
+function igHub(g){
+  const items = g.items || [];
+  return `<div class="ig-hub-center"><div class="t">${esc(tx(g, 'center'))}</div>${tx(g, 'center_note') ? `<div class="d">${esc(tx(g, 'center_note'))}</div>` : ''}</div>
+    <div class="ig-hub-grid" style="--n:${items.length || 1}">` + items.map(it => `
+      <div class="ig-pillar"><div class="t">${esc(tx(it, 'label'))}</div><div class="d">${esc(tx(it, 'detail'))}</div></div>`).join('') + '</div>';
+}
+function renderInfographics(p){
+  const builders = { steps: igSteps, spectrum: igSpectrum, flow: igFlow, columns: igColumns, hub: igHub };
+  return (p.infographics || []).map(g => {
+    const build = builders[g.type];
+    if(!build) return '';
+    return `<figure class="infographic" style="margin-left:0;margin-right:0">
+      <div class="ig-label">INFOGRAPHIC</div>
+      ${tx(g, 'title') ? `<h3>${esc(tx(g, 'title'))}</h3>` : ''}
+      ${build(g)}
+    </figure>`;
+  }).join('');
+}
+
 function sortedPosts(){
   return POSTS.slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
 }
@@ -253,7 +395,7 @@ function renderPost(){
     <div class="tags">${(p.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
     <h1>${esc(pick(p, 'title'))}</h1>
     <div class="post-meta"><span>${fmtDate(p.date)}</span></div>
-    <div class="article-body">${renderBody(pick(p, 'body'))}</div>
+    <div class="article-body">${renderBody(pick(p, 'body'), renderInfographics(p))}</div>
     <div class="share">
       <span>${dict.shareLabel}</span>
       <button type="button" id="copy-link">${dict.copyLink}</button>

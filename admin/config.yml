@@ -116,3 +116,53 @@ collections:
               - {label: "Summary (English)", name: "summary_en", widget: "text", required: false}
               - {label: "เนื้อหา (ไทย)", name: "body_th", widget: "text", hint: "เว้น 1 บรรทัดเพื่อขึ้นย่อหน้าใหม่ | ขึ้นต้นด้วย ## คือหัวข้อ | ขึ้นต้นด้วย - คือรายการ | ใส่ **ตัวหนา** ได้"}
               - {label: "Body (English)", name: "body_en", widget: "text", required: false, hint: "Leave a blank line for a new paragraph | ## heading | - bullet | **bold**. If empty, the Thai text is shown."}
+              - label: "Infographic (ใส่ได้หลายรูป ไม่ใส่ก็ได้)"
+                name: "infographics"
+                widget: "list"
+                required: false
+                summary: "{{fields.type}} · {{fields.title_th}}"
+                fields:
+                  - label: "รูปแบบ"
+                    name: "type"
+                    widget: "select"
+                    options:
+                      - {label: "ขั้นตอน (steps): ลำดับ 1-2-3 ต่อเนื่อง", value: "steps"}
+                      - {label: "เปรียบเทียบระดับ (spectrum): แท่งกราฟน้อย-มาก", value: "spectrum"}
+                      - {label: "ลำดับเหตุการณ์ (flow): กล่องเชื่อมด้วยลูกศร", value: "flow"}
+                      - {label: "สองฝั่ง (columns): ความเสี่ยง vs วิธีรับมือ", value: "columns"}
+                      - {label: "แกนกลาง (hub): แนวคิดหลัก + องค์ประกอบ", value: "hub"}
+                  - {label: "หัวข้อ Infographic (ไทย)", name: "title_th", widget: "string"}
+                  - {label: "Infographic title (English)", name: "title_en", widget: "string", required: false}
+                  - {label: "ข้อความกลาง (ไทย) [ใช้กับ hub]", name: "center_th", widget: "string", required: false}
+                  - {label: "Center text (English) [hub]", name: "center_en", widget: "string", required: false}
+                  - {label: "ข้อความกลางบรรทัดเล็ก (ไทย) [hub]", name: "center_note_th", widget: "string", required: false}
+                  - {label: "Center small text (English) [hub]", name: "center_note_en", widget: "string", required: false}
+                  - {label: "ป้าย A (ไทย) [columns: หัวฝั่งซ้าย / spectrum: ปลายซ้ายของแกน]", name: "label_a_th", widget: "string", required: false}
+                  - {label: "Label A (English)", name: "label_a_en", widget: "string", required: false}
+                  - {label: "ป้าย B (ไทย) [columns: หัวฝั่งขวา / spectrum: ปลายขวาของแกน]", name: "label_b_th", widget: "string", required: false}
+                  - {label: "Label B (English)", name: "label_b_en", widget: "string", required: false}
+                  - label: "รายการภายใน"
+                    name: "items"
+                    widget: "list"
+                    summary: "{{fields.label_th}}"
+                    fields:
+                      - {label: "หัวข้อ (ไทย)", name: "label_th", widget: "string"}
+                      - {label: "Label (English)", name: "label_en", widget: "string", required: false}
+                      - {label: "คำอธิบายสั้น (ไทย)", name: "detail_th", widget: "string", required: false}
+                      - {label: "Short detail (English)", name: "detail_en", widget: "string", required: false}
+                      - {label: "ระดับ 1-5 [เฉพาะ spectrum]", name: "level", widget: "number", value_type: "int", min: 1, max: 5, required: false}
+                      - label: "ฝั่ง [เฉพาะ columns]"
+                        name: "side"
+                        widget: "select"
+                        required: false
+                        options:
+                          - {label: "ฝั่ง A (ซ้าย / สีแดง)", value: "a"}
+                          - {label: "ฝั่ง B (ขวา / สีเขียว)", value: "b"}
+                      - label: "โทนสี [เฉพาะ flow]"
+                        name: "tone"
+                        widget: "select"
+                        required: false
+                        options:
+                          - {label: "ปกติ", value: ""}
+                          - {label: "อันตราย (สีแดง)", value: "danger"}
+                          - {label: "ดี (สีเขียว)", value: "ok"}

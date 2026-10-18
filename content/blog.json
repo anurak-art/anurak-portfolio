@@ -13,7 +13,82 @@
       "summary_th": "คอมพิวเตอร์ควอนตัมที่แข็งแกร่งพอจะถอดรหัส RSA และ ECC ได้ ข้อมูลที่ต้องเป็นความลับระยะยาวควรเริ่มวางแผนวันนี้",
       "summary_en": "A sufficiently powerful quantum computer could break RSA and ECC. Data that must stay secret long-term needs a plan starting now.",
       "body_th": "Post-Quantum Cryptography (PQC) คือการเข้ารหัสแบบใหม่ที่ออกแบบให้ทนทานต่อการโจมตีของคอมพิวเตอร์ควอนตัม โดยยังทำงานบนคอมพิวเตอร์และเครือข่ายที่ใช้อยู่ในปัจจุบันได้ ไม่ต้องใช้ฮาร์ดแวร์ควอนตัม\n\n## ความเสี่ยงคืออะไร\n\n- **RSA และ ECC ถูกถอดรหัสได้ในทางทฤษฎี**: อัลกอริทึมของ Shor บนคอมพิวเตอร์ควอนตัมที่ใหญ่พอ สามารถแก้โจทย์ที่เป็นฐานความปลอดภัยของ RSA, Diffie-Hellman และ ECC ได้ ซึ่งกระทบ TLS, VPN, ใบรับรองดิจิทัล และลายเซ็นดิจิทัล\n- **Harvest now, decrypt later**: ผู้โจมตีสามารถดักเก็บข้อมูลที่เข้ารหัสไว้ตั้งแต่วันนี้ แล้วรอถอดรหัสเมื่อมีเครื่องควอนตัมที่พร้อม ข้อมูลที่ต้องเป็นความลับหลายสิบปีจึงเสี่ยงตั้งแต่ตอนนี้\n- **ไม่มีใครรู้วันที่แน่นอน**: ยังไม่มีเครื่องควอนตัมที่ถอดรหัสจริงได้ในวันนี้ แต่การเปลี่ยนระบบเข้ารหัสทั้งองค์กรใช้เวลาหลายปี จึงควรเริ่มก่อนที่จะจำเป็น\n- **ส่วนที่กระทบน้อยกว่า**: การเข้ารหัสแบบสมมาตรอย่าง AES-256 และแฮชที่แข็งแรงยังถือว่าใช้งานต่อได้ ปัญหาหลักอยู่ที่การแลกเปลี่ยนกุญแจและลายเซ็นดิจิทัล\n\n## มาตรฐานที่ออกมาแล้ว\n\nNIST ประกาศมาตรฐาน PQC ชุดแรกในปี 2024 ได้แก่ ML-KEM (FIPS 203) สำหรับแลกเปลี่ยนกุญแจ, ML-DSA (FIPS 204) และ SLH-DSA (FIPS 205) สำหรับลายเซ็นดิจิทัล และมีมาตรฐานเพิ่มเติมอยู่ระหว่างจัดทำ ผู้ให้บริการและเบราว์เซอร์หลายรายเริ่มรองรับการแลกเปลี่ยนกุญแจแบบผสม (hybrid) ใน TLS แล้ว\n\n## วิธีเตรียมตัว\n\n- **ทำบัญชีการเข้ารหัสที่ใช้อยู่ (crypto inventory)**: ระบุว่าระบบใดใช้ RSA/ECC ที่ไหน เช่น TLS, VPN, PKI, ลายเซ็นโค้ด, ฐานข้อมูล และอุปกรณ์ฝังตัว\n- **จัดลำดับตามอายุความลับของข้อมูล**: ข้อมูลที่ต้องเก็บเป็นความลับนานหลายปี (เช่น ข้อมูลสุขภาพ การเงิน ความมั่นคง) ควรได้รับการปกป้องก่อน\n- **ออกแบบให้เปลี่ยนอัลกอริทึมได้ง่าย (crypto-agility)**: หลีกเลี่ยงการฝังอัลกอริทึมไว้ในโค้ดหรือฮาร์ดแวร์แบบเปลี่ยนไม่ได้\n- **ถามแผนจากผู้ขาย**: ขอ roadmap การรองรับ PQC ของ firewall, VPN, PKI, HSM และซอฟต์แวร์ที่ใช้ และใส่เป็นเกณฑ์ในการจัดซื้อรอบถัดไป\n- **ทดลองแบบ hybrid**: เริ่มจากระบบที่ไม่สำคัญมาก เช่น TLS ขาออกหรือบริการภายใน เพื่อวัดผลกระทบด้านประสิทธิภาพและความเข้ากันได้\n- **ติดตามแนวทางของหน่วยงานกำกับ**: เช่น ไทม์ไลน์การเลิกใช้ RSA/ECC ที่ NIST และหน่วยงานของประเทศต่างๆ เผยแพร่\n\n## จุดเริ่มต้นที่ทำได้ทันที\n\nเริ่มจาก crypto inventory และระบุข้อมูลที่ต้องเป็นความลับระยะยาว สองอย่างนี้ไม่ต้องซื้อเครื่องมือใหม่ และเป็นข้อมูลที่ทุกขั้นตอนต่อไปต้องใช้",
-      "body_en": "Post-Quantum Cryptography (PQC) is a new generation of cryptography designed to resist attacks by quantum computers, while running on the computers and networks we use today. It does not require quantum hardware.\n\n## What is the risk?\n\n- **RSA and ECC can be broken in theory**: Shor's algorithm on a large enough quantum computer can solve the problems that RSA, Diffie-Hellman, and ECC rely on. This affects TLS, VPNs, digital certificates, and digital signatures\n- **Harvest now, decrypt later**: attackers can capture encrypted data today and decrypt it once a capable quantum computer exists. Data that must stay secret for decades is already at risk\n- **Nobody knows the exact date**: no quantum computer can break this cryptography today, but migrating an organization's cryptography takes years, so work should start before it is urgent\n- **What is less affected**: symmetric encryption such as AES-256 and strong hashes remain usable. The main problem is key exchange and digital signatures\n\n## Standards already published\n\nIn 2024 NIST published its first PQC standards: ML-KEM (FIPS 203) for key exchange, and ML-DSA (FIPS 204) and SLH-DSA (FIPS 205) for digital signatures, with more in development. Several providers and browsers already support hybrid key exchange in TLS.\n\n## How to prepare\n\n- **Build a crypto inventory**: find where RSA/ECC is used, such as TLS, VPNs, PKI, code signing, databases, and embedded devices\n- **Prioritize by data secrecy lifetime**: data that must stay confidential for many years (health, financial, national security) comes first\n- **Design for crypto-agility**: avoid hard-coding algorithms in code or hardware that can't be changed\n- **Ask vendors for their plans**: request PQC roadmaps for firewalls, VPNs, PKI, HSMs, and software, and make them a criterion in the next procurement round\n- **Pilot hybrid modes**: start with lower-risk systems such as outbound TLS or internal services to measure performance and compatibility impact\n- **Follow regulator guidance**: such as the RSA/ECC deprecation timelines published by NIST and national agencies\n\n## A starting point you can use today\n\nBegin with a crypto inventory and identify the data that must stay secret long-term. Neither needs new tools, and every later step depends on them."
+      "body_en": "Post-Quantum Cryptography (PQC) is a new generation of cryptography designed to resist attacks by quantum computers, while running on the computers and networks we use today. It does not require quantum hardware.\n\n## What is the risk?\n\n- **RSA and ECC can be broken in theory**: Shor's algorithm on a large enough quantum computer can solve the problems that RSA, Diffie-Hellman, and ECC rely on. This affects TLS, VPNs, digital certificates, and digital signatures\n- **Harvest now, decrypt later**: attackers can capture encrypted data today and decrypt it once a capable quantum computer exists. Data that must stay secret for decades is already at risk\n- **Nobody knows the exact date**: no quantum computer can break this cryptography today, but migrating an organization's cryptography takes years, so work should start before it is urgent\n- **What is less affected**: symmetric encryption such as AES-256 and strong hashes remain usable. The main problem is key exchange and digital signatures\n\n## Standards already published\n\nIn 2024 NIST published its first PQC standards: ML-KEM (FIPS 203) for key exchange, and ML-DSA (FIPS 204) and SLH-DSA (FIPS 205) for digital signatures, with more in development. Several providers and browsers already support hybrid key exchange in TLS.\n\n## How to prepare\n\n- **Build a crypto inventory**: find where RSA/ECC is used, such as TLS, VPNs, PKI, code signing, databases, and embedded devices\n- **Prioritize by data secrecy lifetime**: data that must stay confidential for many years (health, financial, national security) comes first\n- **Design for crypto-agility**: avoid hard-coding algorithms in code or hardware that can't be changed\n- **Ask vendors for their plans**: request PQC roadmaps for firewalls, VPNs, PKI, HSMs, and software, and make them a criterion in the next procurement round\n- **Pilot hybrid modes**: start with lower-risk systems such as outbound TLS or internal services to measure performance and compatibility impact\n- **Follow regulator guidance**: such as the RSA/ECC deprecation timelines published by NIST and national agencies\n\n## A starting point you can use today\n\nBegin with a crypto inventory and identify the data that must stay secret long-term. Neither needs new tools, and every later step depends on them.",
+      "infographics": [
+        {
+          "type": "flow",
+          "title_th": "Harvest now, decrypt later: ทำไมต้องเริ่มวางแผนก่อน",
+          "title_en": "Harvest now, decrypt later: why planning must start early",
+          "items": [
+            {
+              "label_th": "วันนี้: ดักเก็บข้อมูล",
+              "label_en": "Today: capture the data",
+              "detail_th": "ผู้โจมตีเก็บข้อมูลที่เข้ารหัสด้วย RSA/ECC ไว้",
+              "detail_en": "Attackers store data encrypted with RSA/ECC",
+              "tone": "danger"
+            },
+            {
+              "label_th": "อนาคต: มีเครื่องควอนตัมที่ทรงพลังพอ",
+              "label_en": "Later: a capable quantum computer exists",
+              "detail_th": "ไม่มีใครรู้วันที่แน่นอน",
+              "detail_en": "Nobody knows the exact date"
+            },
+            {
+              "label_th": "ถอดรหัสย้อนหลัง",
+              "label_en": "Decrypt retroactively",
+              "detail_th": "ข้อมูลที่ยังเป็นความลับอยู่ถูกเปิดเผย",
+              "detail_en": "Data that should still be secret is exposed",
+              "tone": "danger"
+            }
+          ]
+        },
+        {
+          "type": "columns",
+          "title_th": "อะไรได้รับผลกระทบ และอะไรใช้ต่อได้",
+          "title_en": "What is affected, and what still holds",
+          "label_a_th": "ได้รับผลกระทบ",
+          "label_a_en": "AFFECTED",
+          "label_b_th": "ใช้ต่อได้ / ใช้ทดแทน",
+          "label_b_en": "STILL OK / REPLACEMENT",
+          "items": [
+            {
+              "label_th": "RSA",
+              "label_en": "RSA",
+              "detail_th": "การเข้ารหัสและลายเซ็น",
+              "detail_en": "Encryption and signatures",
+              "side": "a"
+            },
+            {
+              "label_th": "Diffie-Hellman และ ECC",
+              "label_en": "Diffie-Hellman and ECC",
+              "detail_th": "การแลกเปลี่ยนกุญแจและลายเซ็น",
+              "detail_en": "Key exchange and signatures",
+              "side": "a"
+            },
+            {
+              "label_th": "AES-256 และแฮชที่แข็งแรง",
+              "label_en": "AES-256 and strong hashes",
+              "detail_th": "การเข้ารหัสแบบสมมาตรยังใช้งานต่อได้",
+              "detail_en": "Symmetric encryption remains usable",
+              "side": "b"
+            },
+            {
+              "label_th": "ML-KEM",
+              "label_en": "ML-KEM",
+              "detail_th": "ทดแทนการแลกเปลี่ยนกุญแจ (FIPS 203)",
+              "detail_en": "Replaces key exchange (FIPS 203)",
+              "side": "b"
+            },
+            {
+              "label_th": "ML-DSA และ SLH-DSA",
+              "label_en": "ML-DSA and SLH-DSA",
+              "detail_th": "ทดแทนลายเซ็นดิจิทัล (FIPS 204, 205)",
+              "detail_en": "Replace digital signatures (FIPS 204, 205)",
+              "side": "b"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "shadow-ai-risks-and-response",
@@ -28,7 +103,90 @@
       "summary_th": "พนักงานใช้เครื่องมือ AI เองโดยที่ IT ไม่รู้ อาจทำให้ข้อมูลสำคัญรั่วไหล รู้จักความเสี่ยงและแนวทางจัดการที่ไม่ต้องห้ามใช้ AI",
       "summary_en": "Employees using AI tools without IT's knowledge can leak sensitive data. Know the risks and how to manage them without banning AI.",
       "body_th": "Shadow AI คือการที่พนักงานนำเครื่องมือ AI ที่องค์กรไม่ได้อนุมัติมาใช้กับงานจริง เช่น วางเอกสารลับลงในแชตบอตสาธารณะ ใช้ส่วนขยายเบราว์เซอร์สรุปอีเมล หรือเชื่อม AI agent เข้ากับระบบงานเอง เกิดขึ้นเพราะ AI ช่วยงานได้จริง และเครื่องมือที่องค์กรจัดให้มักตามไม่ทัน\n\n## ความเสี่ยงหลัก\n\n- **ข้อมูลรั่วไหล**: ข้อมูลลูกค้า ซอร์สโค้ด สัญญา หรือแผนธุรกิจที่วางลงในเครื่องมือภายนอก อาจถูกจัดเก็บหรือนำไปใช้ตามเงื่อนไขของผู้ให้บริการ ซึ่งองค์กรควบคุมไม่ได้\n- **ละเมิดกฎหมายและสัญญา**: การส่งข้อมูลส่วนบุคคลออกไปโดยไม่มีฐานทางกฎหมายหรือข้อตกลงที่เหมาะสม อาจขัดต่อ PDPA และข้อกำหนดกับลูกค้า\n- **แอปและส่วนขยายปลอม**: มีเครื่องมือ AI ปลอมที่แอบขโมยข้อมูลหรือสิทธิ์การเข้าถึงบัญชี\n- **สิทธิ์ที่มากเกินจำเป็น**: AI agent หรือปลั๊กอินที่เชื่อมกับอีเมล ไฟล์ และระบบภายใน อาจถูกหลอกให้ทำสิ่งที่ไม่ควรทำ เช่น ผ่านคำสั่งแฝงในเอกสาร (prompt injection)\n- **ตรวจสอบย้อนหลังไม่ได้**: ไม่มี log ว่าใครส่งข้อมูลอะไรไปที่ไหน ทำให้ตอบผู้ตรวจสอบหรือสืบสวนเหตุการณ์ได้ยาก\n- **ผลลัพธ์ผิดพลาด**: นำคำตอบของ AI ไปใช้ในงานสำคัญโดยไม่ตรวจสอบ\n\n## วิธีรับมือ\n\n- **ทำให้มองเห็นก่อน**: ตรวจหาการใช้งานจริงจาก log ของ proxy/DNS, ระบบ CASB หรือ SaaS discovery เพื่อรู้ว่ามีเครื่องมือใดถูกใช้อยู่\n- **มีนโยบายที่ชัดเจนและสั้น**: ระบุว่าข้อมูลระดับใดห้ามใส่ในเครื่องมือภายนอก และเครื่องมือใดได้รับอนุมัติ\n- **จัดเครื่องมือที่อนุมัติให้ใช้งานจริง**: เลือกบริการ AI ระดับองค์กรที่มีข้อตกลงไม่นำข้อมูลไปเทรนโมเดล มี SSO และ log การใช้งาน การห้ามอย่างเดียวมักทำให้คนหันไปใช้แบบแอบมากขึ้น\n- **ป้องกันที่ตัวข้อมูล**: จัดชั้นความลับของข้อมูลและใช้ DLP ตรวจจับข้อมูลสำคัญที่กำลังถูกส่งออกไปยังบริการ AI\n- **ควบคุมสิทธิ์ของ AI agent**: ให้สิทธิ์เท่าที่จำเป็น (least privilege) และขออนุมัติจากคนก่อนทำการที่มีผลกระทบสูง\n- **ประเมินผู้ให้บริการก่อนอนุมัติ**: ดูที่ตั้งข้อมูล การเก็บรักษา การใช้ข้อมูลเทรน และใบรับรองด้านความปลอดภัย\n- **อบรมพนักงาน**: อธิบายด้วยตัวอย่างจริงว่าอะไรไม่ควรวาง และมีช่องทางขอเครื่องมือใหม่ที่เร็วพอ\n\n## จุดเริ่มต้นที่ทำได้ทันที\n\nสำรวจการใช้งานจริงใน 30 วันแรก ประกาศนโยบายฉบับสั้น และเปิดให้ใช้เครื่องมือที่อนุมัติอย่างน้อยหนึ่งตัว แล้วค่อยเพิ่มระบบควบคุมตามความเสี่ยงที่พบ",
-      "body_en": "Shadow AI is when employees use AI tools the organization hasn't approved for real work: pasting confidential documents into public chatbots, using browser extensions to summarize email, or wiring AI agents into work systems on their own. It happens because AI genuinely helps, and officially provided tools often lag behind.\n\n## Main risks\n\n- **Data leakage**: customer data, source code, contracts, or business plans pasted into outside tools may be stored or used under the provider's terms, outside the organization's control\n- **Legal and contractual breach**: sending personal data out without a legal basis or proper agreement may violate PDPA and customer requirements\n- **Fake apps and extensions**: counterfeit AI tools can quietly steal data or account access\n- **Excessive permissions**: AI agents or plugins connected to email, files, and internal systems can be tricked into doing things they shouldn't, for example through instructions hidden in documents (prompt injection)\n- **No audit trail**: without logs of who sent what where, answering auditors or investigating incidents is hard\n- **Wrong outputs**: AI answers used in important work without verification\n\n## How to respond\n\n- **Get visibility first**: use proxy/DNS logs, CASB, or SaaS discovery to learn which tools are actually in use\n- **Keep the policy short and clear**: state which data levels must never go into outside tools, and which tools are approved\n- **Provide approved tools people will actually use**: choose enterprise AI services with no-training terms, SSO, and usage logs. A ban alone usually pushes usage further underground\n- **Protect the data itself**: classify data and use DLP to catch sensitive content headed to AI services\n- **Constrain AI agents**: grant least privilege and require human approval before high-impact actions\n- **Assess vendors before approving**: check data location, retention, training use, and security certifications\n- **Train employees**: show real examples of what not to paste, and offer a fast way to request new tools\n\n## A starting point you can use today\n\nSurvey real usage over the first 30 days, publish a short policy, and enable at least one approved tool. Then add controls in proportion to the risks you find."
+      "body_en": "Shadow AI is when employees use AI tools the organization hasn't approved for real work: pasting confidential documents into public chatbots, using browser extensions to summarize email, or wiring AI agents into work systems on their own. It happens because AI genuinely helps, and officially provided tools often lag behind.\n\n## Main risks\n\n- **Data leakage**: customer data, source code, contracts, or business plans pasted into outside tools may be stored or used under the provider's terms, outside the organization's control\n- **Legal and contractual breach**: sending personal data out without a legal basis or proper agreement may violate PDPA and customer requirements\n- **Fake apps and extensions**: counterfeit AI tools can quietly steal data or account access\n- **Excessive permissions**: AI agents or plugins connected to email, files, and internal systems can be tricked into doing things they shouldn't, for example through instructions hidden in documents (prompt injection)\n- **No audit trail**: without logs of who sent what where, answering auditors or investigating incidents is hard\n- **Wrong outputs**: AI answers used in important work without verification\n\n## How to respond\n\n- **Get visibility first**: use proxy/DNS logs, CASB, or SaaS discovery to learn which tools are actually in use\n- **Keep the policy short and clear**: state which data levels must never go into outside tools, and which tools are approved\n- **Provide approved tools people will actually use**: choose enterprise AI services with no-training terms, SSO, and usage logs. A ban alone usually pushes usage further underground\n- **Protect the data itself**: classify data and use DLP to catch sensitive content headed to AI services\n- **Constrain AI agents**: grant least privilege and require human approval before high-impact actions\n- **Assess vendors before approving**: check data location, retention, training use, and security certifications\n- **Train employees**: show real examples of what not to paste, and offer a fast way to request new tools\n\n## A starting point you can use today\n\nSurvey real usage over the first 30 days, publish a short policy, and enable at least one approved tool. Then add controls in proportion to the risks you find.",
+      "infographics": [
+        {
+          "type": "columns",
+          "title_th": "Shadow AI: ความเสี่ยง และสิ่งที่ควรทำ",
+          "title_en": "Shadow AI: the risks and what to do",
+          "label_a_th": "ความเสี่ยง",
+          "label_a_en": "RISKS",
+          "label_b_th": "วิธีรับมือ",
+          "label_b_en": "RESPONSES",
+          "items": [
+            {
+              "label_th": "ข้อมูลรั่วไหล",
+              "label_en": "Data leakage",
+              "detail_th": "ข้อมูลลูกค้า ซอร์สโค้ด สัญญา",
+              "detail_en": "Customer data, source code, contracts",
+              "side": "a"
+            },
+            {
+              "label_th": "ผิด PDPA และสัญญา",
+              "label_en": "PDPA and contract breach",
+              "detail_th": "ส่งข้อมูลส่วนบุคคลออกโดยไม่มีฐานทางกฎหมาย",
+              "detail_en": "Personal data sent out without a legal basis",
+              "side": "a"
+            },
+            {
+              "label_th": "แอปและส่วนขยายปลอม",
+              "label_en": "Fake apps and extensions",
+              "detail_th": "แอบขโมยข้อมูลหรือสิทธิ์เข้าถึงบัญชี",
+              "detail_en": "Quietly steal data or account access",
+              "side": "a"
+            },
+            {
+              "label_th": "AI agent สิทธิ์เกินจำเป็น",
+              "label_en": "Over-privileged AI agents",
+              "detail_th": "ถูกหลอกผ่าน prompt injection",
+              "detail_en": "Tricked through prompt injection",
+              "side": "a"
+            },
+            {
+              "label_th": "ตรวจสอบย้อนหลังไม่ได้",
+              "label_en": "No audit trail",
+              "detail_th": "ไม่รู้ว่าใครส่งอะไรไปที่ไหน",
+              "detail_en": "No record of who sent what where",
+              "side": "a"
+            },
+            {
+              "label_th": "ทำให้มองเห็นการใช้งานจริง",
+              "label_en": "Get visibility",
+              "detail_th": "ตรวจจาก proxy/DNS, CASB หรือ SaaS discovery",
+              "detail_en": "Use proxy/DNS logs, CASB, or SaaS discovery",
+              "side": "b"
+            },
+            {
+              "label_th": "นโยบายสั้นและชัด",
+              "label_en": "A short, clear policy",
+              "detail_th": "ข้อมูลระดับใดห้ามใส่เครื่องมือภายนอก",
+              "detail_en": "Which data levels never go into outside tools",
+              "side": "b"
+            },
+            {
+              "label_th": "จัดเครื่องมือที่อนุมัติให้ใช้จริง",
+              "label_en": "Provide approved tools",
+              "detail_th": "AI ระดับองค์กร มี SSO และ log",
+              "detail_en": "Enterprise AI with SSO and logs",
+              "side": "b"
+            },
+            {
+              "label_th": "ป้องกันที่ตัวข้อมูล",
+              "label_en": "Protect the data",
+              "detail_th": "จัดชั้นความลับและใช้ DLP",
+              "detail_en": "Classify data and use DLP",
+              "side": "b"
+            },
+            {
+              "label_th": "จำกัดสิทธิ์ AI agent",
+              "label_en": "Constrain AI agents",
+              "detail_th": "least privilege และให้คนอนุมัติเรื่องสำคัญ",
+              "detail_en": "Least privilege and human approval for high-impact actions",
+              "side": "b"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "ransomware-first-5-steps",
@@ -42,7 +200,46 @@
       "summary_th": "ไม่ต้องรอซื้อเครื่องมือราคาแพง 5 เรื่องพื้นฐานนี้ลดความเสียหายจากแรนซัมแวร์ได้มากที่สุด",
       "summary_en": "You don't need expensive tools first. These five basics cut the most ransomware damage.",
       "body_th": "แรนซัมแวร์ยังเป็นภัยที่สร้างความเสียหายต่อองค์กรมากที่สุดเรื่องหนึ่ง แต่การป้องกันส่วนใหญ่เริ่มจากพื้นฐานที่ทำได้ทันที\n\n## 1. สำรองข้อมูลแบบ 3-2-1\n\nเก็บข้อมูล 3 สำเนา บนสื่อ 2 ประเภท และอย่างน้อย 1 สำเนาต้องแยกออกจากเครือข่าย (offline หรือ immutable) เพราะแรนซัมแวร์มักเข้ารหัสหรือลบข้อมูลสำรองที่ต่ออยู่ในเครือข่ายด้วย\n\n## 2. เปิด MFA ทุกบัญชีสำคัญ\n\nโดยเฉพาะอีเมล VPN และบัญชีผู้ดูแลระบบ เพราะการขโมยรหัสผ่านเป็นทางเข้าที่พบบ่อย\n\n## 3. อัปเดตแพตช์ระบบที่เปิดสู่อินเทอร์เน็ต\n\nเริ่มจาก VPN, firewall, remote access และเซิร์ฟเวอร์เว็บ ช่องโหว่ที่ถูกโจมตีจริงควรมาก่อนช่องโหว่ทั่วไป\n\n## 4. จำกัดสิทธิ์ผู้ใช้ให้เท่าที่จำเป็น\n\n- ผู้ใช้ทั่วไปไม่ควรเป็น local admin\n- แยกบัญชีผู้ดูแลระบบออกจากบัญชีใช้งานประจำวัน\n- แบ่งส่วนเครือข่ายเพื่อไม่ให้การโจมตีลามทั้งระบบ\n\n## 5. ซ้อมแผนรับมือเหตุการณ์\n\nรู้ล่วงหน้าว่าใครตัดสินใจ ใครติดต่อใคร และจะแยกระบบที่ติดเชื้อออกอย่างไร การซ้อมแผนสั้นๆ ปีละครั้งช่วยลดเวลาตอบสนองได้มาก",
-      "body_en": "Ransomware remains one of the costliest threats to organizations, yet most defenses start with basics you can do right away.\n\n## 1. Follow the 3-2-1 backup rule\n\nKeep 3 copies on 2 types of media, with at least 1 copy isolated from the network (offline or immutable). Ransomware often encrypts or deletes connected backups too.\n\n## 2. Enable MFA on every critical account\n\nEspecially email, VPN, and admin accounts, since stolen passwords are a common way in.\n\n## 3. Patch internet-facing systems first\n\nStart with VPNs, firewalls, remote access, and web servers. Actively exploited vulnerabilities come before the rest.\n\n## 4. Limit user privileges\n\n- Regular users should not be local admins\n- Separate admin accounts from daily-use accounts\n- Segment the network so an attack can't spread everywhere\n\n## 5. Rehearse your incident response plan\n\nKnow in advance who decides, who contacts whom, and how infected systems get isolated. A short yearly drill cuts response time significantly."
+      "body_en": "Ransomware remains one of the costliest threats to organizations, yet most defenses start with basics you can do right away.\n\n## 1. Follow the 3-2-1 backup rule\n\nKeep 3 copies on 2 types of media, with at least 1 copy isolated from the network (offline or immutable). Ransomware often encrypts or deletes connected backups too.\n\n## 2. Enable MFA on every critical account\n\nEspecially email, VPN, and admin accounts, since stolen passwords are a common way in.\n\n## 3. Patch internet-facing systems first\n\nStart with VPNs, firewalls, remote access, and web servers. Actively exploited vulnerabilities come before the rest.\n\n## 4. Limit user privileges\n\n- Regular users should not be local admins\n- Separate admin accounts from daily-use accounts\n- Segment the network so an attack can't spread everywhere\n\n## 5. Rehearse your incident response plan\n\nKnow in advance who decides, who contacts whom, and how infected systems get isolated. A short yearly drill cuts response time significantly.",
+      "infographics": [
+        {
+          "type": "steps",
+          "title_th": "5 เรื่องพื้นฐานที่ลดความเสียหายจากแรนซัมแวร์",
+          "title_en": "5 basics that cut ransomware damage",
+          "items": [
+            {
+              "label_th": "สำรองข้อมูลแบบ 3-2-1",
+              "label_en": "Back up with 3-2-1",
+              "detail_th": "3 สำเนา บนสื่อ 2 ประเภท และ 1 สำเนาแยกจากเครือข่าย",
+              "detail_en": "3 copies, 2 media types, 1 copy isolated from the network"
+            },
+            {
+              "label_th": "เปิด MFA บัญชีสำคัญ",
+              "label_en": "Enable MFA on key accounts",
+              "detail_th": "อีเมล VPN และบัญชีผู้ดูแลระบบ",
+              "detail_en": "Email, VPN, and admin accounts"
+            },
+            {
+              "label_th": "อัปเดตแพตช์",
+              "label_en": "Patch systems",
+              "detail_th": "เริ่มจากระบบที่เปิดสู่อินเทอร์เน็ต และช่องโหว่ที่ถูกโจมตีจริง",
+              "detail_en": "Start with internet-facing systems and actively exploited flaws"
+            },
+            {
+              "label_th": "จำกัดสิทธิ์ผู้ใช้",
+              "label_en": "Limit privileges",
+              "detail_th": "ไม่ให้เป็น local admin แยกบัญชีแอดมิน และแบ่งส่วนเครือข่าย",
+              "detail_en": "No local admin, separate admin accounts, segment the network"
+            },
+            {
+              "label_th": "ซ้อมแผนรับมือ",
+              "label_en": "Rehearse the response plan",
+              "detail_th": "รู้ล่วงหน้าว่าใครตัดสินใจ ใครติดต่อใคร และแยกระบบอย่างไร",
+              "detail_en": "Know who decides, who contacts whom, and how to isolate systems"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "what-is-zero-trust",
@@ -56,7 +253,50 @@
       "summary_th": "แนวคิด never trust, always verify อธิบายแบบเข้าใจง่าย พร้อมจุดเริ่มต้นที่ทำได้จริง",
       "summary_en": "The never-trust, always-verify idea explained simply, with practical places to start.",
       "body_th": "Zero Trust คือแนวคิดที่ไม่เชื่อใจผู้ใช้หรืออุปกรณ์ใดโดยอัตโนมัติ แม้จะอยู่ในเครือข่ายภายในองค์กรแล้วก็ตาม ทุกคำขอเข้าถึงต้องถูกตรวจสอบก่อนเสมอ\n\n## หลักคิดสำคัญ\n\n- ตรวจสอบตัวตนและสถานะอุปกรณ์ทุกครั้งที่เข้าถึง\n- ให้สิทธิ์น้อยที่สุดเท่าที่จำเป็น (least privilege)\n- สมมติว่าระบบอาจถูกเจาะแล้ว และออกแบบให้จำกัดความเสียหาย\n\n## เริ่มต้นอย่างไรโดยไม่ต้องรื้อระบบ\n\n- เริ่มจากตัวตน: เปิด MFA และรวมศูนย์การล็อกอิน (SSO)\n- เลือกแอปพลิเคชันสำคัญ 1-2 ตัว แล้วเปลี่ยนจาก VPN แบบเข้าถึงทั้งเครือข่ายเป็นการเข้าถึงรายแอป (ZTNA)\n- แบ่งส่วนเครือข่ายระหว่างระบบสำคัญ เพื่อลดการเคลื่อนที่ของผู้โจมตี\n- เก็บ log และตรวจจับพฤติกรรมผิดปกติ\n\nZero Trust ไม่ใช่ผลิตภัณฑ์ที่ซื้อครั้งเดียวจบ แต่เป็นทิศทางที่ค่อยๆ ปรับปรุงทีละขั้น",
-      "body_en": "Zero Trust means never automatically trusting any user or device, even inside the corporate network. Every access request is verified first.\n\n## Core ideas\n\n- Verify identity and device health on every access\n- Grant the least privilege necessary\n- Assume breach and design to limit the damage\n\n## How to start without ripping everything out\n\n- Start with identity: enable MFA and centralize sign-in (SSO)\n- Pick one or two key applications and move from network-wide VPN access to per-app access (ZTNA)\n- Segment the network between critical systems to limit attacker movement\n- Collect logs and detect anomalous behavior\n\nZero Trust is not a product you buy once. It is a direction you improve step by step."
+      "body_en": "Zero Trust means never automatically trusting any user or device, even inside the corporate network. Every access request is verified first.\n\n## Core ideas\n\n- Verify identity and device health on every access\n- Grant the least privilege necessary\n- Assume breach and design to limit the damage\n\n## How to start without ripping everything out\n\n- Start with identity: enable MFA and centralize sign-in (SSO)\n- Pick one or two key applications and move from network-wide VPN access to per-app access (ZTNA)\n- Segment the network between critical systems to limit attacker movement\n- Collect logs and detect anomalous behavior\n\nZero Trust is not a product you buy once. It is a direction you improve step by step.",
+      "infographics": [
+        {
+          "type": "hub",
+          "title_th": "Zero Trust: ตรวจสอบทุกคำขอจากทุกมิติ",
+          "title_en": "Zero Trust: verify every request across every dimension",
+          "center_th": "ตรวจสอบทุกคำขอ",
+          "center_en": "Verify every request",
+          "center_note_th": "never trust, always verify",
+          "center_note_en": "never trust, always verify",
+          "items": [
+            {
+              "label_th": "ตัวตน",
+              "label_en": "Identity",
+              "detail_th": "MFA และ SSO",
+              "detail_en": "MFA and SSO"
+            },
+            {
+              "label_th": "อุปกรณ์",
+              "label_en": "Device",
+              "detail_th": "ตรวจสถานะอุปกรณ์ก่อนอนุญาต",
+              "detail_en": "Check device health before access"
+            },
+            {
+              "label_th": "แอปพลิเคชัน",
+              "label_en": "Application",
+              "detail_th": "เข้าถึงรายแอป (ZTNA) แทน VPN ทั้งเครือข่าย",
+              "detail_en": "Per-app access (ZTNA) instead of network-wide VPN"
+            },
+            {
+              "label_th": "เครือข่าย",
+              "label_en": "Network",
+              "detail_th": "แบ่งส่วนเพื่อจำกัดการเคลื่อนที่",
+              "detail_en": "Segment to limit movement"
+            },
+            {
+              "label_th": "การมองเห็น",
+              "label_en": "Visibility",
+              "detail_th": "เก็บ log และตรวจจับพฤติกรรมผิดปกติ",
+              "detail_en": "Collect logs and detect anomalies"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "mfa-which-is-safer",
@@ -70,7 +310,48 @@
       "summary_th": "SMS, แอปยืนยันตัวตน และ Passkey ต่างกันอย่างไร และทำไมบางแบบถึงถูกหลอกได้ง่ายกว่า",
       "summary_en": "How SMS, authenticator apps, and passkeys differ, and why some are easier to phish.",
       "body_th": "MFA ดีกว่าไม่มี MFA เสมอ แต่ทุกแบบไม่ได้ปลอดภัยเท่ากัน\n\n## เรียงจากป้องกันได้น้อยไปมาก\n\n- **SMS / โทรศัพท์**: ใช้ง่าย แต่เสี่ยงต่อการโอนเบอร์ (SIM swap) และการหลอกให้บอกรหัส\n- **แอปยืนยันตัวตน (TOTP)**: ปลอดภัยกว่า SMS แต่ผู้โจมตียังหลอกให้กรอกรหัสบนเว็บปลอมได้\n- **Push notification**: สะดวก แต่เสี่ยงโดนส่งคำขอรัวๆ จนผู้ใช้กดอนุมัติเอง (MFA fatigue)\n- **Passkey / FIDO2 security key**: ผูกกับโดเมนจริง จึงทนต่อฟิชชิ่งได้ดีที่สุด\n\n## คำแนะนำ\n\nบัญชีผู้ดูแลระบบและผู้บริหารควรใช้ Passkey หรือ security key เป็นอันดับแรก ส่วนผู้ใช้ทั่วไปควรเลิกใช้ SMS ถ้ามีทางเลือกอื่น",
-      "body_en": "Any MFA beats no MFA, but not every method is equally safe.\n\n## From weakest to strongest\n\n- **SMS / phone call**: easy to use, but exposed to SIM swapping and code-phishing\n- **Authenticator app (TOTP)**: safer than SMS, but attackers can still trick users into typing codes on fake sites\n- **Push notification**: convenient, but vulnerable to repeated prompts until a user approves (MFA fatigue)\n- **Passkey / FIDO2 security key**: bound to the real domain, so the most phishing-resistant\n\n## Recommendation\n\nAdmins and executives should use passkeys or security keys first. Everyone else should move away from SMS where alternatives exist."
+      "body_en": "Any MFA beats no MFA, but not every method is equally safe.\n\n## From weakest to strongest\n\n- **SMS / phone call**: easy to use, but exposed to SIM swapping and code-phishing\n- **Authenticator app (TOTP)**: safer than SMS, but attackers can still trick users into typing codes on fake sites\n- **Push notification**: convenient, but vulnerable to repeated prompts until a user approves (MFA fatigue)\n- **Passkey / FIDO2 security key**: bound to the real domain, so the most phishing-resistant\n\n## Recommendation\n\nAdmins and executives should use passkeys or security keys first. Everyone else should move away from SMS where alternatives exist.",
+      "infographics": [
+        {
+          "type": "spectrum",
+          "title_th": "MFA แต่ละแบบ ป้องกันฟิชชิ่งได้ต่างกัน",
+          "title_en": "Each MFA method resists phishing differently",
+          "label_a_th": "← ป้องกันฟิชชิ่งได้น้อย",
+          "label_a_en": "← Weaker phishing resistance",
+          "label_b_th": "ทนฟิชชิ่งได้ดีที่สุด →",
+          "label_b_en": "Most phishing-resistant →",
+          "items": [
+            {
+              "label_th": "SMS / โทรศัพท์",
+              "label_en": "SMS / phone call",
+              "detail_th": "เสี่ยง SIM swap และถูกหลอกให้บอกรหัส",
+              "detail_en": "Exposed to SIM swap and code phishing",
+              "level": 1
+            },
+            {
+              "label_th": "แอปยืนยันตัวตน (TOTP)",
+              "label_en": "Authenticator app (TOTP)",
+              "detail_th": "ยังถูกหลอกให้กรอกรหัสบนเว็บปลอมได้",
+              "detail_en": "Users can still be tricked into typing codes on fake sites",
+              "level": 2
+            },
+            {
+              "label_th": "Push notification",
+              "label_en": "Push notification",
+              "detail_th": "เสี่ยงโดนส่งคำขอรัวๆ (MFA fatigue)",
+              "detail_en": "Vulnerable to repeated prompts (MFA fatigue)",
+              "level": 2
+            },
+            {
+              "label_th": "Passkey / FIDO2",
+              "label_en": "Passkey / FIDO2",
+              "detail_th": "ผูกกับโดเมนจริง จึงทนฟิชชิ่งได้ดีที่สุด",
+              "detail_en": "Bound to the real domain, so the most phishing-resistant",
+              "level": 3
+            }
+          ]
+        }
+      ]
     }
   ]
 }
