@@ -1,9 +1,42 @@
 {
   "items": [
     {
+      "slug": "pqc-risks-and-response",
+      "date": "2026-10-18",
+      "tags": [
+        "PQC",
+        "Cryptography",
+        "Quantum"
+      ],
+      "title_th": "PQC: ความเสี่ยงจากคอมพิวเตอร์ควอนตัม และวิธีเตรียมตัว",
+      "title_en": "PQC: Quantum Computing Risks and How to Prepare",
+      "summary_th": "คอมพิวเตอร์ควอนตัมที่แข็งแกร่งพอจะถอดรหัส RSA และ ECC ได้ ข้อมูลที่ต้องเป็นความลับระยะยาวควรเริ่มวางแผนวันนี้",
+      "summary_en": "A sufficiently powerful quantum computer could break RSA and ECC. Data that must stay secret long-term needs a plan starting now.",
+      "body_th": "Post-Quantum Cryptography (PQC) คือการเข้ารหัสแบบใหม่ที่ออกแบบให้ทนทานต่อการโจมตีของคอมพิวเตอร์ควอนตัม โดยยังทำงานบนคอมพิวเตอร์และเครือข่ายที่ใช้อยู่ในปัจจุบันได้ ไม่ต้องใช้ฮาร์ดแวร์ควอนตัม\n\n## ความเสี่ยงคืออะไร\n\n- **RSA และ ECC ถูกถอดรหัสได้ในทางทฤษฎี**: อัลกอริทึมของ Shor บนคอมพิวเตอร์ควอนตัมที่ใหญ่พอ สามารถแก้โจทย์ที่เป็นฐานความปลอดภัยของ RSA, Diffie-Hellman และ ECC ได้ ซึ่งกระทบ TLS, VPN, ใบรับรองดิจิทัล และลายเซ็นดิจิทัล\n- **Harvest now, decrypt later**: ผู้โจมตีสามารถดักเก็บข้อมูลที่เข้ารหัสไว้ตั้งแต่วันนี้ แล้วรอถอดรหัสเมื่อมีเครื่องควอนตัมที่พร้อม ข้อมูลที่ต้องเป็นความลับหลายสิบปีจึงเสี่ยงตั้งแต่ตอนนี้\n- **ไม่มีใครรู้วันที่แน่นอน**: ยังไม่มีเครื่องควอนตัมที่ถอดรหัสจริงได้ในวันนี้ แต่การเปลี่ยนระบบเข้ารหัสทั้งองค์กรใช้เวลาหลายปี จึงควรเริ่มก่อนที่จะจำเป็น\n- **ส่วนที่กระทบน้อยกว่า**: การเข้ารหัสแบบสมมาตรอย่าง AES-256 และแฮชที่แข็งแรงยังถือว่าใช้งานต่อได้ ปัญหาหลักอยู่ที่การแลกเปลี่ยนกุญแจและลายเซ็นดิจิทัล\n\n## มาตรฐานที่ออกมาแล้ว\n\nNIST ประกาศมาตรฐาน PQC ชุดแรกในปี 2024 ได้แก่ ML-KEM (FIPS 203) สำหรับแลกเปลี่ยนกุญแจ, ML-DSA (FIPS 204) และ SLH-DSA (FIPS 205) สำหรับลายเซ็นดิจิทัล และมีมาตรฐานเพิ่มเติมอยู่ระหว่างจัดทำ ผู้ให้บริการและเบราว์เซอร์หลายรายเริ่มรองรับการแลกเปลี่ยนกุญแจแบบผสม (hybrid) ใน TLS แล้ว\n\n## วิธีเตรียมตัว\n\n- **ทำบัญชีการเข้ารหัสที่ใช้อยู่ (crypto inventory)**: ระบุว่าระบบใดใช้ RSA/ECC ที่ไหน เช่น TLS, VPN, PKI, ลายเซ็นโค้ด, ฐานข้อมูล และอุปกรณ์ฝังตัว\n- **จัดลำดับตามอายุความลับของข้อมูล**: ข้อมูลที่ต้องเก็บเป็นความลับนานหลายปี (เช่น ข้อมูลสุขภาพ การเงิน ความมั่นคง) ควรได้รับการปกป้องก่อน\n- **ออกแบบให้เปลี่ยนอัลกอริทึมได้ง่าย (crypto-agility)**: หลีกเลี่ยงการฝังอัลกอริทึมไว้ในโค้ดหรือฮาร์ดแวร์แบบเปลี่ยนไม่ได้\n- **ถามแผนจากผู้ขาย**: ขอ roadmap การรองรับ PQC ของ firewall, VPN, PKI, HSM และซอฟต์แวร์ที่ใช้ และใส่เป็นเกณฑ์ในการจัดซื้อรอบถัดไป\n- **ทดลองแบบ hybrid**: เริ่มจากระบบที่ไม่สำคัญมาก เช่น TLS ขาออกหรือบริการภายใน เพื่อวัดผลกระทบด้านประสิทธิภาพและความเข้ากันได้\n- **ติดตามแนวทางของหน่วยงานกำกับ**: เช่น ไทม์ไลน์การเลิกใช้ RSA/ECC ที่ NIST และหน่วยงานของประเทศต่างๆ เผยแพร่\n\n## จุดเริ่มต้นที่ทำได้ทันที\n\nเริ่มจาก crypto inventory และระบุข้อมูลที่ต้องเป็นความลับระยะยาว สองอย่างนี้ไม่ต้องซื้อเครื่องมือใหม่ และเป็นข้อมูลที่ทุกขั้นตอนต่อไปต้องใช้",
+      "body_en": "Post-Quantum Cryptography (PQC) is a new generation of cryptography designed to resist attacks by quantum computers, while running on the computers and networks we use today. It does not require quantum hardware.\n\n## What is the risk?\n\n- **RSA and ECC can be broken in theory**: Shor's algorithm on a large enough quantum computer can solve the problems that RSA, Diffie-Hellman, and ECC rely on. This affects TLS, VPNs, digital certificates, and digital signatures\n- **Harvest now, decrypt later**: attackers can capture encrypted data today and decrypt it once a capable quantum computer exists. Data that must stay secret for decades is already at risk\n- **Nobody knows the exact date**: no quantum computer can break this cryptography today, but migrating an organization's cryptography takes years, so work should start before it is urgent\n- **What is less affected**: symmetric encryption such as AES-256 and strong hashes remain usable. The main problem is key exchange and digital signatures\n\n## Standards already published\n\nIn 2024 NIST published its first PQC standards: ML-KEM (FIPS 203) for key exchange, and ML-DSA (FIPS 204) and SLH-DSA (FIPS 205) for digital signatures, with more in development. Several providers and browsers already support hybrid key exchange in TLS.\n\n## How to prepare\n\n- **Build a crypto inventory**: find where RSA/ECC is used, such as TLS, VPNs, PKI, code signing, databases, and embedded devices\n- **Prioritize by data secrecy lifetime**: data that must stay confidential for many years (health, financial, national security) comes first\n- **Design for crypto-agility**: avoid hard-coding algorithms in code or hardware that can't be changed\n- **Ask vendors for their plans**: request PQC roadmaps for firewalls, VPNs, PKI, HSMs, and software, and make them a criterion in the next procurement round\n- **Pilot hybrid modes**: start with lower-risk systems such as outbound TLS or internal services to measure performance and compatibility impact\n- **Follow regulator guidance**: such as the RSA/ECC deprecation timelines published by NIST and national agencies\n\n## A starting point you can use today\n\nBegin with a crypto inventory and identify the data that must stay secret long-term. Neither needs new tools, and every later step depends on them."
+    },
+    {
+      "slug": "shadow-ai-risks-and-response",
+      "date": "2026-10-18",
+      "tags": [
+        "Shadow AI",
+        "AI Security",
+        "Data Protection"
+      ],
+      "title_th": "Shadow AI: ความเสี่ยงที่องค์กรมองไม่เห็น และวิธีรับมือ",
+      "title_en": "Shadow AI: The Risk Organizations Can't See, and How to Respond",
+      "summary_th": "พนักงานใช้เครื่องมือ AI เองโดยที่ IT ไม่รู้ อาจทำให้ข้อมูลสำคัญรั่วไหล รู้จักความเสี่ยงและแนวทางจัดการที่ไม่ต้องห้ามใช้ AI",
+      "summary_en": "Employees using AI tools without IT's knowledge can leak sensitive data. Know the risks and how to manage them without banning AI.",
+      "body_th": "Shadow AI คือการที่พนักงานนำเครื่องมือ AI ที่องค์กรไม่ได้อนุมัติมาใช้กับงานจริง เช่น วางเอกสารลับลงในแชตบอตสาธารณะ ใช้ส่วนขยายเบราว์เซอร์สรุปอีเมล หรือเชื่อม AI agent เข้ากับระบบงานเอง เกิดขึ้นเพราะ AI ช่วยงานได้จริง และเครื่องมือที่องค์กรจัดให้มักตามไม่ทัน\n\n## ความเสี่ยงหลัก\n\n- **ข้อมูลรั่วไหล**: ข้อมูลลูกค้า ซอร์สโค้ด สัญญา หรือแผนธุรกิจที่วางลงในเครื่องมือภายนอก อาจถูกจัดเก็บหรือนำไปใช้ตามเงื่อนไขของผู้ให้บริการ ซึ่งองค์กรควบคุมไม่ได้\n- **ละเมิดกฎหมายและสัญญา**: การส่งข้อมูลส่วนบุคคลออกไปโดยไม่มีฐานทางกฎหมายหรือข้อตกลงที่เหมาะสม อาจขัดต่อ PDPA และข้อกำหนดกับลูกค้า\n- **แอปและส่วนขยายปลอม**: มีเครื่องมือ AI ปลอมที่แอบขโมยข้อมูลหรือสิทธิ์การเข้าถึงบัญชี\n- **สิทธิ์ที่มากเกินจำเป็น**: AI agent หรือปลั๊กอินที่เชื่อมกับอีเมล ไฟล์ และระบบภายใน อาจถูกหลอกให้ทำสิ่งที่ไม่ควรทำ เช่น ผ่านคำสั่งแฝงในเอกสาร (prompt injection)\n- **ตรวจสอบย้อนหลังไม่ได้**: ไม่มี log ว่าใครส่งข้อมูลอะไรไปที่ไหน ทำให้ตอบผู้ตรวจสอบหรือสืบสวนเหตุการณ์ได้ยาก\n- **ผลลัพธ์ผิดพลาด**: นำคำตอบของ AI ไปใช้ในงานสำคัญโดยไม่ตรวจสอบ\n\n## วิธีรับมือ\n\n- **ทำให้มองเห็นก่อน**: ตรวจหาการใช้งานจริงจาก log ของ proxy/DNS, ระบบ CASB หรือ SaaS discovery เพื่อรู้ว่ามีเครื่องมือใดถูกใช้อยู่\n- **มีนโยบายที่ชัดเจนและสั้น**: ระบุว่าข้อมูลระดับใดห้ามใส่ในเครื่องมือภายนอก และเครื่องมือใดได้รับอนุมัติ\n- **จัดเครื่องมือที่อนุมัติให้ใช้งานจริง**: เลือกบริการ AI ระดับองค์กรที่มีข้อตกลงไม่นำข้อมูลไปเทรนโมเดล มี SSO และ log การใช้งาน การห้ามอย่างเดียวมักทำให้คนหันไปใช้แบบแอบมากขึ้น\n- **ป้องกันที่ตัวข้อมูล**: จัดชั้นความลับของข้อมูลและใช้ DLP ตรวจจับข้อมูลสำคัญที่กำลังถูกส่งออกไปยังบริการ AI\n- **ควบคุมสิทธิ์ของ AI agent**: ให้สิทธิ์เท่าที่จำเป็น (least privilege) และขออนุมัติจากคนก่อนทำการที่มีผลกระทบสูง\n- **ประเมินผู้ให้บริการก่อนอนุมัติ**: ดูที่ตั้งข้อมูล การเก็บรักษา การใช้ข้อมูลเทรน และใบรับรองด้านความปลอดภัย\n- **อบรมพนักงาน**: อธิบายด้วยตัวอย่างจริงว่าอะไรไม่ควรวาง และมีช่องทางขอเครื่องมือใหม่ที่เร็วพอ\n\n## จุดเริ่มต้นที่ทำได้ทันที\n\nสำรวจการใช้งานจริงใน 30 วันแรก ประกาศนโยบายฉบับสั้น และเปิดให้ใช้เครื่องมือที่อนุมัติอย่างน้อยหนึ่งตัว แล้วค่อยเพิ่มระบบควบคุมตามความเสี่ยงที่พบ",
+      "body_en": "Shadow AI is when employees use AI tools the organization hasn't approved for real work: pasting confidential documents into public chatbots, using browser extensions to summarize email, or wiring AI agents into work systems on their own. It happens because AI genuinely helps, and officially provided tools often lag behind.\n\n## Main risks\n\n- **Data leakage**: customer data, source code, contracts, or business plans pasted into outside tools may be stored or used under the provider's terms, outside the organization's control\n- **Legal and contractual breach**: sending personal data out without a legal basis or proper agreement may violate PDPA and customer requirements\n- **Fake apps and extensions**: counterfeit AI tools can quietly steal data or account access\n- **Excessive permissions**: AI agents or plugins connected to email, files, and internal systems can be tricked into doing things they shouldn't, for example through instructions hidden in documents (prompt injection)\n- **No audit trail**: without logs of who sent what where, answering auditors or investigating incidents is hard\n- **Wrong outputs**: AI answers used in important work without verification\n\n## How to respond\n\n- **Get visibility first**: use proxy/DNS logs, CASB, or SaaS discovery to learn which tools are actually in use\n- **Keep the policy short and clear**: state which data levels must never go into outside tools, and which tools are approved\n- **Provide approved tools people will actually use**: choose enterprise AI services with no-training terms, SSO, and usage logs. A ban alone usually pushes usage further underground\n- **Protect the data itself**: classify data and use DLP to catch sensitive content headed to AI services\n- **Constrain AI agents**: grant least privilege and require human approval before high-impact actions\n- **Assess vendors before approving**: check data location, retention, training use, and security certifications\n- **Train employees**: show real examples of what not to paste, and offer a fast way to request new tools\n\n## A starting point you can use today\n\nSurvey real usage over the first 30 days, publish a short policy, and enable at least one approved tool. Then add controls in proportion to the risks you find."
+    },
+    {
       "slug": "ransomware-first-5-steps",
       "date": "2026-10-18",
-      "tags": ["Ransomware", "Incident Response"],
+      "tags": [
+        "Ransomware",
+        "Incident Response"
+      ],
       "title_th": "5 ขั้นตอนเริ่มต้นรับมือแรนซัมแวร์",
       "title_en": "5 First Steps to Defend Against Ransomware",
       "summary_th": "ไม่ต้องรอซื้อเครื่องมือราคาแพง 5 เรื่องพื้นฐานนี้ลดความเสียหายจากแรนซัมแวร์ได้มากที่สุด",
@@ -14,7 +47,10 @@
     {
       "slug": "what-is-zero-trust",
       "date": "2026-10-11",
-      "tags": ["Zero Trust", "Architecture"],
+      "tags": [
+        "Zero Trust",
+        "Architecture"
+      ],
       "title_th": "Zero Trust คืออะไร และองค์กรควรเริ่มตรงไหน",
       "title_en": "What Is Zero Trust, and Where Should You Start?",
       "summary_th": "แนวคิด never trust, always verify อธิบายแบบเข้าใจง่าย พร้อมจุดเริ่มต้นที่ทำได้จริง",
@@ -25,7 +61,10 @@
     {
       "slug": "mfa-which-is-safer",
       "date": "2026-10-04",
-      "tags": ["IAM", "MFA"],
+      "tags": [
+        "IAM",
+        "MFA"
+      ],
       "title_th": "MFA แบบไหนปลอดภัยกว่ากัน",
       "title_en": "Which MFA Method Is Safer?",
       "summary_th": "SMS, แอปยืนยันตัวตน และ Passkey ต่างกันอย่างไร และทำไมบางแบบถึงถูกหลอกได้ง่ายกว่า",
