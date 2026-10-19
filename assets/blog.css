@@ -142,6 +142,9 @@
   .ig-hub-center .d{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);}
   .ig-hub-grid{position:relative;display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:34px;}
   .ig-hub-grid::before{content:'';position:absolute;top:-17px;left:calc(50% / var(--n));right:calc(50% / var(--n));height:1px;background:var(--line);}
+  .ig-hub-grid.wrap::before,.ig-hub-grid.wrap .ig-pillar::before{display:none;}
+  .ig-hub-center:has(+ .ig-hub-grid.wrap)::after{display:none;}
+  .ig-hub-grid.wrap{margin-top:18px;}
   .ig-pillar{position:relative;border:1px solid var(--line);border-radius:8px;padding:14px 12px;background:var(--panel);}
   .ig-pillar::before{content:'';position:absolute;top:-17px;left:50%;height:17px;width:1px;background:var(--line);}
   .ig-pillar .t{font-weight:600;font-size:14px;color:var(--teal);margin-bottom:4px;}
