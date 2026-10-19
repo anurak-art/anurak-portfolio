@@ -115,7 +115,7 @@ collections:
               - {label: "Title (English)", name: "title_en", widget: "string", required: false}
               - {label: "คำโปรย (ไทย) — แสดงเป็นคำอธิบายบน Google", name: "summary_th", widget: "text", hint: "เขียน 1-2 ประโยค ประมาณ 100-150 ตัวอักษร สรุปประเด็นหลักของบทความ ไม่ซ้ำกับบทความอื่น"}
               - {label: "Summary (English) — shown as the Google description", name: "summary_en", widget: "text", required: false, hint: "1-2 sentences, about 110-155 characters. Unique per article."}
-              - {label: "เนื้อหา (ไทย)", name: "body_th", widget: "text", hint: "เว้น 1 บรรทัดเพื่อขึ้นย่อหน้าใหม่ | ขึ้นต้นด้วย ## คือหัวข้อ | ขึ้นต้นด้วย - คือรายการ | ใส่ **ตัวหนา** ได้ | ลิงก์ [ข้อความลิงก์](https://...) หรือลิงก์ไปบทความอื่น [ข้อความ](post:slug-ของบทความ)"}
+              - {label: "เนื้อหา (ไทย)", name: "body_th", widget: "text", hint: "เว้น 1 บรรทัดเพื่อขึ้นย่อหน้าใหม่ | ขึ้นต้นด้วย ## คือหัวข้อ | ขึ้นต้นด้วย - คือรายการ | ใส่ **ตัวหนา** ได้ | ลิงก์ [ข้อความลิงก์](https://...) หรือลิงก์ไปบทความอื่น [ข้อความ](post:slug-ของบทความ) | `โค้ดสั้น` | โค้ดหลายบรรทัดใส่ระหว่าง ``` สองบรรทัด"}
               - {label: "Body (English)", name: "body_en", widget: "text", required: false, hint: "Leave a blank line for a new paragraph | ## heading | - bullet | **bold**. If empty, the Thai text is shown."}
               - label: "Infographic (ใส่ได้หลายรูป ไม่ใส่ก็ได้)"
                 name: "infographics"
@@ -132,6 +132,7 @@ collections:
                       - {label: "ลำดับเหตุการณ์ (flow): กล่องเชื่อมด้วยลูกศร", value: "flow"}
                       - {label: "สองฝั่ง (columns): ความเสี่ยง vs วิธีรับมือ", value: "columns"}
                       - {label: "แกนกลาง (hub): แนวคิดหลัก + องค์ประกอบ", value: "hub"}
+                  - {label: "แทรกหลังบล็อกที่ (ว่าง = หลังย่อหน้าแรก)", name: "afterBlock", widget: "number", value_type: "int", min: 1, required: false, hint: "นับย่อหน้า หัวข้อ รายการ และโค้ดแต่ละก้อนเป็น 1 บล็อก ตามลำดับในเนื้อหา"}
                   - {label: "หัวข้อ Infographic (ไทย)", name: "title_th", widget: "string"}
                   - {label: "Infographic title (English)", name: "title_en", widget: "string", required: false}
                   - {label: "ข้อความกลาง (ไทย) [ใช้กับ hub]", name: "center_th", widget: "string", required: false}

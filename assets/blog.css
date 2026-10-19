@@ -187,3 +187,8 @@
   .related span.s{color:var(--muted);font-size:13.5px;}
   .notfound{text-align:center;padding:80px 0;}
   .notfound h1{font-size:28px;margin-bottom:12px;}
+
+  /* code in articles */
+  .article-body code{font-family:'IBM Plex Mono',monospace;font-size:.88em;background:rgba(79,209,197,0.08);border:1px solid var(--line);border-radius:4px;padding:1px 6px;word-break:break-word;}
+  .article-body pre{background:#0A1020;border:1px solid var(--line);border-radius:8px;padding:16px 18px;overflow-x:auto;margin:0 0 24px;-webkit-overflow-scrolling:touch;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.65;}
+  .article-body pre code{background:none;border:0;padding:0;font-size:13px;line-height:1.65;word-break:normal;white-space:pre;color:#cfe3f5;}
