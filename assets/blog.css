@@ -28,6 +28,7 @@
   }
   .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto;}
   .brand{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;}
+  .brand img{height:44px;width:auto;display:block;}
   .brand-mark{
     width:28px;height:28px;border:1px solid var(--teal);border-radius:4px;
     display:flex;align-items:center;justify-content:center;

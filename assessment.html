@@ -3,18 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ประเมินความพร้อมด้าน Cybersecurity เบื้องต้น (Self-Assessment) · Anurak</title>
+<title>ประเมินความพร้อมด้าน Cybersecurity เบื้องต้น (Self-Assessment) · DynaSec</title>
 <meta name="description" content="แบบประเมินตนเองด้าน Cybersecurity 5 นาที ครอบคลุม MFA, สำรองข้อมูล, การตรวจจับ, PDPA และอื่นๆ ได้แผนปรับปรุง 30/90/180 วันเบื้องต้น ไม่เก็บข้อมูล ประมวลผลในเบราว์เซอร์">
 <link rel="canonical" href="https://www.dynasec.pro/assessment.html">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta property="og:site_name" content="Anurak">
+<meta property="og:site_name" content="DynaSec Consultants">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ประเมินความพร้อมด้าน Cybersecurity เบื้องต้น (Self-Assessment)">
 <meta property="og:description" content="แบบประเมินตนเอง 5 นาที ได้แผนปรับปรุงความปลอดภัยไซเบอร์ 30/90/180 วันเบื้องต้น ไม่เก็บข้อมูล">
 <meta property="og:url" content="https://www.dynasec.pro/assessment.html">
 <meta property="og:image" content="https://www.dynasec.pro/assets/og-default.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/icon-192.png" type="image/png" sizes="192x192">
+<link rel="icon" href="/assets/icon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"แบบประเมินความพร้อมด้าน Cybersecurity เบื้องต้น","url":"https://www.dynasec.pro/assessment.html","description":"แบบประเมินตนเองด้านความมั่นคงปลอดภัยไซเบอร์ที่ให้แผนปรับปรุงเบื้องต้น ประมวลผลในเบราว์เซอร์ ไม่เก็บข้อมูล","applicationCategory":"SecurityApplication","operatingSystem":"Any","inLanguage":["th","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"THB"},"author":{"@type":"Person","name":"Anurak","url":"https://www.dynasec.pro/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"https://www.dynasec.pro/"},{"@type":"ListItem","position":2,"name":"ประเมินความพร้อมด้าน Cybersecurity เบื้องต้น","item":"https://www.dynasec.pro/assessment.html"}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +37,7 @@
   header{position:sticky;top:0;z-index:50;background:rgba(11,18,32,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto;}
   .brand{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;}
+  .brand img{height:44px;width:auto;display:block;}
   .brand-mark{width:28px;height:28px;border:1px solid var(--teal);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--teal);font-family:'IBM Plex Mono',monospace;font-size:12px;}
   nav.links{display:flex;gap:24px;font-size:14px;color:var(--muted);}
   nav.links a:hover{color:var(--text);}
@@ -153,7 +157,7 @@
 
 <header>
   <div class="nav">
-    <a class="brand" href="/"><div class="brand-mark">AN</div><span>Anurak</span></a>
+    <a class="brand" href="/" aria-label="DynaSec Consultants"><img src="/assets/logo-full.png" alt="DynaSec Consultants" width="120" height="44"></a>
     <nav class="links" aria-label="Main">
       <a href="/#about" data-i18n="navAbout">เกี่ยวกับ</a>
       <a href="/#services" data-i18n="navServices">บริการ</a>
@@ -207,7 +211,7 @@
 </section>
 </main>
 
-<footer><span data-i18n="footerText">© 2026 · Pre-Sales Engineer, Cybersecurity · ผลประเมินเป็นคำแนะนำเบื้องต้น ไม่ใช่การตรวจประเมินอย่างเป็นทางการ</span></footer>
+<footer><span data-i18n="footerText">© 2026 · DynaSec Consultants · ผลประเมินเป็นคำแนะนำเบื้องต้น ไม่ใช่การตรวจประเมินอย่างเป็นทางการ</span></footer>
 
 <script>
 /* ============================ UI text ============================ */
@@ -225,7 +229,7 @@ const UI = {
     s3t:'รับผลและแผนปรับปรุง', s3d:'ได้คะแนนรายด้าน ลำดับความสำคัญ และแผน 30/90/180 วัน',
     coverTitle:'หัวข้อที่ครอบคลุม',
     privacy:'คำตอบทั้งหมดประมวลผลในเบราว์เซอร์ของคุณเท่านั้น ไม่ถูกส่งหรือจัดเก็บที่เซิร์ฟเวอร์',
-    footerText:'© 2026 · Pre-Sales Engineer, Cybersecurity · ผลประเมินเป็นคำแนะนำเบื้องต้น ไม่ใช่การตรวจประเมินอย่างเป็นทางการ',
+    footerText:'© 2026 · DynaSec Consultants · ผลประเมินเป็นคำแนะนำเบื้องต้น ไม่ใช่การตรวจประเมินอย่างเป็นทางการ',
     stepOf:'ขั้นที่', of:'จาก', back:'← ย้อนกลับ', next:'ถัดไป →', start:'เริ่มประเมิน →', seeResult:'ดูผลการวิเคราะห์',
     profileTitle:'เริ่มจากทำความรู้จักองค์กรของคุณ', profileSub:'ข้อมูลนี้ใช้ปรับคำแนะนำเท่านั้น ไม่ถูกเก็บ',
     answerAll:'กรุณาตอบทุกข้อเพื่อไปต่อ', levels:['ยังไม่มี','มีบางส่วน ไม่เป็นระบบ','มีและใช้งานจริงเป็นส่วนใหญ่','ครบถ้วน และทบทวนสม่ำเสมอ'], unsure:'ไม่แน่ใจ',
@@ -258,7 +262,7 @@ const UI = {
     s3t:'Get results and a plan', s3d:'Domain scores, priorities, and a 30/90/180-day plan',
     coverTitle:'Topics covered',
     privacy:'All answers are processed in your browser only. Nothing is sent to or stored on a server.',
-    footerText:'© 2026 · Pre-Sales Engineer, Cybersecurity · Results are preliminary guidance, not a formal audit',
+    footerText:'© 2026 · DynaSec Consultants · Results are preliminary guidance, not a formal audit',
     stepOf:'Step', of:'of', back:'← Back', next:'Next →', start:'Start →', seeResult:'See results',
     profileTitle:'First, tell us about your organization', profileSub:'Used only to tailor the advice. Nothing is stored.',
     answerAll:'Please answer every question to continue', levels:['Not yet','Partial or ad hoc','In place and mostly applied','Complete and regularly reviewed'], unsure:'Not sure',
