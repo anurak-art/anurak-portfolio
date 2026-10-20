@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zero Trust Architecture: องค์ประกอบและแผนเริ่มต้น | DynaSec</title>
+<meta name="description" content="Zero Trust Architecture ตาม NIST SP 800-207 ประกอบด้วย PE, PA, PEP และ 5 เสาหลักของ CISA พร้อมแนวทางติดตั้ง ข้อจำกัด และแผนเริ่มต้น">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://www.dynasec.pro/blog/zero-trust-architecture-guide">
+<link rel="alternate" hreflang="th" href="https://www.dynasec.pro/blog/zero-trust-architecture-guide">
+<link rel="alternate" hreflang="en" href="https://www.dynasec.pro/en/blog/zero-trust-architecture-guide">
+<link rel="alternate" hreflang="x-default" href="https://www.dynasec.pro/blog/zero-trust-architecture-guide">
+<meta property="og:site_name" content="DynaSec Consultants">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zero Trust Architecture: องค์ประกอบและแผนเริ่มต้น | DynaSec">
+<meta property="og:description" content="Zero Trust Architecture ตาม NIST SP 800-207 ประกอบด้วย PE, PA, PEP และ 5 เสาหลักของ CISA พร้อมแนวทางติดตั้ง ข้อจำกัด และแผนเริ่มต้น">
+<meta property="og:url" content="https://www.dynasec.pro/blog/zero-trust-architecture-guide">
+<meta property="og:locale" content="th_TH">
+<meta property="og:image" content="https://www.dynasec.pro/assets/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Zero Trust Architecture: องค์ประกอบและแผนเริ่มต้น | DynaSec">
+<meta name="twitter:description" content="Zero Trust Architecture ตาม NIST SP 800-207 ประกอบด้วย PE, PA, PEP และ 5 เสาหลักของ CISA พร้อมแนวทางติดตั้ง ข้อจำกัด และแผนเริ่มต้น">
+<meta name="twitter:image" content="https://www.dynasec.pro/assets/og-default.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/icon-192.png" type="image/png" sizes="192x192">
+<link rel="icon" href="/assets/icon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Zero Trust Architecture: องค์ประกอบและแผนเริ่มต้น","description":"Zero Trust Architecture ตาม NIST SP 800-207 ประกอบด้วย PE, PA, PEP และ 5 เสาหลักของ CISA พร้อมแนวทางติดตั้ง ข้อจำกัด และแผนเริ่มต้น","url":"https://www.dynasec.pro/blog/zero-trust-architecture-guide","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.dynasec.pro/blog/zero-trust-architecture-guide"},"datePublished":"2026-10-20","dateModified":"2026-10-20","inLanguage":"th","author":{"@type":"Person","name":"Anurak","url":"https://www.dynasec.pro/"},"publisher":{"@type":"Organization","name":"DynaSec Consultants","url":"https://www.dynasec.pro/","logo":{"@type":"ImageObject","url":"https://www.dynasec.pro/assets/icon-512.png"}},"image":["https://www.dynasec.pro/assets/og-default.png"],"keywords":"Zero Trust, Architecture, NIST SP 800-207, CISA ZTMM"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"https://www.dynasec.pro/"},{"@type":"ListItem","position":2,"name":"บทความ","item":"https://www.dynasec.pro/blog"},{"@type":"ListItem","position":3,"name":"Zero Trust Architecture: องค์ประกอบและแผนเริ่มต้น","item":"https://www.dynasec.pro/blog/zero-trust-architecture-guide"}]}]}</script>
+<meta property="article:published_time" content="2026-10-20">
+<meta property="article:modified_time" content="2026-10-20">
+<meta property="article:tag" content="Zero Trust">
+<meta property="article:tag" content="Architecture">
+<meta property="article:tag" content="NIST SP 800-207">
+<meta property="article:tag" content="CISA ZTMM">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/blog.css">
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="brand" href="/" aria-label="DynaSec Consultants">
+      <img src="/assets/logo-full.png" alt="DynaSec Consultants" width="120" height="44">
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="/#about">เกี่ยวกับ</a>
+      <a href="/#services">บริการ</a>
+      <a href="/solutions.html">โซลูชัน</a>
+      <a href="/assessment.html">ประเมินเบื้องต้น</a>
+      <a href="/blog" class="current" aria-current="page">บทความ</a>
+      <a href="/#cases">ผลงาน</a>
+      <a href="/#news">ข่าว Cyber Attack</a>
+      <a href="/#certs">ใบรับรอง</a>
+      <a href="/#contact">ติดต่อ</a>
+    </nav>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <a class="active" href="/blog/zero-trust-architecture-guide" hreflang="th" aria-current="true">TH</a>
+      <a href="/en/blog/zero-trust-architecture-guide" hreflang="en">EN</a>
+    </div>
+  </div>
+</header>
+<section class="main">
+  <div class="wrap">
+    <article class="article">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">หน้าแรก</a><span>›</span><a href="/blog">บทความ</a><span>›</span><span>Zero Trust Architecture: องค์ประกอบและแผนเริ่มต…</span></nav>
+      <div class="tags"><span class="tag">Zero Trust</span><span class="tag">Architecture</span><span class="tag">NIST SP 800-207</span><span class="tag">CISA ZTMM</span></div>
+      <h1>Zero Trust Architecture: องค์ประกอบและแผนเริ่มต้น</h1>
+      <div class="byline"><span>เขียนโดย Anurak</span><span>เผยแพร่ <time datetime="2026-10-20">20 ตุลาคม 2569</time></span></div>
+      <div class="article-body"><p>Zero Trust Architecture (ZTA) คือวิธีที่องค์กรออกแบบเครือข่าย ตัวตน อุปกรณ์ แอปพลิเคชัน และข้อมูล โดยยึดหลัก zero trust NIST SP 800-207 ซึ่งเผยแพร่เมื่อเดือนสิงหาคม 2020 นิยาม ZTA ว่าเป็นแนวทางที่ตำแหน่งในเครือข่ายหรือความเป็นเจ้าของอุปกรณ์เพียงอย่างเดียวไม่ให้ความเชื่อใจโดยปริยาย และการยืนยันตัวตนและการอนุญาตของผู้ใช้และอุปกรณ์เป็นขั้นตอนแยกกันก่อนเริ่ม session ไปยังทรัพยากร พูดสั้น ๆ คือปกป้องทรัพยากรแต่ละชิ้น ไม่ใช่แค่ส่วนของเครือข่ายที่มันอยู่ หากเพิ่งเริ่มรู้จักแนวคิดนี้ อ่าน <a href="/blog/what-is-zero-trust">Zero Trust คืออะไร และองค์กรควรเริ่มตรงไหน</a> ก่อน แล้วกลับมาที่เรื่องสถาปัตยกรรม</p><h2>แนวคิดหลักของ ZTA</h2><p>NIST SP 800-207 อธิบาย zero trust ผ่านชุด tenet สรุปเป็นภาษาง่ายได้ดังนี้</p><ul><li><strong>ทุกอย่างคือทรัพยากร</strong>: แหล่งข้อมูล บริการ และอุปกรณ์ล้วนต้องปกป้อง</li><li><strong>รักษาความปลอดภัยการสื่อสารทั้งหมด</strong> ไม่ว่าจะอยู่ในเครือข่ายตำแหน่งใด</li><li><strong>ให้สิทธิ์ต่อ session</strong> ทีละทรัพยากร</li><li><strong>ตัดสินการเข้าถึงด้วยนโยบายแบบไดนามิก</strong> ที่พิจารณาตัวตน แอปพลิเคชัน สถานะอุปกรณ์ และพฤติกรรม</li><li><strong>เฝ้าดูสถานะของทุกสินทรัพย์</strong> ทั้งที่เป็นขององค์กรและไม่ใช่ แล้วลงมือตามที่เห็น</li><li><strong>ยืนยันตัวตนและอนุญาตทุกครั้งอย่างเข้มงวด</strong> ก่อนให้เข้าถึง</li><li><strong>เก็บข้อมูลให้มากที่สุด</strong> เกี่ยวกับสินทรัพย์ ทราฟฟิก และการเข้าถึง แล้วนำไปปรับปรุงนโยบาย</li></ul><h2>องค์ประกอบเชิงตรรกะ</h2><p>ZTA แยกการตัดสินใจเรื่องการเข้าถึงออกจากการบังคับใช้ NIST อธิบายองค์ประกอบหลักสามอย่าง</p><figure class="infographic" style="margin-left:0;margin-right:0">
+      <div class="ig-label">INFOGRAPHIC</div>
+      <figcaption class="ig-title">เส้นทางการตัดสินการเข้าถึงใน ZTA</figcaption>
+      <div class="ig-flow">
+    <div class="ig-node "><div class="k">01</div>
+      <div class="t">คำขอ</div><div class="d">ผู้ใช้และอุปกรณ์ขอเข้าถึงทรัพยากร</div></div><div class="ig-arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></div>
+    <div class="ig-node "><div class="k">02</div>
+      <div class="t">PEP</div><div class="d">จุดบังคับใช้หน้าทรัพยากร</div></div><div class="ig-arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></div>
+    <div class="ig-node "><div class="k">03</div>
+      <div class="t">PE + PA</div><div class="d">ประเมินตัวตน อุปกรณ์ บริบท แล้วตัดสิน</div></div><div class="ig-arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></div>
+    <div class="ig-node ok"><div class="k">04</div>
+      <div class="t">Session</div><div class="d">เปิดเฉพาะทรัพยากรที่อนุญาต</div></div><div class="ig-arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></div>
+    <div class="ig-node "><div class="k">05</div>
+      <div class="t">ประเมินซ้ำ</div><div class="d">ตรวจสัญญาณต่อเนื่องและปิดเมื่อเสี่ยง</div></div></div>
+    </figure><ul><li><strong>Policy Engine (PE)</strong>: ตัดสินให้หรือปฏิเสธการเข้าถึง โดยใช้นโยบายขององค์กรและสัญญาณจากแหล่งอื่น</li><li><strong>Policy Administrator (PA)</strong>: ทำตามคำตัดสินด้วยการสร้างหรือยกเลิกเส้นทางการสื่อสาร เช่น ออก token หรือ credential สำหรับ session</li><li><strong>Policy Enforcement Point (PEP)</strong>: อยู่หน้าทรัพยากร เปิด เฝ้าดู และปิดการเชื่อมต่อ</li></ul><p>PE และ PA รวมกันมักเรียกว่า Policy Decision Point การตัดสินใจอาศัยระบบสนับสนุน ได้แก่ การจัดการตัวตน สถานะและการเฝ้าดูอุปกรณ์ threat intelligence log กิจกรรม และนโยบายการเข้าถึงข้อมูล</p><figure class="infographic" style="margin-left:0;margin-right:0">
+      <div class="ig-label">INFOGRAPHIC</div>
+      <figcaption class="ig-title">5 เสาหลักของ Zero Trust (CISA)</figcaption>
+      <div class="ig-hub-center"><div class="t">Zero Trust</div><div class="d">visibility, automation, governance ตัดผ่านทุกเสา</div></div>
+    <div class="ig-hub-grid" style="--n:5">
+      <div class="ig-pillar"><div class="t">ตัวตน</div><div class="d">MFA, SSO, สิทธิ์น้อยที่สุด</div></div>
+      <div class="ig-pillar"><div class="t">อุปกรณ์</div><div class="d">บัญชีรายการและสุขภาพอุปกรณ์</div></div>
+      <div class="ig-pillar"><div class="t">เครือข่าย</div><div class="d">แบ่งส่วน เข้าถึงรายแอป</div></div>
+      <div class="ig-pillar"><div class="t">แอปและ workload</div><div class="d">อนุญาตรายแอป ปกป้อง workload</div></div>
+      <div class="ig-pillar"><div class="t">ข้อมูล</div><div class="d">จัดชั้น เข้ารหัส เฝ้าดู</div></div></div>
+    </figure><p>ผลลัพธ์คือวงจรไม่ใช่การตรวจครั้งเดียว คำขอผ่าน PEP จุดตัดสินใจประเมินตัวตน สุขภาพอุปกรณ์ และบริบท เปิด session เฉพาะทรัพยากรที่ได้รับอนุญาต และประเมินสัญญาณซ้ำตลอดที่ session ยังดำเนินอยู่</p><h2>5 เสาหลัก (Pillars)</h2><p>Zero Trust Maturity Model ของ CISA (เวอร์ชัน 2.0) จัดงานเป็น 5 เสาหลัก พร้อมความสามารถอีก 3 อย่างที่ตัดผ่านทุกเสา นี่คือวิธีที่ใช้งานได้จริงที่สุดในการแบ่งเจ้าของงานและวางแผนโครงการ</p><ul><li><strong>ตัวตน (Identity)</strong>: การยืนยันตัวตนที่แข็งแรง SSO สิทธิ์น้อยที่สุด และการจัดการวงจรชีวิตของคนและบัญชีบริการ</li><li><strong>อุปกรณ์ (Devices)</strong>: บัญชีรายการ การตรวจสุขภาพและความสอดคล้อง และการป้องกัน endpoint</li><li><strong>เครือข่าย (Networks)</strong>: การแบ่งส่วน การเข้ารหัสทราฟฟิก และการเข้าถึงรายแอปแทนการเข้าถึงเครือข่ายกว้าง</li><li><strong>แอปพลิเคชันและ workload</strong>: การพัฒนาอย่างปลอดภัย การอนุญาตรายแอป และการปกป้อง workload บนคลาวด์</li><li><strong>ข้อมูล (Data)</strong>: การจัดชั้นความลับ การเข้ารหัส การควบคุมการเข้าถึง และการเฝ้าดูการเคลื่อนย้ายข้อมูล</li></ul><p>ความสามารถที่ตัดผ่านทุกเสาคือ visibility และ analytics, automation และ orchestration, และ governance</p><figure class="infographic" style="margin-left:0;margin-right:0">
+      <div class="ig-label">INFOGRAPHIC</div>
+      <figcaption class="ig-title">4 ระดับวุฒิภาวะต่อเสาหลัก</figcaption>
+      <div class="ig-spec" style="--n:4"><div class="ig-spec-item"><div class="ig-bar" style="--r:0.00;--c:rgb(255,122,122)"></div>
+      <div class="t">Traditional</div><div class="d">ตั้งค่าด้วยมือ นโยบายคงที่</div></div><div class="ig-spec-item"><div class="ig-bar" style="--r:0.33;--c:rgb(255,158,62)"></div>
+      <div class="t">Initial</div><div class="d">เริ่มอัตโนมัติบางส่วน</div></div><div class="ig-spec-item"><div class="ig-bar" style="--r:0.67;--c:rgb(196,187,87)"></div>
+      <div class="t">Advanced</div><div class="d">เชื่อมเสาหลักและสัญญาณ</div></div><div class="ig-spec-item"><div class="ig-bar" style="--r:1.00;--c:rgb(79,209,197)"></div>
+      <div class="t">Optimal</div><div class="d">ตัดสินแบบไดนามิกและอัตโนมัติ</div></div></div><div class="ig-axis"><span>ระดับต้น</span><span>ระดับสูง</span></div>
+    </figure><h2>แนวทางติดตั้ง 3 แบบที่พบบ่อย</h2><p>NIST อธิบายหลายวิธีสร้าง ZTA โปรแกรมจริงส่วนใหญ่ผสมกัน</p><ul><li><strong>Enhanced identity governance</strong>: การตัดสินการเข้าถึงอิงตัวตนและแอตทริบิวต์เป็นศูนย์กลาง เหมาะเมื่อตัวตนคือมาตรการที่แข็งแรงที่สุดและทรัพยากรส่วนใหญ่อยู่บนคลาวด์หรือ SaaS</li><li><strong>Micro-segmentation</strong>: วางทรัพยากรในส่วนย่อยที่ป้องกันด้วย gateway หรือมาตรการบนโฮสต์ มีประโยชน์ในดาต้าเซ็นเตอร์และการปกป้องระบบสำคัญ</li><li><strong>Network-based หรือ software-defined perimeter</strong>: ผู้ใช้และอุปกรณ์เชื่อมต่อได้เฉพาะทรัพยากรที่ได้รับอนุมัติ มักให้บริการในรูป ZTNA (zero trust network access) ใช้แทนการเข้าถึงผ่าน VPN แบบกว้างได้บ่อย</li></ul><p>ZTNA เป็นเทคโนโลยีหนึ่งที่สนับสนุน ZTA ไม่ใช่สถาปัตยกรรมทั้งหมด การซื้อผลิตภัณฑ์ ZTNA เพียงอย่างเดียวไม่ได้ทำให้ได้ zero trust</p><h2>ระดับวุฒิภาวะ</h2><figure class="infographic" style="margin-left:0;margin-right:0">
+      <div class="ig-label">INFOGRAPHIC</div>
+      <figcaption class="ig-title">ลำดับเริ่มสร้าง Zero Trust Architecture</figcaption>
+      <div class="ig-steps">
+    <div class="ig-step"><div class="ig-num">1</div>
+      <div><div class="t">ระบุสิ่งที่ต้องปกป้อง</div><div class="d">ผู้ใช้ อุปกรณ์ แอป ข้อมูล</div></div></div>
+    <div class="ig-step"><div class="ig-num">2</div>
+      <div><div class="t">เสริมตัวตนก่อน</div><div class="d">MFA ที่ทนฟิชชิง SSO สิทธิ์น้อยที่สุด</div></div></div>
+    <div class="ig-step"><div class="ig-num">3</div>
+      <div><div class="t">รู้จักอุปกรณ์</div><div class="d">ตรวจสุขภาพก่อนให้เข้าถึง</div></div></div>
+    <div class="ig-step"><div class="ig-num">4</div>
+      <div><div class="t">เข้าถึงรายแอปและแบ่งส่วน</div><div class="d">เริ่มจากไม่กี่แอปหลัก</div></div></div>
+    <div class="ig-step"><div class="ig-num">5</div>
+      <div><div class="t">ปกป้องข้อมูลและวัดผล</div><div class="d">จัดชั้น เข้ารหัส เฝ้าดู ปรับนโยบาย</div></div></div></div>
+    </figure><p>โมเดลของ CISA อธิบาย 4 ระดับในแต่ละเสาหลัก ได้แก่ traditional, initial, advanced และ optimal โดยหลักการคร่าว ๆ ระดับต้นพึ่งการตั้งค่าด้วยมือและนโยบายคงที่ ส่วนระดับหลังเชื่อมเสาหลักเข้าด้วยกัน ใช้ระบบอัตโนมัติมากขึ้น และตัดสินใจด้วยสัญญาณแบบไดนามิกและเรียลไทม์ ใช้ระดับเหล่านี้ตั้งเป้าหมายอย่างตรงไปตรงมาต่อเสาหลัก เพราะแทบไม่มีองค์กรที่อยู่ระดับเดียวกันทุกด้าน</p><h2>ข้อดีและข้อจำกัด</h2><ul><li><strong>ข้อดี</strong>: จำกัดการเคลื่อนที่ในเครือข่ายหลังถูกบุกรุก เหมาะกับการทำงานระยะไกล คลาวด์ และการเข้าถึงของพาร์ตเนอร์มากกว่าแนวป้องกันรอบนอก มองเห็นว่าใครเข้าถึงอะไรชัดขึ้น และช่วยเป็นหลักฐานด้าน compliance</li><li><strong>ข้อจำกัด</strong>: ต้องใช้ความพยายามต่อเนื่อง ไม่ใช่โครงการเดียว ระบบเก่าและ OT อาจรองรับการยืนยันตัวตนสมัยใหม่ไม่ได้ การตรวจที่เข้มขึ้นอาจเพิ่มความไม่สะดวกของผู้ใช้ และต้องมีคนที่ชำนาญและข้อมูลสินทรัพย์และตัวตนที่ดี</li><li><strong>ความเสี่ยงด้านการออกแบบ</strong>: จุดตัดสินใจกลายเป็นโครงสร้างพื้นฐานสำคัญ จึงต้องวางแผน high availability และพฤติกรรมเมื่อล้มเหลวอย่างปลอดภัย จุดตัดสินใจที่ถูกยึดเป็นเป้าหมายมูลค่าสูง</li><li><strong>ความเสี่ยงด้านการตลาด</strong>: ไม่มีผลิตภัณฑ์ใดเป็น &quot;zero trust ในกล่องเดียว&quot; ควรถามว่าผลิตภัณฑ์รองรับเสาหลักและ tenet ใดจริง</li></ul><h2>แผนเริ่มต้นที่ทำได้จริง</h2><p>NCCoE ของ NIST เผยแพร่ SP 1800-35 เมื่อเดือนมิถุนายน 2025 พร้อมตัวอย่างการติดตั้ง ZTA 19 แบบที่สร้างร่วมกับผู้ร่วมงานจากภาคอุตสาหกรรม ซึ่งเป็นแหล่งอ้างอิงที่มีประโยชน์สำหรับการออกแบบจริง ลำดับทั่วไปที่ใช้ได้กับองค์กรส่วนใหญ่มีดังนี้</p><ul><li><strong>ระบุสิ่งที่ต้องปกป้อง</strong>: ทำบัญชีผู้ใช้ อุปกรณ์ แอปพลิเคชัน และข้อมูล แล้วจัดลำดับตามความสำคัญ</li><li><strong>เสริมตัวตนก่อน</strong>: MFA ที่ทนฟิชชิงเมื่อทำได้ (ดู <a href="/blog/mfa-which-is-safer">MFA แบบไหนปลอดภัยกว่ากัน</a>) SSO และสิทธิ์น้อยที่สุด</li><li><strong>รู้จักอุปกรณ์</strong>: ทำบัญชีรายการและตรวจสุขภาพก่อนให้เข้าถึง</li><li><strong>ย้ายไปเข้าถึงรายแอปและแบ่งส่วนระบบสำคัญ</strong>: เริ่มจากไม่กี่แอปหลัก</li><li><strong>ปกป้องข้อมูล</strong>: จัดชั้น เข้ารหัส และเฝ้าดูข้อมูลที่ละเอียดอ่อนที่สุด</li><li><strong>เฝ้าดู ทำอัตโนมัติ และปรับปรุง</strong>: เก็บสัญญาณ ปรับนโยบาย และทำการตอบสนองให้อัตโนมัติ</li></ul><p>สำหรับโรงงานและระบบควบคุม ใช้แนวคิดเดียวกันแต่ต้องระวังเรื่องความปลอดภัยและความพร้อมใช้งาน ดู <a href="/blog/zero-trust-for-ot">Zero Trust กับระบบ OT</a></p><h2>ขั้นแรกที่ทำได้ทันที</h2><ul><li><strong>ระบุ crown jewels</strong>: ห้าระบบหรือชุดข้อมูลที่ถ้าถูกบุกรุกแล้วเสียหายที่สุด</li><li><strong>ตรวจพื้นฐานด้านตัวตน</strong>: ความครอบคลุมของ MFA บัญชีที่ไม่ใช้งาน และแอดมินที่มีสิทธิ์เกิน</li><li><strong>เลือกหนึ่งแอปพลิเคชัน</strong> แล้วย้ายจากการเข้าถึงทั้งเครือข่ายเป็นการเข้าถึงรายแอป</li><li><strong>ให้คะแนนตัวเองรายเสาหลัก</strong> เทียบกับระดับของ CISA โดยใช้ <a href="/assessment.html">แบบประเมินตนเอง</a> เป็นจุดเริ่มต้น</li><li><strong>ซ้อมการเปลี่ยนแปลง</strong> ในห้องทดลองก่อนบังคับใช้ ดู <a href="/blog/network-cyber-security-simulator-guide">Network &amp; Cyber Security Simulator: ประเภทและการใช้งาน</a></li></ul><h2>ข้อควรระวัง</h2><ul><li><strong>มอง zero trust เป็นการซื้อผลิตภัณฑ์</strong>: มันคือสถาปัตยกรรมและโปรแกรม</li><li><strong>พยายามเปลี่ยนทุกอย่างพร้อมกัน</strong>: เลือกแอปคุณค่าสูงแล้วขยาย</li><li><strong>มองข้ามระบบเก่า</strong>: วางมาตรการชดเชย เช่น การแบ่งส่วนและเส้นทางเข้าถึงที่เข้มงวด</li><li><strong>ลืมความพร้อมใช้งานของจุดตัดสินใจ</strong>: ถ้าล่ม อาจทำให้ทุกคนเข้าใช้งานไม่ได้</li><li><strong>ละเลยประสบการณ์ผู้ใช้</strong>: ความไม่สะดวกผลักให้คนหาทางลัด</li><li><strong>ไม่วัดผล</strong>: ถ้าไม่มี log และตัวชี้วัด จะปรับนโยบายหรือแสดงความคืบหน้าไม่ได้</li></ul><h2>แหล่งอ้างอิงและข้อมูลเพิ่มเติม</h2><ul><li><a href="https://csrc.nist.gov/pubs/sp/800/207/final" target="_blank" rel="noopener">NIST SP 800-207: Zero Trust Architecture</a></li><li><a href="https://csrc.nist.gov/pubs/sp/1800/35/final" target="_blank" rel="noopener">NIST SP 1800-35: Implementing a Zero Trust Architecture</a>: ตัวอย่างการติดตั้ง 19 แบบ</li><li><a href="https://www.cisa.gov/zero-trust-maturity-model" target="_blank" rel="noopener">CISA Zero Trust Maturity Model</a>: 5 เสาหลัก 3 ความสามารถที่ตัดผ่าน และ 4 ระดับวุฒิภาวะ</li><li><a href="https://www.whitehouse.gov/wp-content/uploads/2022/01/M-22-09.pdf" target="_blank" rel="noopener">OMB M-22-09: Moving the U.S. Government Toward Zero Trust Cybersecurity Principles</a></li><li><a href="https://www.ncsc.gov.uk/collection/zero-trust-architecture" target="_blank" rel="noopener">NCSC: Zero trust architecture design principles</a></li></ul></div>
+      <div class="share"><span>แชร์บทความนี้</span><button type="button" id="copy-link">คัดลอกลิงก์</button></div>
+      <aside class="related" aria-labelledby="rel-h"><h2 id="rel-h">บทความที่เกี่ยวข้อง</h2><ul><li><a class="t" href="/blog/what-is-zero-trust">Zero Trust คืออะไร และองค์กรควรเริ่มตรงไหน</a><span class="s">Zero Trust คือแนวคิด never trust, always verify ที่ตรวจสอบทุกคำขอเข้าถึง อธิบายหลักการสำคัญและวิธีเริ่มต้นโดยไม่ต้องรื้อระบบเดิม</span></li><li><a class="t" href="/blog/zero-trust-for-ot">Zero Trust กับระบบ OT: ปรับใช้อย่างไรให้โรงงานไม่สะดุด</a><span class="s">ปรับ Zero Trust ใช้กับระบบ OT และโรงงานอย่างไรไม่ให้กระทบการผลิต ครอบคลุมข้อจำกัดของ OT, zones and conduits, การเข้าถึงระยะไกล และขั้นตอนเริ่มต้น</span></li><li><a class="t" href="/blog/network-cyber-security-simulator-guide">Network &amp; Cyber Security Simulator: ประเภทและการใช้งาน</a><span class="s">Simulator ด้านเครือข่ายและไซเบอร์ช่วยฝึก ทดสอบ และตรวจสอบมาตรการโดยไม่เสี่ยงระบบจริง รู้จัก 5 ประเภท ข้อจำกัด และกฎความปลอดภัย</span></li></ul></aside>
+    </article>
+  </div>
+</section>
+<script>(function(){var b=document.getElementById('copy-link');if(!b||!navigator.clipboard)return;b.addEventListener('click',function(){navigator.clipboard.writeText(location.href).then(function(){var o=b.textContent;b.textContent="คัดลอกแล้ว";setTimeout(function(){b.textContent=o},1500);});});})();</script>
+<footer>
+  <span>© 2026 · DynaSec Consultants · บทความเพื่อให้ความรู้</span>
+</footer>
+</body>
+</html>

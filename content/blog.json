@@ -1,6 +1,183 @@
 {
   "items": [
     {
+      "slug": "zero-trust-architecture-guide",
+      "date": "2026-10-20",
+      "tags": [
+        "Zero Trust",
+        "Architecture",
+        "NIST SP 800-207",
+        "CISA ZTMM"
+      ],
+      "title_th": "Zero Trust Architecture: องค์ประกอบและแผนเริ่มต้น",
+      "title_en": "Zero Trust Architecture: Components and Roadmap",
+      "summary_th": "Zero Trust Architecture ตาม NIST SP 800-207 ประกอบด้วย PE, PA, PEP และ 5 เสาหลักของ CISA พร้อมแนวทางติดตั้ง ข้อจำกัด และแผนเริ่มต้น",
+      "summary_en": "Zero Trust Architecture explained: NIST SP 800-207 components, CISA's five pillars, deployment approaches, limits, and a practical roadmap.",
+      "body_th": "Zero Trust Architecture (ZTA) คือวิธีที่องค์กรออกแบบเครือข่าย ตัวตน อุปกรณ์ แอปพลิเคชัน และข้อมูล โดยยึดหลัก zero trust NIST SP 800-207 ซึ่งเผยแพร่เมื่อเดือนสิงหาคม 2020 นิยาม ZTA ว่าเป็นแนวทางที่ตำแหน่งในเครือข่ายหรือความเป็นเจ้าของอุปกรณ์เพียงอย่างเดียวไม่ให้ความเชื่อใจโดยปริยาย และการยืนยันตัวตนและการอนุญาตของผู้ใช้และอุปกรณ์เป็นขั้นตอนแยกกันก่อนเริ่ม session ไปยังทรัพยากร พูดสั้น ๆ คือปกป้องทรัพยากรแต่ละชิ้น ไม่ใช่แค่ส่วนของเครือข่ายที่มันอยู่ หากเพิ่งเริ่มรู้จักแนวคิดนี้ อ่าน [Zero Trust คืออะไร และองค์กรควรเริ่มตรงไหน](post:what-is-zero-trust) ก่อน แล้วกลับมาที่เรื่องสถาปัตยกรรม\n\n## แนวคิดหลักของ ZTA\n\nNIST SP 800-207 อธิบาย zero trust ผ่านชุด tenet สรุปเป็นภาษาง่ายได้ดังนี้\n\n- **ทุกอย่างคือทรัพยากร**: แหล่งข้อมูล บริการ และอุปกรณ์ล้วนต้องปกป้อง\n- **รักษาความปลอดภัยการสื่อสารทั้งหมด** ไม่ว่าจะอยู่ในเครือข่ายตำแหน่งใด\n- **ให้สิทธิ์ต่อ session** ทีละทรัพยากร\n- **ตัดสินการเข้าถึงด้วยนโยบายแบบไดนามิก** ที่พิจารณาตัวตน แอปพลิเคชัน สถานะอุปกรณ์ และพฤติกรรม\n- **เฝ้าดูสถานะของทุกสินทรัพย์** ทั้งที่เป็นขององค์กรและไม่ใช่ แล้วลงมือตามที่เห็น\n- **ยืนยันตัวตนและอนุญาตทุกครั้งอย่างเข้มงวด** ก่อนให้เข้าถึง\n- **เก็บข้อมูลให้มากที่สุด** เกี่ยวกับสินทรัพย์ ทราฟฟิก และการเข้าถึง แล้วนำไปปรับปรุงนโยบาย\n\n## องค์ประกอบเชิงตรรกะ\n\nZTA แยกการตัดสินใจเรื่องการเข้าถึงออกจากการบังคับใช้ NIST อธิบายองค์ประกอบหลักสามอย่าง\n\n- **Policy Engine (PE)**: ตัดสินให้หรือปฏิเสธการเข้าถึง โดยใช้นโยบายขององค์กรและสัญญาณจากแหล่งอื่น\n- **Policy Administrator (PA)**: ทำตามคำตัดสินด้วยการสร้างหรือยกเลิกเส้นทางการสื่อสาร เช่น ออก token หรือ credential สำหรับ session\n- **Policy Enforcement Point (PEP)**: อยู่หน้าทรัพยากร เปิด เฝ้าดู และปิดการเชื่อมต่อ\n\nPE และ PA รวมกันมักเรียกว่า Policy Decision Point การตัดสินใจอาศัยระบบสนับสนุน ได้แก่ การจัดการตัวตน สถานะและการเฝ้าดูอุปกรณ์ threat intelligence log กิจกรรม และนโยบายการเข้าถึงข้อมูล\n\nผลลัพธ์คือวงจรไม่ใช่การตรวจครั้งเดียว คำขอผ่าน PEP จุดตัดสินใจประเมินตัวตน สุขภาพอุปกรณ์ และบริบท เปิด session เฉพาะทรัพยากรที่ได้รับอนุญาต และประเมินสัญญาณซ้ำตลอดที่ session ยังดำเนินอยู่\n\n## 5 เสาหลัก (Pillars)\n\nZero Trust Maturity Model ของ CISA (เวอร์ชัน 2.0) จัดงานเป็น 5 เสาหลัก พร้อมความสามารถอีก 3 อย่างที่ตัดผ่านทุกเสา นี่คือวิธีที่ใช้งานได้จริงที่สุดในการแบ่งเจ้าของงานและวางแผนโครงการ\n\n- **ตัวตน (Identity)**: การยืนยันตัวตนที่แข็งแรง SSO สิทธิ์น้อยที่สุด และการจัดการวงจรชีวิตของคนและบัญชีบริการ\n- **อุปกรณ์ (Devices)**: บัญชีรายการ การตรวจสุขภาพและความสอดคล้อง และการป้องกัน endpoint\n- **เครือข่าย (Networks)**: การแบ่งส่วน การเข้ารหัสทราฟฟิก และการเข้าถึงรายแอปแทนการเข้าถึงเครือข่ายกว้าง\n- **แอปพลิเคชันและ workload**: การพัฒนาอย่างปลอดภัย การอนุญาตรายแอป และการปกป้อง workload บนคลาวด์\n- **ข้อมูล (Data)**: การจัดชั้นความลับ การเข้ารหัส การควบคุมการเข้าถึง และการเฝ้าดูการเคลื่อนย้ายข้อมูล\n\nความสามารถที่ตัดผ่านทุกเสาคือ visibility และ analytics, automation และ orchestration, และ governance\n\n## แนวทางติดตั้ง 3 แบบที่พบบ่อย\n\nNIST อธิบายหลายวิธีสร้าง ZTA โปรแกรมจริงส่วนใหญ่ผสมกัน\n\n- **Enhanced identity governance**: การตัดสินการเข้าถึงอิงตัวตนและแอตทริบิวต์เป็นศูนย์กลาง เหมาะเมื่อตัวตนคือมาตรการที่แข็งแรงที่สุดและทรัพยากรส่วนใหญ่อยู่บนคลาวด์หรือ SaaS\n- **Micro-segmentation**: วางทรัพยากรในส่วนย่อยที่ป้องกันด้วย gateway หรือมาตรการบนโฮสต์ มีประโยชน์ในดาต้าเซ็นเตอร์และการปกป้องระบบสำคัญ\n- **Network-based หรือ software-defined perimeter**: ผู้ใช้และอุปกรณ์เชื่อมต่อได้เฉพาะทรัพยากรที่ได้รับอนุมัติ มักให้บริการในรูป ZTNA (zero trust network access) ใช้แทนการเข้าถึงผ่าน VPN แบบกว้างได้บ่อย\n\nZTNA เป็นเทคโนโลยีหนึ่งที่สนับสนุน ZTA ไม่ใช่สถาปัตยกรรมทั้งหมด การซื้อผลิตภัณฑ์ ZTNA เพียงอย่างเดียวไม่ได้ทำให้ได้ zero trust\n\n## ระดับวุฒิภาวะ\n\nโมเดลของ CISA อธิบาย 4 ระดับในแต่ละเสาหลัก ได้แก่ traditional, initial, advanced และ optimal โดยหลักการคร่าว ๆ ระดับต้นพึ่งการตั้งค่าด้วยมือและนโยบายคงที่ ส่วนระดับหลังเชื่อมเสาหลักเข้าด้วยกัน ใช้ระบบอัตโนมัติมากขึ้น และตัดสินใจด้วยสัญญาณแบบไดนามิกและเรียลไทม์ ใช้ระดับเหล่านี้ตั้งเป้าหมายอย่างตรงไปตรงมาต่อเสาหลัก เพราะแทบไม่มีองค์กรที่อยู่ระดับเดียวกันทุกด้าน\n\n## ข้อดีและข้อจำกัด\n\n- **ข้อดี**: จำกัดการเคลื่อนที่ในเครือข่ายหลังถูกบุกรุก เหมาะกับการทำงานระยะไกล คลาวด์ และการเข้าถึงของพาร์ตเนอร์มากกว่าแนวป้องกันรอบนอก มองเห็นว่าใครเข้าถึงอะไรชัดขึ้น และช่วยเป็นหลักฐานด้าน compliance\n- **ข้อจำกัด**: ต้องใช้ความพยายามต่อเนื่อง ไม่ใช่โครงการเดียว ระบบเก่าและ OT อาจรองรับการยืนยันตัวตนสมัยใหม่ไม่ได้ การตรวจที่เข้มขึ้นอาจเพิ่มความไม่สะดวกของผู้ใช้ และต้องมีคนที่ชำนาญและข้อมูลสินทรัพย์และตัวตนที่ดี\n- **ความเสี่ยงด้านการออกแบบ**: จุดตัดสินใจกลายเป็นโครงสร้างพื้นฐานสำคัญ จึงต้องวางแผน high availability และพฤติกรรมเมื่อล้มเหลวอย่างปลอดภัย จุดตัดสินใจที่ถูกยึดเป็นเป้าหมายมูลค่าสูง\n- **ความเสี่ยงด้านการตลาด**: ไม่มีผลิตภัณฑ์ใดเป็น \"zero trust ในกล่องเดียว\" ควรถามว่าผลิตภัณฑ์รองรับเสาหลักและ tenet ใดจริง\n\n## แผนเริ่มต้นที่ทำได้จริง\n\nNCCoE ของ NIST เผยแพร่ SP 1800-35 เมื่อเดือนมิถุนายน 2025 พร้อมตัวอย่างการติดตั้ง ZTA 19 แบบที่สร้างร่วมกับผู้ร่วมงานจากภาคอุตสาหกรรม ซึ่งเป็นแหล่งอ้างอิงที่มีประโยชน์สำหรับการออกแบบจริง ลำดับทั่วไปที่ใช้ได้กับองค์กรส่วนใหญ่มีดังนี้\n\n- **ระบุสิ่งที่ต้องปกป้อง**: ทำบัญชีผู้ใช้ อุปกรณ์ แอปพลิเคชัน และข้อมูล แล้วจัดลำดับตามความสำคัญ\n- **เสริมตัวตนก่อน**: MFA ที่ทนฟิชชิงเมื่อทำได้ (ดู [MFA แบบไหนปลอดภัยกว่ากัน](post:mfa-which-is-safer)) SSO และสิทธิ์น้อยที่สุด\n- **รู้จักอุปกรณ์**: ทำบัญชีรายการและตรวจสุขภาพก่อนให้เข้าถึง\n- **ย้ายไปเข้าถึงรายแอปและแบ่งส่วนระบบสำคัญ**: เริ่มจากไม่กี่แอปหลัก\n- **ปกป้องข้อมูล**: จัดชั้น เข้ารหัส และเฝ้าดูข้อมูลที่ละเอียดอ่อนที่สุด\n- **เฝ้าดู ทำอัตโนมัติ และปรับปรุง**: เก็บสัญญาณ ปรับนโยบาย และทำการตอบสนองให้อัตโนมัติ\n\nสำหรับโรงงานและระบบควบคุม ใช้แนวคิดเดียวกันแต่ต้องระวังเรื่องความปลอดภัยและความพร้อมใช้งาน ดู [Zero Trust กับระบบ OT](post:zero-trust-for-ot)\n\n## ขั้นแรกที่ทำได้ทันที\n\n- **ระบุ crown jewels**: ห้าระบบหรือชุดข้อมูลที่ถ้าถูกบุกรุกแล้วเสียหายที่สุด\n- **ตรวจพื้นฐานด้านตัวตน**: ความครอบคลุมของ MFA บัญชีที่ไม่ใช้งาน และแอดมินที่มีสิทธิ์เกิน\n- **เลือกหนึ่งแอปพลิเคชัน** แล้วย้ายจากการเข้าถึงทั้งเครือข่ายเป็นการเข้าถึงรายแอป\n- **ให้คะแนนตัวเองรายเสาหลัก** เทียบกับระดับของ CISA โดยใช้ [แบบประเมินตนเอง](/assessment.html) เป็นจุดเริ่มต้น\n- **ซ้อมการเปลี่ยนแปลง** ในห้องทดลองก่อนบังคับใช้ ดู [Network & Cyber Security Simulator: ประเภทและการใช้งาน](post:network-cyber-security-simulator-guide)\n\n## ข้อควรระวัง\n\n- **มอง zero trust เป็นการซื้อผลิตภัณฑ์**: มันคือสถาปัตยกรรมและโปรแกรม\n- **พยายามเปลี่ยนทุกอย่างพร้อมกัน**: เลือกแอปคุณค่าสูงแล้วขยาย\n- **มองข้ามระบบเก่า**: วางมาตรการชดเชย เช่น การแบ่งส่วนและเส้นทางเข้าถึงที่เข้มงวด\n- **ลืมความพร้อมใช้งานของจุดตัดสินใจ**: ถ้าล่ม อาจทำให้ทุกคนเข้าใช้งานไม่ได้\n- **ละเลยประสบการณ์ผู้ใช้**: ความไม่สะดวกผลักให้คนหาทางลัด\n- **ไม่วัดผล**: ถ้าไม่มี log และตัวชี้วัด จะปรับนโยบายหรือแสดงความคืบหน้าไม่ได้\n\n## แหล่งอ้างอิงและข้อมูลเพิ่มเติม\n\n- [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)\n- [NIST SP 1800-35: Implementing a Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/1800/35/final): ตัวอย่างการติดตั้ง 19 แบบ\n- [CISA Zero Trust Maturity Model](https://www.cisa.gov/zero-trust-maturity-model): 5 เสาหลัก 3 ความสามารถที่ตัดผ่าน และ 4 ระดับวุฒิภาวะ\n- [OMB M-22-09: Moving the U.S. Government Toward Zero Trust Cybersecurity Principles](https://www.whitehouse.gov/wp-content/uploads/2022/01/M-22-09.pdf)\n- [NCSC: Zero trust architecture design principles](https://www.ncsc.gov.uk/collection/zero-trust-architecture)",
+      "body_en": "Zero Trust Architecture (ZTA) is the way an organization designs its network, identity, devices, applications, and data around zero trust principles. NIST SP 800-207, published in August 2020, defines it as an approach where network location or asset ownership alone grants no implicit trust, and where authentication and authorization of the user and the device happen as separate steps before a session to a resource begins. In short, you protect individual resources, not just the network segment they sit in. If you are new to the idea, start with [What Is Zero Trust, and Where Should You Start?](post:what-is-zero-trust), then come back here for the architecture.\n\n## The core ideas behind ZTA\n\nNIST SP 800-207 describes zero trust through a set of tenets. In plain language:\n\n- **Everything is a resource**: data sources, services, and devices are all things to protect\n- **Secure all communication**, regardless of network location\n- **Grant access per session**, to one resource at a time\n- **Decide access with dynamic policy** that considers identity, application, device state, and behavior\n- **Monitor the posture of all assets**, owned or not, and act on what you see\n- **Authenticate and authorize every time**, strictly, before access is allowed\n- **Collect as much information as you can** about assets, traffic, and access, and use it to improve policy\n\n## The logical components\n\nA ZTA separates the decision about access from the enforcement of it. NIST describes three core logical components:\n\n- **Policy Engine (PE)**: makes the grant or deny decision using enterprise policy and signals from other sources\n- **Policy Administrator (PA)**: carries out that decision by establishing or tearing down the communication path, for example by issuing a session token or credential\n- **Policy Enforcement Point (PEP)**: sits in front of the resource and enables, monitors, and ends the connection\n\nThe PE and PA together are often called the Policy Decision Point. The decision draws on supporting systems: identity management, device posture and monitoring, threat intelligence, activity logs, and data access policies.\n\nThe result is a loop rather than a one-time check. A request goes through the PEP, the decision point evaluates identity, device health, and context, a session opens only for the allowed resource, and the signals are re-evaluated while the session continues.\n\n## The five pillars\n\nCISA's Zero Trust Maturity Model (version 2.0) organizes the work into five pillars, with three capabilities that cut across all of them. This is the most practical way to divide ownership and plan projects:\n\n- **Identity**: strong authentication, single sign-on, least privilege, and lifecycle management for people and service accounts\n- **Devices**: inventory, health and compliance checks, and endpoint protection\n- **Networks**: segmentation, encrypted traffic, and per-application access instead of broad network access\n- **Applications and workloads**: secure development, per-application authorization, and protection of cloud workloads\n- **Data**: classification, encryption, access control, and monitoring of data movement\n\nThe cross-cutting capabilities are visibility and analytics, automation and orchestration, and governance.\n\n## Three common deployment approaches\n\nNIST describes several ways to build a ZTA. Most real programs combine them:\n\n- **Enhanced identity governance**: access decisions center on identity and attributes. A good fit when identity is your strongest control and most resources are cloud or SaaS\n- **Micro-segmentation**: place resources in small segments protected by gateways or host-based controls. Useful in data centers and for protecting critical systems\n- **Network-based or software-defined perimeter**: users and devices connect only to the resources they are approved for, often delivered as ZTNA (zero trust network access). A common replacement for broad VPN access\n\nZTNA is one technology that supports ZTA, not the whole architecture. Buying a ZTNA product does not by itself deliver zero trust.\n\n## Maturity stages\n\nCISA's model describes four stages for each pillar: traditional, initial, advanced, and optimal. As a rule of thumb, early stages rely on manual configuration and static policy, and later stages integrate pillars, use more automation, and make decisions with dynamic, real-time signals. Use the stages to set honest targets per pillar, since few organizations are at the same level everywhere.\n\n## Strengths and limitations\n\n- **Strengths**: limits lateral movement after a compromise, fits remote work, cloud, and partner access better than a perimeter, improves visibility into who accesses what, and supports compliance evidence\n- **Limitations**: it takes sustained effort rather than a single project, legacy and OT systems may not support modern authentication, stricter checks can add user friction, and it needs skilled people and good asset and identity data\n- **Design risk**: the decision point becomes critical infrastructure, so plan high availability and a safe failure behavior. A compromised decision point is a high-value target\n- **Marketing risk**: no single product is \"zero trust in a box\". Ask which pillars and which tenets a product actually supports\n\n## A practical roadmap\n\nNIST's NCCoE published SP 1800-35 in June 2025, with 19 example implementations of ZTA built with industry collaborators, which is a useful reference for real designs. A general order that works for most organizations is below.\n\n- **Define what you protect**: inventory users, devices, applications, and data, and rank by criticality\n- **Strengthen identity first**: phishing-resistant MFA where possible (see [Which MFA Is Safer?](post:mfa-which-is-safer)), SSO, and least privilege\n- **Know your devices**: inventory and check health before granting access\n- **Move to per-application access and segment critical systems**: start with a few key applications\n- **Protect the data**: classify, encrypt, and monitor the most sensitive data\n- **Monitor, automate, and improve**: collect signals, tune policy, and automate responses\n\nFor plants and control systems, apply the same ideas with care for safety and availability. See [Zero Trust for OT: Adapting It Without Disrupting the Plant](post:zero-trust-for-ot).\n\n## Start today\n\n- **List your crown jewels**: the five systems or data sets whose compromise would hurt most\n- **Check identity basics**: MFA coverage, stale accounts, and over-privileged admins\n- **Pick one application** and move it from network-wide access to per-application access\n- **Score yourself per pillar** against the CISA stages, with the [self-assessment](/assessment.html) as a starting point\n- **Rehearse changes** in a lab before enforcing them. See [Network and Cyber Security Simulators: Types and Uses](post:network-cyber-security-simulator-guide)\n\n## Common mistakes\n\n- **Treating zero trust as a product purchase**: it is an architecture and a program\n- **Trying to change everything at once**: pick high-value applications and expand\n- **Ignoring legacy systems**: plan compensating controls such as segmentation and strict access paths\n- **Forgetting availability of the decision point**: an outage there can lock everyone out\n- **Neglecting user experience**: friction pushes people to workarounds\n- **Skipping measurement**: without logs and metrics you cannot tune policy or show progress\n\n## References and further reading\n\n- [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)\n- [NIST SP 1800-35: Implementing a Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/1800/35/final): 19 example implementations\n- [CISA Zero Trust Maturity Model](https://www.cisa.gov/zero-trust-maturity-model): five pillars, three cross-cutting capabilities, four maturity stages\n- [OMB M-22-09: Moving the U.S. Government Toward Zero Trust Cybersecurity Principles](https://www.whitehouse.gov/wp-content/uploads/2022/01/M-22-09.pdf)\n- [NCSC: Zero trust architecture design principles](https://www.ncsc.gov.uk/collection/zero-trust-architecture)",
+      "infographics": [
+        {
+          "type": "flow",
+          "afterBlock": 8,
+          "title_th": "เส้นทางการตัดสินการเข้าถึงใน ZTA",
+          "title_en": "How an access decision flows in a ZTA",
+          "items": [
+            {
+              "label_th": "คำขอ",
+              "label_en": "Request",
+              "detail_th": "ผู้ใช้และอุปกรณ์ขอเข้าถึงทรัพยากร",
+              "detail_en": "user and device ask for a resource"
+            },
+            {
+              "label_th": "PEP",
+              "label_en": "PEP",
+              "detail_th": "จุดบังคับใช้หน้าทรัพยากร",
+              "detail_en": "enforcement point in front of the resource"
+            },
+            {
+              "label_th": "PE + PA",
+              "label_en": "PE + PA",
+              "detail_th": "ประเมินตัวตน อุปกรณ์ บริบท แล้วตัดสิน",
+              "detail_en": "evaluate identity, device, context, then decide"
+            },
+            {
+              "label_th": "Session",
+              "label_en": "Session",
+              "detail_th": "เปิดเฉพาะทรัพยากรที่อนุญาต",
+              "detail_en": "opens only the allowed resource",
+              "tone": "ok"
+            },
+            {
+              "label_th": "ประเมินซ้ำ",
+              "label_en": "Re-evaluate",
+              "detail_th": "ตรวจสัญญาณต่อเนื่องและปิดเมื่อเสี่ยง",
+              "detail_en": "keep checking signals, end on risk"
+            }
+          ]
+        },
+        {
+          "type": "hub",
+          "afterBlock": 13,
+          "title_th": "5 เสาหลักของ Zero Trust (CISA)",
+          "title_en": "The five Zero Trust pillars (CISA)",
+          "center_th": "Zero Trust",
+          "center_en": "Zero Trust",
+          "center_note_th": "visibility, automation, governance ตัดผ่านทุกเสา",
+          "center_note_en": "visibility, automation, governance cut across all pillars",
+          "items": [
+            {
+              "label_th": "ตัวตน",
+              "label_en": "Identity",
+              "detail_th": "MFA, SSO, สิทธิ์น้อยที่สุด",
+              "detail_en": "MFA, SSO, least privilege"
+            },
+            {
+              "label_th": "อุปกรณ์",
+              "label_en": "Devices",
+              "detail_th": "บัญชีรายการและสุขภาพอุปกรณ์",
+              "detail_en": "inventory and device health"
+            },
+            {
+              "label_th": "เครือข่าย",
+              "label_en": "Networks",
+              "detail_th": "แบ่งส่วน เข้าถึงรายแอป",
+              "detail_en": "segmentation, per-app access"
+            },
+            {
+              "label_th": "แอปและ workload",
+              "label_en": "Apps and workloads",
+              "detail_th": "อนุญาตรายแอป ปกป้อง workload",
+              "detail_en": "per-app authorization, workload protection"
+            },
+            {
+              "label_th": "ข้อมูล",
+              "label_en": "Data",
+              "detail_th": "จัดชั้น เข้ารหัส เฝ้าดู",
+              "detail_en": "classify, encrypt, monitor"
+            }
+          ]
+        },
+        {
+          "type": "spectrum",
+          "afterBlock": 19,
+          "title_th": "4 ระดับวุฒิภาวะต่อเสาหลัก",
+          "title_en": "Four maturity stages per pillar",
+          "label_a_th": "ระดับต้น",
+          "label_a_en": "Early",
+          "label_b_th": "ระดับสูง",
+          "label_b_en": "Advanced",
+          "items": [
+            {
+              "label_th": "Traditional",
+              "label_en": "Traditional",
+              "detail_th": "ตั้งค่าด้วยมือ นโยบายคงที่",
+              "detail_en": "manual setup, static policy",
+              "level": 1
+            },
+            {
+              "label_th": "Initial",
+              "label_en": "Initial",
+              "detail_th": "เริ่มอัตโนมัติบางส่วน",
+              "detail_en": "some automation begins",
+              "level": 2
+            },
+            {
+              "label_th": "Advanced",
+              "label_en": "Advanced",
+              "detail_th": "เชื่อมเสาหลักและสัญญาณ",
+              "detail_en": "pillars and signals integrated",
+              "level": 3
+            },
+            {
+              "label_th": "Optimal",
+              "label_en": "Optimal",
+              "detail_th": "ตัดสินแบบไดนามิกและอัตโนมัติ",
+              "detail_en": "dynamic, automated decisions",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "type": "steps",
+          "afterBlock": 24,
+          "title_th": "ลำดับเริ่มสร้าง Zero Trust Architecture",
+          "title_en": "Building a Zero Trust Architecture step by step",
+          "items": [
+            {
+              "label_th": "ระบุสิ่งที่ต้องปกป้อง",
+              "label_en": "Define what you protect",
+              "detail_th": "ผู้ใช้ อุปกรณ์ แอป ข้อมูล",
+              "detail_en": "users, devices, apps, data"
+            },
+            {
+              "label_th": "เสริมตัวตนก่อน",
+              "label_en": "Strengthen identity first",
+              "detail_th": "MFA ที่ทนฟิชชิง SSO สิทธิ์น้อยที่สุด",
+              "detail_en": "phishing-resistant MFA, SSO, least privilege"
+            },
+            {
+              "label_th": "รู้จักอุปกรณ์",
+              "label_en": "Know your devices",
+              "detail_th": "ตรวจสุขภาพก่อนให้เข้าถึง",
+              "detail_en": "check health before access"
+            },
+            {
+              "label_th": "เข้าถึงรายแอปและแบ่งส่วน",
+              "label_en": "Per-app access and segmentation",
+              "detail_th": "เริ่มจากไม่กี่แอปหลัก",
+              "detail_en": "start with a few key apps"
+            },
+            {
+              "label_th": "ปกป้องข้อมูลและวัดผล",
+              "label_en": "Protect data and measure",
+              "detail_th": "จัดชั้น เข้ารหัส เฝ้าดู ปรับนโยบาย",
+              "detail_en": "classify, encrypt, monitor, tune policy"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "slug": "network-cyber-security-simulator-guide",
       "date": "2026-10-20",
       "tags": [
@@ -18,7 +195,7 @@
       "infographics": [
         {
           "type": "hub",
-          "afterBlock": 5,
+          "afterBlock": 6,
           "title_th": "Simulator 5 ประเภท",
           "title_en": "Five types of simulators",
           "center_th": "Simulator",
@@ -60,7 +237,7 @@
         },
         {
           "type": "spectrum",
-          "afterBlock": 6,
+          "afterBlock": 7,
           "title_th": "ความสมจริงและแรงที่ต้องใช้ของแต่ละแบบ",
           "title_en": "Realism and effort of each approach",
           "label_a_th": "สมจริงน้อย แรงน้อย",
@@ -107,7 +284,7 @@
         },
         {
           "type": "steps",
-          "afterBlock": 16,
+          "afterBlock": 18,
           "title_th": "วงจรการซ้อมที่ดี",
           "title_en": "A good exercise loop",
           "items": [
@@ -145,7 +322,7 @@
         },
         {
           "type": "columns",
-          "afterBlock": 21,
+          "afterBlock": 24,
           "title_th": "ข้อผิดพลาดที่พบบ่อย กับแนวปฏิบัติที่ควรทำ",
           "title_en": "Common mistakes versus better practice",
           "label_a_th": "ข้อผิดพลาด",
@@ -280,7 +457,7 @@
         },
         {
           "type": "steps",
-          "afterBlock": 22,
+          "afterBlock": 29,
           "title_th": "ลำดับเลือกและนำไปใช้",
           "title_en": "Choosing and rolling out",
           "items": [
@@ -318,7 +495,7 @@
         },
         {
           "type": "columns",
-          "afterBlock": 25,
+          "afterBlock": 32,
           "title_th": "ข้อผิดพลาดที่พบบ่อย กับแนวปฏิบัติที่ควรทำ",
           "title_en": "Common mistakes versus better practice",
           "label_a_th": "ข้อผิดพลาด",
@@ -481,7 +658,7 @@
         },
         {
           "type": "steps",
-          "afterBlock": 22,
+          "afterBlock": 23,
           "title_th": "ลำดับสร้างโปรแกรม AI Governance",
           "title_en": "Building an AI governance program",
           "items": [
@@ -801,8 +978,8 @@
       "title_en": "Zero Trust for OT: Adapting It Without Disrupting the Plant",
       "summary_th": "ปรับ Zero Trust ใช้กับระบบ OT และโรงงานอย่างไรไม่ให้กระทบการผลิต ครอบคลุมข้อจำกัดของ OT, zones and conduits, การเข้าถึงระยะไกล และขั้นตอนเริ่มต้น",
       "summary_en": "How to adapt Zero Trust to OT and plant systems without disrupting production: OT constraints, zones and conduits, remote access, and first steps.",
-      "body_th": "เมื่อโรงงานเชื่อมระบบ OT เข้ากับเครือข่ายองค์กรและผู้รับเหมาเข้าถึงจากระยะไกลมากขึ้น แนวคิดว่า \"ภายในเครือข่ายคือที่ปลอดภัย\" ก็ใช้ไม่ได้อีกต่อไป [Zero Trust](post:what-is-zero-trust) จึงเข้ามาเกี่ยวข้องกับ OT แต่ต้องปรับใช้ให้เหมาะ เพราะเป้าหมายของ OT คือความปลอดภัยของคนและความต่อเนื่องของการผลิต ไม่ใช่แค่การปกป้องข้อมูล\n\n## ทำไม OT ต่างจาก IT และใช้ Zero Trust ตรงๆ ไม่ได้\n\n- **ความพร้อมใช้งานและความปลอดภัยมาก่อน**: การหยุดสายการผลิตหรือกระทบกระบวนการควบคุมมีผลต่อชีวิตและทรัพย์สิน\n- **อุปกรณ์เก่าและอายุใช้งานยาว**: PLC และ HMI จำนวนมากใช้งานหลายสิบปี อัปเดตแพตช์ไม่ได้หรือทำได้เฉพาะช่วงหยุดบำรุงรักษา\n- **โปรโตคอลที่ไม่มีการยืนยันตัวตน**: โปรโตคอลอุตสาหกรรมรุ่นเก่า เช่น Modbus ออกแบบมาโดยไม่มีการยืนยันตัวตนหรือการเข้ารหัส\n- **ติดตั้ง agent บนอุปกรณ์ไม่ได้**: อุปกรณ์ควบคุมส่วนใหญ่ไม่รองรับซอฟต์แวร์ตรวจสอบแบบที่ใช้กับคอมพิวเตอร์ทั่วไป\n- **ผู้ขายและผู้รับเหมาต้องเข้าถึงระยะไกล**: เป็นเส้นทางที่ผู้โจมตีมักใช้\n\n## หลัก Zero Trust ที่ปรับใช้กับ OT ได้\n\n- **รู้ว่ามีอะไรในเครือข่าย**: ทำ asset inventory ด้วยการสังเกตทราฟฟิกแบบ passive ก่อน แทนการสแกนเชิงรุกที่อาจทำให้อุปกรณ์เก่าค้าง\n- **แบ่งโซนและกำหนดช่องทางสื่อสาร (zones and conduits)**: แนวทางตามมาตรฐาน [IEC 62443](https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards) กำหนดว่าโซนไหนคุยกับโซนไหนได้ ผ่านช่องทางใด และปิดที่เหลือทั้งหมด (deny by default)\n- **ควบคุมการเข้าถึงระยะไกล**: ให้เข้าผ่านจุดเดียวที่ควบคุมได้ ใช้ MFA จำกัดเวลาและสิทธิ์รายงาน และบันทึกเซสชัน\n- **ให้สิทธิ์น้อยที่สุดตามบทบาท**: วิศวกรควบคุม ผู้ปฏิบัติงาน และผู้รับเหมา ควรเข้าถึงได้เฉพาะสิ่งที่ต้องใช้\n- **เฝ้าระวังด้วยเครื่องมือที่เข้าใจ OT**: ตรวจจับคำสั่งหรือการสื่อสารที่ผิดปกติจากพฤติกรรมปกติของกระบวนการ\n- **ใช้มาตรการทดแทนเมื่อแพตช์ไม่ได้**: เช่น กั้นอุปกรณ์เสี่ยงไว้หลังไฟร์วอลล์ภายในและจำกัดการสื่อสารให้เหลือเท่าที่จำเป็น\n\n## ข้อควรระวังเมื่อใช้ Zero Trust กับ OT\n\n- **ห้ามให้มาตรการความปลอดภัยไซเบอร์กระทบความปลอดภัยของกระบวนการ**: ทดสอบนอกสายการผลิตหรือในช่วงหยุดบำรุงรักษา\n- **ระวังการสแกนเชิงรุก**: อุปกรณ์เก่าบางรุ่นตอบสนองผิดปกติหรือหยุดทำงานเมื่อถูกสแกน\n- **MFA ในจุดที่ต้องตอบสนองเร็ว**: จุดปฏิบัติงานที่ต้องเข้าถึงทันทีในสถานการณ์ฉุกเฉินต้องออกแบบกระบวนการเฉพาะ ไม่ใช่บังคับแบบเดียวกับพนักงานออฟฟิศ\n- **เปลี่ยนทีละโซน**: การแบ่งส่วนเครือข่ายครั้งเดียวทั้งโรงงานเสี่ยงต่อการตัดการสื่อสารที่กระบวนการต้องใช้\n\n## เริ่มต้น Zero Trust ใน OT อย่างไร\n\n- **ทำ asset inventory แบบ passive**: รู้ว่ามีอุปกรณ์อะไร ใครคุยกับใคร\n- **แบ่งโซนตามความสำคัญ**: เริ่มจากแยก IT ออกจาก OT ให้ชัด แล้วค่อยแบ่งโซนย่อยในฝั่ง OT\n- **ปิดช่องทางเข้าถึงระยะไกลที่ไม่ได้ควบคุม**: ให้ทุกคนเข้าผ่านจุดเดียวที่มี MFA และบันทึกเซสชัน\n- **ติดตั้งระบบเฝ้าระวังแบบ passive**: ดูพฤติกรรมปกติก่อนตั้งกฎแจ้งเตือน\n- **ขยายตามความเสี่ยง**: ทำทีละโซนในช่วงหยุดบำรุงรักษา และทบทวนผลทุกครั้ง\n\n## ขั้นแรกที่คุ้มที่สุด: คุมการเข้าถึงระยะไกล\n\nตรวจสอบว่าใครเข้าถึงระบบ OT จากระยะไกลได้บ้างและผ่านทางไหน แล้วรวมให้เหลือเส้นทางเดียวที่มี MFA และบันทึกเซสชัน เป็นขั้นตอนที่คุ้มค่าที่สุดและกระทบการผลิตน้อยที่สุด\n\nก่อนเปลี่ยนการแบ่งส่วนเครือข่ายในระบบ OT ควรซ้อมในห้องทดลองหรือ digital twin ดูภาพรวมของ simulator ได้ที่ [Network & Cyber Security Simulator: ประเภทและการใช้งาน](post:network-cyber-security-simulator-guide)\n\n## แหล่งอ้างอิงและข้อมูลเพิ่มเติม\n\n- [ISA/IEC 62443 series of standards](https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards): มาตรฐานความปลอดภัยไซเบอร์ของระบบควบคุมอุตสาหกรรม\n- [NIST SP 800-82 Rev. 3: Guide to OT Security](https://csrc.nist.gov/pubs/sp/800/82/r3/final): แนวทางความปลอดภัยของระบบ OT\n- [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final): สถาปัตยกรรม Zero Trust\n- [CISA: Industrial Control Systems](https://www.cisa.gov/topics/industrial-control-systems): ข้อมูลและประกาศเตือนสำหรับระบบควบคุมอุตสาหกรรม",
-      "body_en": "As plants connect OT systems to corporate networks and contractors gain more remote access, the idea that \"inside the network means safe\" no longer holds. [Zero Trust](post:what-is-zero-trust) is relevant to OT, but it must be adapted, because OT exists to protect people and keep production running, not just to protect data.\n\n## Why OT differs from IT, and why Zero Trust can't be copied as-is\n\n- **Availability and safety come first**: stopping a production line or disturbing the control process affects lives and assets\n- **Old equipment with long lifecycles**: many PLCs and HMIs run for decades and can't be patched, or only during maintenance shutdowns\n- **Protocols without authentication**: older industrial protocols such as Modbus were designed without authentication or encryption\n- **No agents on devices**: most controllers can't run the monitoring software used on ordinary computers\n- **Vendors and contractors need remote access**: a path attackers often use\n\n## Zero Trust principles that adapt to OT\n\n- **Know what is on the network**: build an asset inventory by passively observing traffic first, rather than actively scanning, which can freeze old devices\n- **Define zones and conduits**: the approach in [IEC 62443](https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards) states which zone may talk to which, through which conduit, and blocks everything else (deny by default)\n- **Control remote access**: route everyone through one controlled entry point with MFA, per-task time and permission limits, and session recording\n- **Least privilege by role**: control engineers, operators, and contractors should reach only what they need\n- **Monitor with OT-aware tools**: detect abnormal commands or communication against the process's normal behavior\n- **Use compensating controls when patching isn't possible**: for example, place risky devices behind an internal firewall and limit communication to what is necessary\n\n## Cautions when applying Zero Trust to OT\n\n- **Never let cybersecurity measures affect process safety**: test off the line or during maintenance shutdowns\n- **Be careful with active scanning**: some older devices respond abnormally or stop when scanned\n- **MFA where fast response matters**: stations that need immediate access in an emergency need a purpose-built process, not the same rule as office staff\n- **Change one zone at a time**: segmenting the whole plant at once risks cutting communication the process depends on\n\n## How to start Zero Trust in OT\n\n- **Build a passive asset inventory**: know which devices exist and who talks to whom\n- **Segment by criticality**: start by clearly separating IT from OT, then create sub-zones within OT\n- **Close uncontrolled remote access**: send everyone through one entry point with MFA and session recording\n- **Deploy passive monitoring**: learn normal behavior before writing alert rules\n- **Expand by risk**: go zone by zone during maintenance windows and review the results each time\n\n## The best first step: control remote access\n\nFind out who can reach your OT systems remotely and by which paths, then consolidate them into one path with MFA and session recording. It is the highest-value step with the least impact on production.\n\nBefore changing segmentation in OT, rehearse in a lab or digital twin. See the overview in [Network and Cyber Security Simulators: Types and Uses](post:network-cyber-security-simulator-guide).\n\n## References and further reading\n\n- [ISA/IEC 62443 series of standards](https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards): cybersecurity standards for industrial automation and control systems\n- [NIST SP 800-82 Rev. 3: Guide to OT Security](https://csrc.nist.gov/pubs/sp/800/82/r3/final): guidance for securing OT systems\n- [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final): the Zero Trust architecture publication\n- [CISA: Industrial Control Systems](https://www.cisa.gov/topics/industrial-control-systems): resources and advisories for ICS",
+      "body_th": "เมื่อโรงงานเชื่อมระบบ OT เข้ากับเครือข่ายองค์กรและผู้รับเหมาเข้าถึงจากระยะไกลมากขึ้น แนวคิดว่า \"ภายในเครือข่ายคือที่ปลอดภัย\" ก็ใช้ไม่ได้อีกต่อไป [Zero Trust](post:what-is-zero-trust) จึงเข้ามาเกี่ยวข้องกับ OT แต่ต้องปรับใช้ให้เหมาะ เพราะเป้าหมายของ OT คือความปลอดภัยของคนและความต่อเนื่องของการผลิต ไม่ใช่แค่การปกป้องข้อมูล\n\n## ทำไม OT ต่างจาก IT และใช้ Zero Trust ตรงๆ ไม่ได้\n\n- **ความพร้อมใช้งานและความปลอดภัยมาก่อน**: การหยุดสายการผลิตหรือกระทบกระบวนการควบคุมมีผลต่อชีวิตและทรัพย์สิน\n- **อุปกรณ์เก่าและอายุใช้งานยาว**: PLC และ HMI จำนวนมากใช้งานหลายสิบปี อัปเดตแพตช์ไม่ได้หรือทำได้เฉพาะช่วงหยุดบำรุงรักษา\n- **โปรโตคอลที่ไม่มีการยืนยันตัวตน**: โปรโตคอลอุตสาหกรรมรุ่นเก่า เช่น Modbus ออกแบบมาโดยไม่มีการยืนยันตัวตนหรือการเข้ารหัส\n- **ติดตั้ง agent บนอุปกรณ์ไม่ได้**: อุปกรณ์ควบคุมส่วนใหญ่ไม่รองรับซอฟต์แวร์ตรวจสอบแบบที่ใช้กับคอมพิวเตอร์ทั่วไป\n- **ผู้ขายและผู้รับเหมาต้องเข้าถึงระยะไกล**: เป็นเส้นทางที่ผู้โจมตีมักใช้\n\n## หลัก Zero Trust ที่ปรับใช้กับ OT ได้\n\n- **รู้ว่ามีอะไรในเครือข่าย**: ทำ asset inventory ด้วยการสังเกตทราฟฟิกแบบ passive ก่อน แทนการสแกนเชิงรุกที่อาจทำให้อุปกรณ์เก่าค้าง\n- **แบ่งโซนและกำหนดช่องทางสื่อสาร (zones and conduits)**: แนวทางตามมาตรฐาน [IEC 62443](https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards) กำหนดว่าโซนไหนคุยกับโซนไหนได้ ผ่านช่องทางใด และปิดที่เหลือทั้งหมด (deny by default)\n- **ควบคุมการเข้าถึงระยะไกล**: ให้เข้าผ่านจุดเดียวที่ควบคุมได้ ใช้ MFA จำกัดเวลาและสิทธิ์รายงาน และบันทึกเซสชัน\n- **ให้สิทธิ์น้อยที่สุดตามบทบาท**: วิศวกรควบคุม ผู้ปฏิบัติงาน และผู้รับเหมา ควรเข้าถึงได้เฉพาะสิ่งที่ต้องใช้\n- **เฝ้าระวังด้วยเครื่องมือที่เข้าใจ OT**: ตรวจจับคำสั่งหรือการสื่อสารที่ผิดปกติจากพฤติกรรมปกติของกระบวนการ\n- **ใช้มาตรการทดแทนเมื่อแพตช์ไม่ได้**: เช่น กั้นอุปกรณ์เสี่ยงไว้หลังไฟร์วอลล์ภายในและจำกัดการสื่อสารให้เหลือเท่าที่จำเป็น\n\n## ข้อควรระวังเมื่อใช้ Zero Trust กับ OT\n\n- **ห้ามให้มาตรการความปลอดภัยไซเบอร์กระทบความปลอดภัยของกระบวนการ**: ทดสอบนอกสายการผลิตหรือในช่วงหยุดบำรุงรักษา\n- **ระวังการสแกนเชิงรุก**: อุปกรณ์เก่าบางรุ่นตอบสนองผิดปกติหรือหยุดทำงานเมื่อถูกสแกน\n- **MFA ในจุดที่ต้องตอบสนองเร็ว**: จุดปฏิบัติงานที่ต้องเข้าถึงทันทีในสถานการณ์ฉุกเฉินต้องออกแบบกระบวนการเฉพาะ ไม่ใช่บังคับแบบเดียวกับพนักงานออฟฟิศ\n- **เปลี่ยนทีละโซน**: การแบ่งส่วนเครือข่ายครั้งเดียวทั้งโรงงานเสี่ยงต่อการตัดการสื่อสารที่กระบวนการต้องใช้\n\n## เริ่มต้น Zero Trust ใน OT อย่างไร\n\n- **ทำ asset inventory แบบ passive**: รู้ว่ามีอุปกรณ์อะไร ใครคุยกับใคร\n- **แบ่งโซนตามความสำคัญ**: เริ่มจากแยก IT ออกจาก OT ให้ชัด แล้วค่อยแบ่งโซนย่อยในฝั่ง OT\n- **ปิดช่องทางเข้าถึงระยะไกลที่ไม่ได้ควบคุม**: ให้ทุกคนเข้าผ่านจุดเดียวที่มี MFA และบันทึกเซสชัน\n- **ติดตั้งระบบเฝ้าระวังแบบ passive**: ดูพฤติกรรมปกติก่อนตั้งกฎแจ้งเตือน\n- **ขยายตามความเสี่ยง**: ทำทีละโซนในช่วงหยุดบำรุงรักษา และทบทวนผลทุกครั้ง\n\n## ขั้นแรกที่คุ้มที่สุด: คุมการเข้าถึงระยะไกล\n\nตรวจสอบว่าใครเข้าถึงระบบ OT จากระยะไกลได้บ้างและผ่านทางไหน แล้วรวมให้เหลือเส้นทางเดียวที่มี MFA และบันทึกเซสชัน เป็นขั้นตอนที่คุ้มค่าที่สุดและกระทบการผลิตน้อยที่สุด\n\nก่อนเปลี่ยนการแบ่งส่วนเครือข่ายในระบบ OT ควรซ้อมในห้องทดลองหรือ digital twin ดูภาพรวมของ simulator ได้ที่ [Network & Cyber Security Simulator: ประเภทและการใช้งาน](post:network-cyber-security-simulator-guide)\n\nสำหรับสถาปัตยกรรม Zero Trust ในภาพรวมของ IT ดู [Zero Trust Architecture: องค์ประกอบและแผนเริ่มต้น](post:zero-trust-architecture-guide)\n\n## แหล่งอ้างอิงและข้อมูลเพิ่มเติม\n\n- [ISA/IEC 62443 series of standards](https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards): มาตรฐานความปลอดภัยไซเบอร์ของระบบควบคุมอุตสาหกรรม\n- [NIST SP 800-82 Rev. 3: Guide to OT Security](https://csrc.nist.gov/pubs/sp/800/82/r3/final): แนวทางความปลอดภัยของระบบ OT\n- [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final): สถาปัตยกรรม Zero Trust\n- [CISA: Industrial Control Systems](https://www.cisa.gov/topics/industrial-control-systems): ข้อมูลและประกาศเตือนสำหรับระบบควบคุมอุตสาหกรรม",
+      "body_en": "As plants connect OT systems to corporate networks and contractors gain more remote access, the idea that \"inside the network means safe\" no longer holds. [Zero Trust](post:what-is-zero-trust) is relevant to OT, but it must be adapted, because OT exists to protect people and keep production running, not just to protect data.\n\n## Why OT differs from IT, and why Zero Trust can't be copied as-is\n\n- **Availability and safety come first**: stopping a production line or disturbing the control process affects lives and assets\n- **Old equipment with long lifecycles**: many PLCs and HMIs run for decades and can't be patched, or only during maintenance shutdowns\n- **Protocols without authentication**: older industrial protocols such as Modbus were designed without authentication or encryption\n- **No agents on devices**: most controllers can't run the monitoring software used on ordinary computers\n- **Vendors and contractors need remote access**: a path attackers often use\n\n## Zero Trust principles that adapt to OT\n\n- **Know what is on the network**: build an asset inventory by passively observing traffic first, rather than actively scanning, which can freeze old devices\n- **Define zones and conduits**: the approach in [IEC 62443](https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards) states which zone may talk to which, through which conduit, and blocks everything else (deny by default)\n- **Control remote access**: route everyone through one controlled entry point with MFA, per-task time and permission limits, and session recording\n- **Least privilege by role**: control engineers, operators, and contractors should reach only what they need\n- **Monitor with OT-aware tools**: detect abnormal commands or communication against the process's normal behavior\n- **Use compensating controls when patching isn't possible**: for example, place risky devices behind an internal firewall and limit communication to what is necessary\n\n## Cautions when applying Zero Trust to OT\n\n- **Never let cybersecurity measures affect process safety**: test off the line or during maintenance shutdowns\n- **Be careful with active scanning**: some older devices respond abnormally or stop when scanned\n- **MFA where fast response matters**: stations that need immediate access in an emergency need a purpose-built process, not the same rule as office staff\n- **Change one zone at a time**: segmenting the whole plant at once risks cutting communication the process depends on\n\n## How to start Zero Trust in OT\n\n- **Build a passive asset inventory**: know which devices exist and who talks to whom\n- **Segment by criticality**: start by clearly separating IT from OT, then create sub-zones within OT\n- **Close uncontrolled remote access**: send everyone through one entry point with MFA and session recording\n- **Deploy passive monitoring**: learn normal behavior before writing alert rules\n- **Expand by risk**: go zone by zone during maintenance windows and review the results each time\n\n## The best first step: control remote access\n\nFind out who can reach your OT systems remotely and by which paths, then consolidate them into one path with MFA and session recording. It is the highest-value step with the least impact on production.\n\nBefore changing segmentation in OT, rehearse in a lab or digital twin. See the overview in [Network and Cyber Security Simulators: Types and Uses](post:network-cyber-security-simulator-guide).\n\nFor the broader enterprise architecture, see [Zero Trust Architecture: Components and Roadmap](post:zero-trust-architecture-guide).\n\n## References and further reading\n\n- [ISA/IEC 62443 series of standards](https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards): cybersecurity standards for industrial automation and control systems\n- [NIST SP 800-82 Rev. 3: Guide to OT Security](https://csrc.nist.gov/pubs/sp/800/82/r3/final): guidance for securing OT systems\n- [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final): the Zero Trust architecture publication\n- [CISA: Industrial Control Systems](https://www.cisa.gov/topics/industrial-control-systems): resources and advisories for ICS",
       "infographics": [
         {
           "type": "flow",
@@ -1248,8 +1425,8 @@
       "title_en": "What Is Zero Trust, and Where Should You Start?",
       "summary_th": "Zero Trust คือแนวคิด never trust, always verify ที่ตรวจสอบทุกคำขอเข้าถึง อธิบายหลักการสำคัญและวิธีเริ่มต้นโดยไม่ต้องรื้อระบบเดิม",
       "summary_en": "Zero Trust means never trust, always verify. Learn the core principles and how to start without rebuilding your existing systems.",
-      "body_th": "Zero Trust คือแนวคิดที่ไม่เชื่อใจผู้ใช้หรืออุปกรณ์ใดโดยอัตโนมัติ แม้จะอยู่ในเครือข่ายภายในองค์กรแล้วก็ตาม ทุกคำขอเข้าถึงต้องถูกตรวจสอบก่อนเสมอ\n\n## หลักการสำคัญของ Zero Trust\n\n- ตรวจสอบตัวตนและสถานะอุปกรณ์ทุกครั้งที่เข้าถึง\n- ให้สิทธิ์น้อยที่สุดเท่าที่จำเป็น (least privilege)\n- สมมติว่าระบบอาจถูกเจาะแล้ว และออกแบบให้จำกัดความเสียหาย\n\n## วิธีเริ่มต้นใช้ Zero Trust โดยไม่ต้องรื้อระบบ\n\n- เริ่มจากตัวตน: เปิด MFA (ดู [MFA แบบไหนปลอดภัยกว่ากัน](post:mfa-which-is-safer)) และรวมศูนย์การล็อกอิน (SSO)\n- เลือกแอปพลิเคชันสำคัญ 1-2 ตัว แล้วเปลี่ยนจาก VPN แบบเข้าถึงทั้งเครือข่ายเป็นการเข้าถึงรายแอป (ZTNA)\n- แบ่งส่วนเครือข่ายระหว่างระบบสำคัญ เพื่อลดการเคลื่อนที่ของผู้โจมตี\n- เก็บ log และตรวจจับพฤติกรรมผิดปกติ\n\nZero Trust ไม่ใช่ผลิตภัณฑ์ที่ซื้อครั้งเดียวจบ แต่เป็นทิศทางที่ค่อยๆ ปรับปรุงทีละขั้น\n\nสำหรับโรงงานและระบบควบคุมที่มีข้อจำกัดต่างจากระบบ IT ทั่วไป อ่านต่อได้ที่ [Zero Trust กับระบบ OT](post:zero-trust-for-ot)\n\n## แหล่งอ้างอิงและข้อมูลเพิ่มเติม\n\n- [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final): สถาปัตยกรรม Zero Trust ฉบับทางการของ NIST",
-      "body_en": "Zero Trust means never automatically trusting any user or device, even inside the corporate network. Every access request is verified first.\n\n## Core principles of Zero Trust\n\n- Verify identity and device health on every access\n- Grant the least privilege necessary\n- Assume breach and design to limit the damage\n\n## How to start Zero Trust without ripping everything out\n\n- Start with identity: enable MFA (see [Which MFA Is Safer?](post:mfa-which-is-safer)) and centralize sign-in (SSO)\n- Pick one or two key applications and move from network-wide VPN access to per-app access (ZTNA)\n- Segment the network between critical systems to limit attacker movement\n- Collect logs and detect anomalous behavior\n\nZero Trust is not a product you buy once. It is a direction you improve step by step.\n\nFor plants and control systems, whose constraints differ from ordinary IT, read on in [Zero Trust for OT](post:zero-trust-for-ot)\n\n## References and further reading\n\n- [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final): NIST's formal Zero Trust architecture publication",
+      "body_th": "Zero Trust คือแนวคิดที่ไม่เชื่อใจผู้ใช้หรืออุปกรณ์ใดโดยอัตโนมัติ แม้จะอยู่ในเครือข่ายภายในองค์กรแล้วก็ตาม ทุกคำขอเข้าถึงต้องถูกตรวจสอบก่อนเสมอ\n\n## หลักการสำคัญของ Zero Trust\n\n- ตรวจสอบตัวตนและสถานะอุปกรณ์ทุกครั้งที่เข้าถึง\n- ให้สิทธิ์น้อยที่สุดเท่าที่จำเป็น (least privilege)\n- สมมติว่าระบบอาจถูกเจาะแล้ว และออกแบบให้จำกัดความเสียหาย\n\n## วิธีเริ่มต้นใช้ Zero Trust โดยไม่ต้องรื้อระบบ\n\n- เริ่มจากตัวตน: เปิด MFA (ดู [MFA แบบไหนปลอดภัยกว่ากัน](post:mfa-which-is-safer)) และรวมศูนย์การล็อกอิน (SSO)\n- เลือกแอปพลิเคชันสำคัญ 1-2 ตัว แล้วเปลี่ยนจาก VPN แบบเข้าถึงทั้งเครือข่ายเป็นการเข้าถึงรายแอป (ZTNA)\n- แบ่งส่วนเครือข่ายระหว่างระบบสำคัญ เพื่อลดการเคลื่อนที่ของผู้โจมตี\n- เก็บ log และตรวจจับพฤติกรรมผิดปกติ\n\nZero Trust ไม่ใช่ผลิตภัณฑ์ที่ซื้อครั้งเดียวจบ แต่เป็นทิศทางที่ค่อยๆ ปรับปรุงทีละขั้น\n\nสำหรับโรงงานและระบบควบคุมที่มีข้อจำกัดต่างจากระบบ IT ทั่วไป อ่านต่อได้ที่ [Zero Trust กับระบบ OT](post:zero-trust-for-ot)\n\nเมื่อเข้าใจพื้นฐานแล้ว ดูองค์ประกอบและสถาปัตยกรรมเชิงลึกได้ที่ [Zero Trust Architecture: องค์ประกอบและแผนเริ่มต้น](post:zero-trust-architecture-guide)\n\n## แหล่งอ้างอิงและข้อมูลเพิ่มเติม\n\n- [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final): สถาปัตยกรรม Zero Trust ฉบับทางการของ NIST",
+      "body_en": "Zero Trust means never automatically trusting any user or device, even inside the corporate network. Every access request is verified first.\n\n## Core principles of Zero Trust\n\n- Verify identity and device health on every access\n- Grant the least privilege necessary\n- Assume breach and design to limit the damage\n\n## How to start Zero Trust without ripping everything out\n\n- Start with identity: enable MFA (see [Which MFA Is Safer?](post:mfa-which-is-safer)) and centralize sign-in (SSO)\n- Pick one or two key applications and move from network-wide VPN access to per-app access (ZTNA)\n- Segment the network between critical systems to limit attacker movement\n- Collect logs and detect anomalous behavior\n\nZero Trust is not a product you buy once. It is a direction you improve step by step.\n\nFor plants and control systems, whose constraints differ from ordinary IT, read on in [Zero Trust for OT](post:zero-trust-for-ot)\n\nOnce you have the basics, see the components and architecture in depth in [Zero Trust Architecture: Components and Roadmap](post:zero-trust-architecture-guide).\n\n## References and further reading\n\n- [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final): NIST's formal Zero Trust architecture publication",
       "infographics": [
         {
           "type": "hub",
@@ -1293,7 +1470,7 @@
           ]
         }
       ],
-      "updated": "2026-10-18"
+      "updated": "2026-10-20"
     },
     {
       "slug": "mfa-which-is-safer",

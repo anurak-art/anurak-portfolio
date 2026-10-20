@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zero Trust Architecture: Components and Roadmap | DynaSec</title>
+<meta name="description" content="Zero Trust Architecture explained: NIST SP 800-207 components, CISA&#39;s five pillars, deployment approaches, limits, and a practical roadmap.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://www.dynasec.pro/en/blog/zero-trust-architecture-guide">
+<link rel="alternate" hreflang="th" href="https://www.dynasec.pro/blog/zero-trust-architecture-guide">
+<link rel="alternate" hreflang="en" href="https://www.dynasec.pro/en/blog/zero-trust-architecture-guide">
+<link rel="alternate" hreflang="x-default" href="https://www.dynasec.pro/blog/zero-trust-architecture-guide">
+<meta property="og:site_name" content="DynaSec Consultants">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zero Trust Architecture: Components and Roadmap | DynaSec">
+<meta property="og:description" content="Zero Trust Architecture explained: NIST SP 800-207 components, CISA&#39;s five pillars, deployment approaches, limits, and a practical roadmap.">
+<meta property="og:url" content="https://www.dynasec.pro/en/blog/zero-trust-architecture-guide">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.dynasec.pro/assets/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Zero Trust Architecture: Components and Roadmap | DynaSec">
+<meta name="twitter:description" content="Zero Trust Architecture explained: NIST SP 800-207 components, CISA&#39;s five pillars, deployment approaches, limits, and a practical roadmap.">
+<meta name="twitter:image" content="https://www.dynasec.pro/assets/og-default.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/icon-192.png" type="image/png" sizes="192x192">
+<link rel="icon" href="/assets/icon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Zero Trust Architecture: Components and Roadmap","description":"Zero Trust Architecture explained: NIST SP 800-207 components, CISA's five pillars, deployment approaches, limits, and a practical roadmap.","url":"https://www.dynasec.pro/en/blog/zero-trust-architecture-guide","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.dynasec.pro/en/blog/zero-trust-architecture-guide"},"datePublished":"2026-10-20","dateModified":"2026-10-20","inLanguage":"en","author":{"@type":"Person","name":"Anurak","url":"https://www.dynasec.pro/"},"publisher":{"@type":"Organization","name":"DynaSec Consultants","url":"https://www.dynasec.pro/","logo":{"@type":"ImageObject","url":"https://www.dynasec.pro/assets/icon-512.png"}},"image":["https://www.dynasec.pro/assets/og-default.png"],"keywords":"Zero Trust, Architecture, NIST SP 800-207, CISA ZTMM"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.dynasec.pro/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.dynasec.pro/en/blog"},{"@type":"ListItem","position":3,"name":"Zero Trust Architecture: Components and Roadmap","item":"https://www.dynasec.pro/en/blog/zero-trust-architecture-guide"}]}]}</script>
+<meta property="article:published_time" content="2026-10-20">
+<meta property="article:modified_time" content="2026-10-20">
+<meta property="article:tag" content="Zero Trust">
+<meta property="article:tag" content="Architecture">
+<meta property="article:tag" content="NIST SP 800-207">
+<meta property="article:tag" content="CISA ZTMM">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/blog.css">
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="brand" href="/" aria-label="DynaSec Consultants">
+      <img src="/assets/logo-full.png" alt="DynaSec Consultants" width="120" height="44">
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="/#about">About</a>
+      <a href="/#services">Services</a>
+      <a href="/solutions.html">Solutions</a>
+      <a href="/assessment.html">Assessment</a>
+      <a href="/en/blog" class="current" aria-current="page">Blog</a>
+      <a href="/#cases">Case Studies</a>
+      <a href="/#news">Cyber News</a>
+      <a href="/#certs">Certifications</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <a href="/blog/zero-trust-architecture-guide" hreflang="th">TH</a>
+      <a class="active" href="/en/blog/zero-trust-architecture-guide" hreflang="en" aria-current="true">EN</a>
+    </div>
+  </div>
+</header>
+<section class="main">
+  <div class="wrap">
+    <article class="article">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/en/blog">Blog</a><span>›</span><span>Zero Trust Architecture: Components and Roadmap</span></nav>
+      <div class="tags"><span class="tag">Zero Trust</span><span class="tag">Architecture</span><span class="tag">NIST SP 800-207</span><span class="tag">CISA ZTMM</span></div>
+      <h1>Zero Trust Architecture: Components and Roadmap</h1>
+      <div class="byline"><span>By Anurak</span><span>Published <time datetime="2026-10-20">October 20, 2026</time></span></div>
+      <div class="article-body"><p>Zero Trust Architecture (ZTA) is the way an organization designs its network, identity, devices, applications, and data around zero trust principles. NIST SP 800-207, published in August 2020, defines it as an approach where network location or asset ownership alone grants no implicit trust, and where authentication and authorization of the user and the device happen as separate steps before a session to a resource begins. In short, you protect individual resources, not just the network segment they sit in. If you are new to the idea, start with <a href="/en/blog/what-is-zero-trust">What Is Zero Trust, and Where Should You Start?</a>, then come back here for the architecture.</p><h2>The core ideas behind ZTA</h2><p>NIST SP 800-207 describes zero trust through a set of tenets. In plain language:</p><ul><li><strong>Everything is a resource</strong>: data sources, services, and devices are all things to protect</li><li><strong>Secure all communication</strong>, regardless of network location</li><li><strong>Grant access per session</strong>, to one resource at a time</li><li><strong>Decide access with dynamic policy</strong> that considers identity, application, device state, and behavior</li><li><strong>Monitor the posture of all assets</strong>, owned or not, and act on what you see</li><li><strong>Authenticate and authorize every time</strong>, strictly, before access is allowed</li><li><strong>Collect as much information as you can</strong> about assets, traffic, and access, and use it to improve policy</li></ul><h2>The logical components</h2><p>A ZTA separates the decision about access from the enforcement of it. NIST describes three core logical components:</p><figure class="infographic" style="margin-left:0;margin-right:0">
+      <div class="ig-label">INFOGRAPHIC</div>
+      <figcaption class="ig-title">How an access decision flows in a ZTA</figcaption>
+      <div class="ig-flow">
+    <div class="ig-node "><div class="k">01</div>
+      <div class="t">Request</div><div class="d">user and device ask for a resource</div></div><div class="ig-arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></div>
+    <div class="ig-node "><div class="k">02</div>
+      <div class="t">PEP</div><div class="d">enforcement point in front of the resource</div></div><div class="ig-arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></div>
+    <div class="ig-node "><div class="k">03</div>
+      <div class="t">PE + PA</div><div class="d">evaluate identity, device, context, then decide</div></div><div class="ig-arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></div>
+    <div class="ig-node ok"><div class="k">04</div>
+      <div class="t">Session</div><div class="d">opens only the allowed resource</div></div><div class="ig-arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></div>
+    <div class="ig-node "><div class="k">05</div>
+      <div class="t">Re-evaluate</div><div class="d">keep checking signals, end on risk</div></div></div>
+    </figure><ul><li><strong>Policy Engine (PE)</strong>: makes the grant or deny decision using enterprise policy and signals from other sources</li><li><strong>Policy Administrator (PA)</strong>: carries out that decision by establishing or tearing down the communication path, for example by issuing a session token or credential</li><li><strong>Policy Enforcement Point (PEP)</strong>: sits in front of the resource and enables, monitors, and ends the connection</li></ul><p>The PE and PA together are often called the Policy Decision Point. The decision draws on supporting systems: identity management, device posture and monitoring, threat intelligence, activity logs, and data access policies.</p><figure class="infographic" style="margin-left:0;margin-right:0">
+      <div class="ig-label">INFOGRAPHIC</div>
+      <figcaption class="ig-title">The five Zero Trust pillars (CISA)</figcaption>
+      <div class="ig-hub-center"><div class="t">Zero Trust</div><div class="d">visibility, automation, governance cut across all pillars</div></div>
+    <div class="ig-hub-grid" style="--n:5">
+      <div class="ig-pillar"><div class="t">Identity</div><div class="d">MFA, SSO, least privilege</div></div>
+      <div class="ig-pillar"><div class="t">Devices</div><div class="d">inventory and device health</div></div>
+      <div class="ig-pillar"><div class="t">Networks</div><div class="d">segmentation, per-app access</div></div>
+      <div class="ig-pillar"><div class="t">Apps and workloads</div><div class="d">per-app authorization, workload protection</div></div>
+      <div class="ig-pillar"><div class="t">Data</div><div class="d">classify, encrypt, monitor</div></div></div>
+    </figure><p>The result is a loop rather than a one-time check. A request goes through the PEP, the decision point evaluates identity, device health, and context, a session opens only for the allowed resource, and the signals are re-evaluated while the session continues.</p><h2>The five pillars</h2><p>CISA&#39;s Zero Trust Maturity Model (version 2.0) organizes the work into five pillars, with three capabilities that cut across all of them. This is the most practical way to divide ownership and plan projects:</p><ul><li><strong>Identity</strong>: strong authentication, single sign-on, least privilege, and lifecycle management for people and service accounts</li><li><strong>Devices</strong>: inventory, health and compliance checks, and endpoint protection</li><li><strong>Networks</strong>: segmentation, encrypted traffic, and per-application access instead of broad network access</li><li><strong>Applications and workloads</strong>: secure development, per-application authorization, and protection of cloud workloads</li><li><strong>Data</strong>: classification, encryption, access control, and monitoring of data movement</li></ul><p>The cross-cutting capabilities are visibility and analytics, automation and orchestration, and governance.</p><figure class="infographic" style="margin-left:0;margin-right:0">
+      <div class="ig-label">INFOGRAPHIC</div>
+      <figcaption class="ig-title">Four maturity stages per pillar</figcaption>
+      <div class="ig-spec" style="--n:4"><div class="ig-spec-item"><div class="ig-bar" style="--r:0.00;--c:rgb(255,122,122)"></div>
+      <div class="t">Traditional</div><div class="d">manual setup, static policy</div></div><div class="ig-spec-item"><div class="ig-bar" style="--r:0.33;--c:rgb(255,158,62)"></div>
+      <div class="t">Initial</div><div class="d">some automation begins</div></div><div class="ig-spec-item"><div class="ig-bar" style="--r:0.67;--c:rgb(196,187,87)"></div>
+      <div class="t">Advanced</div><div class="d">pillars and signals integrated</div></div><div class="ig-spec-item"><div class="ig-bar" style="--r:1.00;--c:rgb(79,209,197)"></div>
+      <div class="t">Optimal</div><div class="d">dynamic, automated decisions</div></div></div><div class="ig-axis"><span>Early</span><span>Advanced</span></div>
+    </figure><h2>Three common deployment approaches</h2><p>NIST describes several ways to build a ZTA. Most real programs combine them:</p><ul><li><strong>Enhanced identity governance</strong>: access decisions center on identity and attributes. A good fit when identity is your strongest control and most resources are cloud or SaaS</li><li><strong>Micro-segmentation</strong>: place resources in small segments protected by gateways or host-based controls. Useful in data centers and for protecting critical systems</li><li><strong>Network-based or software-defined perimeter</strong>: users and devices connect only to the resources they are approved for, often delivered as ZTNA (zero trust network access). A common replacement for broad VPN access</li></ul><p>ZTNA is one technology that supports ZTA, not the whole architecture. Buying a ZTNA product does not by itself deliver zero trust.</p><h2>Maturity stages</h2><figure class="infographic" style="margin-left:0;margin-right:0">
+      <div class="ig-label">INFOGRAPHIC</div>
+      <figcaption class="ig-title">Building a Zero Trust Architecture step by step</figcaption>
+      <div class="ig-steps">
+    <div class="ig-step"><div class="ig-num">1</div>
+      <div><div class="t">Define what you protect</div><div class="d">users, devices, apps, data</div></div></div>
+    <div class="ig-step"><div class="ig-num">2</div>
+      <div><div class="t">Strengthen identity first</div><div class="d">phishing-resistant MFA, SSO, least privilege</div></div></div>
+    <div class="ig-step"><div class="ig-num">3</div>
+      <div><div class="t">Know your devices</div><div class="d">check health before access</div></div></div>
+    <div class="ig-step"><div class="ig-num">4</div>
+      <div><div class="t">Per-app access and segmentation</div><div class="d">start with a few key apps</div></div></div>
+    <div class="ig-step"><div class="ig-num">5</div>
+      <div><div class="t">Protect data and measure</div><div class="d">classify, encrypt, monitor, tune policy</div></div></div></div>
+    </figure><p>CISA&#39;s model describes four stages for each pillar: traditional, initial, advanced, and optimal. As a rule of thumb, early stages rely on manual configuration and static policy, and later stages integrate pillars, use more automation, and make decisions with dynamic, real-time signals. Use the stages to set honest targets per pillar, since few organizations are at the same level everywhere.</p><h2>Strengths and limitations</h2><ul><li><strong>Strengths</strong>: limits lateral movement after a compromise, fits remote work, cloud, and partner access better than a perimeter, improves visibility into who accesses what, and supports compliance evidence</li><li><strong>Limitations</strong>: it takes sustained effort rather than a single project, legacy and OT systems may not support modern authentication, stricter checks can add user friction, and it needs skilled people and good asset and identity data</li><li><strong>Design risk</strong>: the decision point becomes critical infrastructure, so plan high availability and a safe failure behavior. A compromised decision point is a high-value target</li><li><strong>Marketing risk</strong>: no single product is &quot;zero trust in a box&quot;. Ask which pillars and which tenets a product actually supports</li></ul><h2>A practical roadmap</h2><p>NIST&#39;s NCCoE published SP 1800-35 in June 2025, with 19 example implementations of ZTA built with industry collaborators, which is a useful reference for real designs. A general order that works for most organizations is below.</p><ul><li><strong>Define what you protect</strong>: inventory users, devices, applications, and data, and rank by criticality</li><li><strong>Strengthen identity first</strong>: phishing-resistant MFA where possible (see <a href="/en/blog/mfa-which-is-safer">Which MFA Is Safer?</a>), SSO, and least privilege</li><li><strong>Know your devices</strong>: inventory and check health before granting access</li><li><strong>Move to per-application access and segment critical systems</strong>: start with a few key applications</li><li><strong>Protect the data</strong>: classify, encrypt, and monitor the most sensitive data</li><li><strong>Monitor, automate, and improve</strong>: collect signals, tune policy, and automate responses</li></ul><p>For plants and control systems, apply the same ideas with care for safety and availability. See <a href="/en/blog/zero-trust-for-ot">Zero Trust for OT: Adapting It Without Disrupting the Plant</a>.</p><h2>Start today</h2><ul><li><strong>List your crown jewels</strong>: the five systems or data sets whose compromise would hurt most</li><li><strong>Check identity basics</strong>: MFA coverage, stale accounts, and over-privileged admins</li><li><strong>Pick one application</strong> and move it from network-wide access to per-application access</li><li><strong>Score yourself per pillar</strong> against the CISA stages, with the <a href="/assessment.html">self-assessment</a> as a starting point</li><li><strong>Rehearse changes</strong> in a lab before enforcing them. See <a href="/en/blog/network-cyber-security-simulator-guide">Network and Cyber Security Simulators: Types and Uses</a></li></ul><h2>Common mistakes</h2><ul><li><strong>Treating zero trust as a product purchase</strong>: it is an architecture and a program</li><li><strong>Trying to change everything at once</strong>: pick high-value applications and expand</li><li><strong>Ignoring legacy systems</strong>: plan compensating controls such as segmentation and strict access paths</li><li><strong>Forgetting availability of the decision point</strong>: an outage there can lock everyone out</li><li><strong>Neglecting user experience</strong>: friction pushes people to workarounds</li><li><strong>Skipping measurement</strong>: without logs and metrics you cannot tune policy or show progress</li></ul><h2>References and further reading</h2><ul><li><a href="https://csrc.nist.gov/pubs/sp/800/207/final" target="_blank" rel="noopener">NIST SP 800-207: Zero Trust Architecture</a></li><li><a href="https://csrc.nist.gov/pubs/sp/1800/35/final" target="_blank" rel="noopener">NIST SP 1800-35: Implementing a Zero Trust Architecture</a>: 19 example implementations</li><li><a href="https://www.cisa.gov/zero-trust-maturity-model" target="_blank" rel="noopener">CISA Zero Trust Maturity Model</a>: five pillars, three cross-cutting capabilities, four maturity stages</li><li><a href="https://www.whitehouse.gov/wp-content/uploads/2022/01/M-22-09.pdf" target="_blank" rel="noopener">OMB M-22-09: Moving the U.S. Government Toward Zero Trust Cybersecurity Principles</a></li><li><a href="https://www.ncsc.gov.uk/collection/zero-trust-architecture" target="_blank" rel="noopener">NCSC: Zero trust architecture design principles</a></li></ul></div>
+      <div class="share"><span>Share this article</span><button type="button" id="copy-link">Copy link</button></div>
+      <aside class="related" aria-labelledby="rel-h"><h2 id="rel-h">Related articles</h2><ul><li><a class="t" href="/en/blog/what-is-zero-trust">What Is Zero Trust, and Where Should You Start?</a><span class="s">Zero Trust means never trust, always verify. Learn the core principles and how to start without rebuilding your existing systems.</span></li><li><a class="t" href="/en/blog/zero-trust-for-ot">Zero Trust for OT: Adapting It Without Disrupting the Plant</a><span class="s">How to adapt Zero Trust to OT and plant systems without disrupting production: OT constraints, zones and conduits, remote access, and first steps.</span></li><li><a class="t" href="/en/blog/network-cyber-security-simulator-guide">Network and Cyber Security Simulators: Types and Uses</a><span class="s">Network and cyber security simulators let you train, test, and validate defenses safely. Five types, their limits, and safety rules for running them.</span></li></ul></aside>
+    </article>
+  </div>
+</section>
+<script>(function(){var b=document.getElementById('copy-link');if(!b||!navigator.clipboard)return;b.addEventListener('click',function(){navigator.clipboard.writeText(location.href).then(function(){var o=b.textContent;b.textContent="Copied";setTimeout(function(){b.textContent=o},1500);});});})();</script>
+<footer>
+  <span>© 2026 · DynaSec Consultants · Articles for educational purposes</span>
+</footer>
+</body>
+</html>
