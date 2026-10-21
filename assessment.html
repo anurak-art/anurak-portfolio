@@ -21,7 +21,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"แบบประเมินความพร้อมด้าน Cybersecurity เบื้องต้น","url":"https://www.dynasec.pro/assessment.html","description":"แบบประเมินตนเองด้านความมั่นคงปลอดภัยไซเบอร์ที่ให้แผนปรับปรุงเบื้องต้น ประมวลผลในเบราว์เซอร์ ไม่เก็บข้อมูล","applicationCategory":"SecurityApplication","operatingSystem":"Any","inLanguage":["th","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"THB"},"author":{"@type":"Person","name":"Anurak","url":"https://www.dynasec.pro/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"https://www.dynasec.pro/"},{"@type":"ListItem","position":2,"name":"ประเมินความพร้อมด้าน Cybersecurity เบื้องต้น","item":"https://www.dynasec.pro/assessment.html"}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{--bg:#0B1220;--panel:#121B2E;--panel-2:#0F1626;--line:#24344D;--text:#E8EEF5;--muted:#8CA0B8;--amber:#FFB020;--teal:#4FD1C5;--danger:#FF7A7A;--radius:10px;--maxw:1120px;}
   *{box-sizing:border-box;}
@@ -152,7 +152,6 @@
     .score{color:#111;}
   }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/modern.css">
 <script src="/assets/modern.js" defer></script>
 </head>
@@ -214,7 +213,25 @@
 </section>
 </main>
 
-<footer><span data-i18n="footerText">© 2026 · DynaSec Consultants · ผลประเมินเป็นคำแนะนำเบื้องต้น ไม่ใช่การตรวจประเมินอย่างเป็นทางการ</span></footer>
+<footer>
+  <div class="wrap foot-main">
+    <div class="foot-brand">
+      <img src="/assets/logo-full.png" alt="DynaSec Consultants" width="130" height="48" loading="lazy">
+      <p><span class="t-th">ที่ปรึกษาโซลูชัน Cybersecurity ช่วยออกแบบโซลูชัน จัดทำ PoC ตอบ RFP และสรุปความเสี่ยงให้ผู้บริหาร</span><span class="t-en">Cybersecurity solution consulting: solution design, PoC delivery, RFP responses and executive risk summaries.</span></p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      <a class="t-th" href="/">หน้าแรก</a><a class="t-en" href="/">Home</a>
+      <a class="t-th" href="/solutions.html">โซลูชัน</a><a class="t-en" href="/solutions.html">Solutions</a>
+      <a class="t-th" href="/assessment.html">ประเมินเบื้องต้น</a><a class="t-en" href="/assessment.html">Self-assessment</a>
+      <a class="t-th" href="/blog">บทความ</a><a class="t-en" href="/en/blog">Blog</a>
+      <a class="t-th" href="/#cases">ผลงาน</a><a class="t-en" href="/#cases">Case studies</a>
+      <a class="t-th" href="/#news">ข่าว Cyber Attack</a><a class="t-en" href="/#news">Cyber news</a>
+      <a class="t-th" href="/#certs">ใบรับรอง</a><a class="t-en" href="/#certs">Certifications</a>
+      <a class="t-th" href="/#contact">ติดต่อ</a><a class="t-en" href="/#contact">Contact</a>
+    </nav>
+  </div>
+  <div class="foot-note"><div class="wrap"><span data-i18n="footerText">© 2026 · DynaSec Consultants · ผลประเมินเป็นคำแนะนำเบื้องต้น ไม่ใช่การตรวจประเมินอย่างเป็นทางการ</span></div></div>
+</footer>
 
 <script>
 /* ============================ UI text ============================ */

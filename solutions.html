@@ -20,7 +20,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0B1220;
@@ -161,7 +161,6 @@
 
   footer{padding:32px 0;text-align:center;color:var(--muted);font-size:13px;font-family:'IBM Plex Mono',monospace;}
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/modern.css">
 <script src="/assets/modern.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"https://www.dynasec.pro/"},{"@type":"ListItem","position":2,"name":"โซลูชันควบคุมภัยคุกคามไซเบอร์","item":"https://www.dynasec.pro/solutions.html"}]}</script>
@@ -222,7 +221,23 @@
 </main>
 
 <footer>
-  <span data-i18n="footerText">© 2026 · DynaSec Consultants · ข้อมูลอ้างอิงประกอบการนำเสนอ</span>
+  <div class="wrap foot-main">
+    <div class="foot-brand">
+      <img src="/assets/logo-full.png" alt="DynaSec Consultants" width="130" height="48" loading="lazy">
+      <p><span class="t-th">ที่ปรึกษาโซลูชัน Cybersecurity ช่วยออกแบบโซลูชัน จัดทำ PoC ตอบ RFP และสรุปความเสี่ยงให้ผู้บริหาร</span><span class="t-en">Cybersecurity solution consulting: solution design, PoC delivery, RFP responses and executive risk summaries.</span></p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      <a class="t-th" href="/">หน้าแรก</a><a class="t-en" href="/">Home</a>
+      <a class="t-th" href="/solutions.html">โซลูชัน</a><a class="t-en" href="/solutions.html">Solutions</a>
+      <a class="t-th" href="/assessment.html">ประเมินเบื้องต้น</a><a class="t-en" href="/assessment.html">Self-assessment</a>
+      <a class="t-th" href="/blog">บทความ</a><a class="t-en" href="/en/blog">Blog</a>
+      <a class="t-th" href="/#cases">ผลงาน</a><a class="t-en" href="/#cases">Case studies</a>
+      <a class="t-th" href="/#news">ข่าว Cyber Attack</a><a class="t-en" href="/#news">Cyber news</a>
+      <a class="t-th" href="/#certs">ใบรับรอง</a><a class="t-en" href="/#certs">Certifications</a>
+      <a class="t-th" href="/#contact">ติดต่อ</a><a class="t-en" href="/#contact">Contact</a>
+    </nav>
+  </div>
+  <div class="foot-note"><div class="wrap"><span data-i18n="footerText">© 2026 · DynaSec Consultants · ข้อมูลอ้างอิงประกอบการนำเสนอ</span></div></div>
 </footer>
 
 <script>
