@@ -6,6 +6,9 @@
     "api/sitemap.js": {
       "includeFiles": "content/blog.json"
     },
+    "api/latest.js": {
+      "includeFiles": "content/blog.json"
+    },
     "api/news.js": {
       "maxDuration": 30
     }

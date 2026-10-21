@@ -1000,7 +1000,21 @@ ${message}`
 
 setLang('th');
 loadNews();
+// Show scheduled articles on time: the prerendered cards reflect the last deploy, so ask the server
+// (cached 5 min) which articles are published right now and swap the cards if they differ.
+async function refreshLatest(){
+  try{
+    const res = await fetch('/api/latest');
+    if(!res.ok) return;
+    const d = await res.json();
+    const th = document.querySelector('.latest-grid.lt-th'), en = document.querySelector('.latest-grid.lt-en');
+    if(!th || !en || !d.th) return;
+    if(th.innerHTML.replace(/\s+/g,'') !== d.th.replace(/\s+/g,'')){ th.innerHTML = d.th; en.innerHTML = d.en || ''; }
+    const sec = document.getElementById('latest'); if(sec) sec.hidden = false;
+  }catch(e){ /* keep the prerendered cards */ }
+}
 loadContent();
+refreshLatest();
 </script>
 
 </body>

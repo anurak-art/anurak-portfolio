@@ -105,6 +105,7 @@ collections:
             fields:
               - {label: "ชื่อลิงก์ (slug)", name: "slug", widget: "string", hint: "นี่คือส่วนท้ายของ URL (dynasec.pro/blog/ชื่อลิงก์) ใช้ภาษาอังกฤษพิมพ์เล็กและ - คั่นคำ ห้ามซ้ำ และไม่ควรเปลี่ยนหลังเผยแพร่แล้ว"}
               - {label: "วันที่เผยแพร่", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
+              - {label: "ตั้งเวลาเผยแพร่ (ไม่ใส่ = เผยแพร่ทันที)", name: "publish_at", widget: "datetime", required: false, hint: "ใส่วันและเวลาในอนาคตเพื่อให้บทความขึ้นเอง จนถึงเวลานั้นบทความจะถูกซ่อนจากหน้าเว็บ รายการ และ sitemap (ตั้งช่อง 'วันที่เผยแพร่' ให้เป็นวันเดียวกัน)"}
               - {label: "วันที่อัปเดตล่าสุด (ถ้าแก้ไขเนื้อหาสำคัญ)", name: "updated", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", required: false, hint: "Google ใช้วันที่นี้ประกอบการแสดงผล ใส่เมื่อแก้ไขเนื้อหาจริงเท่านั้น"}
               - label: "แท็ก"
                 name: "tags"
