@@ -5,12 +5,35 @@
   function ready(fn) { d.readyState !== 'loading' ? fn() : d.addEventListener('DOMContentLoaded', fn); }
 
   ready(function () {
-    // Browser UI color on mobile
-    if (!d.querySelector('meta[name="theme-color"]')) {
-      var m = d.createElement('meta');
-      m.name = 'theme-color';
-      m.content = '#0A111D';
-      d.head.appendChild(m);
+    // Theme (dark / light). The initial value is set by a tiny inline script in <head> to avoid a flash.
+    var root = d.documentElement;
+    var COLORS = { dark: '#0A111D', light: '#F6F8FB' };
+    var meta = d.querySelector('meta[name="theme-color"]');
+    if (!meta) {
+      meta = d.createElement('meta');
+      meta.name = 'theme-color';
+      d.head.appendChild(meta);
+    }
+    function currentTheme() { return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark'; }
+    function applyTheme(t, save) {
+      root.setAttribute('data-theme', t);
+      meta.content = COLORS[t];
+      if (save) { try { localStorage.setItem('dynasec-theme', t); } catch (e) { /* private mode */ } }
+      var b = d.querySelector('.theme-toggle');
+      if (b) {
+        var th = t === 'light' ? 'สลับเป็นโหมดมืด' : 'สลับเป็นโหมดสว่าง';
+        var en = t === 'light' ? 'Switch to dark mode' : 'Switch to light mode';
+        var label = root.lang === 'en' ? en : th;
+        b.setAttribute('aria-label', label);
+        b.setAttribute('title', label);
+      }
+    }
+    applyTheme(currentTheme(), false);
+    // Follow the system setting until the visitor makes a choice.
+    var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)');
+    var hasChoice = function () { try { var v = localStorage.getItem('dynasec-theme'); return v === 'light' || v === 'dark'; } catch (e) { return false; } };
+    if (mq && mq.addEventListener) {
+      mq.addEventListener('change', function (e) { if (!hasChoice()) applyTheme(e.matches ? 'light' : 'dark', false); });
     }
 
     var header = d.querySelector('header');
@@ -37,6 +60,15 @@
     cta.innerHTML = '<span class="t-th">ติดต่อเรา</span><span class="t-en">Contact us</span>';
     anchor.parentNode.insertBefore(cta, anchor);
 
+    var tt = d.createElement('button');
+    tt.type = 'button';
+    tt.className = 'theme-toggle';
+    tt.innerHTML = '<svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>' +
+      '<svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>';
+    tt.addEventListener('click', function () { applyTheme(currentTheme() === 'light' ? 'dark' : 'light', true); });
+    anchor.parentNode.insertBefore(tt, anchor);
+    applyTheme(currentTheme(), false);
+
     var btn = d.createElement('button');
     btn.type = 'button';
     btn.className = 'menu-toggle';
@@ -53,5 +85,9 @@
     links.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
     window.addEventListener('resize', function () { if (window.innerWidth > 1020) setOpen(false); });
+    // Keep the toggle label in the page language when the TH/EN switch is used.
+    if (window.MutationObserver) {
+      new MutationObserver(function () { applyTheme(currentTheme(), false); }).observe(root, { attributes: true, attributeFilter: ['lang'] });
+    }
   });
 })();
