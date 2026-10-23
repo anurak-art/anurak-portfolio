@@ -139,6 +139,9 @@
   .btn-primary:hover{opacity:0.92;}
   .btn-ghost{border:1px solid var(--line);color:var(--text);}
   .btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+  .ws-card{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;border:1px solid var(--line);border-radius:var(--radius,8px);padding:28px;}
+  .ws-points{margin:0;padding-left:20px;max-width:720px;color:var(--prose,var(--text));line-height:1.7;}
+  .ws-points li{margin-bottom:6px;}
 
   /* stat readout row */
   .readout{
@@ -311,6 +314,7 @@
     <nav class="links">
       <a href="#about" data-i18n="navAbout">เกี่ยวกับ</a>
       <a href="#services" data-i18n="navServices">บริการ</a>
+      <a href="#webscan" data-i18n="navWebscan">สแกนเว็บฟรี</a>
       <a href="solutions.html" data-i18n="navSolutions">โซลูชัน</a>
       <a href="/assessment.html" data-i18n="navAssessment">ประเมินเบื้องต้น</a>
       <a href="/blog" data-i18n="navBlog">บทความ</a>
@@ -468,6 +472,24 @@
   </div>
 </section>
 
+<section id="webscan">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" data-i18n="wsEyebrow">FREE TOOL</div>
+      <h2 data-i18n="wsTitle">WebScan: ตรวจความปลอดภัยเว็บไซต์เบื้องต้น</h2>
+      <p data-i18n="wsSub">กรอก URL หรือโดเมน แล้วรับรายงานผลเป็นเกรด A ถึง F ตามหมวดของ OWASP Top 10 (2021) พร้อมคำแนะนำการแก้ไข</p>
+    </div>
+    <div class="ws-card">
+      <ul class="ws-points">
+        <li data-i18n="wsP1">สแกนแบบ passive เท่านั้น ไม่ส่ง payload ไม่เดารหัสผ่าน และไม่พยายามเจาะระบบ</li>
+        <li data-i18n="wsP2">ใช้ได้กับเว็บไซต์ที่คุณเป็นเจ้าของ หรือมีหนังสืออนุญาตให้ทดสอบเท่านั้น</li>
+        <li data-i18n="wsP3">เป็นการตรวจเบื้องต้นเพื่อเสริมการทดสอบเจาะระบบ (penetration test) ไม่ใช่ใช้แทน</li>
+      </ul>
+      <a class="btn btn-primary" href="https://webscan.dynasec.pro" target="_blank" rel="noopener" data-i18n="wsCta">เปิด WebScan →</a>
+    </div>
+  </div>
+</section>
+
 <section id="cases">
   <div class="wrap">
     <div class="section-head">
@@ -602,6 +624,7 @@
       <a class="t-th" href="/">หน้าแรก</a><a class="t-en" href="/">Home</a>
       <a class="t-th" href="/solutions.html">โซลูชัน</a><a class="t-en" href="/solutions.html">Solutions</a>
       <a class="t-th" href="/assessment.html">ประเมินเบื้องต้น</a><a class="t-en" href="/assessment.html">Self-assessment</a>
+      <a class="t-th" href="/#webscan">สแกนเว็บฟรี</a><a class="t-en" href="/#webscan">Free web scan</a>
       <a class="t-th" href="/blog">บทความ</a><a class="t-en" href="/en/blog">Blog</a>
       <a class="t-th" href="/#cases">ผลงาน</a><a class="t-en" href="/#cases">Case studies</a>
       <a class="t-th" href="/#news">ข่าว Cyber Attack</a><a class="t-en" href="/#news">Cyber news</a>
@@ -616,7 +639,7 @@
 const translations = {
   th: {
     brandName: "Anurak",
-    navAbout: "เกี่ยวกับ", navServices: "บริการ", navSolutions: "โซลูชัน", navAssessment: "ประเมินเบื้องต้น", navBlog: "บทความ", navCases: "ผลงาน", navCerts: "ใบรับรอง", navContact: "ติดต่อ",
+    navAbout: "เกี่ยวกับ", navServices: "บริการ", navWebscan: "สแกนเว็บฟรี", navSolutions: "โซลูชัน", navAssessment: "ประเมินเบื้องต้น", navBlog: "บทความ", navCases: "ผลงาน", navCerts: "ใบรับรอง", navContact: "ติดต่อ",
     heroEyebrow: "SOLUTION CONSULTANT · CYBERSECURITY",
     heroTitle: "แปลงเทคโนโลยีความปลอดภัยไซเบอร์ ให้เป็นการตัดสินใจทางธุรกิจ",
     heroSub: "ผมช่วยทีมขายและลูกค้าเห็นภาพความเสี่ยงทั้งระบบ ออกแบบโซลูชันที่ตอบโจทย์จริง และปิดดีลได้เร็วขึ้น ด้วยประสบการณ์ที่ปรึกษาโซลูชันด้าน cybersecurity โดยตรง",
@@ -635,6 +658,8 @@ const translations = {
     svc4Title: "เทียบเคียงเทคโนโลยี", svc4Body: "วิเคราะห์และเทียบเคียงผลิตภัณฑ์ด้านความปลอดภัยให้เห็นข้อดี-ข้อจำกัดอย่างเป็นกลาง",
     svc5Title: "สรุปความเสี่ยงให้ผู้บริหาร", svc5Body: "แปลงข้อมูลทางเทคนิคให้เป็นภาษาที่ผู้บริหารเข้าใจ เพื่อสนับสนุนการตัดสินใจอย่างรวดเร็ว",
     svc6Title: "อบรมทีมขาย", svc6Body: "ฝึกอบรมทีมขายให้เข้าใจคุณค่าทางเทคนิคของโซลูชัน เพื่อสื่อสารกับลูกค้าได้อย่างมั่นใจ",
+    wsEyebrow: "FREE TOOL", wsTitle: "WebScan: ตรวจความปลอดภัยเว็บไซต์เบื้องต้น", wsSub: "กรอก URL หรือโดเมน แล้วรับรายงานผลเป็นเกรด A ถึง F ตามหมวดของ OWASP Top 10 (2021) พร้อมคำแนะนำการแก้ไข",
+    wsP1: "สแกนแบบ passive เท่านั้น ไม่ส่ง payload ไม่เดารหัสผ่าน และไม่พยายามเจาะระบบ", wsP2: "ใช้ได้กับเว็บไซต์ที่คุณเป็นเจ้าของ หรือมีหนังสืออนุญาตให้ทดสอบเท่านั้น", wsP3: "เป็นการตรวจเบื้องต้นเพื่อเสริมการทดสอบเจาะระบบ (penetration test) ไม่ใช่ใช้แทน", wsCta: "เปิด WebScan →",
     casesEyebrow: "SELECTED ENGAGEMENTS", casesTitle: "ตัวอย่างผลงาน (ไม่ระบุชื่อลูกค้า)",
     casesSub: "สรุปแบบไม่ระบุตัวตนลูกค้า ตามข้อตกลงการรักษาความลับ",
     kChallenge: "โจทย์", kApproach: "แนวทาง", kOutcome: "ผลลัพธ์",
@@ -659,7 +684,7 @@ const translations = {
   },
   en: {
     brandName: "Anurak",
-    navAbout: "About", navServices: "Services", navSolutions: "Solutions", navAssessment: "Assessment", navBlog: "Blog", navCases: "Case Studies", navCerts: "Certifications", navContact: "Contact",
+    navAbout: "About", navServices: "Services", navWebscan: "Free web scan", navSolutions: "Solutions", navAssessment: "Assessment", navBlog: "Blog", navCases: "Case Studies", navCerts: "Certifications", navContact: "Contact",
     heroEyebrow: "SOLUTION CONSULTANT · CYBERSECURITY",
     heroTitle: "Turning cybersecurity architecture into business decisions.",
     heroSub: "I help sales teams and clients see the full risk picture, design solutions that actually fit, and close deals faster — backed by hands-on cybersecurity solution consulting experience.",
@@ -678,6 +703,8 @@ const translations = {
     svc4Title: "Vendor & Tech Positioning", svc4Body: "Compare security products objectively, highlighting real trade-offs and fit.",
     svc5Title: "Executive Risk Briefing", svc5Body: "Translate technical findings into language executives can act on quickly.",
     svc6Title: "Sales Enablement Training", svc6Body: "Train sales teams to understand and confidently communicate technical value.",
+    wsEyebrow: "FREE TOOL", wsTitle: "WebScan: a quick web security check", wsSub: "Enter a URL or domain and get a report graded A to F across the OWASP Top 10 (2021) categories, with remediation advice.",
+    wsP1: "Passive scanning only: no payloads, no password guessing, no intrusion attempts.", wsP2: "Use it only on sites you own or have written permission to test.", wsP3: "A first-pass check that supplements, and does not replace, a penetration test.", wsCta: "Open WebScan →",
     casesEyebrow: "SELECTED ENGAGEMENTS", casesTitle: "Selected Case Studies (client-anonymized)",
     casesSub: "Anonymized per confidentiality agreements.",
     kChallenge: "CHALLENGE", kApproach: "APPROACH", kOutcome: "OUTCOME",
