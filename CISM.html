@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
   <title>CISM Foundation for Presales - Domain 1</title>
   <style>
     :root{
@@ -192,7 +196,7 @@ const lessons = [
     </table>
   `,
   question:"ใครควรเป็นผู้กำหนด Risk Appetite ขององค์กร?",
-  choices:["SOC Analyst","System Administrator","ผู้บริหารระดับสูงหรือคณะกรรมการ","Vendor"],
+  choices:["SOC Analyst","System Administrator","ผู้บริหารระดับสูงหร��อคณะกรรมการ","Vendor"],
   answer:2
 },
 {
@@ -248,7 +252,7 @@ const lessons = [
       <tr><td>PAM</td><td>ควบคุมบัญชีสิทธิ์สูง</td><td>ลด Insider Risk และเพิ่ม Auditability</td></tr>
       <tr><td>SIEM</td><td>รวม Log และ Correlate Event</td><td>ลดเวลาตรวจจับและลดผลกระทบจาก Incident</td></tr>
       <tr><td>Backup / DR</td><td>สำรองและกู้คืนข้อมูล</td><td>ลด Downtime และรักษาความต่อเนื่องทางธุรกิจ</td></tr>
-      <tr><td>DLP</td><td>ตรวจจับข้อมูลสำคัญ</td><td>ลดข้อมูลรั่วไหลและค่าปรับด้านกฎหมาย</td></tr>
+      <tr><td>DLP</td><td>ตรวจจับข้อมูลสำคัญ</td><td>ลดข้อมูลรั่วไหลและค่าปรับด้านกฎ��มาย</td></tr>
     </table>
     <div class="callout"><b>เทคนิคสำหรับ Presales:</b> ทุก Feature ควรตอบได้ 3 เรื่อง — ลดความเสี่ยงอะไร, ช่วยธุรกิจอย่างไร, วัดผลอย่างไร</div>
   `,
@@ -487,7 +491,7 @@ function checkQuiz(){
   const result = document.getElementById("quizResult");
   if(!selected){ result.textContent="กรุณาเลือกคำตอบ"; result.style.color="var(--warning)"; return; }
   if(Number(selected.value)===lessons[current].answer){
-    result.textContent="ถูกต้อง ✓";
+    result.textContent="��ูกต้อง ✓";
     result.style.color="var(--accent2)";
     if(!completed.includes(current)){
       completed.push(current);

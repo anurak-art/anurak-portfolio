@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <title>AI Security — Interactive Study</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -317,7 +321,7 @@ const N={
     rel:["llm03","atk-poison","atk-backdoor"]},
   "llm05":{cat:"owasp",code:"LLM05",title:"Improper Output Handling",summary:"เอา output ไปใช้ต่อโดยไม่ตรวจ → XSS/SSRF/RCE",
     sec:[T("กลไก","ถือ output ของ LLM เป็นสิ่งเชื่อถือได้แล้วนำไปใช้ต่อ ทำให้เกิดช่องโหว่ปลายทาง"),
-      EX(["output ไป render HTML → XSS","output ต่อ query → SQLi","output เรียก URL → SSRF / RCE"]),
+      EX(["output ไป render HTML → XSS","output ต่อ query → SQLi","output เรียก URL �� SSRF / RCE"]),
       FX(["treat output เป็น untrusted","encode / sanitize","parameterized query"]),
       NOTE("จำ: “ถือ output เป็น untrusted เสมอ” เป็นคำตอบที่ถูกบ่อย")],
     rel:["llm01","def-guardrail"]},
