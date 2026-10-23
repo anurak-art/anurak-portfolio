@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark light">
 <script>(function(){try{var t=localStorage.getItem('dynasec-theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <title>ประเมินความพร้อมด้าน Cybersecurity เบื้องต้น (Self-Assessment) · DynaSec</title>
 <meta name="description" content="แบบประเมินตนเองด้าน Cybersecurity 5 นาที ครอบคลุม MFA, สำรองข้อมูล, การตรวจจับ, PDPA และอื่นๆ ได้แผนปรับปรุง 30/90/180 วันเบื้องต้น ไม่เก็บข้อมูล ประมวลผลในเบราว์เซอร์">
 <link rel="canonical" href="https://www.dynasec.pro/assessment.html">
@@ -374,7 +378,7 @@ const QUESTIONS = [
     q_th:'ไฟร์วอลล์ตั้งกฎอย่างเหมาะสมและทบทวนเป็นระยะ และมีการแบ่งส่วนเครือข่ายระหว่างผู้ใช้ เซิร์ฟเวอร์ และระบบสำคัญเพียงใด',
     q_en:'How well are firewall rules appropriate and reviewed, with the network segmented between users, servers, and critical systems?',
     hint_th:'เครือข่ายแบนราบ (ทุกเครื่องคุยกันได้หมด) ถือว่ายังไม่แบ่งส่วน', hint_en:'A flat network where everything can reach everything counts as not segmented.',
-    fix_th:'ทบทวนกฎไฟร์วอลล์ที่เปิดกว้างเกินจำเป็น แล้วแบ่งส่วนเครือข่ายให้ระบบสำคัญแยกจากเครือข่ายผู้ใช้ทั่วไป เริ่มจากเซิร์ฟเวอร์และระบบการเงิน',
+    fix_th:'ทบทวนกฎไฟร์วอลล์ที่เปิดกว้าง��กินจำเป็น แล้วแบ่งส่วนเครือข่ายให้ระบบสำคัญแยกจากเครือข่ายผู้ใช้ทั่วไป เริ่มจากเซิร์ฟเวอร์และระบบการเงิน',
     fix_en:'Review overly broad firewall rules, then segment critical systems from the general user network, starting with servers and finance systems.' },
   { id:'nw2', d:'network', h:30,
     q_th:'การเข้าถึงระยะไกล (VPN, Remote Desktop, เครื่องมือซัพพอร์ต) ถูกควบคุม มี MFA และบันทึกการใช้งาน และไม่เปิด RDP ตรงสู่อินเทอร์เน็ตเพียงใด',
@@ -452,7 +456,7 @@ const QUESTIONS = [
     q_th:'ระบบ OT/ระบบควบคุมการผลิตแยกจากเครือข่ายองค์กร (IT) ชัดเจน และรู้ว่ามีอุปกรณ์ OT อะไรบ้างเพียงใด',
     q_en:'How well is the OT/production control network clearly separated from the corporate (IT) network, with a known inventory of OT devices?',
     hint_th:'รวมการมีรายการอุปกรณ์ PLC/HMI/SCADA ที่เป็นปัจจุบัน', hint_en:'Include an up-to-date inventory of PLC/HMI/SCADA devices.',
-    fix_th:'ทำรายการอุปกรณ์ OT แบบ passive และแยกเครือข่าย OT ออกจาก IT ให้ชัดเจน ก่อนแบ่งโซนย่อยตาม IEC 62443',
+    fix_th:'ทำรายการอุปกรณ์ OT แบบ passive และแยกเครือข่าย OT ออกจาก IT ให้ชัดเจ�� ก่อนแบ่งโซนย่อยตาม IEC 62443',
     fix_en:'Build a passive OT asset inventory and clearly separate OT from IT before creating sub-zones per IEC 62443.' },
   { id:'ot2', d:'ot', h:30,
     q_th:'การเข้าถึง OT ระยะไกลโดยผู้ขายหรือผู้รับเหมาผ่านจุดเดียวที่ควบคุมได้ มี MFA จำกัดเวลา และบันทึกเซสชันเพียงใด',
