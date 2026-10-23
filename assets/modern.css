@@ -122,6 +122,9 @@
   .lang-toggle button.active,.lang-toggle a.active{background:var(--active);color:var(--strong);}
   .lang-toggle button:hover,.lang-toggle a:hover{color:var(--strong);}
   .menu-toggle{display:none;}
+  .line-add{display:inline-block;margin-top:14px;line-height:0;}
+  .line-add img{height:36px;width:auto;display:block;}
+  .direct-item .line-add{margin-top:0;}
 
   @media (min-width:1241px){
     .nav-cta{
