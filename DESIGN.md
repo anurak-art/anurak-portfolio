@@ -99,7 +99,7 @@ Thai uses larger line-height and no negative letter-spacing (`html[lang="th"]` r
 - Content width `--maxw: 1160px`, side padding 24px (18px on phones).
 - Section vertical padding `clamp(56px, 7vw, 92px)`; sections separated by a 1px `--line`.
 - Radius `--radius: 6px` everywhere; chips and tags use 4px. No pill shapes.
-- Breakpoints in use: 1020px (nav collapses to a menu), 900px, 800px, 760px (footer stacks), 700px (phones).
+- Breakpoints in use: 1240px (nav collapses to a menu), 900px, 800px, 760px (footer stacks), 700px (phones).
 
 ## Components
 

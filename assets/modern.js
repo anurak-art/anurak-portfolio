@@ -84,7 +84,7 @@
     btn.addEventListener('click', function () { setOpen(!header.classList.contains('menu-open')); });
     links.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
-    window.addEventListener('resize', function () { if (window.innerWidth > 1020) setOpen(false); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 1240) setOpen(false); });
     // Keep the toggle label in the page language when the TH/EN switch is used.
     if (window.MutationObserver) {
       new MutationObserver(function () { applyTheme(currentTheme(), false); }).observe(root, { attributes: true, attributeFilter: ['lang'] });
