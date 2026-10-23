@@ -91,6 +91,10 @@
     border:1px solid var(--line);border-radius:6px;padding:7px 14px;cursor:pointer;
   }
   .share button:hover{border-color:var(--teal);}
+  .share{flex-wrap:wrap;}
+  .share a.share-btn,.share button{font-size:13px;}
+  .share a.share-btn{border:1px solid var(--line);border-radius:var(--radius,8px);padding:8px 16px;color:var(--text);text-decoration:none;transition:border-color .15s,color .15s;}
+  .share a.share-btn:hover,.share a.share-btn:focus-visible{border-color:var(--strong,var(--teal));color:var(--strong,var(--text));}
   .share span{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);}
 
   /* ---------- Infographics ---------- */
