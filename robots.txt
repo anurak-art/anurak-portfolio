@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Allow: /api/news
+Allow: /api/latest
 Disallow: /api/
 
 Sitemap: https://www.dynasec.pro/sitemap.xml

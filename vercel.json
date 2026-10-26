@@ -48,5 +48,16 @@
     }
   ],
   "buildCommand": "node scripts/prerender.js",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "headers": [
+    {
+      "source": "/api/(news|latest)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
+  ]
 }
