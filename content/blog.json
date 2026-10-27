@@ -90,15 +90,15 @@
             {
               "label_th": "4 ขู่เปิดเผยข้อมูล",
               "label_en": "4 Data extortion",
-              "detail_th": "14:00 สื่อสาร แจ้งผู้เกี่ยวข้อง",
+              "detail_th": "14:00 สื่อสารและแจ้งผู้เกี่ยวข้อง",
               "detail_en": "14:00 comms, notify",
               "tone": "danger"
             },
             {
-              "label_th": "5 กู้คืนและปิดเหตุ",
-              "label_en": "5 Recover and close",
+              "label_th": "5 กู้คืนบางส่วน",
+              "label_en": "5 Partly restored",
               "detail_th": "พฤหัส 09:00 แจ้งเตือนซ้ำ",
-              "detail_en": "Thu 09:00 repeat alert"
+              "detail_en": "Thu 09:00 same alert again"
             }
           ],
           "afterBlock": 23
