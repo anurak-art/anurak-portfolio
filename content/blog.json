@@ -2202,6 +2202,152 @@
       ]
     },
     {
+      "slug": "what-is-cybersecurity",
+      "date": "2026-10-27",
+      "tags": [
+        "Cybersecurity",
+        "NIST CSF",
+        "Fundamentals",
+        "CIA Triad"
+      ],
+      "title_th": "Cybersecurity คืออะไร: ความหมาย ภัยที่พบบ่อย และกรอบ NIST",
+      "title_en": "What Is Cybersecurity? Threats and the NIST Framework",
+      "summary_th": "อธิบายว่า cybersecurity (ความมั่นคงปลอดภัยไซเบอร์) คืออะไร ปกป้องอะไร มีภัยอะไรที่พบบ่อย และ 6 หน้าที่ของ NIST CSF 2.0 ที่องค์กรใช้จัดระเบียบงาน ด้วยภาษาง่าย ๆ",
+      "summary_en": "What cybersecurity means, what it protects, the threats you meet most often, and the six functions of NIST CSF 2.0 that organizations use, in plain words.",
+      "body_th": "Cybersecurity (ความมั่นคงปลอดภัยไซเบอร์) คือการปกป้องคอมพิวเตอร์ เครือข่าย อุปกรณ์ และข้อมูลในนั้น ไม่ให้คนที่ไม่มีสิทธิ์เข้าถึง และคือการดูแลให้ระบบยังใช้งานได้เมื่อมีปัญหาเกิดขึ้น ครอบคลุมตั้งแต่โทรศัพท์ส่วนตัวไปจนถึงเครือข่ายของโรงพยาบาล บทความนี้อธิบายความหมายของคำนี้ สิ่งที่ต้องปกป้อง ภัยที่พบบ่อย และหน้าที่ 6 ด้านใน NIST (สถาบันมาตรฐานของสหรัฐฯ) Cybersecurity Framework ซึ่งเป็นกรอบแนวทางที่องค์กรใช้จัดระเบียบงานด้านนี้\n\n## คำนี้หมายถึงอะไร\n\nคำนี้ไม่มีนิยามเดียว NIST รวบรวมไว้ 6 นิยามในพจนานุกรมศัพท์ (glossary) ของตน แต่ละนิยามมาจากเอกสารคนละฉบับ มี 2 นิยามที่จำง่าย นิยามแรกคือกระบวนการปกป้องข้อมูลโดยป้องกัน ตรวจจับ และตอบสนองต่อการโจมตี มาจาก NIST Cybersecurity Framework เวอร์ชัน 1.1 นิยามที่สองมาจาก CNSSI 4009 (เอกสารศัพท์มาตรฐานด้านระบบความมั่นคงของสหรัฐฯ) คือการปกป้องคอมพิวเตอร์ ระบบสื่อสาร และข้อมูลในระบบเหล่านั้น รวมถึงการกู้คืนระบบหลังเสียหาย เพื่อให้ยังมีคุณสมบัติเหล่านี้ คือ พร้อมใช้งาน ครบถ้วน ยืนยันได้ว่าเป็นตัวจริง เป็นความลับ และปฏิเสธภายหลังไม่ได้ (non-repudiation คือผู้ส่งไม่อาจปฏิเสธภายหลังว่าตนไม่ได้ส่ง)\n\nพูดให้ง่ายที่สุด เป้าหมายคือให้ข้อมูลเป็นความลับ ถูกต้อง และพร้อมใช้เมื่อต้องการ นี่เป็นวิธีอธิบายของ CISA (หน่วยงานด้านความมั่นคงไซเบอร์ของสหรัฐฯ) เป้าหมายสามข้อนี้มักเรียกว่า confidentiality (ความลับ) integrity (ความถูกต้องครบถ้วน) และ availability (ความพร้อมใช้งาน) NIST นิยาม confidentiality ว่าคือการรักษากฎที่กำหนดไว้ว่าใครเข้าถึงหรือเปิดเผยข้อมูลได้บ้าง\n\n- **Confidentiality (ความลับ)**: เฉพาะคนที่มีสิทธิ์เท่านั้นที่อ่านข้อมูลได้ ตัวอย่าง (ของเราเอง): รายชื่อลูกค้ารั่วไปถึงคู่แข่ง แปลว่าเสียความลับ\n- **Integrity (ความถูกต้องครบถ้วน)**: ข้อมูลถูกต้อง และไม่ถูกคนที่ไม่มีสิทธิ์แก้ไข ตัวอย่าง (ของเราเอง): ผู้โจมตีแก้เลขบัญชีในใบแจ้งหนี้ แปลว่าเสียความถูกต้อง\n- **Availability (ความพร้อมใช้งาน)**: ข้อมูลและระบบใช้งานได้เมื่อต้องการ ตัวอย่าง (ของเราเอง): ransomware (มัลแวร์ คือซอฟต์แวร์ประสงค์ร้าย ชนิดที่เรียกค่าไถ่) ล็อกไฟล์ทั้งหมด แปลว่าเสียความพร้อมใช้งาน\n\n## สิ่งที่ต้องปกป้อง\n\nCISA ชี้ว่าชีวิตสมัยใหม่พึ่งพาเทคโนโลยีมาก เช่น อีเมลและโทรศัพท์ แอปบันเทิง การนำทาง การซื้อของออนไลน์ บัตรชำระเงิน รวมถึงอุปกรณ์และเวชระเบียน (ประวัติการรักษา) ทางการแพทย์ ข้อมูลส่วนบุคคลอาจอยู่ในอุปกรณ์ของผู้ใช้เอง หรืออยู่ในระบบที่องค์กรอื่นดูแล จึงต้องช่วยกันปกป้อง ส่วนองค์กร แนวคิดเดียวกันขยายไปถึงเซิร์ฟเวอร์ บริการคลาวด์ แอปพลิเคชันธุรกิจ และคนที่ใช้งานระบบเหล่านี้\n\n## ภัยที่พบบ่อยที่สุด\n\nCISA ระบุภัยที่พบบ่อยไว้ดังนี้\n\n- **Malware (มัลแวร์)**: ซอฟต์แวร์ประสงค์ร้ายบางตัวทำลายได้ทั้งระบบ และบางชนิดแพร่ไปเครื่องอื่นได้เอง โดยไม่ต้องมีใครกดอะไร\n- **ผู้บุกรุก**: คนที่เจาะเข้ามาได้อาจแก้ไฟล์ หรือใช้เครื่องที่ถูกเจาะไปโจมตีคนอื่นต่อ\n- **การขโมยเงิน**: ผู้โจมตีขโมยข้อมูลบัตร แล้วใช้ซื้อของโดยที่เจ้าของบัตรไม่ได้ซื้อ\n- **ช่องโหว่ซอฟต์แวร์ที่ถูกนำมาโจมตี**: ช่องโหว่ (vulnerability) คือจุดอ่อนในซอฟต์แวร์ ซึ่งมักเกิดจากความผิดพลาดตอนเขียนโปรแกรม ผู้โจมตีใช้จุดอ่อนนี้ทำสิ่งที่ไม่ได้รับอนุญาตได้\n- **ฟิชชิง (phishing) และไฟล์หลอก**: ฟิชชิงคือการหลอกให้ผู้ใช้ทำตาม เช่น เปิดไฟล์แนบ เข้าเว็บอันตราย หรือสั่งให้โค้ด (ชุดคำสั่งคอมพิวเตอร์) อันตรายที่ดูเหมือนมีประโยชน์ทำงาน\n\nสำหรับนิสัยประจำวันที่ช่วยรับมือภัยเหล่านี้ ดู [Cybersecurity Tips ง่าย ๆ สำหรับบุคคลทั่วไป](post:cybersecurity-tips-for-everyone) ส่วนวิธีที่องค์กรติดตามและแก้ช่องโหว่ซอฟต์แวร์ ดู [Vulnerability Management: วิธีสร้างโปรแกรมที่ใช้ได้จริง](post:vulnerability-management-program)\n\n## องค์กรจัดระเบียบงานนี้อย่างไร\n\nNIST เผยแพร่ Cybersecurity Framework (CSF) เวอร์ชัน 2.0 เมื่อวันที่ 26 กุมภาพันธ์ 2024 กรอบนี้แบ่งงานด้านความมั่นคงปลอดภัยไซเบอร์เป็น 6 หน้าที่ (function) ใช้ได้กับองค์กรทุกขนาดและทุกภาคธุรกิจ ไม่ได้จำกัดเฉพาะโครงสร้างพื้นฐานสำคัญ (ระบบที่สังคมต้องพึ่งพา) คำอธิบายข้างล่างเป็นการสรุปด้วยภาษาง่าย ๆ ของเราเอง ไม่ใช่ถ้อยคำของ NIST\n\n- **Govern (กำกับดูแล)**: ผู้บริหารกำหนดกลยุทธ์ และมองความเสี่ยงไซเบอร์เป็นความเสี่ยงสำคัญของธุรกิจ เหมือนความเสี่ยงด้านการเงินและชื่อเสียง\n- **Identify (ระบุ)**: รู้ว่าองค์กรมีอะไรอยู่ และอะไรอาจผิดพลาดได้ เช่น ระบบ ข้อมูล และความเสี่ยง\n- **Protect (ป้องกัน)**: วางมาตรการป้องกัน เช่น ควบคุมว่าใครเข้าถึงอะไรได้ อัปเดตซอฟต์แวร์ และฝึกอบรม\n- **Detect (ตรวจจับ)**: สังเกตให้เร็วเมื่อมีเหตุผิดปกติเกิดขึ้น\n- **Respond (ตอบสนอง)**: รับมือเมื่อเกิดเหตุการณ์ โดยจำกัดความเสียหายและสื่อสารกับผู้เกี่ยวข้อง\n- **Recover (กู้คืน)**: ทำให้การทำงานกลับมาเป็นปกติ และเรียนรู้จากสิ่งที่เกิดขึ้น\n\nถ้าต้องการดูกรอบแนวคิดที่ใกล้เคียงกัน ดู [NIST AI RMF คู่มือฉบับใช้งานจริง](post:nist-ai-rmf-guide) ซึ่งเป็นกรอบพี่น้องที่ใช้กับ AI ส่วนวิธีที่การตรวจจับและการตอบสนองทำงานในศูนย์ปฏิบัติการด้านความปลอดภัย ดู [SIEM + SOAR กับ XDR: เปรียบเทียบความสามารถ ข้อดี ข้อจำกัด และคำแนะนำ](post:siem-soar-vs-xdr-comparison)\n\n## ความมั่นคงปลอดภัยไซเบอร์ไม่ใช่งานของเทคโนโลยีอย่างเดียว\n\nในมุมมองของเรา ความมั่นคงปลอดภัยไซเบอร์ที่ดีต้องมี 3 อย่างทำงานร่วมกัน คือ คนที่รู้ว่าต้องทำอะไร กระบวนการที่บอกว่าใครตัดสินใจและใครลงมือ และเทคโนโลยีที่ช่วยสนับสนุนทั้งสองอย่างนั้น หน้าที่ Govern ใน CSF 2.0 สะท้อนแนวคิดนี้ คือมองว่าผู้บริหารระดับสูงควรร่วมพิจารณาความเสี่ยงไซเบอร์ ไม่ใช่เฉพาะทีมไอที (เป็นการตีความของเรา) ในประเทศไทย พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562 เป็นกฎหมายหลัก และใช้กับองค์กรที่ดูแลโครงสร้างพื้นฐานสำคัญทางสารสนเทศเป็นพิเศษ เราสรุปไว้ว่ากฎหมายนี้ส่งผลต่อหน่วยงานรัฐอย่างไรใน [SOC Architecture Blueprint สำหรับหน่วยงานภาครัฐไทย](post:soc-architecture-blueprint-government) บทความนี้ไม่ใช่คำปรึกษาทางกฎหมาย\n\n## ข้อผิดพลาดที่พบบ่อย\n\n- **คิดว่ามีแต่บริษัทใหญ่ที่ตกเป็นเป้า**: NIST ออกแบบ CSF 2.0 ให้ใช้ได้กับองค์กรทุกขนาด ตั้งแต่โรงเรียนเล็กและองค์กรไม่แสวงกำไรไปจนถึงหน่วยงานขนาดใหญ่\n- **ซื้อเครื่องมือแล้วคิดว่าจบ**: เครื่องมือต้องมีคนและกระบวนการคอยใช้งาน (ความเห็นของเราเอง)\n- **ปล่อยให้เป็นงานของทีมไอทีเพียงทีมเดียว**: หน้าที่ Govern มองว่าผู้บริหารระดับสูงควรร่วมพิจารณาความเสี่ยงไซเบอร์ด้วย (เป็นการตีความของเรา)\n- **ปกป้องระบบแต่ไม่ปกป้องข้อมูลในระบบ**: เป้าหมายครอบคลุมตัวข้อมูลด้วย ไม่ใช่แค่ตัวเครื่อง\n- **วางแผนแค่การป้องกัน**: กรอบนี้มี Detect, Respond และ Recover ด้วย เพราะบางการโจมตีผ่านเข้ามาได้\n- **มองเป็นโครงการครั้งเดียวจบ**: ภัยคุกคามและซอฟต์แวร์เปลี่ยนไปตลอด จึงต้องทำงานนี้ซ้ำเป็นประจำ (ความเห็นของเราเอง)\n\n## ขั้นแรกที่ทำได้ทันที\n\n- **ทำบัญชีรายการสิ่งที่มีอยู่**: อุปกรณ์ บัญชีผู้ใช้ แอปพลิเคชัน และข้อมูลที่เก็บไว้ โดยเริ่มจากสิ่งที่ธุรกิจขาดไม่ได้\n- **เปิดการยืนยันตัวตนขั้นที่สองให้อีเมลและบัญชีผู้ดูแลระบบ**: คือต้องมีอีกขั้นหนึ่งนอกจากรหัสผ่านตอน login\n- **เปิดการอัปเดตอัตโนมัติเท่าที่ทำได้**\n- **ตรวจว่ามีข้อมูลสำรองที่กู้คืนได้จริง**: ลองกู้คืนไฟล์สักไฟล์ดู\n- **กำหนดว่าเมื่อเกิดเรื่องจะโทรหาใครก่อน**: จดชื่อและเบอร์โทรไว้\n- **ระบุผู้บริหารหนึ่งคนเป็นผู้รับผิดชอบความเสี่ยงไซเบอร์**: แม้เป็นองค์กรเล็กก็ควรมี\n\nถ้าอยากดูว่าองค์กรอยู่ตรงไหนในวันนี้ ลองทำ [แบบประเมินตนเอง](/assessment.html)\n\n## แหล่งอ้างอิงและข้อมูลเพิ่มเติม\n\nนิยามและคำอธิบายกรอบ CSF มาจากหน้าเว็บของ NIST และ CISA ที่ระบุไว้ข้างล่าง โดยอ่านเมื่อ 27 ตุลาคม 2026 ส่วนประโยคเรื่องเซิร์ฟเวอร์ บริการคลาวด์ และแอปพลิเคชันในหัวข้อสิ่งที่ต้องปกป้อง คำอธิบายหน้าที่ทั้ง 6 ด้วยภาษาง่าย ๆ ตัวอย่างของเป้าหมายสามข้อ และข้อที่ระบุว่าเป็นความเห็นของเรา เป็นของเราเอง ไม่ได้มาจากหน้าเว็บเหล่านั้น กฎหมายไทยกล่าวถึงเพียงภาพรวม ควรอ่านตัวกฎหมายฉบับจริงเพื่อดูถ้อยคำที่แน่นอน\n\n- [NIST Glossary: cybersecurity](https://csrc.nist.gov/glossary/term/cybersecurity): นิยามทั้ง 6 ของ NIST และเอกสารต้นทางของแต่ละนิยาม\n- [NIST Glossary: confidentiality](https://csrc.nist.gov/glossary/term/confidentiality): นิยามของ confidentiality\n- [CISA: What is cybersecurity?](https://www.cisa.gov/news-events/news/what-cybersecurity): คำอธิบายง่าย ๆ ว่าปกป้องอะไร และภัยที่พบบ่อยมีอะไรบ้าง\n- [NIST: Cybersecurity Framework](https://www.nist.gov/cyberframework): หน้าหลักของกรอบ มีไฟล์ดาวน์โหลดและคู่มือเริ่มต้น\n- [NIST: เปิดตัว Cybersecurity Framework 2.0](https://www.nist.gov/news-events/news/2024/02/nist-releases-version-20-landmark-cybersecurity-framework): ข่าวการเผยแพร่ พร้อมหน้าที่ทั้ง 6 และกลุ่มผู้ใช้กรอบนี้",
+      "body_en": "Cybersecurity is the work of protecting computers, networks, devices and the information in them from people who should not have access, and of keeping them working when something goes wrong. It covers a personal phone as much as a hospital network. This article explains what the word means, what is being protected, the threats you meet most often, and the six functions in the NIST Cybersecurity Framework that organizations use to organize the work.\n\n## What the word means\n\nThere is no single definition. NIST (the US standards institute) lists six in its glossary, taken from different documents. Two of them are easy to remember. One is the process of protecting information by preventing, detecting and responding to attacks, which comes from the NIST Cybersecurity Framework version 1.1. The other, from CNSSI 4009, is the protection of computers, communications systems and the information in them, including restoring them after damage, so that they stay available, intact, authenticated, confidential and non-repudiable (the sender cannot later deny having sent something).\n\nPut simply, the goal is to keep information private, accurate and available when needed, which is how CISA (the US cybersecurity agency) describes it. These three goals are often called confidentiality, integrity and availability. NIST defines confidentiality as preserving authorized restrictions on access to and disclosure of information.\n\n- **Confidentiality**: only the right people can read the information. Example (ours): a customer list that leaks to a competitor breaks it\n- **Integrity**: the information is accurate and has not been changed by someone who should not change it. Example (ours): an attacker who edits the bank account in an invoice breaks it\n- **Availability**: the information and systems work when people need them. Example (ours): ransomware that locks every file breaks it\n\n## What is being protected\n\nCISA points out that much of modern life depends on technology: email and phones, entertainment apps, navigation, online shopping and payment cards, and medical devices and records. Personal data may sit on your own devices or on systems run by other organizations, so protecting it is a shared job. For an organization the same idea extends to servers, cloud services, business applications, and the people who use them.\n\n## Threats you meet most often\n\nCISA lists these common threats:\n\n- **Malware** (harmful software): it can wipe out a whole system, and some kinds spread to other machines without anyone clicking\n- **Intruders**: people who break in can change files or use your computer to attack others\n- **Financial theft**: attackers steal card details and make purchases that are not yours\n- **Exploited software flaws**: a vulnerability, often a programming mistake, lets an attacker do something unauthorized\n- **Phishing and deceptive files**: users are tricked into opening an attachment or visiting a harmful page, or into running harmful code that looks useful\n\nFor everyday habits against these threats, see [Easy Cybersecurity Tips for Everyone](post:cybersecurity-tips-for-everyone). For how an organization tracks and fixes software flaws, see [Vulnerability Management: How to Build a Program That Works](post:vulnerability-management-program).\n\n## How organizations organize the work\n\nNIST released version 2.0 of its Cybersecurity Framework (CSF) on 26 February 2024. It organizes cybersecurity into six functions and applies to organizations of any size and sector, not only critical infrastructure. The explanations below are our plain-words summary of each function, not NIST's wording:\n\n- **Govern**: leaders decide the strategy and treat cyber risk as a major business risk, alongside financial and reputational risk\n- **Identify**: know what you have and what could go wrong, such as systems, data and risks\n- **Protect**: put safeguards in place, such as access control, updates and training\n- **Detect**: notice quickly when something is happening\n- **Respond**: act on an incident, by containing it and communicating\n- **Recover**: restore normal operation and learn from what happened\n\nFor a closer look at the framework, see [NIST AI RMF: A Practical Guide](post:nist-ai-rmf-guide), which covers its sister framework for AI. For how detection and response work in a security operations center, see [SIEM + SOAR vs XDR: Capabilities, Limits and Advice](post:siem-soar-vs-xdr-comparison).\n\n## Cybersecurity is not only a technology job\n\nIn our view, good cybersecurity rests on three things working together: people who know what to do, processes that say who decides and who acts, and technology that supports both. The Govern function in CSF 2.0 reflects this: it treats cyber risk as something senior leaders weigh, not only the IT team (our reading of the function). In Thailand, the Cybersecurity Act B.E. 2562 (2019) is the main law, and it applies in particular to organizations that run critical information infrastructure. We summarize how it affects government agencies in [SOC Architecture Blueprint for Thai Government Agencies](post:soc-architecture-blueprint-government). This article is not legal advice.\n\n## Common mistakes\n\n- **Thinking only large companies are targets**: NIST built CSF 2.0 for organizations of every size, from small schools and nonprofits to large agencies\n- **Buying tools and calling it done**: tools need people and processes to run them (our view)\n- **Leaving cybersecurity to the IT team alone**: the Govern function treats cyber risk as a matter for senior leaders too (our reading)\n- **Protecting systems but not the data in them**: the goal covers the information, not only the machines\n- **Planning only for prevention**: the framework also has Detect, Respond and Recover, because some attacks get through\n- **Treating it as a one-time project**: threats and software change, so the work repeats (our view)\n\n## Start today\n\n- **List what you have**: devices, accounts, applications and the data they hold, starting with what the business cannot work without\n- **Turn on a second login step for email and administrator accounts**\n- **Turn on automatic updates wherever you can**\n- **Check that you have a backup you can actually restore**: and try restoring one file\n- **Decide who to call first when something goes wrong**: write down the name and number\n- **Name one senior person who owns cyber risk**: even in a small organization\n\nTo see where your organization stands today, try the [self-assessment](/assessment.html).\n\n## References and further reading\n\nThe definitions and the framework description come from the NIST and CISA pages listed below, which were read on 27 October 2026. The sentences about servers, cloud services and applications in the protection section, the plain-words descriptions of the six functions, the examples for the three goals, and the points marked as our view are ours and do not come from those pages. The Thai law is mentioned only in general terms; read the Act itself for exact wording.\n\n- [NIST Glossary: cybersecurity](https://csrc.nist.gov/glossary/term/cybersecurity): the six NIST definitions and the documents each comes from\n- [NIST Glossary: confidentiality](https://csrc.nist.gov/glossary/term/confidentiality): the definition of confidentiality\n- [CISA: What is cybersecurity?](https://www.cisa.gov/news-events/news/what-cybersecurity): a plain description of what is protected and the common threats\n- [NIST: Cybersecurity Framework](https://www.nist.gov/cyberframework): the framework home page, with the download and quick-start guides\n- [NIST: version 2.0 of the Cybersecurity Framework released](https://www.nist.gov/news-events/news/2024/02/nist-releases-version-20-landmark-cybersecurity-framework): the release news, the six functions and who the framework is for",
+      "infographics": [
+        {
+          "type": "hub",
+          "title_th": "สามเป้าหมายของ cybersecurity",
+          "title_en": "The three goals of cybersecurity",
+          "center_th": "ข้อมูลที่ต้องปกป้อง",
+          "center_en": "The information to protect",
+          "center_note_th": "เสียไปข้อใดข้อหนึ่ง ก็ถือว่าเสียหาย",
+          "center_note_en": "losing any one counts as harm",
+          "items": [
+            {
+              "label_th": "ความลับ",
+              "label_en": "Confidentiality",
+              "detail_th": "เฉพาะผู้มีสิทธิ์เท่านั้นที่อ่านได้",
+              "detail_en": "only the right people can read"
+            },
+            {
+              "label_th": "ความถูกต้องครบถ้วน",
+              "label_en": "Integrity",
+              "detail_th": "ไม่ถูกแก้ไขโดยผู้ไม่มีสิทธิ์",
+              "detail_en": "not changed by those without rights"
+            },
+            {
+              "label_th": "ความพร้อมใช้งาน",
+              "label_en": "Availability",
+              "detail_th": "ใช้งานได้เมื่อต้องการ",
+              "detail_en": "works when people need it"
+            }
+          ],
+          "afterBlock": 5
+        },
+        {
+          "type": "steps",
+          "title_th": "6 หน้าที่ของ NIST CSF 2.0",
+          "title_en": "The six functions of NIST CSF 2.0",
+          "items": [
+            {
+              "label_th": "Govern กำกับดูแล",
+              "label_en": "Govern",
+              "detail_th": "ผู้บริหารกำหนดกลยุทธ์",
+              "detail_en": "leaders set the strategy"
+            },
+            {
+              "label_th": "Identify ระบุ",
+              "label_en": "Identify",
+              "detail_th": "รู้ว่ามีอะไร เสี่ยงอะไรบ้าง",
+              "detail_en": "know assets and risks"
+            },
+            {
+              "label_th": "Protect ป้องกัน",
+              "label_en": "Protect",
+              "detail_th": "วางมาตรการป้องกัน",
+              "detail_en": "put safeguards in place"
+            },
+            {
+              "label_th": "Detect ตรวจจับ",
+              "label_en": "Detect",
+              "detail_th": "สังเกตให้เร็วเมื่อเกิดเหตุ",
+              "detail_en": "notice when something happens"
+            },
+            {
+              "label_th": "Respond ตอบสนอง",
+              "label_en": "Respond",
+              "detail_th": "จำกัดความเสียหายและสื่อสาร",
+              "detail_en": "contain it and communicate"
+            },
+            {
+              "label_th": "Recover กู้คืน",
+              "label_en": "Recover",
+              "detail_th": "กลับเป็นปกติและเรียนรู้",
+              "detail_en": "restore and learn"
+            }
+          ],
+          "afterBlock": 14
+        },
+        {
+          "type": "columns",
+          "title_th": "ความเข้าใจผิดกับความจริง",
+          "title_en": "Misunderstandings versus reality",
+          "label_a_th": "ความเข้าใจผิด",
+          "label_a_en": "Misunderstanding",
+          "label_b_th": "ความจริง",
+          "label_b_en": "Reality",
+          "items": [
+            {
+              "side": "a",
+              "label_th": "มีแต่บริษัทใหญ่ที่เสี่ยง",
+              "label_en": "Only big firms are at risk",
+              "detail_th": "องค์กรเล็กก็ต้องดูแลเรื่องนี้",
+              "detail_en": "small ones need it too"
+            },
+            {
+              "side": "a",
+              "label_th": "ซื้อเครื่องมือแล้วจบ",
+              "label_en": "Buy tools and finish",
+              "detail_th": "ต้องมีคนและกระบวนการใช้งาน",
+              "detail_en": "tools need people and process"
+            },
+            {
+              "side": "a",
+              "label_th": "เป็นงานของทีมไอทีเท่านั้น",
+              "label_en": "It is an IT job",
+              "detail_th": "ผู้บริหารต้องร่วมตัดสินใจด้วย",
+              "detail_en": "leaders must decide too"
+            },
+            {
+              "side": "b",
+              "label_th": "กรอบนี้ใช้ได้ทุกขนาดองค์กร",
+              "label_en": "The framework fits any size",
+              "detail_th": "ตามที่ NIST ระบุ",
+              "detail_en": "as NIST states"
+            },
+            {
+              "side": "b",
+              "label_th": "ไม่ได้มีแค่การป้องกัน",
+              "label_en": "More than prevention",
+              "detail_th": "มีตรวจจับ ตอบสนอง กู้คืนด้วย",
+              "detail_en": "detect, respond, recover too"
+            },
+            {
+              "side": "b",
+              "label_th": "ผู้บริหารร่วมพิจารณาความเสี่ยง",
+              "label_en": "Leaders weigh cyber risk",
+              "detail_th": "เป็นการตีความของเราเอง",
+              "detail_en": "our reading of the Govern function"
+            }
+          ],
+          "afterBlock": 17
+        }
+      ]
+    },
+    {
       "slug": "agentic-ai-security",
       "date": "2026-10-27",
       "publish_at": "2026-10-27T18:00:00+07:00",
