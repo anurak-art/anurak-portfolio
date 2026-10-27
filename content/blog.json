@@ -1935,8 +1935,6 @@
           "center_th": "profile ของ CIS",
           "center_note_en": "pick by how much strictness the system needs",
           "center_note_th": "เลือกตามความเข้มงวดที่ระบบต้องการ",
-          "anchor_en": null,
-          "anchor_th": null,
           "items": [
             {
               "label_en": "Level 1",
@@ -1956,7 +1954,8 @@
               "detail_en": "separate profile, replaced Level 3",
               "detail_th": "อีก profile หนึ่ง มาแทน Level 3"
             }
-          ]
+          ],
+          "afterBlock": 10
         },
         {
           "type": "steps",
