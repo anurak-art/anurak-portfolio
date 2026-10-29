@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark light">
+<script>(function(){try{var t=localStorage.getItem('dynasec-theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<title>ตรวจรอยเท้าดิจิทัลของตัวเอง (Username Footprint) · DynaSec</title>
+<meta name="description" content="ตรวจว่า username ของคุณปรากฏบนเว็บไซต์สาธารณะใดบ้าง พร้อมสรุปผลและคำแนะนำ ใช้ชุดข้อมูลเปิด WhatsMyName สำหรับตรวจของตัวเองหรือองค์กรที่ได้รับอนุญาตเท่านั้น">
+<link rel="canonical" href="https://www.dynasec.pro/footprint">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="DynaSec Consultants">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ตรวจรอยเท้าดิจิทัลของตัวเอง (Username Footprint)">
+<meta property="og:description" content="ตรวจว่า username ของคุณปรากฏบนเว็บไซต์สาธารณะใดบ้าง พร้อมสรุปและคำแนะนำ">
+<meta property="og:url" content="https://www.dynasec.pro/footprint">
+<meta property="og:image" content="https://www.dynasec.pro/assets/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/icon-192.png" type="image/png" sizes="192x192">
+<link rel="icon" href="/assets/icon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0B1220;--panel:#121B2E;--panel-2:#0F1626;--line:#24344D;--text:#E8EEF5;--muted:#8CA0B8;--amber:#FFB020;--teal:#4FD1C5;--danger:#FF7A7A;--radius:10px;--maxw:1120px;}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter','Noto Sans Thai',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Space Grotesk','Noto Sans Thai',sans-serif;font-weight:600;letter-spacing:-0.01em;margin:0;}
+  .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:0.02em;}
+  a{color:inherit;text-decoration:none;}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  .narrow{max-width:820px;margin:0 auto;}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(11,18,32,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;}
+  .brand img{height:44px;width:auto;display:block;}
+  .brand-mark{width:28px;height:28px;border:1px solid var(--teal);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--teal);font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  nav.links{display:flex;gap:24px;font-size:14px;color:var(--muted);}
+  nav.links a:hover{color:var(--text);}
+  nav.links a.current{color:var(--teal);}
+  .lang-toggle{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);padding:6px 10px;cursor:pointer;}
+  .lang-toggle button.active{background:var(--panel);color:var(--teal);}
+  @media (max-width:860px){nav.links{display:none;}}
+
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--teal);letter-spacing:0.12em;display:flex;align-items:center;gap:8px;margin-bottom:18px;}
+  .eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(79,209,197,0.15);}
+  .page-hero{padding:56px 0 36px;border-bottom:1px solid var(--line);}
+  .page-hero h1{font-size:clamp(28px,4vw,42px);line-height:1.2;max-width:780px;}
+  .page-hero p.sub{color:var(--muted);max-width:680px;margin:16px 0 0;font-size:15.5px;}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+  .badge{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--teal);border:1px solid var(--line);border-radius:20px;padding:5px 12px;}
+  .crumbs{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:22px;display:flex;gap:6px;flex-wrap:wrap;}
+  .crumbs a{color:var(--teal);}
+
+  section.block{padding:44px 0;border-bottom:1px solid var(--line);}
+  .block h2{font-size:clamp(21px,2.6vw,26px);margin-bottom:14px;}
+  .block p{color:var(--muted);margin:0 0 14px;max-width:760px;}
+  .steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;}
+  .step3{border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--panel);}
+  .step3 b{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:12px;letter-spacing:0.08em;}
+  .step3 h3{font-size:16px;margin:6px 0;}
+  .step3 p{font-size:13.5px;margin:0;}
+  .domain-list{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-wrap:wrap;gap:8px;}
+  .domain-list li{font-size:13px;border:1px solid var(--line);border-radius:6px;padding:6px 12px;background:var(--panel-2);color:var(--text);}
+  @media (max-width:760px){.steps3{grid-template-columns:1fr;}}
+
+  /* tool */
+  #tool{padding:48px 0 72px;border-bottom:1px solid var(--line);scroll-margin-top:70px;}
+  .tool-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:30px;}
+  .progress{display:flex;align-items:center;gap:14px;margin-bottom:26px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);}
+  .bar{flex:1;height:6px;background:var(--line);border-radius:4px;overflow:hidden;}
+  .bar>i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s ease;}
+  .step-title{font-size:22px;margin-bottom:6px;}
+  .step-sub{color:var(--muted);font-size:14px;margin:0 0 24px;}
+  fieldset{border:0;margin:0 0 26px;padding:0;min-width:0;}
+  legend{padding:0;font-weight:600;font-size:15.5px;line-height:1.5;margin-bottom:4px;}
+  .hint{color:var(--muted);font-size:13px;margin:0 0 12px;}
+  .opts{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+  .opts.two{grid-template-columns:repeat(2,1fr);}
+  .opts.three{grid-template-columns:repeat(3,1fr);}
+  .opts.four{grid-template-columns:repeat(4,1fr);}
+  .opt{position:relative;}
+  .opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer;}
+  .opt span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:54px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);font-size:13px;line-height:1.35;color:var(--muted);transition:border-color .15s,background .15s,color .15s;}
+  .opt input:hover+span{border-color:var(--teal);color:var(--text);}
+  .opt input:checked+span{background:rgba(79,209,197,0.12);border-color:var(--teal);color:var(--text);}
+  .opt input:focus-visible+span{outline:2px solid var(--teal);outline-offset:2px;}
+  .opt.unsure input:checked+span{background:rgba(255,176,32,0.10);border-color:var(--amber);}
+  @media (max-width:700px){.opts,.opts.four{grid-template-columns:repeat(2,1fr);}.opts.three{grid-template-columns:1fr;}}
+  .nav-btns{display:flex;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid transparent;font-family:inherit;transition:transform .15s ease,opacity .15s ease;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+  .btn-primary{background:var(--amber);color:#1a1206;}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--text);}
+  .btn-ghost:hover:not(:disabled){border-color:var(--teal);color:var(--teal);}
+  .privacy{margin:18px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);}
+
+  /* results */
+  .res-head{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:var(--panel);margin-bottom:28px;}
+  .score{font-family:'Space Grotesk',sans-serif;font-size:56px;font-weight:700;line-height:1;color:var(--c,var(--teal));}
+  .score small{font-size:20px;color:var(--muted);font-weight:500;}
+  .res-head h3{font-size:20px;margin-bottom:6px;}
+  .res-head p{color:var(--muted);font-size:14px;margin:0;}
+  @media (max-width:640px){.res-head{grid-template-columns:1fr;gap:12px;}}
+  .res-h{font-size:18px;margin:34px 0 14px;}
+  .dom-row{display:grid;grid-template-columns:minmax(150px,230px) 1fr 52px;gap:14px;align-items:center;padding:8px 0;font-size:14px;}
+  .dom-row .meter{height:10px;border-radius:5px;background:var(--line);overflow:hidden;}
+  .dom-row .meter i{display:block;height:100%;border-radius:5px;background:var(--c);width:var(--w);}
+  .dom-row .pct{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);text-align:right;}
+  @media (max-width:640px){.dom-row{grid-template-columns:1fr 46px;}.dom-row .meter{grid-column:1 / -1;order:3;}}
+  .prio{display:grid;gap:14px;}
+  .prio-card{border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:8px;padding:18px 20px;background:var(--panel);}
+  .prio-card h4{font-size:16px;margin-bottom:4px;}
+  .prio-card .why{color:var(--muted);font-size:13.5px;margin:0 0 10px;}
+  .prio-card ul{margin:0 0 10px;padding-left:20px;font-size:14px;}
+  .prio-card li{margin-bottom:4px;}
+  .prio-card .rel{font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  .prio-card .rel a{color:var(--teal);text-decoration:underline;text-underline-offset:3px;}
+  .road{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .road-col{border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--panel);}
+  .road-col h4{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;color:var(--teal);margin-bottom:12px;}
+  .road-col ul{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:13.5px;}
+  .road-col li{padding-left:14px;position:relative;}
+  .road-col li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--amber);}
+  .road-col .none{color:var(--muted);}
+  @media (max-width:860px){.road{grid-template-columns:1fr;}}
+  .notes{display:grid;gap:10px;padding:0;margin:0;list-style:none;}
+  .notes li{border:1px solid var(--line);border-radius:8px;padding:12px 16px;background:var(--panel-2);font-size:14px;}
+  .unsure-note{color:var(--amber);font-size:13.5px;margin-top:10px;}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+  .disclaimer{margin-top:28px;border:1px dashed var(--line);border-radius:8px;padding:14px 18px;font-size:13px;color:var(--muted);}
+  .refs{font-size:13px;color:var(--muted);margin-top:14px;}
+  .refs a{color:var(--teal);text-decoration:underline;text-underline-offset:3px;}
+  .toast{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--teal);align-self:center;}
+
+  footer{padding:32px 0;text-align:center;color:var(--muted);font-size:13px;font-family:'IBM Plex Mono',monospace;}
+
+  @media print{
+    header,footer,.progress,.nav-btns,.actions,.privacy,.page-hero,section.block,.lang-toggle{display:none !important;}
+    body{background:#fff;color:#111;}
+    #tool{padding:0;border:0;}
+    .tool-card,.res-head,.prio-card,.road-col,.notes li,.disclaimer{background:#fff !important;border-color:#bbb !important;color:#111 !important;}
+    .res-head p,.prio-card .why,.dom-row .pct,.road-col .none,.refs,.disclaimer{color:#444 !important;}
+    .dom-row .meter{background:#ddd;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .dom-row .meter i{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .score{color:#111;}
+  }
+</style>
+<link rel="stylesheet" href="/assets/modern.css">
+<script src="/assets/modern.js" defer></script>
+
+<style>
+  .fp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:18px;}
+  @media (max-width:760px){.fp-grid{grid-template-columns:1fr;}}
+  .fp-field label{display:block;font-weight:600;font-size:14px;margin-bottom:6px;}
+  .fp-field input[type=text],.fp-field input[type=email]{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);font:inherit;}
+  .fp-field small{display:block;color:var(--muted);font-size:12.5px;margin-top:5px;}
+  .fp-consent{display:flex;gap:10px;align-items:flex-start;border:1px dashed var(--line);border-radius:8px;padding:14px 16px;margin:6px 0 18px;font-size:14px;}
+  .fp-consent input{margin-top:4px;}
+  .fp-cands{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0;}
+  .fp-cand{border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-family:'IBM Plex Mono',monospace;font-size:13px;display:inline-flex;gap:8px;align-items:center;cursor:pointer;}
+  .fp-status{margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted);min-height:20px;}
+  .fp-err{color:var(--danger);}
+  .fp-sum{border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:8px;padding:16px 20px;margin-top:18px;background:var(--panel);}
+  .fp-sum h3{font-size:17px;margin-bottom:8px;}
+  .fp-cats{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 12px;}
+  .fp-cat{border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:12.5px;}
+  .fp-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px;}
+  .fp-list a{display:block;border:1px solid var(--line);border-radius:6px;padding:7px 10px;font-size:13.5px;}
+  .fp-list a:hover{border-color:var(--teal);color:var(--teal);}
+  .fp-list small{color:var(--muted);margin-left:6px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="/" aria-label="DynaSec Consultants"><img class="logo-on-dark" src="/assets/logo-full.png" alt="DynaSec Consultants" width="120" height="44"><img class="logo-on-light" src="/assets/logo-full-light.png" alt="" width="120" height="44"></a>
+    <nav class="links" aria-label="Main">
+      <a href="/#about" data-i18n="navAbout">เกี่ยวกับ</a>
+      <a href="/#services" data-i18n="navServices">บริการ</a>
+      <a href="/solutions.html" data-i18n="navSolutions">โซลูชัน</a>
+      <a href="/assessment.html" data-i18n="navAssessment">ประเมินเบื้องต้น</a>
+      <a href="/blog" data-i18n="navBlog">บทความ</a>
+      <a href="/#cases" data-i18n="navCases">ผลงาน</a>
+      <a href="/#news" data-i18n="navNews">ข่าว Cyber Attack</a>
+      <a href="/#contact" data-i18n="navContact">ติดต่อ</a>
+    </nav>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button id="btn-th" type="button" class="active">TH</button>
+      <button id="btn-en" type="button">EN</button>
+    </div>
+  </div>
+</header>
+<main>
+<section class="page-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/"><span class="t-th">หน้าแรก</span><span class="t-en">Home</span></a><span>›</span><span class="t-th">ตรวจรอยเท้าดิจิทัล</span><span class="t-en">Digital footprint check</span></nav>
+    <div class="eyebrow">FREE TOOL · USERNAME FOOTPRINT</div>
+    <h1><span class="t-th">ตรวจรอยเท้าดิจิทัลของตัวเอง</span><span class="t-en">Check your own digital footprint</span></h1>
+    <p class="sub"><span class="t-th">ดูว่า username ของคุณปรากฏบนเว็บไซต์สาธารณะใดบ้าง พร้อมสรุปผลและคำแนะนำ ใช้ได้กับบัญชีของตัวเองหรือขององค์กรที่คุณได้รับอนุญาตให้ตรวจเท่านั้น</span><span class="t-en">See which public sites have a profile under your username, with a summary and advice. Use it only for your own accounts or for an organization that has authorized you.</span></p>
+    <div class="badges"><span class="badge t-th">ฟรี</span><span class="badge t-en">Free</span><span class="badge t-th">ไม่เก็บข้อมูล</span><span class="badge t-en">Nothing stored</span><span class="badge t-th">ชื่อและอีเมลไม่ถูกส่งออกจากเบราว์เซอร์</span><span class="badge t-en">Name and email stay in your browser</span></div>
+  </div>
+</section>
+
+<section id="tool">
+  <div class="wrap"><div class="narrow">
+    <noscript><p style="color:var(--amber)">เครื่องมือนี้ต้องเปิดใช้งาน JavaScript / This tool requires JavaScript.</p></noscript>
+    <div class="tool-card">
+      <div class="fp-grid">
+        <div class="fp-field"><label for="fp-name"><span class="t-th">ชื่อ (ไม่บังคับ)</span><span class="t-en">Name (optional)</span></label><input type="text" id="fp-name" autocomplete="off" placeholder="Somchai Jaidee"><small><span class="t-th">ใช้สร้างตัวอย่าง username เท่านั้น รองรับตัวอักษรอังกฤษ</span><span class="t-en">Only used to suggest usernames; Latin letters only</span></small></div>
+        <div class="fp-field"><label for="fp-email"><span class="t-th">อีเมล (ไม่บังคับ)</span><span class="t-en">Email (optional)</span></label><input type="email" id="fp-email" autocomplete="off" placeholder="name@example.com"><small><span class="t-th">ใช้ดึงส่วนหน้า @ มาเป็นตัวอย่าง username เท่านั้น ไม่ได้ตรวจกับฐานข้อมูลอีเมลรั่วไหล</span><span class="t-en">Only the part before @ is used as a username suggestion; it is not checked against breach databases</span></small></div>
+        <div class="fp-field"><label for="fp-user">Username</label><input type="text" id="fp-user" autocomplete="off" placeholder="somchai.j"><small><span class="t-th">3–30 ตัว: ตัวอักษร ตัวเลข . _ -</span><span class="t-en">3–30 characters: letters, digits, . _ -</span></small></div>
+      </div>
+      <button type="button" class="btn btn-ghost" id="fp-suggest"><span class="t-th">สร้างตัวอย่าง username จากชื่อ/อีเมล</span><span class="t-en">Suggest usernames from name/email</span></button>
+      <div class="fp-cands" id="fp-cands" aria-live="polite"></div>
+      <label class="fp-consent"><input type="checkbox" id="fp-consent"><span><span class="t-th">ฉันยืนยันว่า username เหล่านี้เป็นของฉันเอง หรือฉันได้รับอนุญาตเป็นลายลักษณ์อักษรให้ตรวจแทนเจ้าของ และจะไม่ใช้ผลเพื่อติดตามหรือรบกวนผู้อื่น</span><span class="t-en">I confirm these usernames are mine, or that I have written permission to check them for their owner, and I will not use the results to track or harass anyone.</span></span></label>
+      <div class="nav-btns" style="justify-content:flex-start"><button type="button" class="btn btn-primary" id="fp-go"><span class="t-th">เริ่มตรวจ</span><span class="t-en">Start check</span></button></div>
+      <div class="fp-status" id="fp-status" aria-live="polite"></div>
+      <div id="fp-out"></div>
+      <p class="privacy"><span class="t-th">ฟังก์ชันของเราส่งเฉพาะ username ไปตรวจกับเว็บไซต์สาธารณะ และไม่บันทึกคำค้นหรือผลลัพธ์ (แพลตฟอร์มโฮสต์อาจมีบันทึกการเข้าใช้ทั่วไปตามปกติ) ตรวจครั้งละไม่เกิน 3 username และจำกัดจำนวนครั้งต่อชั่วโมง ข้อมูลรายชื่อเว็บไซต์มาจากโครงการ WhatsMyName (CC BY-SA 4.0)</span><span class="t-en">Our function sends only the username to public sites and does not store queries or results (the hosting platform may keep ordinary access logs). At most 3 usernames per run, with an hourly limit. The site list comes from the WhatsMyName project (CC BY-SA 4.0).</span></p>
+    </div>
+  </div></div>
+</section>
+
+<section class="block">
+  <div class="wrap"><div class="narrow">
+    <h2><span class="t-th">อ่านผลอย่างไร</span><span class="t-en">How to read the result</span></h2>
+    <p class="t-th">พบโปรไฟล์ไม่ได้แปลว่าเป็นของคุณเสมอไป เพราะคนอื่นอาจใช้ชื่อเดียวกัน และไม่พบก็ไม่ได้แปลว่าไม่มีบัญชี เพราะเครื่องมือตรวจเพียงบางส่วนของเว็บไซต์ และบางเว็บไซต์ตอบผิดพลาดหรือบล็อกการตรวจ ผลที่ได้ใช้เป็นจุดเริ่มสำรวจว่ามีบัญชีเก่าที่ลืมหรือใช้ชื่อเดียวกันหลายที่หรือไม่</p>
+    <p class="t-en">A match does not always mean the profile is yours, because someone else may use the same name. A miss does not prove there is no account, because the tool covers only part of the web and some sites answer wrongly or block the check. Use the result as a starting point for finding forgotten old accounts and names reused in many places.</p>
+    <p class="t-th">ต้องการค้นต่อด้วยรายชื่อเว็บไซต์ที่ครบกว่า ลองใช้ <a href="https://whatsmynameapp.app" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline">whatsmynameapp.app</a> ซึ่งเป็นเว็บค้นหา username บนเว็บไซต์กว่า 700 แห่ง ส่วนการตรวจว่าอีเมลเคยรั่วไหลหรือไม่ ใช้บริการอย่าง <a href="https://haveibeenpwned.com" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline">Have I Been Pwned</a></p>
+    <p class="t-en">For a fuller site list, try <a href="https://whatsmynameapp.app" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline">whatsmynameapp.app</a>, a username search across 700+ sites. To see whether an email appeared in a breach, use a service such as <a href="https://haveibeenpwned.com" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline">Have I Been Pwned</a>.</p>
+    <div class="disclaimer"><span class="t-th">เครื่องมือนี้ไม่ตรวจหมวดเว็บไซต์ที่เปิดเผยข้อมูลอ่อนไหว (เช่น หาคู่ การเมือง สุขภาพ) และไม่รองรับการค้นหาบุคคลอื่นโดยไม่ได้รับอนุญาต การรวบรวมข้อมูลส่วนบุคคลของผู้อื่นอาจขัดต่อกฎหมายคุ้มครองข้อมูลส่วนบุคคล (PDPA)</span><span class="t-en">The tool skips site categories that reveal sensitive information (such as dating, politics and health) and is not meant for looking up other people without permission. Collecting other people's personal data may breach data protection law, including Thailand's PDPA.</span></div>
+  </div></div>
+</section>
+</main>
+<footer>
+  <div class="wrap foot-main">
+    <div class="foot-brand">
+      <img class="logo-on-dark" src="/assets/logo-full.png" alt="DynaSec Consultants" width="130" height="48" loading="lazy"><img class="logo-on-light" src="/assets/logo-full-light.png" alt="" width="130" height="48" loading="lazy">
+      <p><span class="t-th">ที่ปรึกษาโซลูชัน Cybersecurity ช่วยออกแบบโซลูชัน จัดทำ PoC ตอบ RFP และสรุปความเสี่ยงให้ผู้บริหาร</span><span class="t-en">Cybersecurity solution consulting: solution design, PoC delivery, RFP responses and executive risk summaries.</span></p>
+      <a class="line-add" href="https://lin.ee/Phn11JA" target="_blank" rel="noopener"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/th.png" alt="เพิ่มเพื่อน LINE" height="36" loading="lazy"></a>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      <a class="t-th" href="/">หน้าแรก</a><a class="t-en" href="/">Home</a>
+      <a class="t-th" href="/solutions.html">โซลูชัน</a><a class="t-en" href="/solutions.html">Solutions</a>
+      <a class="t-th" href="/assessment.html">ประเมินเบื้องต้น</a><a class="t-en" href="/assessment.html">Self-assessment</a>
+      <a class="t-th" href="/#webscan">สแกนเว็บฟรี</a><a class="t-en" href="/#webscan">Free web scan</a>
+      <a class="t-th" href="/footprint">ตรวจรอยเท้าดิจิทัล</a><a class="t-en" href="/footprint">Footprint check</a>
+      <a class="t-th" href="/blog">บทความ</a><a class="t-en" href="/en/blog">Blog</a>
+      <a class="t-th" href="/#cases">ผลงาน</a><a class="t-en" href="/#cases">Case studies</a>
+      <a class="t-th" href="/#news">ข่าว Cyber Attack</a><a class="t-en" href="/#news">Cyber news</a>
+      <a class="t-th" href="/#certs">ใบรับรอง</a><a class="t-en" href="/#certs">Certifications</a>
+      <a class="t-th" href="/#contact">ติดต่อ</a><a class="t-en" href="/#contact">Contact</a>
+    </nav>
+  </div>
+  <div class="foot-note"><div class="wrap"><span data-i18n="footerText">© 2026 · DynaSec Consultants · ผลประเมินเป็นคำแนะนำเบื้องต้น ไม่ใช่การตรวจประเมินอย่างเป็นทางการ</span></div></div>
+</footer>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var NAME_RE=/^[A-Za-z0-9][A-Za-z0-9._-]{2,29}$/;
+  function isEn(){return document.documentElement.lang==='en'}
+  function T(th,en){return isEn()?en:th}
+  var NAVUI={"th": {"footerText": "© 2026 · DynaSec Consultants · ผลตรวจเป็นข้อมูลเบื้องต้น ไม่ใช่หลักฐานยืนยันตัวตนหรือการตรวจอย่างเป็นทางการ", "navAbout": "เกี่ยวกับ", "navAssessment": "ประเมินเบื้องต้น", "navBlog": "บทความ", "navCases": "ผลงาน", "navContact": "ติดต่อ", "navNews": "ข่าว Cyber Attack", "navServices": "บริการ", "navSolutions": "โซลูชัน"}, "en": {"footerText": "© 2026 · DynaSec Consultants · Results are indicative only and are not proof of identity or a formal assessment", "navAbout": "About", "navAssessment": "Assessment", "navBlog": "Blog", "navCases": "Case Studies", "navContact": "Contact", "navNews": "Cyber News", "navServices": "Services", "navSolutions": "Solutions"}};
+  function setLang(l){document.documentElement.lang=l;document.querySelectorAll('[data-i18n]').forEach(function(n){var v=NAVUI[l][n.getAttribute('data-i18n')];if(v!==undefined)n.innerHTML=v});$('btn-th').classList.toggle('active',l==='th');$('btn-en').classList.toggle('active',l==='en');try{localStorage.setItem('dynasec-lang',l)}catch(e){}}
+  $('btn-th').addEventListener('click',function(){setLang('th')});
+  $('btn-en').addEventListener('click',function(){setLang('en')});
+  var saved='th';try{saved=localStorage.getItem('dynasec-lang')==='en'?'en':'th'}catch(e){}
+  setLang(saved);
+
+  var cands=[];
+  function suggest(){
+    var out=[];var add=function(s){s=(s||'').toLowerCase();if(NAME_RE.test(s)&&out.indexOf(s)<0)out.push(s)};
+    add($('fp-user').value.trim());
+    var em=$('fp-email').value.trim();var at=em.indexOf('@');
+    if(at>0){add(em.slice(0,at).split('+')[0])}
+    var nm=$('fp-name').value.toLowerCase().replace(/[^a-z\s]/g,' ').trim().split(/\s+/).filter(Boolean);
+    if(nm.length>=2){var f=nm[0],l=nm[nm.length-1];add(f+l);add(f+'.'+l);add(f+'_'+l);add(f[0]+l)}
+    else if(nm.length===1){add(nm[0])}
+    cands=out.slice(0,8);renderCands();
+  }
+  function renderCands(){
+    var box=$('fp-cands');box.innerHTML='';
+    if(!cands.length){box.innerHTML='<span class="hint">'+T('ยังไม่มีตัวอย่าง กรอก username หรืออีเมลที่เป็นตัวอักษรอังกฤษ','No suggestions yet. Enter a username or an email with Latin letters.')+'</span>';return}
+    cands.forEach(function(c,i){
+      var lab=document.createElement('label');lab.className='fp-cand';
+      var cb=document.createElement('input');cb.type='checkbox';cb.value=c;cb.checked=i<3;
+      lab.appendChild(cb);lab.appendChild(document.createTextNode(c));box.appendChild(lab);
+    });
+  }
+  $('fp-suggest').addEventListener('click',suggest);
+
+  function selected(){return Array.prototype.map.call(document.querySelectorAll('#fp-cands input:checked'),function(i){return i.value}).slice(0,3)}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  var CAT={social:['โซเชียล','Social'],gaming:['เกม','Gaming'],tech:['เทคโนโลยี','Tech'],hobby:['งานอดิเรก','Hobby'],coding:['โค้ด','Coding'],misc:['อื่น ๆ','Misc'],business:['ธุรกิจ','Business'],finance:['การเงิน','Finance'],images:['รูปภาพ','Images'],blog:['บล็อก','Blog'],music:['เพลง','Music'],shopping:['ช้อปปิง','Shopping'],art:['ศิลปะ','Art'],video:['วิดีโอ','Video'],news:['ข่าว','News']};
+  function catName(c){var x=CAT[c];return x?(isEn()?x[1]:x[0]):c}
+
+  function render(results){
+    var html='';var total=0,names=[];
+    results.forEach(function(r){total+=r.found.length;if(r.found.length)names.push(r.username)});
+    html+='<div class="fp-sum"><h3>'+T('สรุปภาพรวม','Overall summary')+'</h3><p style="margin:0;color:var(--muted)">'+
+      (total===0?T('ไม่พบโปรไฟล์ที่ตรงกันในเว็บไซต์ที่ตรวจ ซึ่งไม่ได้แปลว่าไม่มีบัญชี เพราะตรวจเพียงบางส่วน','No matching profiles were found on the sites checked. That does not mean there are no accounts, because only part of the web was covered.')
+      :T('พบโปรไฟล์ที่ตรงกันรวม '+total+' แห่งจาก username '+names.length+' ชื่อ ลองเปิดแต่ละลิงก์เพื่อดูว่าเป็นบัญชีของคุณหรือไม่ แล้วลบหรือตั้งค่าความเป็นส่วนตัวของบัญชีเก่าที่ไม่ใช้','Found '+total+' matching profile'+(total===1?'':'s')+' across '+names.length+' username'+(names.length===1?'':'s')+'. Open each link to see whether it is yours, then delete old accounts you no longer use or tighten their privacy settings.'))+'</p></div>';
+    results.forEach(function(r){
+      var cats={};r.found.forEach(function(f){cats[f.cat]=(cats[f.cat]||0)+1});
+      html+='<div class="fp-sum"><h3><span class="mono">'+esc(r.username)+'</span></h3>'+
+        '<p style="margin:0;color:var(--muted)">'+T('ตรวจแล้ว '+r.checked+' จาก '+r.total+' เว็บไซต์ พบ '+r.found.length+' แห่ง'+(r.failed?' (ตอบผิดพลาดหรือหมดเวลา '+r.failed+' แห่ง)':''),'Checked '+r.checked+' of '+r.total+' sites, found '+r.found.length+(r.failed?' ('+r.failed+' errored or timed out)':''))+'</p>';
+      if(r.found.length){
+        html+='<div class="fp-cats">'+Object.keys(cats).sort().map(function(c){return '<span class="fp-cat">'+esc(catName(c))+' '+cats[c]+'</span>'}).join('')+'</div><ul class="fp-list">'+
+          r.found.map(function(f){return '<li><a href="'+esc(f.url)+'" target="_blank" rel="noopener noreferrer nofollow">'+esc(f.name)+'<small>'+esc(catName(f.cat))+'</small></a></li>'}).join('')+'</ul>';
+      }
+      html+='</div>';
+    });
+    var many=results.some(function(r){return r.found.length>=10});
+    html+='<div class="fp-sum"><h3>'+T('ข้อแนะนำ','Advice')+'</h3><ul style="margin:0;padding-left:20px;color:var(--muted)">'+
+      '<li>'+T('ใช้ username ต่างกันสำหรับบัญชีสำคัญ เช่น อีเมลและธนาคาร เพื่อให้คนอื่นเชื่อมโยงตัวคุณจากชื่อเดียวกันได้ยากขึ้น','Use different usernames for important accounts such as email and banking, so others cannot link you through one name.')+'</li>'+
+      '<li>'+T('ลบบัญชีเก่าที่ไม่ใช้แล้ว และตรวจการตั้งค่าความเป็นส่วนตัวของบัญชีที่ยังใช้อยู่','Delete old accounts you no longer use and review privacy settings on those you keep.')+'</li>'+
+      '<li>'+T('เปิดการยืนยันตัวตนหลายขั้นตอน (MFA) และใช้รหัสผ่านไม่ซ้ำกันทุกบัญชี','Turn on multifactor authentication (MFA) and use a different password on every account.')+'</li>'+
+      (many?'<li>'+T('พบจำนวนมาก ควรทำบัญชีรายการของตัวเองไว้ และพิจารณาว่าบัญชีใดควรปิด','Many matches were found; keep a list of your own accounts and decide which to close.')+'</li>':'')+
+      '</ul><p class="refs" style="margin-top:12px"><a href="/blog/cybersecurity-tips-for-everyone">'+T('อ่านต่อ: Cybersecurity Tips ง่าย ๆ สำหรับบุคคลทั่วไป','Read next: Easy Cybersecurity Tips for Everyone')+'</a></p></div>';
+    $('fp-out').innerHTML=html;
+  }
+
+  var busy=false;
+  async function run(){
+    if(busy)return;
+    var list=selected();var st=$('fp-status');st.className='fp-status';
+    if(!list.length){var u=$('fp-user').value.trim().toLowerCase();if(NAME_RE.test(u)){cands=[u];renderCands();list=[u]}}
+    if(!list.length){st.className='fp-status fp-err';st.textContent=T('กรอก username หรือกด "สร้างตัวอย่าง" แล้วเลือกอย่างน้อย 1 ชื่อ','Enter a username, or press "Suggest usernames" and pick at least one.');return}
+    if(!$('fp-consent').checked){st.className='fp-status fp-err';st.textContent=T('กรุณาติ๊กยืนยันสิทธิ์ก่อนเริ่มตรวจ','Please tick the confirmation before starting.');return}
+    busy=true;$('fp-go').disabled=true;$('fp-out').innerHTML='';
+    var results=[];
+    try{
+      for(var i=0;i<list.length;i++){
+        st.textContent=T('กำลังตรวจ '+list[i]+' ('+(i+1)+'/'+list.length+') ใช้เวลาประมาณ 20–30 วินาทีต่อชื่อ...','Checking '+list[i]+' ('+(i+1)+'/'+list.length+'), about 20–30 seconds per name...');
+        var res=await fetch('/api/footprint',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:list[i],consent:true})});
+        if(res.status===429){throw new Error(T('ตรวจบ่อยเกินกำหนด ลองใหม่ภายหลัง (จำกัดจำนวนครั้งต่อชั่วโมง)','Too many checks. Please try again later (hourly limit).'))}
+        if(!res.ok){throw new Error(T('ตรวจไม่สำเร็จ ลองใหม่อีกครั้ง','The check failed. Please try again.'))}
+        results.push(await res.json());
+      }
+      st.textContent='';render(results);
+    }catch(e){st.className='fp-status fp-err';st.textContent=e.message||String(e);if(results.length)render(results)}
+    busy=false;$('fp-go').disabled=false;
+  }
+  $('fp-go').addEventListener('click',run);
+  renderCands();
+})();
+</script>
+
+</body>
+</html>

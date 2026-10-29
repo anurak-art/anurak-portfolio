@@ -11,6 +11,10 @@
     },
     "api/news.js": {
       "maxDuration": 30
+    },
+    "api/footprint.js": {
+      "includeFiles": "content/wmn-data.json",
+      "maxDuration": 30
     }
   },
   "redirects": [
@@ -26,6 +30,10 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/footprint",
+      "destination": "/footprint.html"
+    },
     {
       "source": "/blog",
       "destination": "/api/blog?lang=th"
@@ -52,6 +60,15 @@
   "headers": [
     {
       "source": "/api/(news|latest)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/api/footprint",
       "headers": [
         {
           "key": "X-Robots-Tag",

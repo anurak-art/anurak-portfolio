@@ -485,7 +485,7 @@
         <li data-i18n="wsP2">ใช้ได้กับเว็บไซต์ที่คุณเป็นเจ้าของ หรือมีหนังสืออนุญาตให้ทดสอบเท่านั้น</li>
         <li data-i18n="wsP3">เป็นการตรวจเบื้องต้นเพื่อเสริมการทดสอบเจาะระบบ (penetration test) ไม่ใช่ใช้แทน</li>
       </ul>
-      <a class="btn btn-primary" href="https://webscan.dynasec.pro" target="_blank" rel="noopener" data-i18n="wsCta">เปิด WebScan →</a>
+      <div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-primary" href="https://webscan.dynasec.pro" target="_blank" rel="noopener" data-i18n="wsCta">เปิด WebScan →</a><a class="btn btn-ghost" href="/footprint" data-i18n="fpCta">ตรวจรอยเท้าดิจิทัลของตัวเอง</a></div>
     </div>
   </div>
 </section>
@@ -627,6 +627,7 @@
       <a class="t-th" href="/solutions.html">โซลูชัน</a><a class="t-en" href="/solutions.html">Solutions</a>
       <a class="t-th" href="/assessment.html">ประเมินเบื้องต้น</a><a class="t-en" href="/assessment.html">Self-assessment</a>
       <a class="t-th" href="/#webscan">สแกนเว็บฟรี</a><a class="t-en" href="/#webscan">Free web scan</a>
+      <a class="t-th" href="/footprint">ตรวจรอยเท้าดิจิทัล</a><a class="t-en" href="/footprint">Footprint check</a>
       <a class="t-th" href="/blog">บทความ</a><a class="t-en" href="/en/blog">Blog</a>
       <a class="t-th" href="/#cases">ผลงาน</a><a class="t-en" href="/#cases">Case studies</a>
       <a class="t-th" href="/#news">ข่าว Cyber Attack</a><a class="t-en" href="/#news">Cyber news</a>
@@ -661,7 +662,7 @@ const translations = {
     svc5Title: "สรุปความเสี่ยงให้ผู้บริหาร", svc5Body: "แปลงข้อมูลทางเทคนิคให้เป็นภาษาที่ผู้บริหารเข้าใจ เพื่อสนับสนุนการตัดสินใจอย่างรวดเร็ว",
     svc6Title: "อบรมทีมขาย", svc6Body: "ฝึกอบรมทีมขายให้เข้าใจคุณค่าทางเทคนิคของโซลูชัน เพื่อสื่อสารกับลูกค้าได้อย่างมั่นใจ",
     wsEyebrow: "FREE TOOL", wsTitle: "WebScan: ตรวจความปลอดภัยเว็บไซต์เบื้องต้น", wsSub: "กรอก URL หรือโดเมน แล้วรับรายงานผลเป็นเกรด A ถึง F ตามหมวดของ OWASP Top 10 (2021) พร้อมคำแนะนำการแก้ไข",
-    wsP1: "สแกนแบบ passive เท่านั้น ไม่ส่ง payload ไม่เดารหัสผ่าน และไม่พยายามเจาะระบบ", wsP2: "ใช้ได้กับเว็บไซต์ที่คุณเป็นเจ้าของ หรือมีหนังสืออนุญาตให้ทดสอบเท่านั้น", wsP3: "เป็นการตรวจเบื้องต้นเพื่อเสริมการทดสอบเจาะระบบ (penetration test) ไม่ใช่ใช้แทน", wsCta: "เปิด WebScan →",
+    wsP1: "สแกนแบบ passive เท่านั้น ไม่ส่ง payload ไม่เดารหัสผ่าน และไม่พยายามเจาะระบบ", wsP2: "ใช้ได้กับเว็บไซต์ที่คุณเป็นเจ้าของ หรือมีหนังสืออนุญาตให้ทดสอบเท่านั้น", wsP3: "เป็นการตรวจเบื้องต้นเพื่อเสริมการทดสอบเจาะระบบ (penetration test) ไม่ใช่ใช้แทน", wsCta: "เปิด WebScan →", fpCta: "ตรวจรอยเท้าดิจิทัลของตัวเอง",
     casesEyebrow: "SELECTED ENGAGEMENTS", casesTitle: "ตัวอย่างผลงาน (ไม่ระบุชื่อลูกค้า)",
     casesSub: "สรุปแบบไม่ระบุตัวตนลูกค้า ตามข้อตกลงการรักษาความลับ",
     kChallenge: "โจทย์", kApproach: "แนวทาง", kOutcome: "ผลลัพธ์",
@@ -706,7 +707,7 @@ const translations = {
     svc5Title: "Executive Risk Briefing", svc5Body: "Translate technical findings into language executives can act on quickly.",
     svc6Title: "Sales Enablement Training", svc6Body: "Train sales teams to understand and confidently communicate technical value.",
     wsEyebrow: "FREE TOOL", wsTitle: "WebScan: a quick web security check", wsSub: "Enter a URL or domain and get a report graded A to F across the OWASP Top 10 (2021) categories, with remediation advice.",
-    wsP1: "Passive scanning only: no payloads, no password guessing, no intrusion attempts.", wsP2: "Use it only on sites you own or have written permission to test.", wsP3: "A first-pass check that supplements, and does not replace, a penetration test.", wsCta: "Open WebScan →",
+    wsP1: "Passive scanning only: no payloads, no password guessing, no intrusion attempts.", wsP2: "Use it only on sites you own or have written permission to test.", wsP3: "A first-pass check that supplements, and does not replace, a penetration test.", wsCta: "Open WebScan →", fpCta: "Check your digital footprint",
     casesEyebrow: "SELECTED ENGAGEMENTS", casesTitle: "Selected Case Studies (client-anonymized)",
     casesSub: "Anonymized per confidentiality agreements.",
     kChallenge: "CHALLENGE", kApproach: "APPROACH", kOutcome: "OUTCOME",
