@@ -1631,6 +1631,140 @@
       ]
     },
     {
+      "slug": "cybersecurity-solutions-for-small-business",
+      "date": "2026-11-04",
+      "tags": [
+        "Small Business",
+        "SME Security",
+        "Basic Controls",
+        "CISA"
+      ],
+      "title_th": "Cybersecurity สำหรับธุรกิจขนาดเล็ก: โซลูชันที่ควรมีก่อน",
+      "title_en": "Cybersecurity Solutions for Small Business: Where to Start",
+      "summary_th": "ธุรกิจขนาดเล็กควรเริ่มมาตรการความปลอดภัยข้อไหนก่อน อิงคำแนะนำของ CISA และ NCSC มีแหล่งช่วยเหลือฟรี และแผน 90 วัน (ลำดับและแผนเป็นความเห็นของเราเอง)",
+      "summary_en": "Which security measures a small business should put in place first, based on CISA and NCSC guidance, with free help and a 90-day plan.",
+      "body_th": "ธุรกิจขนาดเล็กมักไม่มีทีมความปลอดภัย และหลายแห่งไม่มีเจ้าหน้าที่ไอทีประจำ แต่ยังเก็บข้อมูลลูกค้า เงิน และบัญชีที่มิจฉาชีพต้องการ บทความนี้บอกว่าธุรกิจขนาดเล็กควรเริ่มมาตรการด้านความปลอดภัยอะไรก่อน ควรเรียงลำดับอย่างไร และมีความช่วยเหลือฟรีอะไรบ้าง เนื้อหาอ้างอิงคำแนะนำของ CISA (หน่วยงานด้านความมั่นคงไซเบอร์ของสหรัฐฯ) NCSC (ศูนย์ความมั่นคงไซเบอร์แห่งชาติของสหราชอาณาจักร) และ NIST (สถาบันมาตรฐานของสหรัฐฯ) ข้อสรุปหลักคือ มาตรการพื้นฐานไม่กี่อย่างที่ทำให้ดี สำคัญกว่าการซื้อผลิตภัณฑ์จำนวนมาก\n\n## ทำไมธุรกิจขนาดเล็กถึงตกเป็นเป้า\n\nCISA ระบุว่าธุรกิจขนาดเล็กเก็บข้อมูลที่มีค่า ซึ่งอาชญากรไซเบอร์ต้องการ และมักมีทรัพยากรด้านความปลอดภัยน้อยกว่าบริษัทใหญ่ CISA ยังระบุว่าเหตุการณ์ที่กระทบธุรกิจขนาดเล็กเพิ่มขึ้นมาก โดยเฉพาะ ransomware (มัลแวร์ที่ล็อกไฟล์แล้วเรียกค่าไถ่) NCSC นิยามองค์กรขนาดเล็กว่าเป็นองค์กรที่มีพนักงาน 0 ถึง 49 คนในสหราชอาณาจักร NCSC ระบุว่าองค์กรเหล่านี้มีโอกาสถูกอาชญากรรมออนไลน์พอ ๆ กับองค์กรใหญ่ และระบุว่าธุรกิจขนาดเล็กราว 1 ใน 2 เจอเหตุการณ์ไซเบอร์ทุกปี ตัวเลขนี้เป็นคำกล่าวของ NCSC เกี่ยวกับองค์กรในสหราชอาณาจักร ไม่ใช่สถิติของประเทศไทย\n\n## เริ่มจากการมีผู้รับผิดชอบ ไม่ใช่การซื้อผลิตภัณฑ์\n\nCISA แบ่งงานสำหรับธุรกิจขนาดเล็กเป็นรายการสั้น ๆ ตามบทบาท ผู้บริหารสูงสุดมีหน้าที่สร้างวัฒนธรรมด้านความปลอดภัย และตั้งเป้าหมายง่าย ๆ เช่น กี่บัญชีที่ใช้ MFA (การยืนยันตัวตนหลายขั้นตอน คือขั้นตอนล็อกอินขั้นที่สอง) ติดตั้งอัปเดตได้เร็วแค่ไหน และสำรองข้อมูลได้มากเพียงใด CISA ระบุว่างานสร้างวัฒนธรรมนี้มอบหมายให้คนอื่นทำแทนไม่ได้ ผู้บริหารสูงสุดต้องแต่งตั้งผู้จัดการโปรแกรมความปลอดภัย (คนที่ดูแลงานด้านนี้ ไม่จำเป็นต้องเป็นผู้เชี่ยวชาญ) และผู้จัดการคนนี้ต้องรายงานความคืบหน้าอย่างน้อยเดือนละครั้ง NCSC เสริมว่าความปลอดภัยไซเบอร์ไม่ควรตกอยู่กับคนเดียว เพราะทุกคนในทีมมีส่วนร่วม\n\n## มาตรการที่ควรมีก่อน\n\nลำดับข้างล่างเป็นความเห็นของเราเอง เรียบเรียงจากรายการของ CISA และ NCSC ทุกมาตรการเป็นสิ่งที่หน่วยงานเหล่านั้นระบุไว้สำหรับธุรกิจขนาดเล็ก\n\n- **เปิด MFA โดยเริ่มจากอีเมล บัญชีผู้ดูแลระบบ และบัญชีด้านการเงิน**: CISA ระบุว่าให้บังคับใช้ MFA ด้วยการตั้งค่าระบบ ไม่ปล่อยให้แต่ละคนเลือกเปิดเอง และบัญชีผู้ดูแลระบบทุกบัญชีต้องใช้ MFA MFA แบบใดก็ดีกว่าไม่มี CISA ระบุว่า FIDO authentication (มาตรฐานการยืนยันตัวตนด้วย passkey หรือกุญแจความปลอดภัย) เป็นทางเลือกเดียวที่หาได้ทั่วไปและต้านฟิชชิง (phishing คือการหลอกให้กรอกรหัสผ่านหรือข้อมูลสำคัญ) ได้\n- **ใช้ตัวจัดการรหัสผ่าน และรหัสผ่านยาวที่ไม่ซ้ำกัน**: CISA แนะนำให้ใช้รหัสผ่านยาวอย่างน้อย 16 ตัวอักษร หรือใช้ passphrase (รหัสผ่านที่ทำจากหลายคำที่ไม่เกี่ยวข้องกัน) 4 ถึง 7 คำ และใช้คนละรหัสกับแต่ละบัญชี\n- **สำรองข้อมูลที่ธุรกิจขาดไม่ได้ และทดสอบการกู้คืน**: NCSC ระบุให้เก็บทั้งสำเนาออนไลน์และสำเนาออฟไลน์ (สำเนาที่ไม่ได้เชื่อมต่ออยู่กับระบบ) ให้ถอดไดรฟ์ภายนอกออกเมื่อไม่ใช้งาน ให้เปิดการยืนยันตัวตนขั้นที่สองกับที่เก็บข้อมูลสำรองออนไลน์ และให้ฝึกกู้คืนข้อมูล CISA ระบุว่าเหยื่อ ransomware จำนวนมากไม่มีข้อมูลสำรอง หรือมีแต่เสียหาย\n- **ติดตั้งอัปเดตอัตโนมัติ และแก้ช่องโหว่ที่กำลังถูกโจมตีก่อน**: CISA ระบุให้เปิดอัปเดตอัตโนมัติเท่าที่ทำได้ และให้แก้ช่องโหว่ที่อยู่ในรายการ Known Exploited Vulnerabilities (KEV) ของ CISA ก่อน (KEV คือรายการช่องโหว่ที่มีการโจมตีใช้งานจริงแล้ว)\n- **ตั้งค่าโน้ตบุ๊กให้รัดกุม**: CISA ระบุให้ถอดสิทธิ์ผู้ดูแลระบบ (สิทธิ์ติดตั้งโปรแกรมและเปลี่ยนค่าระบบ) ออกจากโน้ตบุ๊กของผู้ใช้ทั่วไป และให้เปิดการเข้ารหัสดิสก์ (ทำให้คนที่ได้เครื่องไปอ่านไฟล์ไม่ได้) บนโน้ตบุ๊ก Windows และ Mac\n- **ใช้พื้นที่ทำงานบนคลาวด์ที่คนใช้กันทั่วไป และตั้งค่าความปลอดภัยของมัน**: CISA เสนอให้ย้ายอีเมลและที่เก็บไฟล์ที่องค์กรติดตั้งและดูแลเองในองค์กร (on-premises) ไปใช้บริการอย่าง Google Workspace หรือ Microsoft 365 และชี้ไปที่แนวทางตั้งค่า SCuBA ของ CISA (ชุดค่ามาตรฐานสำหรับตั้งค่าความปลอดภัยของบริการคลาวด์)\n- **ฝึกให้คนรู้ทันการหลอกลวงและรายงาน**: ในรายการงานของผู้จัดการโปรแกรมที่ CISA เขียนไว้ มีการฝึกเรื่อง MFA การอัปเดต การไม่กดลิงก์ฟิชชิง และวิธีรายงานเหตุที่น่าสงสัย\n\nเรื่องนิสัยประจำวันที่อยู่เบื้องหลังมาตรการเหล่านี้ ดู [Cybersecurity Tips ง่าย ๆ สำหรับบุคคลทั่วไป](post:cybersecurity-tips-for-everyone) ถ้าสนใจว่าควรเลือก MFA ชนิดไหน ดู [MFA แบบไหนปลอดภัยกว่ากัน](post:mfa-which-is-safer) และถ้าต้องการออกแบบการสำรองข้อมูลให้แข็งแรงขึ้น ดู [Backup 3-2-1-1-0 และ immutable backup](post:backup-3-2-1-1-0-immutable)\n\n## ความช่วยเหลือฟรีที่ใช้ได้\n\nหลายหน่วยงานเผยแพร่เนื้อหาฟรีสำหรับธุรกิจขนาดเล็ก\n\n- **คู่มือองค์กรขนาดเล็กของ NCSC**: หน้าแรกระบุหัวข้อ 3 เรื่อง คือ การสำรองข้อมูล การปกป้องอุปกรณ์และบัญชี และการรู้ทันการหลอกลวง NCSC ระบุว่าคู่มือไม่ต้องใช้ความรู้ด้านเทคนิค และคำแนะนำจำนวนมากใช้เวลาข้อละราว 5 นาที\n- **Cyber Guidance for Small Businesses ของ CISA**: แบ่งงานให้ผู้บริหารสูงสุด ผู้จัดการโปรแกรม และหัวหน้าไอที พร้อมเคล็ดลับเรื่องแผนรับมือเหตุการณ์ (เอกสารที่บอกว่าเมื่อเกิดเหตุ ใครทำอะไรก่อนหลัง) และการซ้อมบนโต๊ะ (tabletop exercise คือการนั่งคุยจำลองเหตุการณ์สมมติ)\n- **บริการไม่คิดค่าใช้จ่ายของ CISA**: หน้าเว็บของ CISA ระบุ Cyber Hygiene Services (บริการเฝ้าระวังที่ไม่คิดค่าใช้จ่าย ช่วยลดความเสี่ยงจากภัยคุกคาม) และโครงการ SCuBA สำหรับการตั้งค่าความปลอดภัยของบริการคลาวด์ หน้าที่เราอ่านไม่ได้บอกว่าองค์กรนอกสหรัฐฯ ใช้ได้หรือไม่ จึงควรตรวจสอบก่อนพึ่งพา\n- **Small Business Cybersecurity Corner ของ NIST**: รวบรวมคำแนะนำแยกตามหัวข้อ (ransomware ฟิชชิง MFA ความปลอดภัยคลาวด์ ห่วงโซ่อุปทาน (supply chain คือการพึ่งพาผู้ขายและซอฟต์แวร์จากภายนอก) ประกันภัยไซเบอร์ และการรับมือเหตุการณ์) มีวิดีโอฝึกอบรม และเครื่องมือค้นหาโครงการสนับสนุนในภูมิภาค\n\n## เมื่อไรควรซื้อบริการแทนการทำเอง\n\nหัวข้อนี้เป็นความเห็นของเราเอง ไม่ได้มาจากหน่วยงานข้างต้น ถ้าในธุรกิจไม่มีใครตามงานอัปเดต การแจ้งเตือน และการทบทวนบัญชีได้ทัน การจ้าง managed service provider (บริษัทที่ดูแลไอทีหรือความปลอดภัยแทนองค์กร) อาจทำได้จริงกว่าการจ้างคนเพิ่ม ก่อนเซ็นสัญญา ให้ถามว่าผู้ให้บริการทำอะไรเมื่อมีการแจ้งเตือน ใครล็อกอินเข้าระบบของเราได้บ้าง ข้อมูลและข้อมูลสำรองได้รับการปกป้องอย่างไร และข้อมูลของเราจะเป็นอย่างไรถ้าเลิกใช้บริการ ถ้าต้องการดูตัวเลือกในภาพกว้างขึ้น ดู [EDR, XDR และ MDR ต่างกันอย่างไร](post:edr-xdr-mdr-comparison) และ [MDR: เลือกผู้ให้บริการอย่างไร](post:mdr-how-to-choose-provider)\n\n## เตรียมตัวก่อนเกิดเหตุ\n\nCISA ระบุว่าผู้บริหารสูงสุดควรตรวจและอนุมัติแผนรับมือเหตุการณ์ไว้ก่อนเกิดเหตุ และควรเข้าร่วมการซ้อมบนโต๊ะ CISA ยกตัวอย่างสถานการณ์ที่โน้ตบุ๊กของพนักงานถูก ransomware ล็อก ถ้าเกิดเหตุไปแล้ว ดู [Ransomware: 5 ขั้นแรกที่ต้องทำ](post:ransomware-first-5-steps) ถ้าต้องการสถานการณ์สำเร็จรูปไว้ใช้ซ้อม ดู [Tabletop Ransomware: แม่แบบสถานการณ์พร้อมใช้](post:ransomware-tabletop-exercise-template)\n\n## แผน 90 วัน\n\nแผนข้างล่างเป็นตัวอย่างของเราเอง ไม่ใช่มาตรฐาน แผนนี้แบ่งมาตรการข้างต้นเป็น 3 ช่วง เพื่อให้ทีมเล็กทำจบได้ทีละช่วง\n\n- **วันที่ 1 ถึง 30 (บัญชีและข้อมูลสำรอง)**: เปิด MFA ให้อีเมล บัญชีผู้ดูแลระบบ และบัญชีด้านการเงิน ตั้งค่าตัวจัดการรหัสผ่าน และทำข้อมูลสำรอง 1 ชุดพร้อมทดสอบการกู้คืน\n- **วันที่ 31 ถึง 60 (อุปกรณ์และการอัปเดต)**: เปิดอัปเดตอัตโนมัติ ถอดสิทธิ์ผู้ดูแลระบบออกจากโน้ตบุ๊กทั่วไป และเปิดการเข้ารหัสดิสก์\n- **วันที่ 61 ถึง 90 (คนและการตอบสนอง)**: อบรมพนักงาน แต่งตั้งผู้จัดการโปรแกรมความปลอดภัย เขียนแผนรับมือเหตุการณ์ฉบับสั้น และซ้อมบนโต๊ะ 1 ครั้ง\n\n## ข้อผิดพลาดที่พบบ่อย\n\n- **ซื้อเครื่องมือก่อนเปิด MFA และทำข้อมูลสำรอง**: มาตรการพื้นฐานใช้เงินน้อย และครอบคลุมการโจมตีที่พบบ่อยที่สุด (ความเห็นของเราเอง)\n- **คิดว่าธุรกิจเล็กเกินกว่าจะเป็นเป้า**: NCSC ระบุว่าองค์กรขนาดเล็กมีโอกาสถูกอาชญากรรมออนไลน์พอ ๆ กับองค์กรใหญ่\n- **มีข้อมูลสำรองที่ไม่เคยทดสอบ**: CISA ระบุว่าเหยื่อ ransomware จำนวนมากไม่มีข้อมูลสำรอง หรือมีแต่เสียหาย และใช้เวลากู้คืนนานกว่าที่คาด\n- **ปล่อยให้เป็นหน้าที่ของคนเดียว**: NCSC ระบุว่าทุกคนในทีมมีส่วนร่วม\n- **ให้ทุกคนมีสิทธิ์ผู้ดูแลระบบบนโน้ตบุ๊กของตัวเอง**: CISA ระบุให้ถอดสิทธิ์นี้ออกจากผู้ใช้ทั่วไป\n- **หวังว่าพนักงานจะจำเปิด MFA เอง**: CISA ระบุให้บังคับใช้ด้วยการตั้งค่าระบบ และตรวจหาช่องว่างเป็นประจำ\n\n## ขั้นแรกที่ทำได้ทันที\n\n- **เปิด MFA ให้อีเมลของเจ้าของกิจการและพนักงานการเงิน**: โดยทั่วไปทำได้เร็ว (ความเห็นของเรา)\n- **เลือกตัวจัดการรหัสผ่าน และย้ายบัญชีสำคัญที่สุดเข้าไปก่อน**\n- **คัดลอกไฟล์ธุรกิจที่สำคัญไปไว้ที่เก็บออนไลน์และไดรฟ์ออฟไลน์**: แล้วลองกู้คืนไฟล์สักไฟล์\n- **เปิดอัปเดตอัตโนมัติบนคอมพิวเตอร์และโทรศัพท์ทุกเครื่อง**\n- **ระบุหนึ่งคนเป็นผู้จัดการโปรแกรมความปลอดภัย**: และตกลงกันว่าจะตรวจความคืบหน้าทุกเดือน\n- **อ่านคู่มือองค์กรขนาดเล็กของ NCSC**: NCSC ระบุว่าคำแนะนำจำนวนมากใช้เวลาข้อละราว 5 นาที\n\nถ้าต้องการดูว่าธุรกิจของคุณอยู่ตรงไหนในวันนี้ ลองใช้ [แบบประเมินตนเอง](/assessment.html) ส่วนพื้นฐานที่อธิบายด้วยภาษาง่าย ๆ อ่านได้ที่ [Cybersecurity คืออะไร](post:what-is-cybersecurity)\n\n## แหล่งอ้างอิงและข้อมูลเพิ่มเติม\n\nคำแนะนำในบทความมาจากหน้าเว็บของ CISA, NCSC และ NIST ที่ระบุข้างล่าง ซึ่งเราอ่านเมื่อ 4 พฤศจิกายน 2026 ของ NCSC เราอ่านหน้าการสำรองข้อมูลและหน้าแรกของคู่มือองค์กรขนาดเล็ก แต่ไม่ได้อ่านหน้าเรื่องอุปกรณ์ บัญชี และการหลอกลวง จึงไม่ได้อ้างอะไรจากหน้าเหล่านั้น ส่วนที่เป็นของเราเอง ได้แก่ ลำดับของมาตรการ หัวข้อบริการที่จ้างภายนอก และแผน 90 วัน ตัวเลขของ NCSC เป็นข้อมูลขององค์กรในสหราชอาณาจักร คำแนะนำเปลี่ยนได้ จึงควรเปิดหน้าต้นฉบับอีกครั้งก่อนลงมือ\n\n- [CISA: Cyber Guidance for Small Businesses](https://www.cisa.gov/cyber-guidance-small-businesses): งานของผู้บริหารสูงสุด ผู้จัดการโปรแกรม และหัวหน้าไอที\n- [CISA: Small and Medium Businesses](https://www.cisa.gov/audiences/small-and-medium-businesses): บริการและทรัพยากรฟรีสำหรับธุรกิจขนาดเล็ก\n- [CISA: Use strong passwords](https://www.cisa.gov/secure-our-world/use-strong-passwords): ความยาวรหัสผ่านและตัวจัดการรหัสผ่าน\n- [NCSC: Small organisations guide to cyber security](https://www.ncsc.gov.uk/collection/small-business-guide): หน้าแรกของคู่มือ ซึ่งมีตัวเลข 1 ใน 2 และนิยามองค์กรขนาดเล็ก\n- [NCSC: Backing up your data](https://www.ncsc.gov.uk/collection/small-organisations-guide-to-cyber-security/backing-up-your-data): สิ่งที่ควรสำรอง สำเนาออฟไลน์ และการทดสอบการกู้คืน\n- [NIST: Small Business Cybersecurity Corner](https://www.nist.gov/itl/smallbusinesscyber): คำแนะนำแยกตามหัวข้อ การฝึกอบรม และเครื่องมือค้นหาโครงการสนับสนุน",
+      "body_en": "A small business usually has no security team and often no full-time IT person, yet it holds customer data, money and accounts that criminals want. This article sets out which security measures a small business should put in place first, in what order, and which free help exists. It draws on guidance from CISA (the US cybersecurity agency), the NCSC (the UK's national cyber security centre) and NIST (the US standards institute). The main message is that a few basic measures, done well, matter more than buying many products.\n\n## Why small businesses are targeted\n\nCISA says small businesses hold valuable information that cybercriminals seek, often with fewer resources for cybersecurity than larger firms, and that incidents affecting small businesses have surged, especially ransomware (malware that locks files until a ransom is paid). The NCSC defines a small organization as one with 0 to 49 employees in the UK, says such organizations are just as likely as larger ones to suffer online crime, and states that about 1 in 2 small businesses have a cyber incident every year. That figure is the NCSC's statement about UK organizations, not a Thai statistic.\n\n## Start with ownership, not products\n\nCISA's small business guidance gives each role a short list of tasks. The chief executive builds a security culture and sets simple goals such as how many accounts use multifactor authentication (MFA, a second login step), how quickly updates are installed and how much data is backed up. CISA states that culture cannot be delegated. The chief executive also names a security program manager, who does not need to be a security expert and who reports progress at least monthly. The NCSC adds that cybersecurity should not rest with one person, because every team member has a part in it.\n\n## The measures to put in place first\n\nThe order below is our own view, built from the CISA and NCSC lists. Each measure is one that those agencies name for small businesses:\n\n- **Turn on MFA, starting with email, administrator and finance accounts**: CISA says to enforce MFA through technical settings instead of relying on people, and to require it for all system administrator accounts. Any MFA is better than none, and CISA calls FIDO authentication the only widely available phishing-resistant option\n- **Use a password manager and long, separate passwords**: CISA recommends at least 16 characters or a passphrase of 4 to 7 unrelated words, a different one for each account\n- **Back up what the business cannot run without, and test the restore**: the NCSC says to keep both an online copy and an offline copy, to unplug external drives when not in use, to turn on 2-step verification for online backups, and to practice restoring. CISA notes that many ransomware victims had no backups or damaged ones\n- **Install updates automatically, and fix the actively attacked flaws first**: CISA says to enable automatic updates where possible and to give priority to flaws in its Known Exploited Vulnerabilities (KEV) catalog\n- **Lock down laptops**: CISA says to remove administrator rights from ordinary users' laptops and to turn on disk encryption on Windows and Mac laptops\n- **Use a mainstream cloud workspace and its security settings**: CISA suggests moving on-premises mail and file storage to services such as Google Workspace or Microsoft 365, and points to its SCuBA baselines for configuring them\n- **Train people to spot scams and to report them**: CISA's list for the program manager includes training on MFA, updates, avoiding phishing links and how to report suspicious activity\n\nFor the everyday habits behind these measures, see [Easy Cybersecurity Tips for Everyone](post:cybersecurity-tips-for-everyone). For which kind of MFA to choose, see [MFA: Which Type Is Safer?](post:mfa-which-is-safer). For a stronger backup design, see [Backup 3-2-1-1-0 and Immutable Backups](post:backup-3-2-1-1-0-immutable).\n\n## Free help you can use\n\nSeveral agencies publish free material for small businesses:\n\n- **NCSC small organisations guide**: its landing page names three topics: backups, protecting devices and accounts, and spotting scams. The NCSC says the guide needs no technical expertise and that many recommendations take about five minutes each\n- **CISA Cyber Guidance for Small Businesses**: tasks for the chief executive, the program manager and the IT lead, plus tips on incident response plans and tabletop exercises\n- **CISA no-cost services**: its pages list Cyber Hygiene Services (no-cost monitoring to help reduce exposure to threats) and the SCuBA project for securing cloud services. Eligibility and availability for organizations outside the US are not stated on the pages we read, so check before relying on them\n- **NIST Small Business Cybersecurity Corner**: guidance by topic (ransomware, phishing, MFA, cloud security, supply chain, cyber insurance, incident response), training videos, and a finder for regional support programs\n\n## When to buy a service instead of doing it yourself\n\nThis section is our own view, not taken from the agencies. If nobody in the business can keep up with updates, alerts and account reviews, paying a managed service provider (a company that runs IT or security for you) can be more realistic than hiring. Before you sign, ask what the provider does when an alert fires, who can log in to your systems, how your data and backups are protected, and what happens to your data if you leave. For the wider choices, see [EDR, XDR and MDR Compared](post:edr-xdr-mdr-comparison) and [MDR: How to Choose a Provider](post:mdr-how-to-choose-provider).\n\n## Prepare before something happens\n\nCISA says the chief executive should review and approve the incident response plan before an incident occurs, and take part in tabletop exercises (a talk-through of a made-up incident). It suggests a scenario in which an employee's laptop is locked by ransomware. If it has already happened, see [Ransomware: The First 5 Steps](post:ransomware-first-5-steps), and for a ready scenario to rehearse, see [Ransomware Tabletop: A Ready-to-Use Scenario Template](post:ransomware-tabletop-exercise-template).\n\n## A 90-day plan\n\nThe plan below is our own example, not a standard. It puts the measures above into three stretches so that a small team can finish each one.\n\n- **Days 1 to 30, accounts and backups**: turn on MFA for email, administrator and finance accounts, set up a password manager, and make and test one backup\n- **Days 31 to 60, devices and updates**: turn on automatic updates, remove administrator rights from ordinary laptops, and turn on disk encryption\n- **Days 61 to 90, people and response**: train staff, name the security program manager, write a short incident response plan, and run one tabletop exercise\n\n## Common mistakes\n\n- **Buying tools before turning on MFA and backups**: the basic measures cost little and cover the most common attacks (our view)\n- **Assuming the business is too small to be a target**: the NCSC says small organizations are just as likely as larger ones to suffer online crime\n- **Having backups nobody has tested**: CISA notes that many ransomware victims had no backups or damaged ones, and restore times were longer than expected\n- **Leaving security to one person**: the NCSC says every team member has a part in it\n- **Giving everyone administrator rights on their laptop**: CISA says to remove those rights from ordinary users\n- **Relying on staff to remember to turn on MFA**: CISA says to enforce it with technical controls and audit for gaps\n\n## Start today\n\n- **Turn on MFA for the owner's and finance staff's email accounts**: this is usually quick (our view)\n- **Pick a password manager and move your most important accounts into it**\n- **Copy your key business files to an online store and an offline drive**: then try restoring one file\n- **Turn on automatic updates on every computer and phone**\n- **Name one person as the security program manager**: and agree on a monthly check-in\n- **Read the NCSC small organisations guide**: many of its recommendations take about five minutes each, according to the NCSC\n\nTo see where your business stands today, try the [self-assessment](/assessment.html). For the basics in plain language, see [What Is Cybersecurity?](post:what-is-cybersecurity).\n\n## References and further reading\n\nThe advice comes from the CISA, NCSC and NIST pages listed below, which were read on 4 November 2026. We read the NCSC backup page and the landing page of its small organisations guide, but not its pages on devices, accounts and scams, so nothing here is attributed to those. The order of the measures, the section on managed services and the 90-day plan are our own, and the NCSC figure describes UK organizations. Guidance changes, so check the original pages before acting.\n\n- [CISA: Cyber Guidance for Small Businesses](https://www.cisa.gov/cyber-guidance-small-businesses): tasks for the chief executive, program manager and IT lead\n- [CISA: Small and Medium Businesses](https://www.cisa.gov/audiences/small-and-medium-businesses): free services and resources for small businesses\n- [CISA: Use strong passwords](https://www.cisa.gov/secure-our-world/use-strong-passwords): password length and password managers\n- [NCSC: Small organisations guide to cyber security](https://www.ncsc.gov.uk/collection/small-business-guide): the landing page, with the 1 in 2 figure and the definition of a small organization\n- [NCSC: Backing up your data](https://www.ncsc.gov.uk/collection/small-organisations-guide-to-cyber-security/backing-up-your-data): what to back up, offline copies and testing restores\n- [NIST: Small Business Cybersecurity Corner](https://www.nist.gov/itl/smallbusinesscyber): guidance by topic, training and the support programs finder",
+      "infographics": [
+        {
+          "type": "hub",
+          "title_th": "สี่ด้านหลักที่ธุรกิจเล็กควรทำก่อน",
+          "title_en": "Four areas a small business should cover first",
+          "center_th": "พื้นฐานความปลอดภัย",
+          "center_en": "Security basics",
+          "center_note_th": "ทำให้ดีก่อนซื้อเครื่องมือเพิ่ม",
+          "center_note_en": "do these well before buying more tools",
+          "items": [
+            {
+              "label_th": "บัญชีและรหัสผ่าน",
+              "label_en": "Accounts and passwords",
+              "detail_th": "MFA และตัวจัดการรหัสผ่าน",
+              "detail_en": "MFA, password manager"
+            },
+            {
+              "label_th": "ข้อมูลสำรอง",
+              "label_en": "Backups",
+              "detail_th": "ออนไลน์และออฟไลน์ พร้อมทดสอบกู้คืน",
+              "detail_en": "online and offline, tested"
+            },
+            {
+              "label_th": "อุปกรณ์และการอัปเดต",
+              "label_en": "Devices and updates",
+              "detail_th": "อัปเดตอัตโนมัติ ถอดสิทธิ์ผู้ดูแลระบบ",
+              "detail_en": "auto-update, no admin rights"
+            },
+            {
+              "label_th": "คนและการรับมือ",
+              "label_en": "People and response",
+              "detail_th": "อบรม มีผู้รับผิดชอบ ซ้อมแผน",
+              "detail_en": "training, an owner, a rehearsed plan"
+            }
+          ],
+          "afterBlock": 8
+        },
+        {
+          "type": "steps",
+          "title_th": "แผน 90 วัน (ตัวอย่างของเราเอง)",
+          "title_en": "A 90-day plan (our own example)",
+          "items": [
+            {
+              "label_th": "วัน 1–30 บัญชีและสำรอง",
+              "label_en": "Days 1–30: accounts, backups",
+              "detail_th": "MFA รหัสผ่าน สำรอง 1 ชุด",
+              "detail_en": "MFA, password manager, one backup"
+            },
+            {
+              "label_th": "วัน 31–60 อุปกรณ์",
+              "label_en": "Days 31–60: devices",
+              "detail_th": "อัปเดตอัตโนมัติ เข้ารหัสดิสก์",
+              "detail_en": "auto-update, disk encryption"
+            },
+            {
+              "label_th": "วัน 61–90 คนและแผน",
+              "label_en": "Days 61–90: people, plan",
+              "detail_th": "อบรม แผนรับมือ ซ้อม 1 ครั้ง",
+              "detail_en": "training, a plan, one exercise"
+            }
+          ],
+          "afterBlock": 19
+        },
+        {
+          "type": "columns",
+          "title_th": "ที่มักพลาด กับที่ควรทำ",
+          "title_en": "Common slips versus better habits",
+          "label_a_th": "ที่มักพลาด",
+          "label_a_en": "Common slip",
+          "label_b_th": "ที่ควรทำ",
+          "label_b_en": "Better habit",
+          "items": [
+            {
+              "side": "a",
+              "label_th": "ซื้อเครื่องมือก่อน",
+              "label_en": "Buy tools first",
+              "detail_th": "ยังไม่ได้เปิด MFA",
+              "detail_en": "MFA still off"
+            },
+            {
+              "side": "a",
+              "label_th": "สำรองข้อมูลแต่ไม่เคยทดสอบ",
+              "label_en": "Backups never tested",
+              "detail_th": "อาจกู้คืนช้ากว่าที่คาด",
+              "detail_en": "restores may take longer than expected"
+            },
+            {
+              "side": "a",
+              "label_th": "ทุกคนเป็นผู้ดูแลเครื่องตัวเอง",
+              "label_en": "Everyone is an admin",
+              "detail_th": "CISA ระบุให้ถอดสิทธิ์ผู้ดูแล",
+              "detail_en": "CISA says to remove admin rights"
+            },
+            {
+              "side": "b",
+              "label_th": "เริ่มที่ MFA และสำรองข้อมูล",
+              "label_en": "Start with MFA and backups",
+              "detail_th": "ต้นทุนต่ำ ครอบคลุมมาก (ความเห็นเรา)",
+              "detail_en": "low cost, wide cover (our view)"
+            },
+            {
+              "side": "b",
+              "label_th": "ลองกู้คืนไฟล์จริง",
+              "label_en": "Restore a real file",
+              "detail_th": "รู้ก่อนเกิดเหตุ",
+              "detail_en": "learn before an incident"
+            },
+            {
+              "side": "b",
+              "label_th": "ถอดสิทธิ์ผู้ดูแลจากผู้ใช้ปกติ",
+              "label_en": "Remove admin rights",
+              "detail_th": "ตามที่ CISA ระบุ",
+              "detail_en": "as CISA states"
+            }
+          ],
+          "afterBlock": 21
+        }
+      ]
+    },
+    {
       "slug": "crypto-agility-cbom-post-quantum",
       "date": "2026-11-04",
       "publish_at": "2026-11-04T18:00:00+07:00",
