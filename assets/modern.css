@@ -664,4 +664,19 @@
   footer .logo-on-light{display:none !important;}
   footer .logo-on-dark{display:block !important;}
   .foot-main,.foot-note{padding-left:clamp(24px,4vw,48px);padding-right:clamp(24px,4vw,48px);}
+
+  /* fixes: featured (black) post card contrast; nav fits in EN */
+  .post-grid .post-card:first-child:not([hidden]) h2 a,
+  .post-grid .post-card:first-child:not([hidden]) .card-link{color:var(--on-ink);}
+  .post-grid .post-card:first-child:not([hidden]) .tag{color:var(--sun);border-color:rgba(255,255,255,.32);}
+  .post-grid .post-card:first-child:not([hidden]) p{color:var(--on-ink-muted);}
+  .post-grid .post-card:first-child:not([hidden]):hover h2 a{color:var(--sun);}
+  .cta-box .tag,.cta-box a:not(.btn){color:var(--sun);}
+  .nav{max-width:1280px;}
+  .nav{gap:clamp(10px,1.1vw,18px);}
+  nav.links{gap:clamp(12px,1.25vw,22px);margin-left:10px;}
+  .nav>.lang-toggle,.nav-right,.theme-toggle{margin-left:0;}
+  .nav-cta{margin-left:auto;}
+  .lang-toggle{overflow:hidden;flex:none;}
+  .lang-toggle button,.lang-toggle a{padding:7px 13px;}
 }
