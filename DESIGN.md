@@ -144,3 +144,13 @@ Thai uses larger line-height and no negative letter-spacing (`html[lang="th"]` r
 2. Check both themes and a 390px-wide viewport.
 3. Keep prerender markers and `data-i18n` attributes untouched.
 4. After editing `lib/blog-render.js`, render a post and the list and check that no raw markup or broken links appear.
+
+## v3 visual direction (2026-11-15)
+
+Reference: Dribbble "Ramos" analytics site by Outcrowd. Applied as a layer at the end of `modern.css`, so v2 tokens stay valid.
+
+- Softer and rounder: radii 14 / 24 / 32 px, pill buttons, chips and nav. Light canvas is neutral grey `#EDEDF0` with white cards and soft shadow (no hairline borders in light mode).
+- Black capsule navigation (`--ink`) with a white CTA; black footer block; one black feature card per group (first stat, first blog post, CTA box).
+- Accents: DynaSec orange stays the brand colour. A yellow `--sun` is used only for small badges (eyebrow pill, service numbers, stat dots).
+- Type: Urbanist for Latin (geometric, bold, tight tracking), IBM Plex Sans Thai for Thai. Thai headings keep looser line height.
+- This supersedes the v2 rule against pill labels and hover lift on cards: the eyebrow is a pill again and cards lift 3 px on hover. Gradients, glow and glassmorphism remain banned.
