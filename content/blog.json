@@ -11090,6 +11090,150 @@
         }
       ],
       "updated": "2026-10-21"
+    },
+    {
+      "slug": "ngfw-comparison-palo-alto-fortinet-check-point",
+      "date": "2026-11-15",
+      "publish_at": "2026-11-15T22:00:00+07:00",
+      "tags": [
+        "NGFW",
+        "Palo Alto Networks",
+        "Fortinet",
+        "Check Point",
+        "Comparison"
+      ],
+      "title_th": "เปรียบเทียบ NGFW 3 ยี่ห้อ: Palo Alto, Check Point และ Fortinet",
+      "title_en": "NGFW Compared: Palo Alto Networks, Check Point and Fortinet",
+      "summary_th": "เทียบไฟร์วอลล์รุ่นใหม่ (NGFW) สามยี่ห้อชั้นนำด้านความสามารถ ประสิทธิภาพ และความพึงพอใจ จากรายงาน Gartner ผลทดสอบอิสระ CyberRatings และรีวิวผู้ใช้ พร้อมข้อจำกัดของตัวเลข",
+      "summary_en": "A comparison of three leading NGFW brands on capabilities, performance and satisfaction, from Gartner reports, independent CyberRatings tests and user reviews, with the limits of each number.",
+      "body_th": "NGFW (ไฟร์วอลล์รุ่นใหม่ที่ตรวจถึงแอป ผู้ใช้ และภัยคุกคาม ไม่ดูแค่พอร์ตกับ IP) หรือ Next-Generation Firewall ของ Palo Alto Networks, Fortinet และ Check Point เป็นสามผู้ผลิตที่นักวิเคราะห์จัดอยู่กลุ่มผู้นำพร้อมกัน บทความนี้เปรียบเทียบสามยี่ห้อใน 3 มิติ คือความสามารถหลัก ประสิทธิภาพ และคะแนนความพึงพอใจของผู้ใช้ โดยอ้างอิงรายงานนักวิเคราะห์ ผลทดสอบจากหน่วยงานอิสระ และเอกสารของผู้ผลิต ข้อสรุปสั้น ๆ คือ ทั้งสามยี่ห้อเป็นตัวเลือกระดับแนวหน้า แต่ต่างกันที่วิธีบริหารจัดการ ต้นทุนตลอดอายุการใช้งาน และผลทดสอบของแต่ละรุ่น จึงไม่มีผู้ชนะที่เหมาะกับทุกองค์กร\n\n## อ่านการเปรียบเทียบนี้อย่างไร: แหล่งข้อมูลและข้อจำกัด\n\nข้อมูลในบทความมาจากแหล่งสาธารณะ 4 กลุ่ม กลุ่มแรกคือ Gartner (บริษัทวิจัยด้านเทคโนโลยี) Magic Quadrant for Hybrid Mesh Firewall ซึ่งเป็นรายงานจัดอันดับผู้ผลิต ไม่ใช่การทดสอบสินค้า กลุ่มที่สองคือ Forrester Wave: Enterprise Firewall Solutions ของบริษัทวิจัยอีกราย กลุ่มที่สามคือผลทดสอบของ CyberRatings.org (องค์กรทดสอบอิสระที่ใช้ห้องทดสอบด้านความปลอดภัยเครือข่าย (NSS Labs)) และกลุ่มที่สี่คือ Gartner Peer Insights (เว็บรวบรวมรีวิวจากผู้ใช้จริง) เสริมด้วยเอกสารเผยแพร่ของผู้ผลิต DynaSec ไม่ได้ทดสอบอุปกรณ์เองในห้องปฏิบัติการ ข้อมูลนี้เป็นสถานะ ณ เดือนพฤศจิกายน 2026 และซอฟต์แวร์ของไฟร์วอลล์เปลี่ยนรุ่นเร็ว ควรตรวจหน้าต้นทางอีกครั้งก่อนใช้ตัดสินใจจัดซื้อ\n\n## ความสามารถหลัก: ฟังก์ชันพื้นฐานเหมือนกัน ต่างที่วิธีสร้างและบริหาร\n\nทั้งสามยี่ห้อมีฟังก์ชันแกนกลางของ NGFW ครบ ได้แก่ การควบคุมตามแอปพลิเคชัน IPS (ระบบป้องกันการบุกรุก ตรวจและบล็อกการโจมตีที่ใช้ช่องโหว่ในทราฟฟิก) การกรอง URL และ VPN (การเชื่อมต่อแบบเข้ารหัสผ่านอินเทอร์เน็ต) และการถอดรหัสทราฟฟิก TLS (เปิดดูข้อมูลที่เข้ารหัสเพื่อตรวจภัยคุกคามที่ซ่อนอยู่ข้างใน) ความต่างที่ควรดูจึงอยู่ที่สถาปัตยกรรม ชุดบริการเสริมแบบสมัครสมาชิก และเครื่องมือบริหารจัดการ\n\n- **Palo Alto Networks:** ระบบปฏิบัติการ PAN-OS ใช้ App-ID (เทคโนโลยีระบุว่าทราฟฟิกคือแอปใด โดยไม่ขึ้นกับพอร์ตหรือการเข้ารหัส) เป็นแกนของนโยบาย ผู้ผลิตระบุว่า App-ID ทำงานตลอดเวลา บริการเสริมแบบสมัครสมาชิกมี Advanced Threat Prevention (บริการตรวจภัยคุกคามที่ใช้โมเดลบนคลาวด์) และ Advanced URL Filtering บริหารผ่าน Panorama (ระบบจัดการกลางสำหรับหลายเครื่อง) หรือ Strata Cloud Manager (ระบบจัดการบนคลาวด์)\n- **Fortinet:** ใช้ FortiOS ระบบปฏิบัติการเดียวกันกับงานไฟร์วอลล์และ SD-WAN (ระบบเลือกเส้นทางเครือข่ายระหว่างสาขาตามแอปและคุณภาพของลิงก์) เอกสารผู้ผลิตระบุว่าหลายรุ่นมีชิปเฉพาะ SPU (Security Processing Unit ชิปช่วยเร่งงานตรวจสอบ) เพื่อเร่ง IPS และการถอดรหัส SSL บริการเสริมคือ FortiGuard (บริการข้อมูลภัยคุกคามแบบสมัครสมาชิก) และบริหารผ่าน FortiManager (ระบบจัดการกลาง)\n- **Check Point:** ตระกูล Quantum Force ใช้ ThreatCloud AI (ฐานข้อมูลภัยคุกคามที่ผู้ผลิตระบุว่าใช้ AI มากกว่า 50 เอนจิน) และบริหารนโยบายผ่าน SmartConsole (หน้าจอบริหารกลาง) ส่วน Maestro (ระบบรวมหลายเครื่องให้ทำงานเป็นกลุ่มเดียวเพื่อขยายกำลัง) ใช้กับงานขนาดใหญ่\n\n## มุมมองของนักวิเคราะห์: ผู้นำทั้งสามราย แต่ข้อควรระวังต่างกัน\n\nในรายงาน Gartner Magic Quadrant for Hybrid Mesh Firewall (ผู้ผลิตที่ขายไฟร์วอลล์หลายรูปแบบ ทั้งอุปกรณ์ เสมือน และคลาวด์ ภายใต้การจัดการเดียวกัน) ฉบับแรกเมื่อสิงหาคม 2025 สื่ออย่าง SDxCentral รายงานว่า Fortinet, Palo Alto Networks และ Check Point เป็นผู้นำ (Leaders) เพียงสามราย และสื่อรายงานผลลักษณะเดียวกันสำหรับฉบับที่ลงวันที่ 7 กันยายน 2026 ส่วน Forrester Wave: Enterprise Firewall Solutions ไตรมาส 4 ปี 2024 จัดทั้งสามรายเป็นผู้นำเช่นกัน ร่วมกับ Cisco ตามที่ผู้ผลิตและสื่อรายงาน\n\nผู้ผลิตแต่ละรายประกาศจุดเด่นจากฉบับ 2026 ของตน Fortinet ระบุว่าได้อันดับสูงสุดด้าน Ability to Execute (ความสามารถในการส่งมอบ) เป็นปีที่สอง ส่วน Palo Alto Networks ระบุว่าอยู่ไกลที่สุดด้าน Completeness of Vision (ความครบถ้วนของวิสัยทัศน์) ทั้งสองข้อเป็นคำประกาศของผู้ผลิต DynaSec ยังไม่ได้อ่านรายงานฉบับเต็ม ข้อควรระวังในหัวข้อนี้มาจากฉบับ 2025 ตามที่ SDxCentral สรุป ฉบับ 2026 ควรอ่านจากรายงานต้นฉบับ\n\n- **Fortinet:** จุดแข็งคือความเร็วในการออกผลิตภัณฑ์รับมือภัยใหม่ รวมถึงการเข้ารหัสที่ทนต่อคอมพิวเตอร์ควอนตัม และ FortiFlex (รูปแบบสิทธิ์ใช้งานแบบยืดหยุ่น) ข้อควรระวังตามสรุปฉบับ 2025 คือลูกค้ากังวลเรื่องช่องโหว่ของผลิตภัณฑ์ และมองเห็นแผนงานในอนาคตได้จำกัด\n- **Palo Alto Networks:** จุดแข็งคือการเพิ่ม AI ช่วยประเมินความรุนแรงของภัยคุกคาม และ Strata Cloud Manager ที่คุมไฟร์วอลล์หลายรูปแบบจากที่เดียว ข้อควรระวังตามสรุปฉบับ 2025 คือต้นทุนรวมสูงกว่าคู่แข่งโดยตรง ค่าต่ออายุสูงจนลูกค้าบางรายเลือกสัญญาระยะสั้น บางรายต้องใช้ Strata Cloud Manager คู่กับ Panorama นานอย่างน้อยหนึ่งปีก่อนย้ายเสร็จ และมีรายงานว่าฮาร์ดแวร์บูตช้าและใช้ทรัพยากรมาก\n- **Check Point:** จุดแข็งคือความโปร่งใสด้านราคา เพราะเป็นรายเดียวในรายงานที่มีพอร์ทัลราคาสาธารณะครบทุกผลิตภัณฑ์ และมีสิทธิ์ใช้งานแบบสมัครสมาชิกที่ยืดหยุ่นสำหรับอุปกรณ์ ข้อควรระวังตามสรุปฉบับ 2025 คือลูกค้ารายงานว่าการตั้งค่าเริ่มต้นและการบริหารซับซ้อน และยังไม่มีไฟร์วอลล์สำหรับ container (แพ็กเกจรันแอปแบบแยกส่วน) และ remote browser isolation (การเปิดเว็บในสภาพแวดล้อมแยก เพื่อกันมัลแวร์จากเว็บ) และมี SD-WAN ขั้นสูงที่อ่อนกว่าคู่แข่ง\n\n## ประสิทธิภาพ: อย่าเทียบตัวเลขใน datasheet ตรง ๆ\n\ndatasheet (เอกสารข้อมูลจำเพาะที่ผู้ผลิตเผยแพร่) ของทั้งสามยี่ห้อระบุค่า throughput (ปริมาณข้อมูลที่ผ่านได้ต่อวินาที หน่วย Gbps) หลายแบบ เช่น firewall throughput, IPS throughput และ threat prevention throughput แต่ผู้ผลิตแต่ละรายกำหนดเงื่อนไขการวัดเอง ทั้งชนิดทราฟฟิกที่ใช้ ขนาดแพ็กเก็ต และฟังก์ชันที่เปิดระหว่างวัด ชื่อค่าเดียวกันจึงอาจวัดคนละอย่าง ก่อนเทียบตัวเลขจึงควรถามว่าเปิดฟังก์ชันใดบ้าง และรวมการถอดรหัส TLS หรือไม่\n\nทางเลือกที่ดีกว่าคือดูผลทดสอบอิสระ CyberRatings.org ทดสอบไฟร์วอลล์ด้วยชุดช่องโหว่ มัลแวร์ และเทคนิค evasion (เทคนิคหลบการตรวจจับ เช่น แบ่งแพ็กเก็ตจนไฟร์วอลล์มองไม่เห็นการโจมตี) ชุดเดียวกัน แล้ววัดทั้งอัตราป้องกัน ผลบวกลวง (false positive คือการบล็อกทราฟฟิกปกติผิดพลาด) และปริมาณข้อมูลที่ผ่านได้ รายงานปี 2024 เตือนว่าหากไฟร์วอลล์พลาด evasion เพียงรูปแบบเดียว ผู้โจมตีอาจใช้วิธีนั้นหลบการตรวจได้กับการโจมตีทั้งกลุ่ม และการถอดรหัส HTTPS ไม่ได้เปิดเป็นค่าเริ่มต้น\n\nผลปี 2024 เผยแพร่เมื่อ 27 มิถุนายน 2024 และทดสอบคนละรุ่นที่ขนาดต่างกัน จึงเทียบกันตรง ๆ ไม่ได้ รายการด้านล่างให้ดูว่าแต่ละรุ่นได้ผลอย่างไรเท่านั้น\n\n- **Palo Alto Networks `PA-450` (PAN-OS 11.1.1):** Recommended อัตราป้องกัน 96.36% ปริมาณข้อมูลที่ผ่านได้ 1,026 Mbps ราคาต่อ Mbps ที่ป้องกันได้ $6.52\n- **Fortinet FortiGate-900G (v7.4.4):** Recommended อัตราป้องกัน 98.21% ปริมาณข้อมูลที่ผ่านได้ 14,096 Mbps ราคาต่อ Mbps ที่ป้องกันได้ $3.25\n- **Check Point Quantum Force 19200 Plus (R81.20):** Recommended อัตราป้องกัน 98.41% ปริมาณข้อมูลที่ผ่านได้ 12,281 Mbps ราคาต่อ Mbps ที่ป้องกันได้ $11.28\n\nผลปี 2025 เผยแพร่เมื่อ 5 พฤศจิกายน 2025 ใช้ระเบียบวิธีทดสอบฉบับใหม่ ทดสอบ 7 ผลิตภัณฑ์ และมีเพียง 3 รายที่ได้ Recommended ภาพของสามยี่ห้อต่างจากปี 2024 อย่างชัดเจน และรุ่นที่ทดสอบก็เป็นคนละรุ่นอีกเช่นกัน จึงอ่านเป็นการจัดอันดับยี่ห้อไม่ได้\n\n- **Check Point `CP-CGS-9300`:** Recommended ประสิทธิผลด้านความปลอดภัย 99.59% ความแม่นยำด้านผลบวกลวง 99.35%\n- **Fortinet FortiGate-200G:** Caution ประสิทธิผลด้านความปลอดภัย 79.24% ความแม่นยำด้านผลบวกลวง 99.41%\n- **Palo Alto Networks `PA-1410`:** Caution ประสิทธิผลด้านความปลอดภัย 46.37% ความแม่นยำด้านผลบวกลวง 99.66%\n\nผู้ทดสอบระบุว่าจุดอ่อนของ Fortinet และ Palo Alto Networks ในรอบนั้นอยู่ที่การต้านเทคนิค evasion จากนั้นทั้งสองรายส่งซอฟต์แวร์รุ่นใหม่เข้าทดสอบซ้ำด้วยระเบียบวิธีและชุดข้อมูลเดิม และเมื่อ 25 พฤศจิกายน 2025 ทั้งคู่ได้เลื่อนเป็น Recommended DynaSec ไม่พบตัวเลขหลังทดสอบซ้ำในแหล่งที่เปิดอ่านได้ ผลนี้ชี้ว่าผลทดสอบเป็นภาพของรุ่นเครื่องและรุ่นซอฟต์แวร์ ณ เวลาหนึ่ง ไม่ใช่คะแนนถาวรของยี่ห้อ และการอัปเดตซอฟต์แวร์รวมถึงชุดตรวจจับ (signature) ของผู้ผลิตอาจส่งผลต่อผลป้องกันได้\n\n## ความพึงพอใจของผู้ใช้: ใกล้กันมาก\n\nใน Gartner Peer Insights ตลาด Network Firewalls คะแนนของทั้งสามรายที่พบใกล้กันมาก ตัวเลขด้านล่างมาจากข้อความสรุปในผลค้นหา DynaSec เปิดหน้าต้นฉบับไม่ได้ จึงเป็นค่าประมาณ ณ เดือนพฤศจิกายน 2026 และจำนวนรีวิวเปลี่ยนตลอดเวลา (คะแนนเต็ม 5)\n\n- **Fortinet:** 4.6 จากประมาณ 2,850 รีวิว สินค้า FortiGate NGFW ประมาณ 4.6 จากราว 2,840 รีวิว\n- **Palo Alto Networks:** 4.6 จากประมาณ 1,420 รีวิว สินค้า `PA-Series` อยู่ที่ 4.6 ถึง 4.7 ขึ้นกับช่วงเวลาที่ดู\n- **Check Point:** 4.5 จากประมาณ 2,170 รีวิว สินค้า Quantum ประมาณ 4.5 จากราว 1,800 รีวิว\n\nส่วนต่าง 0.1 ถึง 0.2 คะแนนเล็กเกินกว่าจะใช้ตัดสินได้ รีวิวเหล่านี้เป็นความเห็นของผู้ใช้ที่สมัครใจเขียน ไม่ใช่การทดสอบด้านความปลอดภัย และอาจเอนไปทางลูกค้าที่พอใจ ควรอ่านเนื้อหารีวิวด้านการสนับสนุน ความยากของการตั้งค่า และราคาตอนต่ออายุ มากกว่าดูแค่ดาว\n\n## เลือกอย่างไร: ความเห็นของเรา\n\nความเห็นของเรา (ไม่ใช่ข้อสรุปจากการทดสอบ) คือข้อมูลสาธารณะยังไม่พอจะประกาศผู้ชนะ ทั้งสามอยู่ระดับแนวหน้า ผลทดสอบเปลี่ยนตามรุ่นและซอฟต์แวร์ และความต่างที่กระทบองค์กรจริงมักอยู่ที่การใช้งาน ได้แก่ ทักษะของทีม ต้นทุนตอนต่ออายุ และเครื่องมือบริหาร แนวคิดต่อไปนี้เป็นจุดเริ่มคัดรายชื่อ ไม่ใช่ข้อแนะนำให้ซื้อ\n\n- **Fortinet:** น่าใส่ในรายชื่อเมื่อมีหลายสาขาและอยากรวมไฟร์วอลล์กับ SD-WAN ในอุปกรณ์เดียว (Gartner ฉบับ 2025 ตามที่ SDxCentral สรุป ระบุว่า Fortinet แข็งแรงทั้งงานขอบเครือข่าย สาขา และศูนย์ข้อมูล) แต่ควรมีขั้นตอนติดตามประกาศช่องโหว่และอัปเดตอย่างสม่ำเสมอ ซึ่งจำเป็นกับทุกยี่ห้อ\n- **Palo Alto Networks:** น่าใส่เมื่อต้องการนโยบายตามแอปที่ละเอียดและมีทีมที่คุ้นเคยอยู่แล้ว แต่ควรขอราคาต่ออายุ 3 ถึง 5 ปีล่วงหน้า เพราะ Gartner ฉบับ 2025 ตามที่ SDxCentral สรุป ระบุเรื่องต้นทุนรวม\n- **Check Point:** น่าใส่เมื่อให้ความสำคัญกับราคาที่โปร่งใสและต้องขยายกำลังเป็นกลุ่ม (Maestro) แต่ควรเผื่อเวลาตั้งค่าเริ่มต้นและฝึกทีม\n\n## เริ่มเปรียบเทียบจริงอย่างไร\n\n- **ขอราคาตลอดอายุสัญญา:** ให้ผู้ผลิตแจ้งราคาอุปกรณ์ สิทธิ์ใช้งานบริการเสริม และค่าต่ออายุ 3 ถึง 5 ปี ในตารางเดียวกัน\n- **กำหนดเงื่อนไขทดสอบเดียวกัน:** เปิด IPS การกรอง URL การถอดรหัส TLS และ logging ในทุกยี่ห้อ แล้ววัดทั้ง throughput และ latency (ความหน่วงของทราฟฟิก)\n- **ขอผลทดสอบอิสระล่าสุด:** ถามผลทดสอบของรุ่นและซอฟต์แวร์ที่เสนอจริง รวมถึงผล evasion และผลบวกลวง\n- **ให้ทีมลองบริหารเอง:** สร้างนโยบาย อัปเดตซอฟต์แวร์ และอ่าน log ด้วยเครื่องมือบริหารของแต่ละยี่ห้อ\n- **ตรวจการสนับสนุนในประเทศไทย:** ระยะเวลาเปลี่ยนอุปกรณ์ ทีมวิศวกรท้องถิ่น และขั้นตอนอัปเดตช่องโหว่เร่งด่วน\n\nแนวทางเขียน TOR (ขอบเขตงานที่ใช้จัดซื้อ) และวางแผน PoC (การทดลองใช้งานจริงก่อนตัดสินใจซื้อ) ดูได้ที่ [เขียน TOR/RFP โซลูชันความปลอดภัยอย่างไรให้ได้ของที่ต้องการ และวางแผน PoC](post:security-tor-rfp-poc-planning) ความแตกต่างของ NGFW กับ UTM (อุปกรณ์รวมหลายฟังก์ชันความปลอดภัยในกล่องเดียว) และ WAF (ไฟร์วอลล์ป้องกันเว็บแอปพลิเคชัน) อยู่ที่ [NGFW, UTM และ WAF ต่างกันอย่างไร และเลือกอย่างไร](post:ngfw-utm-waf-comparison) ส่วนทางเลือกที่ย้ายการป้องกันไปอยู่บนคลาวด์ อ่านได้ที่ [SASE และ SSE คืออะไร ใช้เมื่อไรจึงเหมาะ](post:sase-sse-explained) หากต้องการประเมินความพร้อมก่อนเลือกผลิตภัณฑ์ เริ่มได้ที่ [แบบประเมินความพร้อม](/assessment.html)",
+      "body_en": "NGFW (Next-Generation Firewall) means a firewall that inspects applications, users and threats in the traffic, not only ports and IP addresses. This article compares the NGFW products of Palo Alto Networks, Fortinet and Check Point, three vendors that analysts place in the Leaders group together, on three points: core capabilities, performance and user satisfaction. It draws on analyst reports, independent test results and vendor documents. The short conclusion: all three are top-tier choices, but they differ in how they are managed, in cost over the product's life, and in test results for each model, so no single winner fits every organization.\n\n## How to read this comparison: sources and limits\n\nThe data comes from four public sources. The first is Gartner's Magic Quadrant for Hybrid Mesh Firewall, a ranking of vendors, not a product test. The second is the Forrester Wave: Enterprise Firewall Solutions from another research firm. The third is test results from CyberRatings.org, an independent testing organization that uses NSS Labs' test facility. The fourth is Gartner Peer Insights, a site that collects reviews from real users. Vendor documents add detail. DynaSec did not test the devices in its own lab. The data is a snapshot as of November 2026, and firewall software changes versions quickly, so check the original pages again before a purchase decision.\n\n## Core capabilities: the same basics, built and managed differently\n\nAll three have the core NGFW functions: application control, IPS (intrusion prevention system, which detects and blocks attacks that exploit vulnerabilities in the traffic), URL filtering, VPN (an encrypted connection over the internet), and TLS decryption (opening encrypted traffic to inspect threats hidden inside). The differences worth looking at are the architecture, the add-on subscription services and the management tools.\n\n- **Palo Alto Networks:** its PAN-OS operating system builds policy around App-ID (a technology that identifies which application the traffic belongs to, regardless of port or encryption). The vendor says App-ID is always on. Subscription add-ons include Advanced Threat Prevention (a cloud-based model that finds threats) and Advanced URL Filtering. It is managed through Panorama (a central management system for many devices) or Strata Cloud Manager (a cloud-based management system).\n- **Fortinet:** FortiOS is one operating system for firewall and SD-WAN work (software that chooses network paths between sites by application and link quality). Vendor documents say many models carry dedicated SPU chips (Security Processing Unit, chips that speed up inspection) to accelerate IPS and SSL decryption. Add-ons come through FortiGuard (a subscription threat-intelligence service), and management through FortiManager.\n- **Check Point:** the Quantum Force family uses ThreatCloud AI (a threat database that the vendor says uses more than 50 AI engines) and manages policy through SmartConsole (a central management console). Maestro (a system that joins several appliances into one group to scale capacity) is used for large deployments.\n\n## What analysts say: three Leaders, different cautions\n\nIn Gartner's Magic Quadrant for Hybrid Mesh Firewall (vendors that sell firewalls in several forms, including appliance, virtual and cloud, under one management), media such as SDxCentral reported that Fortinet, Palo Alto Networks and Check Point were the only three Leaders in the first edition in August 2025. Media reported the same pattern for the edition dated 7 September 2026. The Forrester Wave: Enterprise Firewall Solutions for Q4 2024 also named all three as Leaders, together with Cisco, as reported by the vendors and media.\n\nEach vendor announced its own highlights from the 2026 edition. Fortinet says it ranked highest on Ability to Execute for the second year, and Palo Alto Networks says it is positioned furthest on Completeness of Vision. Both are vendor claims. DynaSec has not read the full report. The cautions below come from the 2025 edition as summarized by SDxCentral, so read the original report for the 2026 edition.\n\n- **Fortinet:** strengths are the speed of releasing products against new threats, including quantum-resistant encryption, and FortiFlex (a flexible licensing model). The cautions, per the 2025 summary, are that customers raised concerns about product vulnerabilities and had limited visibility into the future roadmap.\n- **Palo Alto Networks:** strengths are the addition of AI to assess threat severity, and Strata Cloud Manager, which controls several firewall forms from one place. The cautions, per the 2025 summary, are a higher total cost than direct competitors, renewal costs high enough that some customers choose short contracts, a need for some customers to run Strata Cloud Manager alongside Panorama for at least a year before finishing the move, and reports of slow boot times and heavy resource use on the hardware.\n- **Check Point:** a strength is pricing transparency, as the only vendor in the report with a public pricing portal for all its products, plus flexible subscription licensing for appliances. The cautions, per the 2025 summary, are that customers reported complex initial setup and management, that it does not yet offer a firewall for containers (packaged apps that run in isolated units) or remote browser isolation (opening web pages in a separate environment to keep web malware away), and that its advanced SD-WAN is weaker than competitors.\n\n## Performance: do not compare datasheet numbers directly\n\nThe datasheets (specification documents that vendors publish) of all three list several kinds of throughput (the amount of data that can pass per second, in Gbps), such as firewall throughput, IPS throughput and threat prevention throughput. But each vendor sets its own measurement conditions, including the type of traffic, the packet size and the functions turned on during the test. The same name can therefore measure different things. Before comparing numbers, ask which functions were on and whether TLS decryption was included.\n\nA better option is independent test results. CyberRatings.org tests firewalls with the same set of exploits, malware and evasion techniques (ways to avoid detection, such as splitting packets so the firewall cannot see the attack), and measures the protection rate, false positives (wrongly blocking normal traffic) and throughput. Its 2024 report warns that if a firewall misses even one form of evasion, an attacker may use it to bypass detection for a whole class of attacks, and that HTTPS decryption is not on by default.\n\nThe 2024 results were published on 27 June 2024 and covered models of different sizes, so they cannot be compared directly. The list shows how each model performed, nothing more.\n\n- **Palo Alto Networks `PA-450` (PAN-OS 11.1.1):** Recommended, protection rate 96.36%, throughput 1,026 Mbps, price per protected Mbps $6.52\n- **Fortinet FortiGate-900G (v7.4.4):** Recommended, protection rate 98.21%, throughput 14,096 Mbps, price per protected Mbps $3.25\n- **Check Point Quantum Force 19200 Plus (R81.20):** Recommended, protection rate 98.41%, throughput 12,281 Mbps, price per protected Mbps $11.28\n\nThe 2025 results were published on 5 November 2025 under a newer test methodology, covering seven products, of which only three earned Recommended. The picture for the three vendors differs clearly from 2024, and the models tested are different again, so it cannot be read as a ranking of brands.\n\n- **Check Point `CP-CGS-9300`:** Recommended, security effectiveness 99.59%, false-positive accuracy 99.35%\n- **Fortinet FortiGate-200G:** Caution, security effectiveness 79.24%, false-positive accuracy 99.41%\n- **Palo Alto Networks `PA-1410`:** Caution, security effectiveness 46.37%, false-positive accuracy 99.66%\n\nThe testers said the weakness of Fortinet and Palo Alto Networks in that round was resisting evasion techniques. Both then submitted newer software for a retest using the same methodology and datasets, and on 25 November 2025 both moved up to Recommended. DynaSec did not find the post-retest numbers in sources it could open. This shows that a test result is a picture of one hardware model and one software version at one point in time, not a permanent score for a brand, and that software updates, including the vendor's detection signatures, may affect protection.\n\n## User satisfaction: very close\n\nOn Gartner Peer Insights, in the Network Firewalls market, the scores of the three vendors that we found are very close. The figures below come from summaries in search results. DynaSec could not open the original pages, so they are approximate values as of November 2026, and review counts change constantly (out of 5).\n\n- **Fortinet:** 4.6 from about 2,850 reviews; the FortiGate NGFW product is about 4.6 from roughly 2,840 reviews\n- **Palo Alto Networks:** 4.6 from about 1,420 reviews; the `PA-Series` product sits between 4.6 and 4.7 depending on when it is viewed\n- **Check Point:** 4.5 from about 2,170 reviews; the Quantum product is about 4.5 from roughly 1,800 reviews\n\nA gap of 0.1 to 0.2 points is too small to decide anything. These reviews are opinions from users who chose to write them, not security tests, and they may lean toward satisfied customers. Read the review text on support, setup difficulty and renewal pricing rather than looking only at the stars.\n\n## How to choose: our view\n\nOur view (not a conclusion from testing) is that public data is not enough to name a winner. All three are top tier, test results change by model and software, and the differences that affect a real organization usually lie in operation: team skills, cost at renewal and management tools. The ideas below are a starting point for shortlisting, not a recommendation to buy.\n\n- **Fortinet:** worth shortlisting when there are many branches and you want firewall and SD-WAN in one device (Gartner's 2025 edition, as summarized by SDxCentral, describes Fortinet as strong across network perimeter, branch and data center use), but you should have a routine for tracking vulnerability notices and applying updates.\n- **Palo Alto Networks:** worth shortlisting when you want detailed application-based policy and already have a familiar team, but ask for renewal prices over 3 to 5 years up front, because Gartner's 2025 edition, as summarized by SDxCentral, raises total cost.\n- **Check Point:** worth shortlisting when transparent pricing matters and you need to scale capacity as a group (Maestro), but allow time for initial setup and team training.\n\n## Where to start a real comparison\n\n- **Ask for the price over the full term:** have each vendor quote hardware, add-on subscriptions and renewal for 3 to 5 years in one table.\n- **Set the same test conditions:** turn on IPS, URL filtering, TLS decryption and logging on every brand, then measure both throughput and latency (the delay added to traffic).\n- **Ask for recent independent results:** ask for results for the exact model and software offered, including evasion and false positives.\n- **Let your own team manage it:** create policies, update software and read logs using each brand's management tools.\n- **Check support in Thailand:** device replacement time, local engineering team and the process for urgent vulnerability updates.\n\nFor TOR (terms of reference, the procurement scope document) writing and PoC (a real trial before the purchase decision) planning, see [How to write a security TOR/RFP that gets what you need, and plan the PoC](post:security-tor-rfp-poc-planning). The difference between NGFW, UTM (an all-in-one security appliance) and WAF (a firewall that protects web applications) is covered in [NGFW vs UTM vs WAF: What Each One Protects](post:ngfw-utm-waf-comparison), and the option of moving protection to the cloud is in [SASE and SSE Explained: When Each One Fits](post:sase-sse-explained). To assess your readiness before choosing a product, start with the [readiness assessment](/assessment.html).",
+      "infographics": [
+        {
+          "type": "hub",
+          "title_th": "สามยี่ห้อ ต่างกันที่จุดไหน",
+          "title_en": "Where the three brands differ",
+          "center_th": "NGFW",
+          "center_en": "NGFW",
+          "center_note_th": "ฟังก์ชันแกนกลางเหมือนกัน",
+          "center_note_en": "same core functions",
+          "items": [
+            {
+              "label_th": "Palo Alto Networks",
+              "label_en": "Palo Alto Networks",
+              "detail_th": "นโยบายตามแอปด้วย App-ID",
+              "detail_en": "app-based policy via App-ID"
+            },
+            {
+              "label_th": "Fortinet",
+              "label_en": "Fortinet",
+              "detail_th": "FortiOS เดียว + ชิป SPU",
+              "detail_en": "one FortiOS + SPU chips"
+            },
+            {
+              "label_th": "Check Point",
+              "label_en": "Check Point",
+              "detail_th": "ThreatCloud AI + Maestro",
+              "detail_en": "ThreatCloud AI + Maestro"
+            },
+            {
+              "label_th": "เครื่องมือบริหาร",
+              "label_en": "Management tools",
+              "detail_th": "Panorama · FortiManager · SmartConsole",
+              "detail_en": "Panorama · FortiManager · SmartConsole"
+            }
+          ],
+          "afterBlock": 6
+        },
+        {
+          "type": "columns",
+          "title_th": "ตัวเลขใน datasheet กับผลทดสอบอิสระ",
+          "title_en": "Datasheet numbers vs independent tests",
+          "label_a_th": "Datasheet ของผู้ผลิต",
+          "label_a_en": "Vendor datasheet",
+          "label_b_th": "ผลทดสอบอิสระ",
+          "label_b_en": "Independent test",
+          "items": [
+            {
+              "side": "a",
+              "label_th": "ผู้ผลิตกำหนดเงื่อนไขวัดเอง",
+              "label_en": "Vendor sets the conditions",
+              "detail_th": "ชนิดทราฟฟิกและฟังก์ชันที่เปิดต่างกัน",
+              "detail_en": "traffic type and enabled functions differ"
+            },
+            {
+              "side": "a",
+              "label_th": "ชื่อค่าเหมือนกัน วัดต่างกัน",
+              "label_en": "Same name, different test",
+              "detail_th": "เทียบข้ามยี่ห้อได้ยาก",
+              "detail_en": "hard to compare across brands"
+            },
+            {
+              "side": "a",
+              "label_th": "ไม่บอกว่าถูกหลบหรือไม่",
+              "label_en": "Silent on bypass",
+              "detail_th": "ไม่แสดงผล evasion",
+              "detail_en": "no evasion results shown"
+            },
+            {
+              "side": "b",
+              "label_th": "ชุดโจมตีเดียวกันทุกยี่ห้อ",
+              "label_en": "Same attack set for all",
+              "detail_th": "ช่องโหว่ มัลแวร์ และ evasion",
+              "detail_en": "exploits, malware and evasion"
+            },
+            {
+              "side": "b",
+              "label_th": "วัดอัตราป้องกันและผลบวกลวง",
+              "label_en": "Protection and false positives",
+              "detail_th": "ดูทั้งบล็อกถูกและบล็อกผิด",
+              "detail_en": "both correct and wrong blocks"
+            },
+            {
+              "side": "b",
+              "label_th": "ผูกกับรุ่นและซอฟต์แวร์",
+              "label_en": "Tied to model and version",
+              "detail_th": "เป็นภาพ ณ เวลาหนึ่ง",
+              "detail_en": "a snapshot in time"
+            }
+          ],
+          "afterBlock": 12
+        },
+        {
+          "type": "flow",
+          "title_th": "ผลทดสอบเปลี่ยนได้เมื่ออัปเดตซอฟต์แวร์",
+          "title_en": "A test result can change after a software update",
+          "items": [
+            {
+              "label_th": "5 พ.ย. 2025",
+              "label_en": "5 Nov 2025",
+              "detail_th": "Caution: Fortinet, Palo Alto",
+              "detail_en": "Caution: Fortinet, PANW",
+              "tone": "danger"
+            },
+            {
+              "label_th": "แก้ที่ evasion",
+              "label_en": "Fix evasion gaps",
+              "detail_th": "ส่งซอฟต์แวร์รุ่นใหม่",
+              "detail_en": "submit new builds"
+            },
+            {
+              "label_th": "ทดสอบซ้ำ",
+              "label_en": "Retest",
+              "detail_th": "ใช้ชุดข้อมูลเดิม",
+              "detail_en": "same datasets"
+            },
+            {
+              "label_th": "25 พ.ย. 2025",
+              "label_en": "25 Nov 2025",
+              "detail_th": "เลื่อนเป็น Recommended",
+              "detail_en": "moved to Recommended",
+              "tone": "ok"
+            }
+          ],
+          "afterBlock": 18
+        }
+      ]
     }
   ]
 }
