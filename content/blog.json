@@ -14845,6 +14845,151 @@
       ],
       "date": "2026-11-30",
       "publish_at": "2026-11-30T18:00:00+07:00"
+    },
+    {
+      "slug": "ctem-continuous-threat-exposure-management-benefits-roi",
+      "tags": [
+        "CTEM",
+        "Exposure Management",
+        "ROI",
+        "Vulnerability Management",
+        "Risk"
+      ],
+      "title_th": "CTEM (บริหารจุดเสี่ยงต่อเนื่อง) คืออะไร ประโยชน์ที่ได้ และความคุ้มทุน",
+      "title_en": "CTEM: what it is, the benefits and the payback",
+      "summary_th": "CTEM (การบริหารจุดเสี่ยงต่อเนื่อง) คือโปรแกรมที่ค้นหา พิสูจน์ และแก้จุดเสี่ยงที่ถูกโจมตีได้จริงเป็นรอบ บทความสรุปประโยชน์ วิธีคิดจุดคุ้มทุนแบบไม่เกินจริง และจุดเริ่มต้น",
+      "summary_en": "CTEM is a program that finds and fixes truly exploitable weaknesses in repeating cycles. Benefits, an honest way to work out break-even, and where to start.",
+      "body_th": "CTEM (การบริหารจุดเสี่ยงต่อเนื่อง ย่อจาก Continuous Threat Exposure Management) คือแนวทางที่ให้องค์กรหาจุดเสี่ยงอย่างเป็นรอบ จัดลำดับตามผลกระทบต่อธุรกิจ พิสูจน์ว่าโจมตีได้จริงหรือไม่ แล้วสั่งการให้แก้ ไม่ใช่การสแกนปีละครั้งแล้วได้รายงานเล่มหนา บทความนี้สรุปว่า CTEM ให้ประโยชน์อะไร คิดความคุ้มทุนอย่างไรโดยไม่เกินจริง และควรเริ่มตรงไหน\n\n## CTEM คืออะไร และต่างจากการสแกนช่องโหว่อย่างไร\n\nคำว่า exposure (จุดเสี่ยงที่ผู้โจมตีใช้ได้จริง) กว้างกว่าช่องโหว่ เพราะรวมการตั้งค่าผิด บัญชีที่สิทธิ์เกิน และระบบที่ลืมปิดไว้บนอินเทอร์เน็ตด้วย Gartner (บริษัทวิจัยด้านไอที) เป็นผู้เสนอคำว่า CTEM ราวปี 2022 ข้อมูลนี้มาจากคำอธิบายของผู้ให้บริการด้านความปลอดภัยหลายราย เรายังไม่ได้อ่านเอกสารต้นฉบับของ Gartner จึงอ้างผ่านแหล่งรองเหล่านี้ จุดสำคัญคือ CTEM เป็นโปรแกรมที่มีกระบวนการและเจ้าภาพ ไม่ใช่ผลิตภัณฑ์ชิ้นเดียวที่ซื้อมาติดตั้งแล้วจบ ส่วนการสแกนช่องโหว่ ([อ่านเรื่องโปรแกรมจัดการช่องโหว่](post:vulnerability-management-program)) เป็นเพียงหนึ่งในเครื่องมือที่อยู่ในโปรแกรมนี้\n\n## ห้าขั้นตอนที่วนเป็นรอบ\n\n- **Scoping (กำหนดขอบเขต)**: ตกลงก่อนว่าจะดูอะไร เช่น ระบบรับชำระเงินหรือเว็บไซต์ที่ลูกค้าใช้ โดยเลือกจากสิ่งที่ธุรกิจเสียหายมากหากถูกโจมตี\n- **Discovery (ค้นหา)**: รวบรวมสินทรัพย์และจุดเสี่ยงในขอบเขตนั้น รวมของที่ไอทีไม่รู้ว่ามี ([อ่านเรื่อง EASM](post:easm-external-attack-surface-management) ซึ่งเป็นการเฝ้าดูสินทรัพย์ฝั่งอินเทอร์เน็ต)\n- **Prioritization (จัดลำดับ)**: เรียงว่าอะไรต้องแก้ก่อน โดยดูโอกาสถูกโจมตีจริงและความสำคัญของระบบ ไม่ใช่ดูคะแนนความรุนแรง (CVSS) อย่างเดียว ([อ่านเรื่อง CVSS EPSS KEV](post:cvss-epss-kev-prioritization))\n- **Validation (พิสูจน์)**: ทดสอบว่าจุดเสี่ยงนั้นถูกใช้โจมตีได้จริงในสภาพแวดล้อมของเรา เช่น ผ่านการทดสอบเจาะระบบ (pentest) หรือการจำลองการโจมตี ([อ่านเรื่องความต่างของ pentest](post:pentest-vs-vulnerability-assessment-vs-red-team))\n- **Mobilization (ขับเคลื่อน)**: ทำให้ทีมที่เป็นเจ้าของระบบแก้จริง ตามกำหนดเวลา และวัดผลได้ ([อ่านเรื่องการจัดการแพตช์](post:patch-management-best-practice))\n\n## ประโยชน์ที่ได้\n\nประโยชน์ด้านล่างเป็นการสรุปของเราจากหลักการของ CTEM ไม่ได้มาจากผลสำรวจที่วัดผลโดยอิสระ ผลจริงขึ้นกับว่าองค์กรทำครบทุกขั้นตอนหรือไม่\n\n- **แก้น้อยลงแต่ตรงจุดขึ้น**: ทีมไม่ต้องไล่แก้ทุกรายการที่สแกนพบ เพราะคัดเฉพาะรายการที่โจมตีได้จริงและกระทบระบบสำคัญขึ้นมาก่อน\n- **เห็นสินทรัพย์ที่ลืมไว้**: การค้นหาต่อเนื่องทำให้พบเซิร์ฟเวอร์หรือบัญชีที่ไม่มีเจ้าของก่อนผู้โจมตีพบ\n- **คุยกับผู้บริหารรู้เรื่อง**: รายงานเปลี่ยนจากการนับจำนวนช่องโหว่ มาเป็นการบอกว่าปิดจุดเสี่ยงบนระบบที่ธุรกิจพึ่งพาไปแล้วกี่รายการ\n- **เห็นช่องว่างของเครื่องมือที่ซื้อไว้**: การพิสูจน์ช่วยบอกว่าไฟร์วอลล์หรือระบบตรวจจับที่ลงทุนไป ดักการโจมตีได้จริงหรือไม่\n- **มีหลักฐานต่อผู้ตรวจสอบ**: บันทึกว่าพบอะไร ตัดสินใจอย่างไร แก้เมื่อไร ช่วยประกอบการตอบการตรวจประเมิน\n\nGartner ตั้งสมมุติฐานในการวางแผน (planning assumption คือการคาดการณ์ ไม่ใช่ผลที่วัดได้จริง) ไว้ว่า องค์กรที่จัดลำดับการลงทุนด้านความปลอดภัยตามโปรแกรม CTEM จะมีโอกาสถูกเจาะน้อยลงราว 3 เท่าภายในปี 2026 (อีกถ้อยคำหนึ่งที่พบคือลดลงสองในสาม) ณ เดือนพฤศจิกายน 2026 เราไม่พบงานวิจัยอิสระที่ยืนยันตัวเลขนี้ แม้ปี 2026 ใกล้สิ้นสุดแล้ว และผู้ให้บริการรายหนึ่งก็ระบุว่ายังพิสูจน์ไม่ได้ จึงควรอ่านเป็นทิศทาง ไม่ใช่ตัวเลขที่ใช้สัญญาว่าจะได้\n\n## คิดความคุ้มทุนอย่างไรให้ไม่เกินจริง\n\nROI (ผลตอบแทนเทียบกับเงินที่ลงทุน) ของงานความปลอดภัยวัดยาก เพราะผลลัพธ์หลักคือเรื่องร้ายที่ไม่เกิดขึ้น วิธีที่ตรงไปตรงมากว่าคือคำนวณว่าต้องลดความเสี่ยงให้ได้เท่าใดจึงถึงจุดคุ้มทุน (break-even คือจุดที่ผลที่ได้เท่ากับต้นทุน) แล้วถามว่าเป็นไปได้หรือไม่ เริ่มจากนับต้นทุนให้ครบ\n\n- **คน**: เวลาของทีมความปลอดภัย ทีมระบบ และเจ้าของแอปที่ต้องลงมือแก้ ซึ่งมักเป็นต้นทุนก้อนใหญ่ที่สุดและถูกลืมนับ (ความเห็นของเรา)\n- **เครื่องมือและบริการ**: เครื่องมือสแกน ค้นหาสินทรัพย์ ทดสอบเจาะระบบ หรือการจำลองการโจมตี ทั้งแบบซื้อเองและจ้างภายนอก\n- **ค่าเสียโอกาสของการหยุดระบบเพื่อแก้**: ช่วงปิดปรับปรุงที่กระทบงาน ควรนับเมื่อเป็นระบบที่สำคัญต่อธุรกิจ\n- **ผลประหยัดอื่นที่นับได้ (หักออกจากต้นทุน)**: ชั่วโมงแพตช์ที่ไม่ต้องทำเพราะไม่ต้องแก้ทุกรายการ และเครื่องมือซ้ำซ้อนที่ยกเลิกได้\n\nตัวอย่างต่อไปนี้เป็นตัวเลขสมมุติ ไม่ใช่ข้อมูลจริงของใคร สมมติโปรแกรมมีต้นทุน 1.2 ล้านบาทต่อปี และประเมินว่าเหตุร้ายแรงมีโอกาสเกิด 8 เปอร์เซ็นต์ต่อปี ความเสียหายครั้งละ 25 ล้านบาท ความเสียหายคาดการณ์ต่อปี (โอกาสเกิดคูณความเสียหายต่อครั้ง คือ 8 เปอร์เซ็นต์ × 25 ล้านบาท) จึงเท่ากับ 2.0 ล้านบาท หากประหยัดค่าแรงที่ไม่ต้องแก้ซ้ำได้ 0.3 ล้านบาท ต้นทุนส่วนที่เหลืออีก 0.9 ล้านบาทต้องได้คืนจากความเสียหายที่ลดลง คิดเป็นสัดส่วนของความเสียหายคาดการณ์ได้ว่า (1.2 − 0.3) หารด้วย 2.0 เท่ากับ 0.45 หรือ 45 เปอร์เซ็นต์ นั่นคือตามตัวเลขนี้ โปรแกรมต้องลดความเสียหายคาดการณ์ให้ได้อย่างน้อย 45 เปอร์เซ็นต์ (เกือบครึ่ง) จึงเท่าทุน ถ้าเห็นว่าลดได้ขนาดนั้นเป็นไปได้ยาก ควรลดขอบเขตให้เล็กลง หรือเริ่มกับระบบที่ความเสียหายต่อครั้งสูงกว่า\n\n## ข้อควรระวัง\n\n- **ซื้อเครื่องมือแล้วคิดว่าจบ**: เครื่องมือช่วยขั้นค้นหาและจัดลำดับได้ แต่ขั้นขับเคลื่อนที่ต้องให้หลายทีมลงมือแก้ มักเป็นจุดที่โปรแกรมสะดุดตามที่ผู้ให้บริการหลายรายระบุ\n- **ขอบเขตกว้างเกินไป**: เริ่มทั้งองค์กรพร้อมกันแล้วรายการล้นจนไม่มีใครแก้ ควรเริ่มจากระบบที่สำคัญที่สุดก่อน\n- **ไม่มีเจ้าของและกำหนดเวลา**: จุดเสี่ยงที่พบแต่ไม่มีใครรับผิดชอบจะค้างอยู่ในรายการ\n- **เชื่อตัวเลขของผู้ขายโดยไม่ตรวจ**: ตัวเลขผลลัพธ์จากผู้ให้บริการควรถามที่มาและเงื่อนไขก่อนนำไปใช้ของบ\n\n## จะเริ่มอย่างไร\n\n- **เลือกระบบที่สำคัญที่สุด 1-3 ระบบ**: ใช้เป็นขอบเขตรอบแรก และจดไว้ว่าหากระบบนั้นหยุดหรือข้อมูลรั่ว จะเสียหายเท่าใด\n- **กำหนดเจ้าของและเวลาแก้**: ตกลงกับทีมระบบก่อนว่าจุดเสี่ยงระดับสูงต้องแก้ภายในกี่วัน\n- **ใช้สิ่งที่มีอยู่ก่อน**: ผลสแกนช่องโหว่ที่มีอยู่ บวกการทดสอบเจาะระบบประจำปี อาจเป็นจุดเริ่มต้นที่เพียงพอสำหรับรอบแรก\n- **วัดผลเป็นรอบ**: ติดตามเวลาเฉลี่ยในการปิดจุดเสี่ยงสำคัญ และจำนวนจุดเสี่ยงสำคัญที่ค้างอยู่ เปรียบเทียบรอบต่อรอบ\n- **ประเมินความพร้อมก่อน**: ลอง[ทำแบบประเมินความพร้อมด้านความปลอดภัย](/assessment.html)เพื่อดูว่าควรเริ่มตรงจุดใด\n\nข้อมูลนี้เป็นความรู้ทั่วไป ไม่ใช่คำแนะนำทางกฎหมายหรือทางการเงิน และตัวเลขตัวอย่างเป็นสมมุติ",
+      "body_en": "CTEM (short for Continuous Threat Exposure Management, meaning ongoing management of the weaknesses attackers can really use) is an approach where an organization finds weaknesses in regular cycles, ranks them by business impact, proves whether they can actually be attacked, and gets them fixed. It is not a yearly scan that ends in a thick report. This article summarizes what CTEM delivers, how to judge its payback without overstating it, and where to start.\n\n## What CTEM is and how it differs from vulnerability scanning\n\nAn exposure (a weakness an attacker can really use) is broader than a vulnerability, because it also covers misconfiguration, accounts with excess privilege, and systems left open on the internet. Gartner (an IT research firm) proposed the term CTEM around 2022, according to descriptions from several security vendors. We have not read Gartner's original document, so we cite these secondary sources. The key point is that CTEM is a program with a process and owners, not a single product you buy and install. Vulnerability scanning ([read about vulnerability management programs](post:vulnerability-management-program)) is just one tool inside it.\n\n## Five stages that repeat in a cycle\n\n- **Scoping**: agree first on what to look at, such as the payment system or the customer-facing website, chosen by how much the business would lose if it were attacked.\n- **Discovery**: collect the assets and exposures in that scope, including things IT does not know exist ([read about EASM](post:easm-external-attack-surface-management), which watches internet-facing assets).\n- **Prioritization**: rank what to fix first by real-world likelihood of attack and system importance, not severity score alone ([read about CVSS, EPSS and KEV](post:cvss-epss-kev-prioritization)).\n- **Validation**: test whether the exposure can really be used against our environment, for example through penetration testing or attack simulation ([read how pentests differ](post:pentest-vs-vulnerability-assessment-vs-red-team)).\n- **Mobilization**: get the teams that own the systems to fix them, on a deadline, with measurable results ([read about patch management](post:patch-management-best-practice)).\n\n## What you gain\n\nThe benefits below are our own summary of CTEM principles, not results from an independent survey. Actual outcomes depend on whether the organization completes every stage.\n\n- **Fewer fixes, better aimed**: the team does not chase every scan finding, because items that are really exploitable and touch important systems come first.\n- **See forgotten assets**: continuous discovery finds unowned servers or accounts before an attacker does.\n- **Talk to executives clearly**: reports shift from a count of vulnerabilities to exposures closed on the systems the business depends on.\n- **See gaps in tools already bought**: validation shows whether the firewall or detection system you invested in actually stops the attacks.\n- **Evidence for auditors**: a record of what was found, what was decided and when it was fixed supports assessments.\n\nGartner set out a planning assumption that organizations prioritizing security investment through a CTEM program would be about three times less likely to be breached by 2026 (another wording we found is a two-thirds reduction). As of November 2026 we found no independent study confirming this figure, even though 2026 is nearly over, and one vendor says it remains unproven, so read it as a direction, not a number to promise.\n\n## Judging payback without overstating it\n\nROI (return compared with money invested) is hard to measure for security, because the main result is bad events that do not happen. A more honest method is to calculate how much risk reduction you need to break even, then ask whether that is plausible. Start by counting the full cost.\n\n- **People**: time from the security team, systems team and application owners who must do the fixing. This is usually the biggest cost and the one most often left out.\n- **Tools and services**: scanning, asset discovery, penetration testing or attack simulation, whether bought or outsourced.\n- **Cost of downtime for fixes**: maintenance windows that disrupt work, worth counting for important systems.\n- **Other countable savings**: patching hours not spent because not every item needs fixing, and overlapping tools that can be cancelled.\n\nThe example below uses hypothetical numbers, not anyone's real data. Suppose the program costs 1.2 million baht a year, and a serious incident has an 8 percent yearly chance with a loss of 25 million baht each time. Expected yearly loss is then 2.0 million baht. If 0.3 million baht of labor is saved by avoiding repeat work, the rest must come from reduced loss: (1.2 − 0.3) divided by 2.0 equals 45 percent. The program must cut expected loss by at least 45 percent (nearly half) to break even under these numbers. If that seems unlikely, shrink the scope or start with a system where each incident costs more.\n\n## Cautions\n\n- **Buy a tool and call it done**: tools help with discovery and prioritization, but mobilization, which needs several teams to act, is where programs often stall, as several vendors note.\n- **Scope too wide**: starting with the whole organization produces a list so long that nobody fixes anything. Begin with the most important systems.\n- **No owner or deadline**: an exposure found but not owned just sits on the list.\n- **Trusting vendor figures unchecked**: ask where a vendor's outcome figure comes from, and under what conditions, before using it in a budget request.\n\n## Where to start\n\n- **Pick 1-3 of the most important systems**: use them as round-one scope and write down the loss if each one stopped or leaked data.\n- **Set owners and fix times**: agree with the systems team how many days a high-risk exposure may stay open.\n- **Use what you already have**: existing vulnerability scan results plus the yearly penetration test may be enough for a first round.\n- **Measure each round**: track the average time to close important exposures and the number still open, round over round.\n- **Check readiness first**: try the [security readiness assessment](/assessment.html) to see where to begin.\n\nThis is general information, not legal or financial advice, and the example figures are hypothetical.",
+      "infographics": [
+        {
+          "type": "steps",
+          "title_th": "ห้าขั้นตอนของ CTEM วนเป็นรอบ",
+          "title_en": "The five CTEM stages, repeated in cycles",
+          "items": [
+            {
+              "label_th": "กำหนดขอบเขต",
+              "label_en": "Scoping",
+              "detail_th": "เลือกระบบที่ธุรกิจพึ่งพา",
+              "detail_en": "pick systems the business needs"
+            },
+            {
+              "label_th": "ค้นหา",
+              "label_en": "Discovery",
+              "detail_th": "หาสินทรัพย์และจุดเสี่ยง",
+              "detail_en": "find assets and exposures"
+            },
+            {
+              "label_th": "จัดลำดับ",
+              "label_en": "Prioritization",
+              "detail_th": "เรียงตามโอกาสและผลกระทบ",
+              "detail_en": "rank by likelihood and impact"
+            },
+            {
+              "label_th": "พิสูจน์",
+              "label_en": "Validation",
+              "detail_th": "ทดสอบว่าโจมตีได้จริงไหม",
+              "detail_en": "test if it can really be attacked"
+            },
+            {
+              "label_th": "ขับเคลื่อน",
+              "label_en": "Mobilization",
+              "detail_th": "ให้เจ้าของระบบแก้ตามกำหนด",
+              "detail_en": "owners fix by the deadline"
+            }
+          ],
+          "afterBlock": 5
+        },
+        {
+          "type": "columns",
+          "title_th": "จากสแกนแล้วแก้ทั้งหมด สู่แก้ตรงจุด",
+          "title_en": "From fixing every scan finding to fixing what matters",
+          "label_a_th": "แบบเดิม: สแกนปีละครั้ง",
+          "label_a_en": "Before: scan once a year",
+          "label_b_th": "แบบ CTEM: วนเป็นรอบ",
+          "label_b_en": "CTEM: repeating cycles",
+          "items": [
+            {
+              "side": "a",
+              "label_th": "รายการยาวเรียงตามคะแนน",
+              "label_en": "Long list by score",
+              "detail_th": "ไม่รู้ว่าอันไหนโจมตีได้จริง",
+              "detail_en": "unclear what is truly exploitable"
+            },
+            {
+              "side": "a",
+              "label_th": "เห็นเฉพาะสินทรัพย์ที่รู้จัก",
+              "label_en": "Only known assets",
+              "detail_th": "ของที่ลืมไว้ไม่ถูกสแกน",
+              "detail_en": "forgotten systems go unscanned"
+            },
+            {
+              "side": "a",
+              "label_th": "รายงานเล่มเดียวจบ",
+              "label_en": "One report, then done",
+              "detail_th": "ไม่มีเจ้าของติดตามผล",
+              "detail_en": "nobody owns follow-up"
+            },
+            {
+              "side": "b",
+              "label_th": "คัดเฉพาะที่โจมตีได้จริง",
+              "label_en": "Only truly exploitable items",
+              "detail_th": "พิสูจน์ก่อนส่งให้ทีมแก้",
+              "detail_en": "proven before sent to teams"
+            },
+            {
+              "side": "b",
+              "label_th": "ค้นหาสินทรัพย์ต่อเนื่อง",
+              "label_en": "Continuous discovery",
+              "detail_th": "พบของที่ไม่มีเจ้าของ",
+              "detail_en": "finds unowned systems"
+            },
+            {
+              "side": "b",
+              "label_th": "มีเจ้าของและเวลาแก้",
+              "label_en": "Owners and fix times",
+              "detail_th": "วัดผลเทียบรอบก่อนหน้า",
+              "detail_en": "measured against last round"
+            }
+          ],
+          "afterBlock": 8
+        },
+        {
+          "type": "flow",
+          "title_th": "คำนวณจุดคุ้มทุน (ตัวเลขสมมุติ)",
+          "title_en": "Working out break-even (hypothetical numbers)",
+          "items": [
+            {
+              "label_th": "ต้นทุนต่อปี",
+              "label_en": "Yearly cost",
+              "detail_th": "1.2 ล้านบาท",
+              "detail_en": "1.2 million baht"
+            },
+            {
+              "label_th": "หักผลประหยัดอื่น",
+              "label_en": "Minus other savings",
+              "detail_th": "0.3 ล้านบาท",
+              "detail_en": "0.3 million baht"
+            },
+            {
+              "label_th": "ต้องมาจากความเสียหายที่ลดลง",
+              "label_en": "Must come from loss reduced",
+              "detail_th": "0.9 ล้านบาท",
+              "detail_en": "0.9 million baht"
+            },
+            {
+              "label_th": "หารด้วยความเสียหายคาดการณ์ 2.0",
+              "label_en": "Divide by expected loss 2.0",
+              "detail_th": "ต้องลดความเสียหาย 45%",
+              "detail_en": "must cut by 45%",
+              "tone": "danger"
+            }
+          ],
+          "afterBlock": 13
+        }
+      ],
+      "date": "2026-11-27",
+      "publish_at": "2026-11-27T08:00:00+07:00"
     }
   ]
 }
